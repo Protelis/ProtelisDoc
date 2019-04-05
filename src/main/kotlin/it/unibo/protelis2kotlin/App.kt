@@ -47,7 +47,7 @@ fun parseTypeAndRest(line: String): Pair<String,String> {
         }
         cond
     }
-    return Pair(type, line.substring(k).strip())
+    return Pair(type, line.substring(k).trim())
 }
 
 fun parseDoc(doc: String): ProtelisFunDoc {
@@ -55,9 +55,9 @@ fun parseDoc(doc: String): ProtelisFunDoc {
 
     var txt = ""
     val pieces: MutableList<DocPiece> = mutableListOf()
-    doc.lines().map { """\s+\*\s+""".toRegex().replace(it,"").strip() }.forEach { l ->
+    doc.lines().map { """\s+\*\s+""".toRegex().replace(it,"").trim() }.forEach { l ->
         if(l.isEmpty()){ }
-        else if(!l.startsWith("@")) txt += "\n"+l.strip().substringAfter("*")
+        else if(!l.startsWith("@")) txt += "\n"+l.trim().substringAfter("*")
         else {
             DocPiece.docParamRegex.matchEntire(l)?.let { matchRes ->
                 val gs = matchRes.groupValues
@@ -81,7 +81,7 @@ fun parseProtelisFunction(fline: String): ProtelisFun {
     return ProtelisFun(
             name = """def (\w+)""".toRegex().find(fline)!!.groupValues[1],
             params = """\(([^\)]*)\)""".toRegex().find(fline)!!.groupValues[1]?.split(",")
-                    ?.filter { !it.isEmpty() }.map { ProtelisFunArg(it.strip(),"") }.toList(),
+                    ?.filter { !it.isEmpty() }.map { ProtelisFunArg(it.trim(),"") }.toList(),
             public = """(public def)""".toRegex().find(fline)!=null)
 }
 
@@ -127,7 +127,7 @@ fun generateKotlinType(protelisType: String): String = when(protelisType){
     "num" -> "Number"
     else ->
         """\(([^\)]*)\)\s*->\s*(.*)""".toRegex().matchEntire(protelisType)?.let { matchRes ->
-            val args = matchRes.groupValues[1].split(",").map { generateKotlinType(it.strip()) }
+            val args = matchRes.groupValues[1].split(",").map { generateKotlinType(it.trim()) }
             val ret = generateKotlinType(matchRes.groupValues[2])
             """(${args.joinToString(",")}) -> $ret"""
         } ?:
