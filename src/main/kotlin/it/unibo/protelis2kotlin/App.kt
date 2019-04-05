@@ -107,17 +107,6 @@ fun parseFile(content: String): List<ProtelisItem> {
     return pitems
 }
 
-fun main(args: Array<String>) {
-    val filePath = C().javaClass.getResource("/accumulation.pt")
-    val file = File(filePath.toURI())
-    val fileText: String = file.readText()
-
-    val protelisItems = parseFile(fileText)
-    val kotlinFile = generateKotlin(protelisItems)
-    println(kotlinFile)
-}
-
-
 fun generateKotlinDoc(docs: ProtelisFunDoc): String {
     val docPieces = docs.docPieces
     return "/**\n"+
@@ -141,6 +130,9 @@ fun generateKotlinType(protelisType: String): String = when(protelisType){
             val args = matchRes.groupValues[1].split(",").map { generateKotlinType(it.strip()) }
             val ret = generateKotlinType(matchRes.groupValues[2])
             """(${args.joinToString(",")}) -> $ret"""
+        } ?:
+        """\[([^\]]*)\]""".toRegex().matchEntire(protelisType)?.let { matchRes ->
+            "List<${generateKotlinType(matchRes.groupValues[1])}>"
         } ?:
         if(protelisType.length==1 && protelisType.any{ it.isUpperCase() })
             protelisType
@@ -189,4 +181,14 @@ fun generateKotlin(protelisItems: List<ProtelisItem>): String {
     }
 
     return pitems.map { generateKotlinItem(it)}.joinToString("\n\n")
+}
+
+fun main(args: Array<String>) {
+    val filePath = C().javaClass.getResource("/protelis-lang-utils.pt")
+    val file = File(filePath.toURI())
+    val fileText: String = file.readText()
+
+    val protelisItems = parseFile(fileText)
+    val kotlinFile = generateKotlin(protelisItems)
+    println(kotlinFile)
 }
