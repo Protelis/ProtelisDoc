@@ -8,10 +8,6 @@ import java.io.File.separator as SEP
 
 class C { }
 
-interface KtCovertible {
-    fun kotlinRepr(): String
-}
-
 interface DocPiece {
     companion object {
         val docParamRegex = """@param\s+(\w+)\s*([^\n]*)""".toRegex()
@@ -19,14 +15,22 @@ interface DocPiece {
     }
 }
 data class DocText(val text: String): DocPiece
-data class DocParam(val paramName: String, val paramType: String, val paramDescription: String): DocPiece{
+data class DocParam(val paramName: String,
+                    val paramType: String,
+                    val paramDescription: String): DocPiece{
 }
-data class DocReturn(val returnType: String, val returnDescription: String): DocPiece
+data class DocReturn(val returnType: String,
+                     val returnDescription: String): DocPiece
 
 data class ProtelisFunArg(val name: String, val type: String)
-data class ProtelisFun(val name: String, val params: List<ProtelisFunArg> = listOf(), val returnType: String = "", val public: Boolean = false){}
+data class ProtelisFun(val name: String,
+                       val params: List<ProtelisFunArg> = listOf(),
+                       val returnType: String = "",
+                       val public: Boolean = false,
+                       val genericTypes: Set<String> = setOf()){}
 data class ProtelisFunDoc(val docPieces: List<DocPiece>)
-data class ProtelisItem(val function: ProtelisFun, val docs: ProtelisFunDoc)
+data class ProtelisItem(val function: ProtelisFun,
+                        val docs: ProtelisFunDoc)
 
 fun parseTypeAndRest(line: String): Pair<String,String> {
     // Works by finding the first comma which is not contained within parentheses
@@ -43,7 +47,7 @@ fun parseTypeAndRest(line: String): Pair<String,String> {
         }
         cond
     }
-    return Pair(type, line.substring(k).strip())
+    return Pair(type, line.substring(k).trim())
 }
 
 fun parseDoc(doc: String): ProtelisFunDoc {
@@ -51,9 +55,9 @@ fun parseDoc(doc: String): ProtelisFunDoc {
 
     var txt = ""
     val pieces: MutableList<DocPiece> = mutableListOf()
-    doc.lines().map { """\s+\*\s+""".toRegex().replace(it,"").strip() }.forEach { l ->
+    doc.lines().map { """\s+\*\s+""".toRegex().replace(it,"").trim() }.forEach { l ->
         if(l.isEmpty()){ }
-        else if(!l.startsWith("@")) txt += "\n"+l.strip().substringAfter("*")
+        else if(!l.startsWith("@")) txt += "\n"+l.trim().substringAfter("*")
         else {
             DocPiece.docParamRegex.matchEntire(l)?.let { matchRes ->
                 val gs = matchRes.groupValues
@@ -77,7 +81,7 @@ fun parseProtelisFunction(fline: String): ProtelisFun {
     return ProtelisFun(
             name = """def (\w+)""".toRegex().find(fline)!!.groupValues[1],
             params = """\(([^\)]*)\)""".toRegex().find(fline)!!.groupValues[1]?.split(",")
-                    ?.filter { !it.isEmpty() }.map { ProtelisFunArg(it.strip(),"") }.toList(),
+                    ?.filter { !it.isEmpty() }.map { ProtelisFunArg(it.trim(),"") }.toList(),
             public = """(public def)""".toRegex().find(fline)!=null)
 }
 
@@ -103,17 +107,6 @@ fun parseFile(content: String): List<ProtelisItem> {
     return pitems
 }
 
-fun main(args: Array<String>) {
-    val filePath = C().javaClass.getResource("/accumulation.pt")
-    val file = File(filePath.toURI())
-    val fileText: String = file.readText()
-
-    val protelisItems = parseFile(fileText)
-    val kotlinFile = generateKotlin(protelisItems)
-    println(kotlinFile)
-}
-
-
 fun generateKotlinDoc(docs: ProtelisFunDoc): String {
     val docPieces = docs.docPieces
     return "/**\n"+
@@ -129,9 +122,25 @@ fun generateKotlinDoc(docs: ProtelisFunDoc): String {
 }
 
 fun generateKotlinType(protelisType: String): String = when(protelisType){
+    "" -> "Any"
     "bool" -> "Boolean"
     "num" -> "Number"
-    else -> "Any"
+    else ->
+        """\(([^\)]*)\)\s*->\s*(.*)""".toRegex().matchEntire(protelisType)?.let { matchRes ->
+            val args = matchRes.groupValues[1].split(",").map { generateKotlinType(it.trim()) }
+            val ret = generateKotlinType(matchRes.groupValues[2])
+            """(${args.joinToString(",")}) -> $ret"""
+        } ?:
+        """\[([^\]]*)\]""".toRegex().matchEntire(protelisType)?.let { matchRes ->
+            "List<${generateKotlinType(matchRes.groupValues[1])}>"
+        } ?:
+        if(protelisType.length==1 && protelisType.any{ it.isUpperCase() })
+            protelisType
+        else if("""[A-Z]'""".toRegex().matches(protelisType))
+            "${protelisType[0].inc()}"
+        else if("""\w+""".toRegex().matches(protelisType))
+            protelisType
+        else "Any"
 }
 
 fun sanitizeNameForKotlin(name: String): String = when(name){
@@ -140,7 +149,10 @@ fun sanitizeNameForKotlin(name: String): String = when(name){
 }
 
 fun generateKotlinFun(fn: ProtelisFun): String {
-    return "fun ${sanitizeNameForKotlin(fn.name)}(" +
+    var genTypesStr = fn.genericTypes.joinToString(",")
+    if(!genTypesStr.isEmpty()) genTypesStr = " <$genTypesStr>"
+
+    return "fun${genTypesStr} ${sanitizeNameForKotlin(fn.name)}(" +
             fn.params.map { "${sanitizeNameForKotlin(it.name)}: ${generateKotlinType(it.type)}" }.joinToString(", ") +
             "): ${generateKotlinType(fn.returnType)} = TODO()"
 }
@@ -160,9 +172,25 @@ fun generateKotlin(protelisItems: List<ProtelisItem>): String {
                 returnType = doc.docPieces.filter { it is DocReturn }.map { (it as DocReturn).returnType }.firstOrNull() ?: "",
                 params = fn.params.map { param ->
                     param.copy(type = doc.docPieces.filter { it is DocParam && it.paramName==param.name }
-                            .map { (it as DocParam).paramType }.firstOrNull() ?: "")
-        }))
+                            .map { (it as DocParam).paramType }.firstOrNull() ?: "")},
+                genericTypes = doc.docPieces.map {
+                    if(!(it is DocParam)) "" else it.paramType
+                }.flatMap { """([A-Z]'?)""".toRegex().findAll(it).map{
+                    if(it.value.length==2 && it.value[1]=='\'') "${it.value[0].inc()}"
+                    else it.value
+                }.toList() }.toSet()
+        ))
     }
 
     return pitems.map { generateKotlinItem(it)}.joinToString("\n\n")
+}
+
+fun main(args: Array<String>) {
+    val filePath = C().javaClass.getResource("/source.pt")
+    val file = File(filePath.toURI())
+    val fileText: String = file.readText()
+
+    val protelisItems = parseFile(fileText)
+    val kotlinFile = generateKotlin(protelisItems)
+    println(kotlinFile)
 }
