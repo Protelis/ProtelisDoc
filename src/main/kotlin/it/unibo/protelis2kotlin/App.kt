@@ -138,6 +138,8 @@ fun generateKotlinType(protelisType: String): String = when(protelisType){
             protelisType
         else if("""[A-Z]'""".toRegex().matches(protelisType))
             "${protelisType[0].inc()}"
+        else if("""\w+""".toRegex().matches(protelisType))
+            protelisType
         else "Any"
 }
 
@@ -184,7 +186,7 @@ fun generateKotlin(protelisItems: List<ProtelisItem>): String {
 }
 
 fun main(args: Array<String>) {
-    val filePath = C().javaClass.getResource("/protelis-lang-utils.pt")
+    val filePath = C().javaClass.getResource("/source.pt")
     val file = File(filePath.toURI())
     val fileText: String = file.readText()
 
