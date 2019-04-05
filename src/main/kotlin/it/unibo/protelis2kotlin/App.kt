@@ -47,6 +47,8 @@ fun parseTypeAndRest(line: String): Pair<String,String> {
 }
 
 fun parseDoc(doc: String): ProtelisFunDoc {
+    // TODO: handle @see ProtelisDoc directives
+
     var txt = ""
     val pieces: MutableList<DocPiece> = mutableListOf()
     doc.lines().map { """\s+\*\s+""".toRegex().replace(it,"").strip() }.forEach { l ->
