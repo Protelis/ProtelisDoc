@@ -1,3 +1,5 @@
+import org.jetbrains.dokka.gradle.DokkaTask
+
 plugins {
     application
     kotlin("jvm") version "1.3.21"
@@ -6,6 +8,7 @@ plugins {
     id("com.palantir.git-version") version "0.12.0-rc2"
     id ("org.danilopianini.git-sensitive-semantic-versioning") version "0.1.0"
     id ("org.danilopianini.publish-on-central") version "0.1.1"
+    id ("org.jetbrains.dokka") version "0.9.17"
 }
 
 group = "org.protelis"
@@ -26,6 +29,13 @@ dependencies {
 
 application {
     mainClassName = "it.unibo.protelis2kotlin.AppKt"
+}
+
+tasks {
+    javadocJar {
+        dependsOn(dokka)
+        from(dokka.get().outputDirectory)
+    }
 }
 
 publishOnCentral {
