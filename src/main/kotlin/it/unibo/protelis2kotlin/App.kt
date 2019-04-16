@@ -183,12 +183,32 @@ fun generateKotlin(protelisItems: List<ProtelisItem>): String {
     return pitems.map { generateKotlinItem(it)}.joinToString("\n\n")
 }
 
-fun main() {
-    val filePath = ClassLoader.getSystemClassLoader().getResource("source.pt")
-    val file = File(filePath.toURI())
-    val fileText: String = file.readText()
+fun main(args: Array<String>) {
+    if(args.size < 2){
+        println("USAGE: program <dir> <destDir>")
+        return;
+    }
 
-    val protelisItems = parseFile(fileText)
-    val kotlinFile = generateKotlin(protelisItems)
-    println(kotlinFile)
+    val dir = args[0];
+    val destDir = args[1];
+
+    File(dir).walkTopDown().forEach { file ->
+        if(!file.isFile) return@forEach
+        val fileText: String = file.readText()
+        val pkg = """module (.+)""".toRegex().find(fileText)?.groupValues?.component2() ?: "";
+        if(pkg.isEmpty()) return@forEach
+        val pkgParts = pkg.split(':')
+        println("Processing " + file.absolutePath)
+        println("\tPackage: " + pkg)
+        val protelisItems = parseFile(fileText)
+        println("\tFound " + protelisItems.size + " Protelis items.")
+        val kotlinCode = generateKotlin(protelisItems)
+        val outPath = "$destDir$SEP${pkgParts.joinToString(SEP)}$SEP${file.name}"
+        println("\tWriting " + outPath)
+        File(outPath).let {
+            it.parentFile.mkdirs()
+            it.createNewFile()
+            it
+        }.writeText(kotlinCode)
+    }
 }
