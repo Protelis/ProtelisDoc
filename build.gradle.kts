@@ -1,3 +1,6 @@
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     application
     kotlin("jvm") version "1.3.21"
@@ -8,6 +11,7 @@ plugins {
     id("org.danilopianini.publish-on-central") version "0.1.1"
     id("org.jetbrains.dokka") version "0.9.17"
     id("org.jlleitschuh.gradle.ktlint") version "7.3.0"
+    `java-gradle-plugin`
 }
 
 group = "org.protelis"
@@ -22,8 +26,12 @@ gitSemVer {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7")
+    implementation(kotlin("stdlib"))
+    implementation(gradleApi())
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+    testImplementation(gradleTestKit())
+    testImplementation("io.kotlintest:kotlintest-runner-junit5:+")
 }
 
 application {
@@ -64,6 +72,45 @@ publishing {
                     }
                 }
             }
+        }
+    }
+}
+
+tasks {
+    "test"(Test::class) {
+        useJUnitPlatform()
+        testLogging.showStandardStreams = true
+        testLogging {
+            showCauses = true
+            showStackTraces = true
+            showStandardStreams = true
+            events(*TestLogEvent.values())
+        }
+    }
+    register("createClasspathManifest") {
+        val outputDir = file("$buildDir/$name")
+        inputs.files(sourceSets.main.get().runtimeClasspath)
+        outputs.dir(outputDir)
+        doLast {
+            outputDir.mkdirs()
+            file("$outputDir/plugin-classpath.txt").writeText(sourceSets.main.get().runtimeClasspath.joinToString("\n"))
+        }
+    }
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = "1.6"
+    }
+}
+
+// Add the classpath file to the test runtime classpath
+dependencies {
+    testRuntimeOnly(files(tasks["createClasspathManifest"]))
+}
+
+gradlePlugin {
+    plugins {
+        create("Protelis2Kotlin") {
+            id = "it.unibo.protelis2kotlin"
+            implementationClass = "it.unibo.protelis2kotlin.Protelis2KotlinPlugin"
         }
     }
 }
