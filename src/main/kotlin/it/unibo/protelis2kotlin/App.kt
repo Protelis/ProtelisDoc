@@ -6,8 +6,6 @@ import java.io.File
 import kotlin.text.RegexOption.*
 import java.io.File.separator as SEP
 
-class C { }
-
 interface DocPiece {
     companion object {
         val docParamRegex = """@param\s+(\w+)\s*([^\n]*)""".toRegex()
@@ -186,7 +184,7 @@ fun generateKotlin(protelisItems: List<ProtelisItem>): String {
 }
 
 fun main() {
-    val filePath = C().javaClass.getResource("/source.pt")
+    val filePath = ClassLoader.getSystemClassLoader().getResource("source.pt")
     val file = File(filePath.toURI())
     val fileText: String = file.readText()
 
