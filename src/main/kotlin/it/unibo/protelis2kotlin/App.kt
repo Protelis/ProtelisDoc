@@ -185,7 +185,7 @@ fun generateKotlin(protelisItems: List<ProtelisItem>): String {
     return pitems.map { generateKotlinItem(it)}.joinToString("\n\n")
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val filePath = C().javaClass.getResource("/source.pt")
     val file = File(filePath.toURI())
     val fileText: String = file.readText()
