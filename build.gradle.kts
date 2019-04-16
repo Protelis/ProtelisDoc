@@ -1,14 +1,13 @@
-import org.jetbrains.dokka.gradle.DokkaTask
-
 plugins {
     application
     kotlin("jvm") version "1.3.21"
     `maven-publish`
     signing
     id("com.palantir.git-version") version "0.12.0-rc2"
-    id ("org.danilopianini.git-sensitive-semantic-versioning") version "0.1.0"
-    id ("org.danilopianini.publish-on-central") version "0.1.1"
-    id ("org.jetbrains.dokka") version "0.9.17"
+    id("org.danilopianini.git-sensitive-semantic-versioning") version "0.1.0"
+    id("org.danilopianini.publish-on-central") version "0.1.1"
+    id("org.jetbrains.dokka") version "0.9.17"
+    id("org.jlleitschuh.gradle.ktlint") version "7.3.0"
 }
 
 group = "org.protelis"
@@ -36,6 +35,10 @@ tasks {
         dependsOn(dokka)
         from(dokka.get().outputDirectory)
     }
+}
+
+ktlint {
+    ignoreFailures.set(false)
 }
 
 publishOnCentral {
