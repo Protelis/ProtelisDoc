@@ -8,6 +8,8 @@ plugins {
     id ("org.danilopianini.publish-on-central") version "0.1.1"
 }
 
+group = "org.protelis"
+
 repositories {
     mavenCentral()
 }
