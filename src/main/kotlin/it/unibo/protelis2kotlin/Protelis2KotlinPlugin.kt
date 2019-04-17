@@ -23,6 +23,7 @@ class Protelis2KotlinPlugin : Plugin<Project> {
             it.doLast {
                 main(arrayOf(extension.baseDir.get(), extension.destDir.get()))
             }
+            it.outputs.files(project.fileTree(extension.destDir.get()))
         }
     }
 }
