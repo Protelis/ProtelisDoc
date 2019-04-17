@@ -40,11 +40,9 @@ public def and(a, b) {
             id("it.unibo.protelis2kotlin")
         }
 
-        apply<Protelis2KotlinPlugin>()
-
-        configure<Protelis2KotlinPluginExtension> {
-            baseDir = "."
-            destDir = "./output"
+        Protelis2Kotlin {
+            baseDir.set("${this.root.absolutePath!!}")
+            destDir.set("${this.root.absolutePath!!}/output")
         }
     """ }
     }
