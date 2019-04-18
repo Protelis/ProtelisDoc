@@ -8,7 +8,7 @@ inline fun <reified T> Project.propertyWithDefault(default: T): Property<T> =
         objects.property(T::class.java).apply { convention(default) }
 
 inline fun <reified T> Project.propertyWithDefault(noinline default: () -> T): Property<T> =
-        objects.property(T::class.java).apply { convention( default()) }
+    objects.property(T::class.java).apply { convention(default()) }
 
 open class Protelis2KotlinPluginExtension @JvmOverloads constructor(
     private val project: Project,

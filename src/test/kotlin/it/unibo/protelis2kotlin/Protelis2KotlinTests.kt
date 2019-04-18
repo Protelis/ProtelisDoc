@@ -1,11 +1,8 @@
 package it.unibo.protelis2kotlin
 
-import io.kotlintest.shouldBe
 import io.kotlintest.specs.StringSpec
-import org.gradle.api.file.Directory
 import org.gradle.internal.impldep.org.junit.rules.TemporaryFolder
 import org.gradle.testkit.runner.GradleRunner
-import org.gradle.testkit.runner.TaskOutcome
 import java.io.File
 
 class Protelis2KotlinTests : StringSpec({
@@ -70,7 +67,7 @@ public def and(a, b) {
             dependsOn("generateKotlinFromProtelis")
             dependsOn("compileKotlin")
         }
-    """}
+    """ }
     }
     val pluginClasspathResource = ClassLoader.getSystemClassLoader()
             .getResource("plugin-classpath.txt")
@@ -87,6 +84,6 @@ public def and(a, b) {
                 .build()
         println(result.tasks)
         println(result.output)
-        File(workingDirectory.root.toURI()).walkTopDown().forEach{ println(it) }
+        File(workingDirectory.root.toURI()).walkTopDown().forEach { println(it) }
     }
 })

@@ -30,7 +30,7 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
     implementation(gradleApi())
-    //implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.30")
+    // implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.30")
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:0.9.16")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")

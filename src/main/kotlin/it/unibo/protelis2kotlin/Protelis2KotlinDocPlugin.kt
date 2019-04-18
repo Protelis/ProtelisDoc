@@ -25,7 +25,7 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         project.pluginManager.apply(Protelis2KotlinPlugin::class.java)
         project.pluginManager.apply(dokkaPluginName)
 
-        project.plugins.forEach { println("Plugin: ${it}") }
+        // project.plugins.forEach { println("Plugin: $it") }
         val dokka = project.plugins.getAt(dokkaPluginName)
         val p2kp = project.extensions.getByName("Protelis2Kotlin") as Protelis2KotlinPluginExtension
         p2kp.destDir.set(project.rootDir.path + "/src/main/kotlin")
