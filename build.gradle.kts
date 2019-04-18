@@ -9,7 +9,7 @@ plugins {
     id("com.palantir.git-version") version "0.12.0-rc2"
     id("org.danilopianini.git-sensitive-semantic-versioning") version "0.1.0"
     id("org.danilopianini.publish-on-central") version "0.1.1"
-    id("org.jetbrains.dokka") version "0.9.17"
+    id("org.jetbrains.dokka") version "0.9.16"
     id("org.jlleitschuh.gradle.ktlint") version "7.3.0"
     `java-gradle-plugin`
 }
@@ -18,6 +18,7 @@ group = "org.protelis"
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 gitSemVer {
@@ -27,7 +28,11 @@ gitSemVer {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7")
     implementation(kotlin("stdlib"))
+    implementation(kotlin("reflect"))
     implementation(gradleApi())
+    //implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.30")
+    implementation("org.jetbrains.dokka:dokka-gradle-plugin:0.9.16")
+
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
     testImplementation(gradleTestKit())
@@ -111,6 +116,15 @@ gradlePlugin {
         create("Protelis2Kotlin") {
             id = "it.unibo.protelis2kotlin"
             implementationClass = "it.unibo.protelis2kotlin.Protelis2KotlinPlugin"
+        }
+    }
+}
+
+gradlePlugin {
+    plugins {
+        create("Protelis2KotlinDoc") {
+            id = "it.unibo.protelis2kotlindoc"
+            implementationClass = "it.unibo.protelis2kotlin.Protelis2KotlinDocPlugin"
         }
     }
 }

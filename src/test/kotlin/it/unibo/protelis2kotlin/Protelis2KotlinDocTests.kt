@@ -8,7 +8,7 @@ import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
 import java.io.File
 
-class CentralTests : StringSpec({
+class Protelis2KotlinDocTests : StringSpec({
     fun folder(closure: TemporaryFolder.() -> Unit) = TemporaryFolder().apply {
         create()
         closure()
@@ -41,12 +41,9 @@ public def and(a, b) {
         )
 
         file("build.gradle.kts") { """
-        import org.jetbrains.dokka.gradle.DokkaTask
-
         plugins {
             kotlin("jvm") version "1.3.21"
-            id("it.unibo.protelis2kotlin")
-            id("org.jetbrains.dokka") version "0.9.18"
+            id("it.unibo.protelis2kotlindoc")
         }
 
         dependencies {
@@ -57,19 +54,11 @@ public def and(a, b) {
             jcenter() // or maven { url 'https://dl.bintray.com/kotlin/dokka' }
         }
 
-        Protelis2Kotlin {
+        Protelis2KotlinDoc {
             baseDir.set("${this.root.absolutePath!!}/src/main/protelis")
-            destDir.set("${this.root.absolutePath!!}/src/main/kotlin")
+            destDir.set("${this.root.absolutePath!!}/docs")
         }
 
-        val dokka by tasks.getting(DokkaTask::class) {
-            outputFormat = "html"
-            outputDirectory = "${"$"}buildDir/dokka"
-            jdkVersion = 8
-            reportUndocumented = true
-            dependsOn("generate")
-            dependsOn("compileKotlin")
-        }
     """}
     }
     val pluginClasspathResource = ClassLoader.getSystemClassLoader()
@@ -78,12 +67,12 @@ public def and(a, b) {
     val classpath = pluginClasspathResource.openStream().bufferedReader().use { reader ->
         reader.readLines().map { File(it) }
     }
-    "Generation of Kotlin interfaces from Protelis sources should work" {
+    "Generation of Kotlin docs from Protelis sources should work" {
         println(workingDirectory.root)
         val result = GradleRunner.create()
                 .withProjectDir(workingDirectory.root)
                 .withPluginClasspath(classpath)
-                .withArguments("generate", "dokka")
+                .withArguments("generateProtelisDoc")
                 .build()
         println(result.tasks)
         println(result.output)

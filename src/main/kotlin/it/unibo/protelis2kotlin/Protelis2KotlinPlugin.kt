@@ -19,7 +19,7 @@ open class Protelis2KotlinPluginExtension @JvmOverloads constructor(
 class Protelis2KotlinPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         val extension = project.extensions.create("Protelis2Kotlin", Protelis2KotlinPluginExtension::class.java, project)
-        project.task("generate") {
+        project.task("generateKotlinFromProtelis") {
             it.doLast {
                 main(arrayOf(extension.baseDir.get(), extension.destDir.get()))
             }
