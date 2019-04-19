@@ -6,6 +6,7 @@ plugins {
     kotlin("jvm") version "1.3.21"
     `maven-publish`
     signing
+    id("com.gradle.build-scan") version "2.1"
     id("com.palantir.git-version") version "0.12.0-rc2"
     id("org.danilopianini.git-sensitive-semantic-versioning") version "0.1.0"
     id("org.danilopianini.publish-on-central") version "0.1.1"
@@ -127,4 +128,9 @@ gradlePlugin {
             implementationClass = "it.unibo.protelis2kotlin.Protelis2KotlinDocPlugin"
         }
     }
+}
+
+buildScan {
+    setTermsOfServiceUrl("https://gradle.com/terms-of-service")
+    setTermsOfServiceAgree("yes")
 }
