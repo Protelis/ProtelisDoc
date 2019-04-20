@@ -34,6 +34,36 @@ import java.lang.Math.pow
 public def and(a, b) {
     a && b
 }
+
+/**
+ * Find the parent of the current device following the maximum decrease in
+ * potential.
+ *
+ * @param potential num, potential
+ * @param f         (ExecutionContext) -> T, what to do with the parent
+ * @param g         (T') -> T', what to do with the value
+ * @param local     T', local value
+ * @return          [num|T,T'], [imRoot()|noParent()|f(parent), g(value)]
+ * @see imRoot, noParent
+ */
+public def getParentExtended(potential, f, g, local) {
+    getParentsExtended(potential, v -> { minHood(v) }, f, g, local, local)
+}
+
+/**
+ * Find the parents of the current device following the decrease in
+ * potential.
+ *
+ * @param potential num, potential
+ * @param f         (ExecutionContext) -> T, what to do with the parent
+ * @param g         (T') -> T', what to do with the value
+ * @param local     T', local value
+ * @return          [[num|T,T']], [[imRoot()|noParent()|f(parent), g(value)]]
+ * @see imRoot, noParent
+ */
+public def getParents(potential, f, g, local, default) {
+    getParentsExtended(potential, identity, f, g, local, default)
+}
         """.trimIndent()
         )
 
