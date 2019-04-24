@@ -207,8 +207,8 @@ fun main(args: Array<String>) {
         println("\tPackage: " + pkg)
         val protelisItems = parseFile(fileText)
         println("\tFound " + protelisItems.size + " Protelis items.")
-        val kotlinCode = generateKotlin(protelisItems)
-        val outPath = "$destDir$SEP${pkgParts.joinToString(SEP)}$SEP${file.name}"
+        val kotlinCode = "package ${pkgParts.joinToString(".")}\n\n" + generateKotlin(protelisItems)
+        val outPath = "$destDir$SEP${pkgParts.joinToString(SEP)}$SEP${file.name.replace(".pt",".kt")}"
         println("\tWriting " + outPath)
         File(outPath).let {
             it.parentFile.mkdirs()
