@@ -7,3 +7,5 @@ build
 # Ignore idea stuff
 .idea
 out
+
+.kotlintest

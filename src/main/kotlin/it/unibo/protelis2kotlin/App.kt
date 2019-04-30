@@ -7,6 +7,13 @@ import kotlin.text.RegexOption.MULTILINE
 import kotlin.text.RegexOption.DOT_MATCHES_ALL
 import java.io.File.separator as SEP
 
+var context = Context(setOf())
+
+data class Context(var protelisTypes: Set<String>)
+fun registerProtelisType(pt: String) {
+    context = context.copy(context.protelisTypes + pt)
+}
+
 interface DocPiece {
     companion object {
         val docParamRegex = """@param\s+(\w+)\s*([^\n]*)""".toRegex()
@@ -127,7 +134,7 @@ fun generateKotlinDoc(docs: ProtelisFunDoc): String {
 }
 
 fun generateKotlinType(protelisType: String): String = when (protelisType) {
-    "" -> "Any"
+    "" -> ""
     "bool" -> "Boolean"
     "num" -> "Number"
     else ->
@@ -136,14 +143,16 @@ fun generateKotlinType(protelisType: String): String = when (protelisType) {
             val ret = generateKotlinType(matchRes.groupValues[2])
             """(${args.joinToString(",")}) -> $ret"""
         } ?: """\[([^\]]*)\]""".toRegex().matchEntire(protelisType)?.let { matchRes ->
-            "List<${generateKotlinType(matchRes.groupValues[1])}>"
+            registerProtelisType("Tuple")
+            "Tuple" // "List<${generateKotlinType()}>"
         } ?: if (protelisType.length == 1 && protelisType.any { it.isUpperCase() })
             protelisType
         else if ("""[A-Z]'""".toRegex().matches(protelisType))
             "${protelisType[0].inc()}"
-        else if ("""\w+""".toRegex().matches(protelisType))
+        else if ("""\w+""".toRegex().matches(protelisType)) {
+            registerProtelisType(protelisType)
             protelisType
-        else "Any"
+        } else "Any"
 }
 
 fun sanitizeNameForKotlin(name: String): String = when (name) {
@@ -175,7 +184,7 @@ fun generateKotlin(protelisItems: List<ProtelisItem>): String {
                 returnType = doc.docPieces.filter { it is DocReturn }.map { (it as DocReturn).returnType }.firstOrNull() ?: "",
                 params = fn.params.map { param ->
                     param.copy(type = doc.docPieces.filter { it is DocParam && it.paramName == param.name }
-                            .map { (it as DocParam).paramType }.firstOrNull() ?: "") },
+                            .map { (it as DocParam).paramType }.firstOrNull() ?: "Any") },
                 genericTypes = doc.docPieces.map {
                     if (!(it is DocParam)) "" else it.paramType
                 }.flatMap { """([A-Z]'?)""".toRegex().findAll(it).map {
@@ -199,21 +208,42 @@ fun main(args: Array<String>) {
 
     File(dir).walkTopDown().forEach { file ->
         if (!file.isFile) return@forEach
+
         val fileText: String = file.readText()
         val pkg = """module (.+)""".toRegex().find(fileText)?.groupValues?.component2() ?: ""
         if (pkg.isEmpty()) return@forEach
+
         val pkgParts = pkg.split(':')
         println("Processing " + file.absolutePath)
         println("\tPackage: " + pkg)
+
+        // RESET CONTEXT
+        context = Context(setOf())
+
         val protelisItems = parseFile(fileText)
         println("\tFound " + protelisItems.size + " Protelis items.")
-        val kotlinCode = "package ${pkgParts.joinToString(".")}\n\n" + generateKotlin(protelisItems)
+
+        val pkgCode = "package ${pkgParts.joinToString(".")}\n\n"
+        val kotlinCode = generateKotlin(protelisItems)
+
+        println("\tContext: " + context)
+
+        val importCode = context.protelisTypes.map { when (it) {
+            "ExecutionContext", "ExecutionEnvironment" -> "org.protelis.vm.$it"
+            "Tuple" -> "org.protelis.lang.datatype.$it"
+            else -> ""
+        } }.filterNot { it.isEmpty() }.map { "import " + it }.joinToString("\n") + "\n\n"
+
+        val kotlinFullCode = pkgCode + importCode + kotlinCode
+
         val outPath = "$destDir$SEP${pkgParts.joinToString(SEP)}$SEP${file.name.replace(".pt",".kt")}"
+
         println("\tWriting " + outPath)
+
         File(outPath).let {
             it.parentFile.mkdirs()
             it.createNewFile()
             it
-        }.writeText(kotlinCode)
+        }.writeText(kotlinFullCode)
     }
 }
