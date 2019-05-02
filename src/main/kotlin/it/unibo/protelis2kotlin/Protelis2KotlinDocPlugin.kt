@@ -1,8 +1,8 @@
 package it.unibo.protelis2kotlin
 
 import org.gradle.api.Plugin
-import org.gradle.api.provider.Property
 import org.gradle.api.Project
+import org.gradle.api.provider.Property
 
 open class Protelis2KotlinDocPluginExtension @JvmOverloads constructor(
     private val project: Project,
@@ -21,6 +21,9 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
         val extension = project.extensions.create("Protelis2KotlinDoc", Protelis2KotlinDocPluginExtension::class.java, project)
+
+        // Add dependency to Kotlin stdlib for TODO()s
+        val dep = project.dependencies.add("implementation", "org.jetbrains.kotlin:kotlin-stdlib:1.3.31")
 
         project.pluginManager.apply(Protelis2KotlinPlugin::class.java)
         project.pluginManager.apply(dokkaPluginName)

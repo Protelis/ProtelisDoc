@@ -74,7 +74,6 @@ public def getParents(potential, f, g, local, default) {
         }
 
         dependencies {
-            implementation(kotlin("stdlib"))
             implementation("org.protelis:protelis-interpreter:11.1.0")
         }
 

@@ -15,7 +15,7 @@ class Protelis2KotlinTests : StringSpec({
 
     val workingDirectory = folder {
         file("settings.gradle") { "rootProject.name = 'testproject'" }
-        val srcDir = File("${this.root.absolutePath}/src/main/protelis").mkdirs()
+        File("${this.root.absolutePath}/src/main/protelis").mkdirs()
         File("${this.root.absolutePath}/src/main/protelis/file.pt").writeText("""
 module protelis:coord:accumulation
 import protelis:coord:meta
