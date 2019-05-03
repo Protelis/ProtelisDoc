@@ -15,7 +15,7 @@ class Protelis2KotlinDocTests : StringSpec({
 
     val workingDirectory = folder {
         file("settings.gradle") { "rootProject.name = 'testproject'" }
-        val srcDir = File("${this.root.absolutePath}/src/main/protelis").mkdirs()
+        File("${this.root.absolutePath}/src/main/protelis").mkdirs()
         File("${this.root.absolutePath}/src/main/protelis/file.pt").writeText("""
 module protelis:coord:accumulation
 import protelis:coord:meta
@@ -73,10 +73,6 @@ public def getParents(potential, f, g, local, default) {
             id("it.unibo.protelis2kotlindoc")
         }
 
-        dependencies {
-            implementation("org.protelis:protelis-interpreter:11.1.0")
-        }
-
         repositories {
             jcenter() // or maven { url 'https://dl.bintray.com/kotlin/dokka' }
         }
@@ -84,13 +80,14 @@ public def getParents(potential, f, g, local, default) {
         Protelis2KotlinDoc {
             baseDir.set("${this.root.absolutePath!!}/src/main/protelis")
             destDir.set("${this.root.absolutePath!!}/docs")
+            kotlinVersion.set("+")
+            protelisVersion.set("+")
         }
-
     """ }
     }
     val pluginClasspathResource = ClassLoader.getSystemClassLoader()
             .getResource("plugin-classpath.txt")
-            ?: throw IllegalStateException("Did not find plugin classpath resource, run \"testClasses\" build task.") as Throwable
+            ?: throw IllegalStateException("Did not find plugin classpath resource, run \"testClasses\" build task.")
     val classpath = pluginClasspathResource.openStream().bufferedReader().use { reader ->
         reader.readLines().map { File(it) }
     }

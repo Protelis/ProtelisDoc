@@ -72,7 +72,7 @@ public def and(a, b) {
     }
     val pluginClasspathResource = ClassLoader.getSystemClassLoader()
             .getResource("plugin-classpath.txt")
-            ?: throw IllegalStateException("Did not find plugin classpath resource, run \"testClasses\" build task.") as Throwable
+            ?: throw IllegalStateException("Did not find plugin classpath resource, run \"testClasses\" build task.")
     val classpath = pluginClasspathResource.openStream().bufferedReader().use { reader ->
         reader.readLines().map { File(it) }
     }
