@@ -116,11 +116,6 @@ gradlePlugin {
             id = "it.unibo.protelis2kotlin"
             implementationClass = "it.unibo.protelis2kotlin.Protelis2KotlinPlugin"
         }
-    }
-}
-
-gradlePlugin {
-    plugins {
         create("Protelis2KotlinDoc") {
             id = "it.unibo.protelis2kotlindoc"
             implementationClass = "it.unibo.protelis2kotlin.Protelis2KotlinDocPlugin"
