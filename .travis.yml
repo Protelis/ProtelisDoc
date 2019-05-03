@@ -27,7 +27,7 @@ install: >-
 
 script: ./gradlew clean check sourcesJar javadocJar
 
-after_success: if $SHOULD_CONFIGURE && $PUBLISH; then ./gradlew publish; fi
+after_success: if $SHOULD_CONFIGURE && $PUBLISH; then ./gradlew publish publishPlugins; fi
 
 env:
   global:
