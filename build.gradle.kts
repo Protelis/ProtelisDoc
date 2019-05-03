@@ -28,7 +28,6 @@ gitSemVer {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7")
-    implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
     implementation(gradleApi())
     // implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.30")
