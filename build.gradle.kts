@@ -122,10 +122,12 @@ gradlePlugin {
     plugins {
         create("Protelis2Kotlin") {
             id = "org.protelis.protelis2kotlin"
+            displayName = "Protelis to Kotlin API converter"
             implementationClass = "it.unibo.protelis2kotlin.Protelis2KotlinPlugin"
         }
         create("Protelis2KotlinDoc") {
             id = "org.protelis.protelisdoc"
+            displayName = "Protelis Documentation Engine"
             implementationClass = "it.unibo.protelis2kotlin.Protelis2KotlinDocPlugin"
         }
     }
