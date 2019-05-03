@@ -53,11 +53,19 @@ ktlint {
     ignoreFailures.set(false)
 }
 
+val websiteUrl = "https://github.com/Protelis/Protelis-KDoc-generator"
+
 publishOnCentral {
     projectDescription.set("A translator from documented Protelis code to compiling Kotlin interfaces")
     projectLongName.set("Protelis KDoc generator")
-    projectUrl.set("https://github.com/Protelis/Protelis-KDoc-generator")
+    projectUrl.set(websiteUrl)
     scmConnection.set("git@github.com:Protelis/Protelis-KDoc-generator.git")
+}
+
+pluginBundle {
+    website = websiteUrl
+    vcsUrl = websiteUrl
+    tags = listOf("protelis", "javadoc", "documentation", "protelisdoc", "dokka", "kotlin")
 }
 
 publishing {
@@ -113,11 +121,11 @@ dependencies {
 gradlePlugin {
     plugins {
         create("Protelis2Kotlin") {
-            id = "it.unibo.protelis2kotlin"
+            id = "org.protelis.protelis2kotlin"
             implementationClass = "it.unibo.protelis2kotlin.Protelis2KotlinPlugin"
         }
         create("Protelis2KotlinDoc") {
-            id = "it.unibo.protelis2kotlindoc"
+            id = "org.protelis.protelisdoc"
             implementationClass = "it.unibo.protelis2kotlin.Protelis2KotlinDocPlugin"
         }
     }
