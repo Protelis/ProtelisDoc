@@ -8,7 +8,6 @@ plugins {
     signing
     id("com.gradle.build-scan") version "2.1"
     id("com.gradle.plugin-publish") version "0.10.1"
-    id("com.palantir.git-version") version "0.12.0-rc2"
     id("org.danilopianini.git-sensitive-semantic-versioning") version "0.1.0"
     id("org.danilopianini.publish-on-central") version "0.1.1"
     id("org.jetbrains.dokka") version "0.9.16"
