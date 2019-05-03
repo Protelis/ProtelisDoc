@@ -15,7 +15,7 @@ class Protelis2KotlinTests : StringSpec({
 
     val workingDirectory = folder {
         file("settings.gradle") { "rootProject.name = 'testproject'" }
-        val srcDir = File("${this.root.absolutePath}/src/main/protelis").mkdirs()
+        File("${this.root.absolutePath}/src/main/protelis").mkdirs()
         File("${this.root.absolutePath}/src/main/protelis/file.pt").writeText("""
 module protelis:coord:accumulation
 import protelis:coord:meta
@@ -72,7 +72,7 @@ public def and(a, b) {
     }
     val pluginClasspathResource = ClassLoader.getSystemClassLoader()
             .getResource("plugin-classpath.txt")
-            ?: throw IllegalStateException("Did not find plugin classpath resource, run \"testClasses\" build task.") as Throwable
+            ?: throw IllegalStateException("Did not find plugin classpath resource, run \"testClasses\" build task.")
     val classpath = pluginClasspathResource.openStream().bufferedReader().use { reader ->
         reader.readLines().map { File(it) }
     }
