@@ -30,7 +30,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7")
     implementation(kotlin("reflect"))
     implementation(gradleApi())
-    implementation("org.jetbrains.dokka:dokka-gradle-plugin:0.9.16")
+    implementation("org.jetbrains.dokka:dokka-gradle-plugin:0.9.18")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
