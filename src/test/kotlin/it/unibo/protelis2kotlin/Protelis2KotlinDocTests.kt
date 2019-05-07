@@ -69,7 +69,6 @@ public def getParents(potential, f, g, local, default) {
 
         file("build.gradle.kts") { """
         plugins {
-            kotlin("jvm") version "1.3.21"
             id("it.unibo.protelis2kotlindoc")
         }
 

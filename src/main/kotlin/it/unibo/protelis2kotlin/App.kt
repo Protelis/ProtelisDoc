@@ -142,7 +142,7 @@ fun generateKotlinType(protelisType: String): String = when (protelisType) {
             val args = matchRes.groupValues[1].split(",").map { generateKotlinType(it.trim()) }
             val ret = generateKotlinType(matchRes.groupValues[2])
             """(${args.joinToString(",")}) -> $ret"""
-        } ?: """\[([^\]]*)\]""".toRegex().matchEntire(protelisType)?.let { matchRes ->
+        } ?: """\[([^\]]*)\]""".toRegex().matchEntire(protelisType)?.let { _ ->
             registerProtelisType("Tuple")
             "Tuple" // "List<${generateKotlinType()}>"
         } ?: if (protelisType.length == 1 && protelisType.any { it.isUpperCase() })

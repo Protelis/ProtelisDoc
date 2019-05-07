@@ -33,6 +33,7 @@ dependencies {
     implementation(gradleApi())
     // implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.30")
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:0.9.16")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.21")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
