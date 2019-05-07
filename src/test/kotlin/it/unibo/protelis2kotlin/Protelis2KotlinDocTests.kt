@@ -72,10 +72,6 @@ public def getParents(potential, f, g, local, default) {
             id("it.unibo.protelis2kotlindoc")
         }
 
-        repositories {
-            jcenter() // or maven { url 'https://dl.bintray.com/kotlin/dokka' }
-        }
-
         Protelis2KotlinDoc {
             baseDir.set("${this.root.absolutePath!!}/src/main/protelis")
             destDir.set("${this.root.absolutePath!!}/docs")
