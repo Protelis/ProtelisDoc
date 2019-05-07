@@ -69,14 +69,19 @@ public def getParents(potential, f, g, local, default) {
 
         file("build.gradle.kts") { """
         plugins {
+            // kotlin("jvm") version "1.3.21"
             id("it.unibo.protelis2kotlindoc")
         }
+
+        // repositories {
+        //    jcenter() // or maven { url 'https://dl.bintray.com/kotlin/dokka' }
+        // }
 
         Protelis2KotlinDoc {
             baseDir.set("${this.root.absolutePath!!}/src/main/protelis")
             destDir.set("${this.root.absolutePath!!}/docs")
-            kotlinVersion.set("+")
-            protelisVersion.set("+")
+            // kotlinVersion.set("+")
+            // protelisVersion.set("+")
         }
     """ }
     }
