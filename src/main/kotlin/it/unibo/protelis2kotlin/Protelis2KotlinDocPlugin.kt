@@ -27,7 +27,7 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
 
         project.pluginManager.apply(kotlinPluginName)
 
-        // Add dependency to Kotlin stdlib for TODO()s
+        // Add dependency to Kotlin stdlib for TODO()s and Protelis
         project.dependencies.add("implementation", "org.jetbrains.kotlin:kotlin-stdlib:${extension.kotlinVersion.get()}")
         project.dependencies.add("implementation", "org.protelis:protelis-interpreter:${extension.protelisVersion.get()}")
 

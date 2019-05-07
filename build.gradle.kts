@@ -7,7 +7,7 @@ plugins {
     `maven-publish`
     signing
     id("com.gradle.build-scan") version "2.1"
-    id("com.palantir.git-version") version "0.12.0-rc2"
+    id("com.gradle.plugin-publish") version "0.10.1"
     id("org.danilopianini.git-sensitive-semantic-versioning") version "0.1.0"
     id("org.danilopianini.publish-on-central") version "0.1.1"
     id("org.jetbrains.dokka") version "0.9.16"
@@ -27,18 +27,16 @@ gitSemVer {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7")
-    implementation(kotlin("stdlib"))
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation(kotlin("reflect"))
     implementation(gradleApi())
-    // implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.30")
-    implementation("org.jetbrains.dokka:dokka-gradle-plugin:0.9.16")
+    implementation("org.jetbrains.dokka:dokka-gradle-plugin:0.9.18")
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.21")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
     testImplementation(gradleTestKit())
-    testImplementation("io.kotlintest:kotlintest-runner-junit5:+")
+    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.2")
 }
 
 application {
@@ -56,11 +54,19 @@ ktlint {
     ignoreFailures.set(false)
 }
 
+val websiteUrl = "https://github.com/Protelis/Protelis-KDoc-generator"
+
 publishOnCentral {
     projectDescription.set("A translator from documented Protelis code to compiling Kotlin interfaces")
     projectLongName.set("Protelis KDoc generator")
-    projectUrl.set("https://github.com/Protelis/Protelis-KDoc-generator")
+    projectUrl.set(websiteUrl)
     scmConnection.set("git@github.com:Protelis/Protelis-KDoc-generator.git")
+}
+
+pluginBundle {
+    website = websiteUrl
+    vcsUrl = websiteUrl
+    tags = listOf("protelis", "javadoc", "documentation", "protelisdoc", "dokka", "kotlin")
 }
 
 publishing {
@@ -116,16 +122,15 @@ dependencies {
 gradlePlugin {
     plugins {
         create("Protelis2Kotlin") {
-            id = "it.unibo.protelis2kotlin"
+            id = "org.protelis.protelis2kotlin"
+            displayName = "Protelis to Kotlin API converter"
+            description = "A plugin that translates Protelis modules into Kotlin collections of functions"
             implementationClass = "it.unibo.protelis2kotlin.Protelis2KotlinPlugin"
         }
-    }
-}
-
-gradlePlugin {
-    plugins {
         create("Protelis2KotlinDoc") {
-            id = "it.unibo.protelis2kotlindoc"
+            id = "org.protelis.protelisdoc"
+            displayName = "Protelis Documentation Engine"
+            description = "A plugin that translates Protelis modules to Kotlin code, then generates the function documentation via Dokka"
             implementationClass = "it.unibo.protelis2kotlin.Protelis2KotlinDocPlugin"
         }
     }
