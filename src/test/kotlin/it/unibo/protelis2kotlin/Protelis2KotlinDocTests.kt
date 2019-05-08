@@ -91,7 +91,7 @@ public def getParents(potential, f, g, local, default) {
 
         Protelis2KotlinDoc {
             baseDir.set("${this.root.absolutePath!!}/src/main/protelis")
-            destDir.set("${this.root.absolutePath!!}/docs")
+            // destDir.set("${this.root.absolutePath!!}/docs")
             // kotlinVersion.set("+")
             // protelisVersion.set("+")
         }

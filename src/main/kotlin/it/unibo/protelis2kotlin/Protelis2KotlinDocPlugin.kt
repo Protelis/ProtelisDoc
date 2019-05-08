@@ -3,11 +3,14 @@ package it.unibo.protelis2kotlin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+import java.io.File
+
 
 open class Protelis2KotlinDocPluginExtension @JvmOverloads constructor(
     private val project: Project,
     val baseDir: Property<String> = project.propertyWithDefault("."),
-    val destDir: Property<String> = project.propertyWithDefault("."),
+    val destDir: Property<String> = project.propertyWithDefault(project.buildDir.path+"/protelis-docs/"),
     val kotlinVersion: Property<String> = project.propertyWithDefault("+"),
     val protelisVersion: Property<String> = project.propertyWithDefault("+")
 )
@@ -40,7 +43,7 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         // project.plugins.forEach { println("Plugin: $it") }
         // val dokka = project.plugins.getAt(dokkaPluginName)
         val p2kp = project.extensions.getByName("Protelis2Kotlin") as Protelis2KotlinPluginExtension
-        p2kp.destDir.set(project.rootDir.path + "/src/main/kotlin")
+        p2kp.destDir.set(project.buildDir.path + "/protelis2kotlin/src/main/kotlin")
         val protelis2kotlintask = project.tasks.getByName(generateKotlinFromProtelisTaskName)
         protelis2kotlintask.dependsOn(configureGenerateProtelisDocTaskName)
 
@@ -49,6 +52,14 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         dokkaTask.setProperty("jdkVersion", 8)
         dokkaTask.setProperty("reportUndocumented", true)
         dokkaTask.dependsOn(compileKotlinTaskName)
+
+        val kotlinPluginExt = project.extensions.getByName("kotlin") as KotlinJvmProjectExtension
+        val mainKotlinSrcset = kotlinPluginExt.sourceSets.getByName("main")
+        // This doesn't work: mainKotlinSrcset.kotlin.srcDirs.add(File(p2kp.destDir.get()))
+        // This also doesn't work: mainKotlinSrcset.resources.srcDirs.add(File(p2kp.destDir.get()))
+        // This doesn't work as well: mainKotlinSrcset.kotlin.sourceDirectories.files.add(File(p2kp.destDir.get()))
+        mainKotlinSrcset.kotlin.setSrcDirs(setOf(File(p2kp.destDir.get())))
+        kotlinPluginExt.sourceSets.forEach { kss -> println(" ### ${kss.name} " + kss.kotlin.srcDirs) }
 
         val compileKotlin = project.tasks.getByPath(compileKotlinTaskName)
         compileKotlin.dependsOn(generateKotlinFromProtelisTaskName)
