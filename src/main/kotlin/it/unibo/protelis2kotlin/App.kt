@@ -51,8 +51,8 @@ data class DocReturn(
 }
 
 data class DocDirective(
-        val directive: String,
-        val description: String
+    val directive: String,
+    val description: String
 ) : DocPiece {
     override fun extendWith(txt: String): DocPiece {
         return DocDirective(directive, description + txt)
@@ -95,14 +95,13 @@ fun parseDoc(doc: String): ProtelisFunDoc {
     doc.lines().map { """\s*\*\s*""".trimMargin().toRegex().replace(it, "").trim() }.forEach { l ->
         if (!l.startsWith("@")) {
             val partialtxt = l
-            if(pieces.isEmpty()) txt += if(txt.isEmpty()) partialtxt else "\n $partialtxt"
+            if (pieces.isEmpty()) txt += if (txt.isEmpty()) partialtxt else "\n $partialtxt"
             else {
                 val last = pieces.last()
                 pieces.remove(last)
-                pieces.add(last.extendWith(" "+partialtxt))
+                pieces.add(last.extendWith(" " + partialtxt))
             }
-        }
-        else {
+        } else {
             DocPiece.docParamRegex.matchEntire(l)?.let { matchRes ->
                 val gs = matchRes.groupValues
                 val (type, desc) = parseTypeAndRest(gs[2])
@@ -117,7 +116,7 @@ fun parseDoc(doc: String): ProtelisFunDoc {
                 return@forEach
             }
 
-            DocPiece.docOtherDirectiveRegex.matchEntire(l)?.let {matchRes ->
+            DocPiece.docOtherDirectiveRegex.matchEntire(l)?.let { matchRes ->
                 val directive = matchRes.groupValues[1]
                 val desc = matchRes.groupValues[2]
                 pieces.add(DocDirective(directive, desc))
@@ -170,7 +169,7 @@ fun generateKotlinDoc(docs: ProtelisFunDoc): String {
                     "  * @param ${p.paramName} ${p.paramDescription}"
                 } else if (p is DocReturn) {
                     "  * @return ${p.returnDescription}"
-                } else if(p is DocDirective) {
+                } else if (p is DocDirective) {
                     "  * @${p.directive} ${p.description}"
                 } else ""
             }.joinToString("\n") + "\n  */"
@@ -250,7 +249,7 @@ fun main(args: Array<String>) {
     val destDir = args[1]
 
     File(dir).walkTopDown().forEach { file ->
-        if (!file.isFile || file.extension!= protelisFileExt) return@forEach
+        if (!file.isFile || file.extension != protelisFileExt) return@forEach
 
         val fileText: String = file.readText()
 
