@@ -6,11 +6,10 @@ import org.gradle.api.provider.Property
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import java.io.File
 
-
 open class Protelis2KotlinDocPluginExtension @JvmOverloads constructor(
     private val project: Project,
     val baseDir: Property<String> = project.propertyWithDefault("."),
-    val destDir: Property<String> = project.propertyWithDefault(project.buildDir.path+"/protelis-docs/"),
+    val destDir: Property<String> = project.propertyWithDefault(project.buildDir.path + "/protelis-docs/"),
     val kotlinVersion: Property<String> = project.propertyWithDefault("+"),
     val protelisVersion: Property<String> = project.propertyWithDefault("+")
 )
