@@ -58,7 +58,6 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         // This also doesn't work: mainKotlinSrcset.resources.srcDirs.add(File(p2kp.destDir.get()))
         // This doesn't work as well: mainKotlinSrcset.kotlin.sourceDirectories.files.add(File(p2kp.destDir.get()))
         mainKotlinSrcset.kotlin.setSrcDirs(setOf(File(p2kp.destDir.get())))
-        kotlinPluginExt.sourceSets.forEach { kss -> println(" ### ${kss.name} " + kss.kotlin.srcDirs) }
 
         val compileKotlin = project.tasks.getByPath(compileKotlinTaskName)
         compileKotlin.dependsOn(generateKotlinFromProtelisTaskName)
