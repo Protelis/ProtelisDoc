@@ -3,6 +3,7 @@ package it.unibo.protelis2kotlin
 import org.gradle.api.Plugin
 import org.gradle.api.provider.Property
 import org.gradle.api.Project
+import java.io.File
 
 inline fun <reified T> Project.propertyWithDefault(default: T): Property<T> =
         objects.property(T::class.java).apply { convention(default) }
@@ -20,6 +21,7 @@ class Protelis2KotlinPlugin : Plugin<Project> {
     override fun apply(project: Project) {
         val extension = project.extensions.create("Protelis2Kotlin", Protelis2KotlinPluginExtension::class.java, project)
         project.task("generateKotlinFromProtelis") {
+            it.inputs.files(extension.baseDir.get())
             it.doLast {
                 main(arrayOf(extension.baseDir.get(), extension.destDir.get()))
             }

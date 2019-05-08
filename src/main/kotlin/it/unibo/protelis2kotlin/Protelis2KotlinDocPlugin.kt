@@ -70,6 +70,7 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         }
 
         project.task(generateProtelisDocTaskName) {
+            it.inputs.files(p2kp.destDir.get())
             it.outputs.files(project.fileTree(extension.destDir.get()))
             it.dependsOn(dokkaTaskName)
         }
