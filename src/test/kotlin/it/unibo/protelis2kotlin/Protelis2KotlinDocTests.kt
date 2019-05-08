@@ -51,7 +51,8 @@ public def and(a, b) {
  * potential.
  *
  * @param potential num, potential
- * @param f         (ExecutionContext) -> T, what to do with the parent
+ * @param f         (ExecutionContext) -> T, what to do
+ *                   with the parent
  * @param g         (T') -> T', what to do with the value
  * @param local     T', local value
  * @return          [num|T,T'], [imRoot()|noParent()|f(parent), g(value)]
