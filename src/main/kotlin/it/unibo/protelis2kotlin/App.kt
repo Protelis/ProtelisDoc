@@ -9,6 +9,8 @@ import java.io.File.separator as SEP
 
 var context = Context(setOf())
 
+val protelisFileExt = "pt"
+
 data class Context(var protelisTypes: Set<String>)
 fun registerProtelisType(pt: String) {
     context = context.copy(context.protelisTypes + pt)
@@ -207,7 +209,7 @@ fun main(args: Array<String>) {
     val destDir = args[1]
 
     File(dir).walkTopDown().forEach { file ->
-        if (!file.isFile) return@forEach
+        if (!file.isFile || file.extension!= protelisFileExt) return@forEach
 
         val fileText: String = file.readText()
         val pkg = """module (.+)""".toRegex().find(fileText)?.groupValues?.component2() ?: ""
