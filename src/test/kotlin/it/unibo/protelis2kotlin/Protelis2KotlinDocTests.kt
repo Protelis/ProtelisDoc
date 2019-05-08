@@ -76,6 +76,18 @@ public def getParentExtended(potential, f, g, local) {
 public def getParents(potential, f, g, local, default) {
     getParentsExtended(potential, identity, f, g, local, default)
 }
+
+/**
+ * Aggregation of local information.
+ *
+ * @param local  T, local information
+ * @param reduce (T, T) -> T, how to aggregate information
+ * @param        T, aggregated information
+ */
+public def aggregation(local, reduce) {
+    hood((a, b) -> { reduce.apply(a, b) }, local, nbr(local))
+}
+
         """.trimIndent()
         )
 
