@@ -26,6 +26,7 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         val extension = project.extensions.create("Protelis2KotlinDoc", Protelis2KotlinDocPluginExtension::class.java, project)
 
         project.repositories.add(project.repositories.jcenter())
+        project.repositories.add(project.repositories.mavenCentral())
 
         project.pluginManager.apply(kotlinPluginName)
 
