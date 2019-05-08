@@ -9,6 +9,8 @@ import java.io.File.separator as SEP
 
 var context = Context(setOf())
 
+val protelisFileExt = "pt"
+
 data class Context(var protelisTypes: Set<String>)
 fun registerProtelisType(pt: String) {
     context = context.copy(context.protelisTypes + pt)
@@ -18,19 +20,44 @@ interface DocPiece {
     companion object {
         val docParamRegex = """@param\s+(\w+)\s*([^\n]*)""".toRegex()
         val docReturnRegex = """@return\s+([^\n]*)""".toRegex()
+        val docOtherDirectiveRegex = """@(\w+)\s+([^\n]*)""".toRegex()
+    }
+
+    fun extendWith(txt: String): DocPiece
+}
+data class DocText(val text: String) : DocPiece {
+    override fun extendWith(txt: String): DocPiece {
+        return DocText(text + txt)
     }
 }
-data class DocText(val text: String) : DocPiece
+
 data class DocParam(
     val paramName: String,
     val paramType: String,
     val paramDescription: String
-) : DocPiece
+) : DocPiece {
+    override fun extendWith(txt: String): DocPiece {
+        return DocParam(paramName, paramType, paramDescription + txt)
+    }
+}
 
 data class DocReturn(
     val returnType: String,
     val returnDescription: String
-) : DocPiece
+) : DocPiece {
+    override fun extendWith(txt: String): DocPiece {
+        return DocReturn(returnType, returnDescription + txt)
+    }
+}
+
+data class DocDirective(
+    val directive: String,
+    val description: String
+) : DocPiece {
+    override fun extendWith(txt: String): DocPiece {
+        return DocDirective(directive, description + txt)
+    }
+}
 
 data class ProtelisFunArg(val name: String, val type: String)
 data class ProtelisFun(
@@ -63,24 +90,37 @@ fun parseTypeAndRest(line: String): Pair<String, String> {
 }
 
 fun parseDoc(doc: String): ProtelisFunDoc {
-    // TODO: handle @see ProtelisDoc directives
-
     var txt = ""
     val pieces: MutableList<DocPiece> = mutableListOf()
-    doc.lines().map { """\s+\*\s+""".toRegex().replace(it, "").trim() }.forEach { l ->
-        if (l.isEmpty()) {
-        } else if (!l.startsWith("@")) txt += "\n" + l.trim().substringAfter("*")
-        else {
+    doc.lines().map { """\s*\*\s*""".trimMargin().toRegex().replace(it, "").trim() }.forEach { l ->
+        if (!l.startsWith("@")) {
+            val partialtxt = l
+            if (pieces.isEmpty()) txt += if (txt.isEmpty()) partialtxt else "\n $partialtxt"
+            else {
+                val last = pieces.last()
+                pieces.remove(last)
+                pieces.add(last.extendWith(" " + partialtxt))
+            }
+        } else {
             DocPiece.docParamRegex.matchEntire(l)?.let { matchRes ->
                 val gs = matchRes.groupValues
                 val (type, desc) = parseTypeAndRest(gs[2])
                 pieces.add(DocParam(gs[1], type, desc))
+                return@forEach
             }
 
             DocPiece.docReturnRegex.matchEntire(l)?.let { matchRes ->
                 val gs = matchRes.groupValues
                 val (type, desc) = parseTypeAndRest(gs[1])
                 pieces.add(DocReturn(type, desc))
+                return@forEach
+            }
+
+            DocPiece.docOtherDirectiveRegex.matchEntire(l)?.let { matchRes ->
+                val directive = matchRes.groupValues[1]
+                val desc = matchRes.groupValues[2]
+                pieces.add(DocDirective(directive, desc))
+                return@forEach
             }
         }
     }
@@ -129,6 +169,8 @@ fun generateKotlinDoc(docs: ProtelisFunDoc): String {
                     "  * @param ${p.paramName} ${p.paramDescription}"
                 } else if (p is DocReturn) {
                     "  * @return ${p.returnDescription}"
+                } else if (p is DocDirective) {
+                    "  * @${p.directive} ${p.description}"
                 } else ""
             }.joinToString("\n") + "\n  */"
 }
@@ -142,7 +184,7 @@ fun generateKotlinType(protelisType: String): String = when (protelisType) {
             val args = matchRes.groupValues[1].split(",").map { generateKotlinType(it.trim()) }
             val ret = generateKotlinType(matchRes.groupValues[2])
             """(${args.joinToString(",")}) -> $ret"""
-        } ?: """\[([^\]]*)\]""".toRegex().matchEntire(protelisType)?.let { _ ->
+        } ?: """\[.*\]""".toRegex().matchEntire(protelisType)?.let { _ ->
             registerProtelisType("Tuple")
             "Tuple" // "List<${generateKotlinType()}>"
         } ?: if (protelisType.length == 1 && protelisType.any { it.isUpperCase() })
@@ -207,14 +249,19 @@ fun main(args: Array<String>) {
     val destDir = args[1]
 
     File(dir).walkTopDown().forEach { file ->
-        if (!file.isFile) return@forEach
+        if (!file.isFile || file.extension != protelisFileExt) return@forEach
 
         val fileText: String = file.readText()
+
+        println("Processing " + file.absolutePath)
+
         val pkg = """module (.+)""".toRegex().find(fileText)?.groupValues?.component2() ?: ""
-        if (pkg.isEmpty()) return@forEach
+        if (pkg.isEmpty()) {
+            println("\tCannot parse Protelis package. Skipping.")
+            return@forEach
+        }
 
         val pkgParts = pkg.split(':')
-        println("Processing " + file.absolutePath)
         println("\tPackage: " + pkg)
 
         // RESET CONTEXT

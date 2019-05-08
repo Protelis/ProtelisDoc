@@ -16,6 +16,17 @@ class Protelis2KotlinDocTests : StringSpec({
     val workingDirectory = folder {
         file("settings.gradle") { "rootProject.name = 'testproject'" }
         File("${this.root.absolutePath}/src/main/protelis").mkdirs()
+        File("${this.root.absolutePath}/src/main/protelis/file2.pt").writeText("""
+            unformed protelis file
+            def prova
+            /* ..
+            hello
+            """)
+        File("${this.root.absolutePath}/src/main/protelis/file.java").writeText("""
+            /** prova
+            */
+            public static void main(String[] args){ }
+        """.trimIndent())
         File("${this.root.absolutePath}/src/main/protelis/file.pt").writeText("""
 module protelis:coord:accumulation
 import protelis:coord:meta
@@ -40,7 +51,8 @@ public def and(a, b) {
  * potential.
  *
  * @param potential num, potential
- * @param f         (ExecutionContext) -> T, what to do with the parent
+ * @param f         (ExecutionContext) -> T, what to do
+ *                   with the parent
  * @param g         (T') -> T', what to do with the value
  * @param local     T', local value
  * @return          [num|T,T'], [imRoot()|noParent()|f(parent), g(value)]
@@ -69,19 +81,19 @@ public def getParents(potential, f, g, local, default) {
 
         file("build.gradle.kts") { """
         plugins {
-            kotlin("jvm") version "1.3.21"
+            // kotlin("jvm") version "1.3.21"
             id("it.unibo.protelis2kotlindoc")
         }
 
-        repositories {
-            jcenter() // or maven { url 'https://dl.bintray.com/kotlin/dokka' }
-        }
+        // repositories {
+        //    jcenter() // or maven { url 'https://dl.bintray.com/kotlin/dokka' }
+        // }
 
         Protelis2KotlinDoc {
             baseDir.set("${this.root.absolutePath!!}/src/main/protelis")
             destDir.set("${this.root.absolutePath!!}/docs")
-            kotlinVersion.set("+")
-            protelisVersion.set("+")
+            // kotlinVersion.set("+")
+            // protelisVersion.set("+")
         }
     """ }
     }

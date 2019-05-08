@@ -20,9 +20,15 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
 
     private val dokkaTaskName = "dokka"
     private val dokkaPluginName = "org.jetbrains.dokka"
+    private val kotlinPluginName = "org.jetbrains.kotlin.jvm"
 
     override fun apply(project: Project) {
         val extension = project.extensions.create("Protelis2KotlinDoc", Protelis2KotlinDocPluginExtension::class.java, project)
+
+        project.repositories.add(project.repositories.jcenter())
+        project.repositories.add(project.repositories.mavenCentral())
+
+        project.pluginManager.apply(kotlinPluginName)
 
         // Add dependency to Kotlin stdlib for TODO()s and Protelis
         project.dependencies.add("implementation", "org.jetbrains.kotlin:kotlin-stdlib:${extension.kotlinVersion.get()}")
@@ -31,6 +37,8 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         project.pluginManager.apply(Protelis2KotlinPlugin::class.java)
         project.pluginManager.apply(dokkaPluginName)
 
+        // project.plugins.forEach { println("Plugin: $it") }
+        // val dokka = project.plugins.getAt(dokkaPluginName)
         val p2kp = project.extensions.getByName("Protelis2Kotlin") as Protelis2KotlinPluginExtension
         p2kp.destDir.set(project.rootDir.path + "/src/main/kotlin")
         val protelis2kotlintask = project.tasks.getByName(generateKotlinFromProtelisTaskName)
