@@ -212,11 +212,16 @@ fun main(args: Array<String>) {
         if (!file.isFile || file.extension!= protelisFileExt) return@forEach
 
         val fileText: String = file.readText()
+
+        println("Processing " + file.absolutePath)
+
         val pkg = """module (.+)""".toRegex().find(fileText)?.groupValues?.component2() ?: ""
-        if (pkg.isEmpty()) return@forEach
+        if (pkg.isEmpty()) {
+            println("\tCannot parse Protelis package. Skipping.")
+            return@forEach
+        }
 
         val pkgParts = pkg.split(':')
-        println("Processing " + file.absolutePath)
         println("\tPackage: " + pkg)
 
         // RESET CONTEXT

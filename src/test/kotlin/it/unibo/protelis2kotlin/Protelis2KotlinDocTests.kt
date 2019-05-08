@@ -16,6 +16,17 @@ class Protelis2KotlinDocTests : StringSpec({
     val workingDirectory = folder {
         file("settings.gradle") { "rootProject.name = 'testproject'" }
         File("${this.root.absolutePath}/src/main/protelis").mkdirs()
+        File("${this.root.absolutePath}/src/main/protelis/file2.pt").writeText("""
+            unformed protelis file
+            def prova
+            /* ..
+            hello
+            """)
+        File("${this.root.absolutePath}/src/main/protelis/file.java").writeText("""
+            /** prova
+            */
+            public static void main(String[] args){ }
+        """.trimIndent())
         File("${this.root.absolutePath}/src/main/protelis/file.pt").writeText("""
 module protelis:coord:accumulation
 import protelis:coord:meta
