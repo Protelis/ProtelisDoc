@@ -176,7 +176,7 @@ fun generateKotlinDoc(docs: ProtelisFunDoc): String {
 }
 
 fun generateKotlinType(protelisType: String): String = when (protelisType) {
-    "" -> ""
+    "" -> "Unit"
     "bool" -> "Boolean"
     "num" -> "Number"
     else ->
