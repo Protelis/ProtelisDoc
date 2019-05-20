@@ -18,7 +18,8 @@ open class Protelis2KotlinDocPluginExtension @JvmOverloads constructor(
     val baseDir: Property<String> = project.propertyWithDefault("."),
     val destDir: Property<String> = project.propertyWithDefault(project.buildDir.path + "/protelis-docs/"),
     val kotlinVersion: Property<String> = project.propertyWithDefault("+"),
-    val protelisVersion: Property<String> = project.propertyWithDefault("+")
+    val protelisVersion: Property<String> = project.propertyWithDefault("+"),
+    val outputFormat: Property<String> = project.propertyWithDefault("javadoc")
 )
 
 /**
@@ -57,7 +58,6 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         protelis2kotlintask.dependsOn(configureGenerateProtelisDocTaskName)
 
         val dokkaTask = project.tasks.getByName(dokkaTaskName)
-        dokkaTask.setProperty("outputFormat", "html")
         dokkaTask.setProperty("jdkVersion", 8)
         dokkaTask.setProperty("reportUndocumented", true)
         dokkaTask.dependsOn(compileKotlinTaskName)
@@ -76,6 +76,7 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
             it.doLast {
                 p2kp.baseDir.set(extension.baseDir.get())
                 dokkaTask.setProperty("outputDirectory", extension.destDir.get())
+                dokkaTask.setProperty("outputFormat", extension.outputFormat.get())
             }
         }
 

@@ -31,6 +31,7 @@ Protelis2KotlinDoc {
   destDir.set("${project.buildDir.path}/protelis-docs/") // output dir for docs
   kotlinVersion.set("+")
   protelisVersion.set("+")
+  outputFormat.set("javadoc") // Dokka's output format (alternative: 'html')
 }
 ```
 
