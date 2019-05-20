@@ -6,6 +6,13 @@ import org.gradle.api.provider.Property
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import java.io.File
 
+/**
+ * Extension for the Protelis2KotlinDoc plugin.
+ * @param baseDir The base directory from which looking for Protelis files
+ * @param destDir The directory that will contain the generated docs
+ * @param kotlinVersion
+ * @param protelisVersion
+ */
 open class Protelis2KotlinDocPluginExtension @JvmOverloads constructor(
     private val project: Project,
     val baseDir: Property<String> = project.propertyWithDefault("."),
@@ -14,6 +21,9 @@ open class Protelis2KotlinDocPluginExtension @JvmOverloads constructor(
     val protelisVersion: Property<String> = project.propertyWithDefault("+")
 )
 
+/**
+ * Protelis2KotlinDoc Gradle Plugin: reuses the Protelis2Kotlin and Dokka plugins to generate Kotlin docs from Protelis code.
+ */
 class Protelis2KotlinDocPlugin : Plugin<Project> {
     private val configureGenerateProtelisDocTaskName = "configureGenerateProtelisDoc"
     private val generateProtelisDocTaskName = "generateProtelisDoc"

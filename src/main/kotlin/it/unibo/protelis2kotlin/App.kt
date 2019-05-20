@@ -11,11 +11,21 @@ var context = Context(setOf())
 
 val protelisFileExt = "pt"
 
+/**
+ * Data class containing information that should be collected during parsing.
+ */
 data class Context(var protelisTypes: Set<String>)
+
+/**
+ * Utility function to extend contextual info with a Protelis type
+ */
 fun registerProtelisType(pt: String) {
     context = context.copy(context.protelisTypes + pt)
 }
 
+/**
+ * Interface for a "piece of documentation"
+ */
 interface DocPiece {
     companion object {
         val docParamRegex = """@param\s+(\w+)\s*([^\n]*)""".toRegex()
@@ -25,12 +35,19 @@ interface DocPiece {
 
     fun extendWith(txt: String): DocPiece
 }
+
+/**
+ * Data class for a piece of documentation text (like this very comment)
+ */
 data class DocText(val text: String) : DocPiece {
     override fun extendWith(txt: String): DocPiece {
         return DocText(text + txt)
     }
 }
 
+/**
+ * Data class for a piece of documentation describing a function parameter
+ */
 data class DocParam(
     val paramName: String,
     val paramType: String,
@@ -41,6 +58,9 @@ data class DocParam(
     }
 }
 
+/**
+ * Data class for a piece of documentation describing a function's return value/type
+ */
 data class DocReturn(
     val returnType: String,
     val returnDescription: String
@@ -50,6 +70,9 @@ data class DocReturn(
     }
 }
 
+/**
+ * Data class for a generic documentation directive `@<directive> description`
+ */
 data class DocDirective(
     val directive: String,
     val description: String
@@ -59,7 +82,14 @@ data class DocDirective(
     }
 }
 
+/**
+ * Data class describing a Protelis function parameter (name and type)
+ */
 data class ProtelisFunArg(val name: String, val type: String)
+
+/**
+ * Data class describing a Protelis function: name, parameters, return type, visibility, and type parameters (generics)
+ */
 data class ProtelisFun(
     val name: String,
     val params: List<ProtelisFunArg> = listOf(),
@@ -68,9 +98,20 @@ data class ProtelisFun(
     val genericTypes: Set<String> = setOf()
 )
 
+/**
+ * Data class containing the various documentation pieces for a Protelis function
+ */
 data class ProtelisFunDoc(val docPieces: List<DocPiece>)
+
+/**
+ * Data class pairing a Protelis function with its documentation
+ */
 data class ProtelisItem(val function: ProtelisFun, val docs: ProtelisFunDoc)
 
+/**
+ * Parses a type and returns both the parsed type and the remaining text
+ * @param line The text line to be parsed
+ */
 fun parseTypeAndRest(line: String): Pair<String, String> {
     // Works by finding the first comma which is not contained within parentheses
     var stillType = true
@@ -89,6 +130,11 @@ fun parseTypeAndRest(line: String): Pair<String, String> {
     return Pair(type, line.substring(k).trim())
 }
 
+/**
+ * Parses the documentation of a Protelis function
+ * @param doc The documentation string to be parsed
+ * @return [ProtelisFunDoc]
+ */
 fun parseDoc(doc: String): ProtelisFunDoc {
     var txt = ""
     val pieces: MutableList<DocPiece> = mutableListOf()
@@ -129,6 +175,11 @@ fun parseDoc(doc: String): ProtelisFunDoc {
     return ProtelisFunDoc(pieces)
 }
 
+/**
+ * Parses a Protelis function definition
+ * @param fline The string of a Protelis function definition to be parsed
+ * @return [ProtelisFun]
+ */
 fun parseProtelisFunction(fline: String): ProtelisFun {
     return ProtelisFun(
             name = """def (\w+)""".toRegex().find(fline)!!.groupValues[1],
@@ -137,6 +188,10 @@ fun parseProtelisFunction(fline: String): ProtelisFun {
             public = """(public def)""".toRegex().find(fline) != null)
 }
 
+/**
+ * Parses Protelis source code into a list of [ProtelisItem]s
+ * @param content The string of Protelis source code to be parsed
+ */
 fun parseFile(content: String): List<ProtelisItem> {
     val pitems = mutableListOf<ProtelisItem>()
 
@@ -159,6 +214,10 @@ fun parseFile(content: String): List<ProtelisItem> {
     return pitems
 }
 
+/**
+ * Generates (Dokka ) Kotlin documentation from a [ProtelisFunDoc]
+ * @param docs The [ProtelisFunDoc] object encapsulating the docs for a Protelis function
+ */
 fun generateKotlinDoc(docs: ProtelisFunDoc): String {
     val docPieces = docs.docPieces
     return "/**\n" +
@@ -175,6 +234,9 @@ fun generateKotlinDoc(docs: ProtelisFunDoc): String {
             }.joinToString("\n") + "\n  */"
 }
 
+/**
+ * Generates a Kotlin type from a Protelis type
+ */
 fun generateKotlinType(protelisType: String): String = when (protelisType) {
     "" -> "Unit"
     "bool" -> "Boolean"
@@ -197,11 +259,17 @@ fun generateKotlinType(protelisType: String): String = when (protelisType) {
         } else "Any"
 }
 
+/**
+ * Symbols used frely in Protelis but that are not valid in Kotlin (e.g., as they are reserved words) are sanitized
+ */
 fun sanitizeNameForKotlin(name: String): String = when (name) {
     "null" -> "`null`"
     else -> name
 }
 
+/**
+ * Generates a Kotlin function from a Protelis function descriptor
+ */
 fun generateKotlinFun(fn: ProtelisFun): String {
     var genTypesStr = fn.genericTypes.joinToString(",")
     if (!genTypesStr.isEmpty()) genTypesStr = " <$genTypesStr>"
@@ -211,12 +279,18 @@ fun generateKotlinFun(fn: ProtelisFun): String {
             "): ${generateKotlinType(fn.returnType)} = TODO()"
 }
 
+/**
+ * Generates a Kotlin item (doc + fun signature) from a Protelis item (doc + fun)
+ */
 fun generateKotlinItem(pitem: ProtelisItem): String {
     val doc = pitem.docs
     var fn = pitem.function
     return generateKotlinDoc(doc) + "\n" + generateKotlinFun(fn)
 }
 
+/**
+ * Generates a string from a list of Protelis items (function and docs pairs)
+ */
 fun generateKotlin(protelisItems: List<ProtelisItem>): String {
     // Retrieve type info from docs
     val pitems = protelisItems.map { pitem ->
@@ -239,6 +313,13 @@ fun generateKotlin(protelisItems: List<ProtelisItem>): String {
     return pitems.map { generateKotlinItem(it) }.joinToString("\n\n")
 }
 
+/**
+ * Main function: reads all Protelis files under a base directory, parses them, and generates corresponding Kotlin files in a destination directory.
+ *
+ * This is to be called with two arguments:
+ * 1) The base directory from which recursively looking for Protelis files
+ * 2) The destination directory that will contain the output Kotlin files
+ */
 fun main(args: Array<String>) {
     if (args.size < 2) {
         println("USAGE: program <dir> <destDir>")
