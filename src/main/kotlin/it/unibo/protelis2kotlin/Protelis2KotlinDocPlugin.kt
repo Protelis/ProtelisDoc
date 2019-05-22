@@ -1,19 +1,31 @@
 package it.unibo.protelis2kotlin
 
+import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import java.io.File
 
+/**
+ * Extension for the Protelis2KotlinDoc plugin.
+ * @param baseDir The base directory from which looking for Protelis files
+ * @param destDir The directory that will contain the generated docs
+ * @param kotlinVersion
+ * @param protelisVersion
+ */
 open class Protelis2KotlinDocPluginExtension @JvmOverloads constructor(
     private val project: Project,
     val baseDir: Property<String> = project.propertyWithDefault("."),
     val destDir: Property<String> = project.propertyWithDefault(project.buildDir.path + "/protelis-docs/"),
     val kotlinVersion: Property<String> = project.propertyWithDefault("+"),
-    val protelisVersion: Property<String> = project.propertyWithDefault("+")
+    val protelisVersion: Property<String> = project.propertyWithDefault("+"),
+    val outputFormat: Property<String> = project.propertyWithDefault("javadoc")
 )
 
+/**
+ * Protelis2KotlinDoc Gradle Plugin: reuses the Protelis2Kotlin and Dokka plugins to generate Kotlin docs from Protelis code.
+ */
 class Protelis2KotlinDocPlugin : Plugin<Project> {
     private val configureGenerateProtelisDocTaskName = "configureGenerateProtelisDoc"
     private val generateProtelisDocTaskName = "generateProtelisDoc"
@@ -26,6 +38,7 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
         val extension = project.extensions.create("Protelis2KotlinDoc", Protelis2KotlinDocPluginExtension::class.java, project)
+        if (JavaVersion.current() > JavaVersion.VERSION_1_8) extension.outputFormat.set("html")
 
         project.repositories.add(project.repositories.jcenter())
         project.repositories.add(project.repositories.mavenCentral())
@@ -47,7 +60,6 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         protelis2kotlintask.dependsOn(configureGenerateProtelisDocTaskName)
 
         val dokkaTask = project.tasks.getByName(dokkaTaskName)
-        dokkaTask.setProperty("outputFormat", "html")
         dokkaTask.setProperty("jdkVersion", 8)
         dokkaTask.setProperty("reportUndocumented", true)
         dokkaTask.dependsOn(compileKotlinTaskName)
@@ -66,6 +78,7 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
             it.doLast {
                 p2kp.baseDir.set(extension.baseDir.get())
                 dokkaTask.setProperty("outputDirectory", extension.destDir.get())
+                dokkaTask.setProperty("outputFormat", extension.outputFormat.get())
             }
         }
 
