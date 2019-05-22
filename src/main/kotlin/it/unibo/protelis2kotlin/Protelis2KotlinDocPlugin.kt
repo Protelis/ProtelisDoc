@@ -1,5 +1,6 @@
 package it.unibo.protelis2kotlin
 
+import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
@@ -37,6 +38,7 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
         val extension = project.extensions.create("Protelis2KotlinDoc", Protelis2KotlinDocPluginExtension::class.java, project)
+        if (JavaVersion.current() > JavaVersion.VERSION_1_8) extension.outputFormat.set("html")
 
         project.repositories.add(project.repositories.jcenter())
         project.repositories.add(project.repositories.mavenCentral())
