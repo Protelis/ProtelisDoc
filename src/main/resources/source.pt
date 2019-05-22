@@ -4,9 +4,303 @@ import protelis:coord:spreading
 import protelis:lang:utils
 import protelis:state:time
 
+module protelis:lang:utils
+import java.lang.Math.pow
+
+/**
+ * @param a bool, first condition
+ * @param b bool, second condition
+ * @return  bool, true if both the conditions are true
+ */
+public def and(a, b) {
+    a && b
+}
+
+///**
+// * Build a field from a value.
+// *
+// * Return type: (any) -> any.
+// * @param value value to be fielded
+// * @return field of the given value
+// */
+//public def field(v) {
+//    nbr(v)
+//}
+
+/**
+ * Line-of-sight detector.
+ *
+ * @param a T, value
+ * @return  bool, true if there is at least a neighbor respect to x, false otherwise
+ */
+public def canSee(a) {
+    anyHood(nbr(a))
+}
+
+///**
+// * Return type: (fun) -> fun.
+// * @param f function
+// * @return g(f(args))
+// */
+//public def composeF(f) {
+//    () -> { f.apply() }
+//}
+//
+///**
+// * Return type: (any) -> fun.
+// * @param a value to be composed as a function
+// * @return a function which returns a
+// */
+//public def composeV(a) {
+//    () -> { a }
+//}
+
+/**
+ * @param x      num, value to be denormalized
+ * @param oldmin num, oldmin
+ * @param oldmax num, oldmax
+ * @param newmin num, newmin
+ * @param newmax num, newmax
+ * @return       num, denormalized value
+ */
+public def denormalize(x, oldmin, oldmax, newmin, newmax) {
+    x * (newmax - newmin) / (oldmax - oldmin) + (newmin - oldmin)
+}
+
+/**
+ * @param a num, first field
+ * @param b num, second field
+ * @return  num, difference between two fields
+ */
+public def diff(a, b) {
+    a - b
+}
+
+/**
+ * @param a T, first field
+ * @param b T, second field
+ * @return  bool, true if a is equal to b, false otherwise
+ */
+public def equal(a, b) {
+    a == b
+}
+
+/**
+ * @param a T, first field
+ * @param b T, second field
+ * @return  bool, true if a is greater than b, false otherwise
+ */
+public def greaterThan(a, b) {
+    a > b
+}
+
+/**
+ * @param a T, first field
+ * @param b T, second field
+ * @return  bool, true if a is greater than or equal to b, false otherwise
+ */
+public def greaterEqual(a, b) {
+    a >= b
+}
+
+/**
+ * *-hood wrapper.
+ *
+ * @param local        T, local value
+ * @param aggregator   (T, T) -> T, how to reduce information
+ * @param default      T, default value in case the field returned by fieldBuilder is empty
+ * @param fieldBuilder () -> T, return which field should be reduced
+ * @return             T, reduced value
+ */
+public def hoodW(local, aggregator, default, fieldBuilder) {
+    aggregator.apply(local,
+        hood(
+            (a, b) -> { aggregator.apply(a, b) },
+            default,
+            fieldBuilder.apply()
+        )
+    )
+}
+
+/**
+ * Stateful *-hood wrapper.
+ *
+ * @param local        T, local value
+ * @param aggregator   (T, T) -> T, how to reduce information
+ * @param default      T, default value in case the field returned by fieldBuilder is empty
+ * @param fieldBuilder (T) -> T, return which field should be reduced
+ * @return             T, reduced value
+ */
+public def hoodWstateful(local, aggregator, default, fieldBuilder) {
+    rep (v <- local) {
+        aggregator.apply(local,
+            hood(
+                (a, b) -> { aggregator.apply(a, b) },
+                default,
+                fieldBuilder.apply(v)
+            )
+        )
+    }
+}
+
+/**
+ * @param a T, value to be returned
+ * @return  T, the same value
+ */
+public def identity(a) {
+    a
+}
+
+/**
+ * Verify if a device is on the edge of a spatial region.
+ *
+ * @param condition bool, how to discriminate a region
+ * @return          bool, true if the device is on the edge, false otherwise
+ */
+ public def isEdge(condition) {
+     !(allHood(nbr(condition)) || allHood(!nbr(condition)))
+ }
+
+/**
+ * @param a T, first field
+ * @param b T, second field
+ * @return  bool, true if a is less than b, false otherwise
+ */
+public def lessThan(a, b) {
+    a < b
+}
+
+/**
+ * @param a T, first field
+ * @param b T, second field
+ * @return  bool, true if a is less than or equal to b, false otherwise
+ */
+public def lessEqual(a, b) {
+    a <= b
+}
+
+/**
+ * @param a T, first field
+ * @param b T, second field
+ * @return  T, maximum between the two fields
+ */
+public def max(a, b) {
+    mux (a > b) {
+        a
+    } else {
+        b
+    }
+}
+
+/**
+ * @param a num, first field
+ * @param b num, second field
+ * @return  num, mean of the two fields
+ */
+public def mean(local, field) {
+    (local + field) / 2
+}
+
+/**
+ * @param a num, first field
+ * @param b num, second field
+ * @return  num, minimum between the two fields
+ */
+public def min(a, b) {
+    mux (a < b) {
+        a
+    } else {
+        b
+    }
+}
+
+/**
+ * @return node's UID
+ */
+public def getUID() {
+    self.getDeviceUID().toString()
+}
+
+/**
+ * Norm of a numeric tuple.
+ *
+ * @param tuple [num], tuple
+ * @param p     num, pow
+ * @return      num, norm of a numeric tuple
+ */
+public def norm(tuple, p) {
+    pow(
+        tuple
+            .map(self, (a) -> { pow(a, p) })
+            .reduce(self, 0, (a, b) -> { a + b }),
+        1/p
+    )
+}
+
+/**
+ * @param a bool, first condition
+ * @return  bool, negated condition
+ */
+public def not(a) {
+    !a
+}
+
+/**
+ * @param a T, first field
+ * @param b T, second field
+ * @return  bool, true if a is not equal to b, false otherwise
+ */
+public def notEqual(a, b) {
+    a != b
+}
+
+/**
+ * @param a bool, first condition
+ * @param b bool, second condition
+ * @return  bool, true if one of the conditions is true
+ */
+public def or(a, b) {
+    a || b
+}
+
+/**
+ * @param x   num, value
+ * @param min num, lower bound
+ * @param max num, upper bound
+ * @return    num, scale x with respect to the range
+ */
+public def range(x, min, max) {
+    x * (max - min) + min
+}
+
+/**
+ * @param a num, summand
+ * @param b num, summand
+ * @return  num, sum of two fields
+ */
+public def sum(a, b) {
+    a + b
+}
+
+/**
+ * @param a [T], tuple
+ * @param b [T], tuple
+ * @return  [T], concatenation of two tuples
+ */
+public def union(a, b) {
+    a.union(b)
+}
+
+/**
+ * @return num, 0
+ */
+public def zero() {
+    0
+}
+
 /**
  * Aggregation of local information.
- * 
+ *
  * @param local  T, local information
  * @param reduce (T, T) -> T, how to aggregate information
  */
@@ -67,7 +361,7 @@ public def C(potential, reduce, local, null) {
                 (a, b) -> { reduce.apply(a, b) },
                 // expression that will be evaluated if the field is empty
                 null,
-                mux (nbr(getParent(potential, x -> { x.getDeviceUID() })) == self.getDeviceUID()) { 
+                mux (nbr(getParent(potential, x -> { x.getDeviceUID() })) == self.getDeviceUID()) {
                     v
                 } else { null }
             )
@@ -186,7 +480,7 @@ public def cossip(sink, value, f) {
 
 /**
  * Count the devices.
- * 
+ *
  * @param potential num, gradient of which gives aggregation direction
  * @return          num, number of devices
  */
@@ -196,7 +490,7 @@ public def countDevices(potential) {
 
 /**
  * Count the devices in a region.
- * 
+ *
  * @param potential num, gradient of which gives aggregation direction
  * @param condition bool, device discriminant
  * @param region    bool, region discriminant
@@ -208,7 +502,7 @@ public def countDevicesInRegion(potential, condition, region) {
 
 /**
  * Count the devices with a given condition.
- * 
+ *
  * @param potential num, gradient of which gives aggregation direction
  * @param condition bool, discriminant
  * @return          num, number of devices
@@ -218,7 +512,7 @@ public def countDevicesWithCondition(potential, condition) {
 }
 
 /**
- * Gossip and estimate the diameter of the connected component joined by 
+ * Gossip and estimate the diameter of the connected component joined by
  * the current device.
  *
  * @param source    bool, source of the connected component
@@ -229,7 +523,7 @@ public def diameter(source) {
 }
 
 /**
- * Gossip and estimate the diameter of the connected component joined by 
+ * Gossip and estimate the diameter of the connected component joined by
  * the current device.
  *
  * @param source    bool, source of the connected component
@@ -244,7 +538,7 @@ public def diameterWithMetric(source, metric) {
 }
 
 /**
- * Gossip and estimate the diameter of the connected component joined by 
+ * Gossip and estimate the diameter of the connected component joined by
  * the current device.
  *
  * @param source    bool, source of the connected component
@@ -255,7 +549,7 @@ public def diameterInRegion(source, region) {
 }
 
 /**
- * Gossip and estimate the diameter of the connected component joined by 
+ * Gossip and estimate the diameter of the connected component joined by
  * the current device.
  *
  * @param source    bool, source of the connected component
@@ -320,264 +614,4 @@ public def getChildren(potential, f, g, default) {
         g,
         default
     )
-}
-
-/**
- * Apply function to the children of the current device. A child may have multiple parents.
- *
- * @param potential num, potential to be followed
- * @param condition () -> bool, which children should be considered
- * @param f         (ExecutionContext) -> T', function to be applied to the child
- * @param g         (T) -> T, function to be applied to the child value
- * @param default   T, default value for devices which are not children
- * @return          [num|T', T], children list
- */
-public def getChildrenExtended(potential, condition, f, g, default) {
-    mux (condition.apply()) {
-        nbr([f.apply(self), g.apply()])
-    } else {
-        [noParent(), default]
-    }
-}
-
-/**
- * Get the ids of all the children of the current device.
- *
- * @param potential num, potential to be followed
- * @return          [num], list of children ids
- */
-public def getChildrenIds(potential) {
-    idUnion(
-        getChildren(
-            potential,
-            (device) -> { device.getDeviceUID() },
-            () -> { NaN },
-            NaN
-        ).get(0)
-    )
-}
-
-/**
- * Find the parent of the current device following the maximum decrease in
- * potential.
- *
- * @param potential num, potential
- * @param f         (ExecutionContext) -> T, what to do with the parent
- * @return          num|T, imRoot()|noParent()|f(parent)
- * @see imRoot, noParent
- */
-public def getParent(potential, f) {
-    getParentExtended(potential, f, value -> { NaN }, NaN).get(0)
-}
-
-/**
- * Find the parent of the current device following the maximum decrease in
- * potential.
- *
- * @param potential num, potential
- * @param f         (ExecutionContext) -> T, what to do with the parent
- * @param g         (T') -> T', what to do with the value
- * @param local     T', local value
- * @return          [num|T,T'], [imRoot()|noParent()|f(parent), g(value)]
- * @see imRoot, noParent
- */
-public def getParentExtended(potential, f, g, local) {
-    getParentsExtended(potential, v -> { minHood(v) }, f, g, local, local)
-}
-
-/**
- * Find the parents of the current device following the decrease in
- * potential.
- *
- * @param potential num, potential
- * @param f         (ExecutionContext) -> T, what to do with the parent
- * @param g         (T') -> T', what to do with the value
- * @param local     T', local value
- * @return          [[num|T,T']], [[imRoot()|noParent()|f(parent), g(value)]]
- * @see imRoot, noParent
- */
-public def getParents(potential, f, g, local, default) {
-    getParentsExtended(potential, identity, f, g, local, default)
-}
-
-
-/**
- * Find the parents of the current device following the decrease in
- * potential.
- *
- * @param potential num, potential
- * @param condition (num) -> bool, how to determine parent devices
- * @param f         (ExecutionContext) -> T, what to do with the parent
- * @param g         (T') -> T', what to do with the value
- * @param local     T', local value
- * @return          [[num|T,T']], [[imRoot()|noParent()|f(parent), g(value)]]
- * @see imRoot, noParent
- */
-public def getParentsExtended(potential, condition, f, g, local, default) {
-    mux (condition.apply(nbr(potential)) < potential) {
-        let c = condition.apply(nbr([potential, f.apply(self), g.apply(local)]));
-        mux (c.size() > 1) {  [c.get(1), c.get(2)] }
-        else { [noParent(), default] }
-    } else { [imRoot(), default] }
-}
-
-/**
- * Find the ID of the current-device parent by following the maximum decrease in
- * potential.
- *
- * @param potential num, potential
- * @return          num, imRoot()|noParent()|parentId
- * @see imRoot, noParent
- */
-public def getParentId(potential) {
-    getParent(potential, (device) -> { device.getDeviceUID() })
-}
-
-/**
- * Find the IDs of the current-device parents by following a potential decrease.
- *
- * @param potential num, potential
- * @return          [num], list of parent ids
- */
-public def getParentIds(potential) {
-    idUnion(getParents(potential, (device) -> { device.getDeviceUID() }, identity, NaN, NaN).get(0))
-}
-
-/**
- * @param id num, device id
- * @return   bool, true if the device has no parent
- */
-public def hasNoParent(id) {
-    id == noParent() || id == imRoot()
-}
-
-/**
- * @param id num, device id
- * @return   bool, true if the device has a parent
- */
-public def hasParent(id) {
-    !hasNoParent(id)
-}
-
-/**
- * @return num, root value
- */
-public def imRoot() { -2 }
-
-/**
- * This function MUST NOT be public as it is an utilities for both protelis:coord:accumulation and
- * protelis:coord:tree. This function reduces a field of ids
- */
-def idUnion(idField) {
-    hood(
-        (a, b) -> {
-            if (a.size() == 1 && hasNoParent(a.get(0))) { // a has no parent
-                if (hasNoParent(b.get(0))) { [] } else { b }
-            } else {
-                if (hasNoParent(b.get(0))) { a } else {  a.union(b) }
-            }
-        },
-        [],
-        [idField]
-    )
-}
-
-
-/**
- * Laplacian consensus.
- *
- * @param init    num, initial value
- * @param epsilon num, epsilon
- * @return        num, value agreed upon consensus
- */
-public def laplacianConsensus(init, epsilon) {
-     consensus(init, (v) -> {epsilon * v})
-}
-
-/**
- * @return num, error finding parent
- */
-public def noParent() { -1 }
-
-/**
- * Broadcast the value accumulated by the sink.
- * Example: 'summarize(distanceTo(sink), sum, 1, 0)' broadcast the sum number of
- * devices in a region.
- *
- * @param sink   bool, whether the device should collect the aggregated information
- * @param reduce (T, T) -> T, how to aggregate
- * @param local  T, local value
- * @param null   T, default value
- * @return       T, aggregated value
- */
-public def summarize(sink, reduce, local, null) {
-    summarizeWithMetric(sink, nbrRange, reduce, local, null)
-}
-
-/**
- * Broadcast the value accumulated by the sink.
- *
- * @param sink   bool, whether the device should collect the aggregated information
- * @param metric () -> num, how to estimate distance to the other device
- * @param reduce (T, T) -> T, how to aggregate
- * @param local  T, local value
- * @param null   T, default value
- * @return       T, aggregated value
- */
-public def summarizeWithMetric(sink, metric, accumulate, local, null) {
-    broadcastWithMetric(sink, C(distanceToWithMetric(sink, metric), accumulate, local, null), metric)
-}
-
-/**
- * Broadcast the value accumulated by the sink.
- *
- * @param potential num, potential
- * @param zero      num, value representing null potential
- * @param reduce    (T, T) -> T, how to aggregate
- * @param local     T, local value
- * @param null      T, default value
- * @return          T, aggregated value
- */
-public def summarizeWithPotential(potential, zero, accumulate, local, null) {
-    summarizeWithPotentialExt(potential, zero, accumulate, identity, local, null)
-}
-
-public def summarizeWithPotentialExt(potential, zero, accumulate, f, local, null) {
-    broadcastWithMetric(
-        potential == zero,
-        f.apply(C(potential, accumulate, local, null)),
-        () -> { potential }
-    )
-}
-
-/**
- * Quorum sensing.
- * 
- * @param potential num, gradient of which gives aggregation direction
- * @param thr       num, threshold
- * @param under     (num) -> T, what to do if quorum is under threshold
- * @param over      (num) -> T, what to do otherwise
- * @return          T
- */
-public def quorumSensing(potential, zero, thr, under, over) {
-    quorumSensingWithCondition(potential, zero, thr, true, under, over)
-}
-
-/**
- * Quorum sensing.
- * 
- * @param potential num, gradient of which gives aggregation direction
- * @param thr       num, threshold
- * @param condition bool, whether to count a device or not
- * @param under     (num) -> T, what to do if quorum is under threshold
- * @param over      (num) -> T, what to do otherwise
- * @return          T
- */
-public def quorumSensingWithCondition(potential, zero, thr, condition, under, over) {
-    let c = broadcast(potential == zero, countDevicesWithCondition(potential, condition));
-    if (c < thr) {
-        under.apply(c)
-    } else {
-        over.apply(c)
-    }
 }
