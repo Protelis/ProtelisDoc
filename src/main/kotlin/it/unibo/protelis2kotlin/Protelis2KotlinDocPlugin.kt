@@ -21,7 +21,8 @@ open class Protelis2KotlinDocPluginExtension @JvmOverloads constructor(
     val kotlinVersion: Property<String> = project.propertyWithDefault("+"),
     val protelisVersion: Property<String> = project.propertyWithDefault("+"),
     val outputFormat: Property<String> = project.propertyWithDefault("javadoc"),
-    val automaticDependencies: Property<Boolean> = project.propertyWithDefault(true)
+    val automaticDependencies: Property<Boolean> = project.propertyWithDefault(true),
+    val debug: Property<Boolean> = project.propertyWithDefault(false)
 )
 
 /**
@@ -50,40 +51,40 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         val extension = project.extensions.create(protelis2KotlinDocPlugin, Protelis2KotlinDocPluginExtension::class.java, project)
         if (JavaVersion.current() > JavaVersion.VERSION_1_8) extension.outputFormat.set("html")
 
-
-        if(!project.repositories.contains(project.repositories.jcenter())) {
+        if (!project.repositories.contains(project.repositories.jcenter())) {
             project.repositories.add(project.repositories.jcenter())
         }
-        if(!project.repositories.contains(project.repositories.mavenCentral())) {
+        if (!project.repositories.contains(project.repositories.mavenCentral())) {
             project.repositories.add(project.repositories.mavenCentral())
         }
 
-        if(!project.pluginManager.hasPlugin(kotlinPluginName)) {
+        if (!project.pluginManager.hasPlugin(kotlinPluginName)) {
             project.pluginManager.apply(kotlinPluginName)
         }
 
         // Add dependency to Kotlin stdlib for TODO()s and Protelis
-        if(extension.automaticDependencies.get()) {
+        if (extension.automaticDependencies.get()) {
             val deps = project.configurations.getByName(implConfiguration).dependencies
-            if(!deps.any { it.group==kotlinGroup && it.name==kotlinStdlibDepName }) {
+            if (!deps.any { it.group==kotlinGroup && it.name==kotlinStdlibDepName }) {
                 project.dependencies.add(implConfiguration, "$kotlinGroup:$kotlinStdlibDepName:${extension.kotlinVersion.get()}")
             }
 
-            if(!deps.any { it.group==protelisGroup && it.name==protelisInterpreterDepName }) {
+            if (!deps.any { it.group==protelisGroup && it.name==protelisInterpreterDepName }) {
                 project.dependencies.add(implConfiguration, "$protelisGroup:$protelisInterpreterDepName:${extension.protelisVersion.get()}")
             }
         }
 
-        if(!project.pluginManager.hasPlugin(protelis2KotlinDocPlugin)) {
+        if (!project.pluginManager.hasPlugin(protelis2KotlinDocPlugin)) {
             project.pluginManager.apply(Protelis2KotlinPlugin::class.java)
         }
-        if(!project.pluginManager.hasPlugin(dokkaPluginName)) {
+        if (!project.pluginManager.hasPlugin(dokkaPluginName)) {
             project.pluginManager.apply(dokkaPluginName)
         }
 
         // Configure Protelis2Kotlin plugin
         val p2kp = project.extensions.getByName("Protelis2Kotlin") as Protelis2KotlinPluginExtension
         p2kp.destDir.set(project.buildDir.path + "/protelis2kotlin/src/main/kotlin")
+        p2kp.debug.set(extension.debug.get())
         val protelis2kotlintask = project.tasks.getByName(generateKotlinFromProtelisTaskName)
         protelis2kotlintask.dependsOn(configureGenerateProtelisDocTaskName)
 

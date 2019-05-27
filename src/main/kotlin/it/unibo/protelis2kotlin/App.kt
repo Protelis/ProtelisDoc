@@ -11,6 +11,20 @@ var context = Context(setOf())
 
 val protelisFileExt = "pt"
 
+object Log {
+    var debug = true
+
+    fun log(msg: String) {
+        if (debug) {
+            println(msg)
+        }
+    }
+
+    fun printInfo(msg: String) {
+        println(msg)
+    }
+}
+
 /**
  * Data class containing information that should be collected during parsing.
  */
@@ -322,39 +336,46 @@ fun generateKotlin(protelisItems: List<ProtelisItem>): String {
  */
 fun main(args: Array<String>) {
     if (args.size < 2) {
-        println("USAGE: program <dir> <destDir>")
+        println("USAGE: program <dir> <destDir> <debug>")
         return
     }
 
+    val header = "[Protelis2Kotlin]"
+
     val dir = args[0]
     val destDir = args[1]
+    Log.debug = if (args.size == 3) args[2] == "1" else false
+
+    Log.log("$header Base directory: $dir\n$header Destination directory: $destDir")
+
+    var k = 0
 
     File(dir).walkTopDown().forEach { file ->
         if (!file.isFile || file.extension != protelisFileExt) return@forEach
 
         val fileText: String = file.readText()
 
-        println("Processing " + file.absolutePath)
+        Log.log("Processing " + file.absolutePath)
 
         val pkg = """module (.+)""".toRegex().find(fileText)?.groupValues?.component2() ?: ""
         if (pkg.isEmpty()) {
-            println("\tCannot parse Protelis package. Skipping.")
+            Log.log("\tCannot parse Protelis package. Skipping.")
             return@forEach
         }
 
         val pkgParts = pkg.split(':')
-        println("\tPackage: " + pkg)
+        Log.log("\tPackage: " + pkg)
 
         // RESET CONTEXT
         context = Context(setOf())
 
         val protelisItems = parseFile(fileText)
-        println("\tFound " + protelisItems.size + " Protelis items.")
+        Log.log("\tFound " + protelisItems.size + " Protelis items.")
 
         val pkgCode = "package ${pkgParts.joinToString(".")}\n\n"
         val kotlinCode = generateKotlin(protelisItems)
 
-        println("\tContext: " + context)
+        Log.log("\tContext: " + context)
 
         val importCode = context.protelisTypes.map { when (it) {
             "ExecutionContext", "ExecutionEnvironment" -> "org.protelis.vm.$it"
@@ -366,12 +387,14 @@ fun main(args: Array<String>) {
 
         val outPath = "$destDir$SEP${pkgParts.joinToString(SEP)}$SEP${file.name.replace(".pt",".kt")}"
 
-        println("\tWriting " + outPath)
+        Log.log("\tWriting " + outPath)
 
         File(outPath).let {
             it.parentFile.mkdirs()
             it.createNewFile()
             it
-        }.writeText(kotlinFullCode)
+        }.writeText(kotlinFullCode).let { k++ }
     }
+
+    Log.log("$header Converted $k .pt files to Kotlin")
 }
