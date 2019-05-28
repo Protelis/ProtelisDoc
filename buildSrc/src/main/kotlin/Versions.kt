@@ -7,7 +7,7 @@ import kotlin.String
  *
  * YOU are responsible for updating manually the dependency version. */
 object Versions {
-    const val com_gradle_build_scan_gradle_plugin: String = "2.1" // available: "2.3"
+    const val com_gradle_build_scan_gradle_plugin: String = "2.3"
 
     const val com_gradle_plugin_publish_gradle_plugin: String = "0.10.1" 
 
