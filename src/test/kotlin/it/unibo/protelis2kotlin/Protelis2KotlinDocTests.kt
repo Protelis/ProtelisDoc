@@ -106,6 +106,7 @@ public def aggregation(local, reduce) {
             // destDir.set("${this.root.absolutePath!!}/docs")
             // kotlinVersion.set("+")
             // protelisVersion.set("+")
+            debug.set(true)
         }
     """ }
     }

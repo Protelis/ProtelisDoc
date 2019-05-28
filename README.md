@@ -32,6 +32,8 @@ Protelis2KotlinDoc {
   kotlinVersion.set("+")
   protelisVersion.set("+")
   outputFormat.set("javadoc") // Dokka's output format (alternative: 'html')
+  automaticDependencies.set(true) // Automatic resolution of deps (e.g., protelis-interpreter)
+  debug.set(false) // Debug prints are disabled by default
 }
 ```
 

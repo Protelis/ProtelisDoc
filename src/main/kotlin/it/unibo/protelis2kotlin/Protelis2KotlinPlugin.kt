@@ -18,7 +18,8 @@ inline fun <reified T> Project.propertyWithDefault(noinline default: () -> T): P
 open class Protelis2KotlinPluginExtension @JvmOverloads constructor(
     private val project: Project,
     val baseDir: Property<String> = project.propertyWithDefault("."),
-    val destDir: Property<String> = project.propertyWithDefault(".")
+    val destDir: Property<String> = project.propertyWithDefault("."),
+    val debug: Property<Boolean> = project.propertyWithDefault(false)
 )
 
 /**
@@ -30,7 +31,7 @@ class Protelis2KotlinPlugin : Plugin<Project> {
         project.task("generateKotlinFromProtelis") {
             it.inputs.files(extension.baseDir.get())
             it.doLast {
-                main(arrayOf(extension.baseDir.get(), extension.destDir.get()))
+                main(arrayOf(extension.baseDir.get(), extension.destDir.get(), if (extension.debug.get()) "1" else "0"))
             }
             it.outputs.files(project.fileTree(extension.destDir.get()))
         }
