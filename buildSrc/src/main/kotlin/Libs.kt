@@ -14,6 +14,10 @@ object Libs {
             "com.gradle.plugin-publish:com.gradle.plugin-publish.gradle.plugin:" +
             Versions.com_gradle_plugin_publish_gradle_plugin
 
+    /**
+     * https://github.com/pinterest/ktlint */
+    const val ktlint: String = "com.pinterest:ktlint:" + Versions.ktlint
+
     const val de_fayard_buildsrcversions_gradle_plugin: String =
             "de.fayard.buildSrcVersions:de.fayard.buildSrcVersions.gradle.plugin:" +
             Versions.de_fayard_buildsrcversions_gradle_plugin
@@ -32,11 +36,10 @@ object Libs {
             Versions.org_danilopianini_publish_on_central_gradle_plugin
 
     const val dokka_gradle_plugin: String = "org.jetbrains.dokka:dokka-gradle-plugin:" +
-            Versions.dokka_gradle_plugin
+            Versions.org_jetbrains_dokka
 
     const val org_jetbrains_dokka_gradle_plugin: String =
-            "org.jetbrains.dokka:org.jetbrains.dokka.gradle.plugin:" +
-            Versions.org_jetbrains_dokka_gradle_plugin
+            "org.jetbrains.dokka:org.jetbrains.dokka.gradle.plugin:" + Versions.org_jetbrains_dokka
 
     const val org_jetbrains_kotlin_jvm_gradle_plugin: String =
             "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:" +

@@ -11,23 +11,23 @@ object Versions {
 
     const val com_gradle_plugin_publish_gradle_plugin: String = "0.10.1" 
 
+    const val ktlint: String = "0.32.0" 
+
     const val de_fayard_buildsrcversions_gradle_plugin: String = "0.3.2" 
 
     const val kotlintest_runner_junit5: String = "3.3.2" 
 
-    const val org_danilopianini_git_sensitive_semantic_versioning_gradle_plugin: String = "0.2.2"
+    const val org_danilopianini_git_sensitive_semantic_versioning_gradle_plugin: String = "0.2.2" 
 
     const val org_danilopianini_publish_on_central_gradle_plugin: String = "0.1.1" 
 
-    const val dokka_gradle_plugin: String = "0.9.18" 
+    const val org_jetbrains_dokka: String = "0.9.18" 
 
-    const val org_jetbrains_dokka_gradle_plugin: String = "0.9.18"
+    const val org_jetbrains_kotlin_jvm_gradle_plugin: String = "1.3.31" 
 
-    const val org_jetbrains_kotlin_jvm_gradle_plugin: String = "1.3.31"
+    const val org_jetbrains_kotlin: String = "1.3.31" 
 
-    const val org_jetbrains_kotlin: String = "1.3.31"
-
-    const val org_jlleitschuh_gradle_ktlint_gradle_plugin: String = "8.0.0"
+    const val org_jlleitschuh_gradle_ktlint_gradle_plugin: String = "8.0.0" 
 
     /**
      *
@@ -35,7 +35,7 @@ object Versions {
      *      ./gradle/wrapper/gradle-wrapper.properties
      */
     object Gradle {
-        const val runningVersion: String = "5.3.1"
+        const val runningVersion: String = "5.4.1"
 
         const val currentVersion: String = "5.4.1"
 
