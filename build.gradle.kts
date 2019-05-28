@@ -12,7 +12,7 @@ plugins {
     id("org.danilopianini.git-sensitive-semantic-versioning") version
         Versions.org_danilopianini_git_sensitive_semantic_versioning_gradle_plugin
     id("org.danilopianini.publish-on-central") version Versions.org_danilopianini_publish_on_central_gradle_plugin
-    id("org.jetbrains.dokka") version Versions.dokka_gradle_plugin
+    id("org.jetbrains.dokka") version Versions.org_jetbrains_dokka
     id("org.jlleitschuh.gradle.ktlint") version Versions.org_jlleitschuh_gradle_ktlint_gradle_plugin
     `java-gradle-plugin`
 }
