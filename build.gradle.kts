@@ -23,6 +23,7 @@ repositories {
 }
 
 gitSemVer {
+    maxVersionLength.set(20)
     version = computeGitSemVer() // THIS IS MANDATORY, AND MUST BE LAST IN BLOCK
 }
 
