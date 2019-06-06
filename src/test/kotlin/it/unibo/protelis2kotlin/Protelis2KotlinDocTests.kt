@@ -93,8 +93,12 @@ public def aggregation(local, reduce) {
 
         file("build.gradle.kts") { """
         plugins {
-            // kotlin("jvm") version "1.3.21"
             id("it.unibo.protelis2kotlindoc")
+        }
+
+        dependencies {
+            implementation("org.protelis:protelis-interpreter:11.1.0")
+            implementation(kotlin("stdlib"))
         }
 
         // repositories {

@@ -32,8 +32,17 @@ Protelis2KotlinDoc {
   kotlinVersion.set("+")
   protelisVersion.set("+")
   outputFormat.set("javadoc") // Dokka's output format (alternative: 'html')
-  automaticDependencies.set(true) // Automatic resolution of deps (e.g., protelis-interpreter)
+  automaticDependencies.set(false) // Automatic resolution of deps (e.g., protelis-interpreter)
   debug.set(false) // Debug prints are disabled by default
+}
+```
+
+Note: when automatic resolution of dependencies is disabled (default), you should add the following dependencies for the plugin to work:
+
+```kotlin
+dependencies {
+    implementation("org.protelis:protelis-interpreter:11.1.0")
+    implementation(kotlin("stdlib"))
 }
 ```
 
