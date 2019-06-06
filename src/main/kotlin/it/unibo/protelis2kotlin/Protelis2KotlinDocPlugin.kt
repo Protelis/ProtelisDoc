@@ -21,7 +21,7 @@ open class Protelis2KotlinDocPluginExtension @JvmOverloads constructor(
     val kotlinVersion: Property<String> = project.propertyWithDefault("+"),
     val protelisVersion: Property<String> = project.propertyWithDefault("+"),
     val outputFormat: Property<String> = project.propertyWithDefault("javadoc"),
-    val automaticDependencies: Property<Boolean> = project.propertyWithDefault(true),
+    val automaticDependencies: Property<Boolean> = project.propertyWithDefault(false),
     val debug: Property<Boolean> = project.propertyWithDefault(false)
 )
 
