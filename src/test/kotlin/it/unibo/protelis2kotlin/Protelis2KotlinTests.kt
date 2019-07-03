@@ -31,9 +31,28 @@ import java.lang.Math.pow
  * @param b bool, second condition
  * @return  bool, true if both the conditions are true
  */
-public def and(a, b) {
+public  def   and(a, b) {
     a && b
 }
+
+public def or+(x,y){}
+
+/**
+ * a
+ */
+
+/**
+  * b
+  */
+/**
+  * c
+  */
+def add+(x,y){}
+
+/**
+  * d
+  */
+def sth(){}
         """.trimIndent()
         )
 
@@ -58,6 +77,7 @@ public def and(a, b) {
         Protelis2Kotlin {
             baseDir.set("${this.root.absolutePath!!}/src/main/protelis")
             destDir.set("${this.root.absolutePath!!}/src/main/kotlin")
+            debug.set(true)
         }
 
         val dokka by tasks.getting(DokkaTask::class) {
