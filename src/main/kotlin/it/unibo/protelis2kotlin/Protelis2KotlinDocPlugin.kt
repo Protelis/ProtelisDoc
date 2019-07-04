@@ -6,6 +6,7 @@ import org.gradle.api.Project
 import org.gradle.api.provider.Property
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import java.io.File
+import java.io.File.separator as SEP
 
 /**
  * Extension for the Protelis2KotlinDoc plugin.
@@ -17,7 +18,7 @@ import java.io.File
 open class Protelis2KotlinDocPluginExtension @JvmOverloads constructor(
     private val project: Project,
     val baseDir: Property<String> = project.propertyWithDefault("."),
-    val destDir: Property<String> = project.propertyWithDefault(project.buildDir.path + "/protelis-docs/"),
+    val destDir: Property<String> = project.propertyWithDefault(project.buildDir.path + "${SEP}protelis-docs$SEP"),
     val kotlinVersion: Property<String> = project.propertyWithDefault("+"),
     val protelisVersion: Property<String> = project.propertyWithDefault("+"),
     val outputFormat: Property<String> = project.propertyWithDefault("javadoc"),
@@ -83,7 +84,7 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
 
         // Configure Protelis2Kotlin plugin
         val p2kp = project.extensions.getByName("Protelis2Kotlin") as Protelis2KotlinPluginExtension
-        p2kp.destDir.set(project.buildDir.path + "/protelis2kotlin/src/main/kotlin")
+        p2kp.destDir.set("${project.buildDir.path}${SEP}protelis2kotlin${SEP}src${SEP}main${SEP}kotlin")
         p2kp.debug.set(extension.debug.get())
         val protelis2kotlintask = project.tasks.getByName(generateKotlinFromProtelisTaskName)
         protelis2kotlintask.dependsOn(configureGenerateProtelisDocTaskName)
