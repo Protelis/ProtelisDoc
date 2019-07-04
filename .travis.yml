@@ -24,7 +24,12 @@ env:
     - JDK="adopt@1.12.33-0"
     - JDK="1.12.0-1"
 matrix:
+  include:
+    - os: linux
+      env: PUBLISH="true" JDK="adopt@1.8.212-04"
   exclude:
+    - os: linux
+      env: JDK="adopt@1.8.212-04"
     # No certificates configured
     - os: windows
       env: JDK="adopt@1.9.181-0"
