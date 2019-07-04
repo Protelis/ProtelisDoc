@@ -43,7 +43,8 @@ install: >-
     fi
 before_script:
   - "if [ -f ~/.windows_config ]; then source ~/.windows_config; fi"
-script: ./gradlew clean check sourcesJar javadocJar
+script:
+  - ./gradlew clean check sourcesJar javadocJar
 before_cache:
   - wget "${GRAVIS}.clean_gradle_cache.sh"
   - bash .clean_gradle_cache.sh
