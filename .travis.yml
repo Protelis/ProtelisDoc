@@ -36,6 +36,7 @@ cache:
     - $HOME/.jabba/
 before_install:
     - curl "${GRAVIS}.install-jdk-travis.sh" --output .install-jdk-travis.sh
+    - chmod +x .install-jdk-travis.sh
     - ./.install-jdk-travis.sh
     - export SHOULD_CONFIGURE="$(if ! $TRAVIS_PULL_REQUEST && [ $TRAVIS_REPO_SLUG="Protelis/Protelis-KDoc-generator" ] && [ $TRAVIS_OS_NAME = 'linux' ]; then echo "true"; else echo "false"; fi)"
 install: >-
