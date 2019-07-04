@@ -46,6 +46,7 @@ before_script:
   - bash .install-jdk-travis.sh
 #  - source ~/.jdk_config"
 script:
+  - java -version
   - ./gradlew clean check sourcesJar javadocJar --scan
 before_cache:
   - curl "${GRAVIS}.clean_gradle_cache.sh" --output .clean_gradle_cache.sh
