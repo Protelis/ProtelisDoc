@@ -6,6 +6,9 @@ import java.io.File
 import kotlin.text.RegexOption.MULTILINE
 import kotlin.text.RegexOption.DOT_MATCHES_ALL
 import java.io.File.separator as SEP
+import java.io.PrintWriter
+import java.io.StringWriter
+import java.lang.IllegalStateException
 
 var context = Context(setOf())
 
@@ -22,6 +25,12 @@ object Log {
 
     fun printInfo(msg: String) {
         println(msg)
+    }
+
+    fun logException(e: Exception) {
+        val errorStr = StringWriter()
+        e.printStackTrace(PrintWriter(errorStr))
+        log(errorStr.toString())
     }
 }
 
@@ -196,10 +205,14 @@ fun parseDoc(doc: String): ProtelisFunDoc {
  */
 fun parseProtelisFunction(fline: String): ProtelisFun {
     return ProtelisFun(
-            name = """def (\w+)""".toRegex().find(fline)!!.groupValues[1],
-            params = """\(([^\)]*)\)""".toRegex().find(fline)!!.groupValues[1].split(",")
-                    .filter { !it.isEmpty() }.map { ProtelisFunArg(it.trim(), "") }.toList(),
-            public = """(public def)""".toRegex().find(fline) != null)
+            name = """def\s+(\w+)""".toRegex().find(fline)?.groupValues?.get(1) ?: throw IllegalStateException("Cannot parse function name in: $fline"),
+            params = """\(([^\)]*)\)""".toRegex().find(fline)?.groupValues?.get(1)?.split(",")
+                    ?.filter { !it.isEmpty() }
+                    ?.map {
+                        // if (!"""\w""".toRegex().matches(it)) throw IllegalStateException("Bad argument name: $it")
+                        ProtelisFunArg(it.trim(), "")
+                    }?.toList() ?: throw IllegalStateException("Cannot parse arglist in: $fline"),
+            public = """(public\s+def)""".toRegex().find(fline) != null)
 }
 
 /**
@@ -221,8 +234,28 @@ fun parseFile(content: String): List<ProtelisItem> {
 //                    println("Doc piece: $p")
 //                }
 //                println("Function line: $funLine\n${parseProtelisFunction(funLine)}")
-                val parsedDoc = parseDoc(doc)
-                val parsedFun = parseProtelisFunction(funLine)
+                var parsedDoc: ProtelisFunDoc
+                var parsedFun: ProtelisFun
+
+                try {
+                    parsedDoc = parseDoc(doc)
+                } catch (e: Exception) {
+                    Log.log("Failed to parse doc\n\"\"\"${matchRes.value}\"\"\" [$doc]")
+                    Log.logException(e)
+                    return@forEach
+                }
+
+                // Easy check to control if we actually have a function
+                if (!funLine.contains("def")) return@forEach
+
+                try {
+                    parsedFun = parseProtelisFunction(funLine)
+                } catch (e: Exception) {
+                    Log.log("Failed to parse function\n\"\"\"${matchRes.value}\"\"\" [$funLine]")
+                    Log.logException(e)
+                    return@forEach
+                }
+
                 pitems.add(ProtelisItem(parsedFun, parsedDoc))
             }
     return pitems
@@ -369,7 +402,16 @@ fun main(args: Array<String>) {
         // RESET CONTEXT
         context = Context(setOf())
 
-        val protelisItems = parseFile(fileText)
+        var protelisItems: List<ProtelisItem>
+
+        try {
+            protelisItems = parseFile(fileText)
+        } catch (e: Exception) {
+            Log.log("Failed to parse $file")
+            Log.logException(e)
+            return@forEach
+        }
+
         Log.log("\tFound " + protelisItems.size + " Protelis items.")
 
         val pkgCode = "package ${pkgParts.joinToString(".")}\n\n"

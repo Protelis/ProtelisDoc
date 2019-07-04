@@ -21,6 +21,8 @@ plugins {
 }
 ```
 
+and run ``./gradlew generateProtelisDoc``.
+
 It follows the convention-over-configuration principle. So, with standard Gradle/Maven-like, you should expect it to find protelis code under the working directory and generate docs under `build/protelis-docs`.
 
 The configuration syntax, configuration options, and default values are shown in the following listing:
