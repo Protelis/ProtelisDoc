@@ -16,8 +16,8 @@ class Protelis2KotlinTests : StringSpec({
 
     val workingDirectory = folder {
         file("settings.gradle") { "rootProject.name = 'testproject'" }
-        File("${this.root.absolutePath}${SEP}src${SEP}main${SEP}protelis").mkdirs()
-        File("${this.root.absolutePath}${SEP}src${SEP}main${SEP}protelis${SEP}file.pt").writeText("""
+        File("${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis").mkdirs()
+        File("${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis${SEP}file.pt").writeText("""
 module protelis:coord:accumulation
 import protelis:coord:meta
 import protelis:coord:spreading
@@ -76,8 +76,8 @@ def sth(){}
         }
 
         Protelis2Kotlin {
-            baseDir.set("${this.root.absolutePath!!}${SEP}src${SEP}main${SEP}protelis")
-            destDir.set("${this.root.absolutePath!!}${SEP}src${SEP}main${SEP}kotlin")
+            baseDir.set("${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis")
+            destDir.set("${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}kotlin")
             debug.set(true)
         }
 
