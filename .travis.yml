@@ -34,7 +34,7 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.jabba/
 before_install:
-    - wget "${GRAVIS}.install-jdk-travis.sh"
+    - curl "${GRAVIS}.install-jdk-travis.sh" --output .install-jdk-travis.sh
     - bash .install-jdk-travis.sh
     - export SHOULD_CONFIGURE="$(if ! $TRAVIS_PULL_REQUEST && [ $TRAVIS_REPO_SLUG="Protelis/Protelis-KDoc-generator" ] && [ $TRAVIS_OS_NAME = 'linux' ]; then echo "true"; else echo "false"; fi)"
 install: >-
@@ -47,7 +47,7 @@ before_script:
 script:
   - ./gradlew clean check sourcesJar javadocJar --scan
 before_cache:
-  - wget "${GRAVIS}.clean_gradle_cache.sh"
+  - curl "${GRAVIS}.clean_gradle_cache.sh" --output .clean_gradle_cache.sh
   - bash .clean_gradle_cache.sh
 after_success:
   - if $SHOULD_CONFIGURE && $PUBLISH; then ./gradlew publishPlugins; ./gradlew publish; fi
