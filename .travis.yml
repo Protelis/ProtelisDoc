@@ -2,8 +2,8 @@ language: bash
 git:
   depth: false
 os:
-  - osx
-  - linux
+#  - osx
+#  - linux
   - windows
 dist: xenial
 env:
@@ -46,7 +46,7 @@ install: >-
     fi
 script:
   - java -version
-  - ./gradlew --stacktrace clean check sourcesJar javadocJar --scan
+  - ./gradlew --debug clean check sourcesJar javadocJar --scan
 before_cache:
   - curl "${GRAVIS}.clean_gradle_cache.sh" --output .clean_gradle_cache.sh
   - bash .clean_gradle_cache.sh
