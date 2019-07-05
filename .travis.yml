@@ -51,6 +51,9 @@ install: >-
         bash prepare_environment.sh
     fi
 script:
+  - echo javahhome set to $JAVA_HOME
+  - echo path set to $PATH
+  - which java
   - java -version
   - ./gradlew clean check sourcesJar javadocJar --scan
 before_cache:
