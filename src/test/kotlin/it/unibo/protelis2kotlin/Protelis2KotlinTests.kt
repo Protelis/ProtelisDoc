@@ -14,10 +14,12 @@ class Protelis2KotlinTests : StringSpec({
     fun TemporaryFolder.file(name: String, content: () -> String) =
             newFile(name).writeText(content().trimIndent())
 
+    val MS = "\"\"\""
+
     val workingDirectory = folder {
         file("settings.gradle") { "rootProject.name = 'testproject'" }
-        File("${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis").mkdirs()
-        File("${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis${SEP}file.pt").writeText("""
+        File("""${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis""").mkdirs()
+        File("""${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis${SEP}file.pt""").writeText("""
 module protelis:coord:accumulation
 import protelis:coord:meta
 import protelis:coord:spreading
@@ -76,14 +78,14 @@ def sth(){}
         }
 
         Protelis2Kotlin {
-            baseDir.set("${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis")
-            destDir.set("${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}kotlin")
+            baseDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis$MS)
+            destDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}kotlin$MS)
             debug.set(true)
         }
 
         val dokka by tasks.getting(DokkaTask::class) {
             outputFormat = "html"
-            outputDirectory = "${"$"}buildDir${SEP}dokka"
+            outputDirectory = $MS${"$"}buildDir${SEP}dokka$MS
             jdkVersion = 8
             reportUndocumented = true
             dependsOn("generateKotlinFromProtelis")
