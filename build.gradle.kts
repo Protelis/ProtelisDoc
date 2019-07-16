@@ -124,12 +124,6 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        create("Protelis2Kotlin") {
-            id = "org.protelis.protelis2kotlin"
-            displayName = "Protelis to Kotlin API converter"
-            description = "A plugin that translates Protelis modules into Kotlin collections of functions"
-            implementationClass = "it.unibo.protelis2kotlin.Protelis2KotlinPlugin"
-        }
         create("Protelis2KotlinDoc") {
             id = "org.protelis.protelisdoc"
             displayName = "Protelis Documentation Engine"

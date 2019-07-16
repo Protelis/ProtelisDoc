@@ -64,7 +64,7 @@ def sth(){}
 
         plugins {
             kotlin("jvm") version "1.3.21"
-            id("it.unibo.protelis2kotlin")
+            id("it.unibo.protelis2kotlindoc")
             id("org.jetbrains.dokka") version "0.9.18"
         }
 
@@ -77,7 +77,7 @@ def sth(){}
             jcenter() // or maven { url 'https://dl.bintray.com/kotlin/dokka' }
         }
 
-        Protelis2Kotlin {
+        Protelis2KotlinDoc {
             baseDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis$MS)
             destDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}kotlin$MS)
             debug.set(true)
