@@ -361,6 +361,13 @@ fun generateKotlin(protelisItems: List<ProtelisItem>): String {
 }
 
 /**
+ * Turns a Protelis package to a class name using camelcase convention
+ */
+fun packageToClassName(pkg: String): String {
+    return pkg.split(':').last().split('_').map { it.capitalize() }.joinToString("")
+}
+
+/**
  * Main function: reads all Protelis files under a base directory, parses them, and generates corresponding Kotlin files in a destination directory.
  *
  * This is to be called with two arguments:
@@ -414,7 +421,11 @@ fun main(args: Array<String>) {
 
         Log.log("\tFound " + protelisItems.size + " Protelis items.")
 
-        val pkgCode = "package ${pkgParts.joinToString(".")}\n\n"
+        val pkgCode = """
+            @file:JvmName("${packageToClassName(pkg)}")
+            package ${pkgParts.joinToString(".")}
+
+        """.trimIndent()
         val kotlinCode = generateKotlin(protelisItems)
 
         Log.log("\tContext: " + context)
