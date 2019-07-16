@@ -129,7 +129,6 @@ public def aggregation(local, reduce) {
                 .withProjectDir(workingDirectory.root)
                 .withPluginClasspath(classpath)
                 .withArguments("generateProtelisDoc")
-                .withDebug(true)
                 .build()
         println(result.tasks)
         println(result.output)

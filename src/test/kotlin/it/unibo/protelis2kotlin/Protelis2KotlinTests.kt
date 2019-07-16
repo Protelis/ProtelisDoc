@@ -105,7 +105,6 @@ def sth(){}
                 .withProjectDir(workingDirectory.root)
                 .withPluginClasspath(classpath)
                 .withArguments("generateKotlinFromProtelis", "dokka")
-                .withDebug(true)
                 .build()
         println(result.tasks)
         println(result.output)
