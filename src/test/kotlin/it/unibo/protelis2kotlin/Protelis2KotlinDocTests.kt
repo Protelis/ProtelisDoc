@@ -125,13 +125,18 @@ public def aggregation(local, reduce) {
     }
     "Generation of Kotlin docs from Protelis sources should work" {
         println(workingDirectory.root)
-        val result = GradleRunner.create()
-                .withProjectDir(workingDirectory.root)
-                .withPluginClasspath(classpath)
-                .withArguments("generateProtelisDoc")
-                .build()
-        println(result.tasks)
-        println(result.output)
-        File(workingDirectory.root.toURI()).walkTopDown().forEach { println(it) }
+        try {
+            val result = GradleRunner.create()
+                    .withProjectDir(workingDirectory.root)
+                    .withPluginClasspath(classpath)
+                    .withArguments("generateProtelisDoc")
+                    .build()
+            println(result.tasks)
+            println(result.output)
+            File(workingDirectory.root.toURI()).walkTopDown().forEach { println(it) }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            throw(e)
+        }
     }
 })
