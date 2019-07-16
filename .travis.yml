@@ -45,7 +45,7 @@ jobs:
       env:
         - *reference_jdk
       script:
-        - ./gradlew clean check --scan --parallel --debug
+        - (set -o pipefail; ./gradlew clean test --scan --debug | grep -Ev "(org.gradle)|(sun.rmi)")
     - stage: deploy
       name: "Reports and deployment"
       if: repo = env(OFFICIAL_REPO_SLUG) AND type != pull_request
