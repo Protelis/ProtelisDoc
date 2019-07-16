@@ -45,8 +45,7 @@ jobs:
       env:
         - *reference_jdk
       script:
-        - ./gradlew clean check --scan --parallel
-        - cat build/reports/tests/test/index.html
+        - ./gradlew clean check --scan --debug --stacktrace --parallel
     - stage: deploy
       name: "Reports and deployment"
       if: repo = env(OFFICIAL_REPO_SLUG) AND type != pull_request

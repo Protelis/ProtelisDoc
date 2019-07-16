@@ -100,12 +100,12 @@ def sth(){}
         reader.readLines().map { File(it) }
     }
     "Generation of Kotlin interfaces from Protelis sources should work" {
-        File(workingDirectory.root.toURI()).walkTopDown().forEach { println(it) }
+        println(workingDirectory.root)
         val result = GradleRunner.create()
                 .withProjectDir(workingDirectory.root)
                 .withPluginClasspath(classpath)
-                .withDebug(true)
                 .withArguments("generateKotlinFromProtelis", "dokka")
+                .withDebug(true)
                 .build()
         println(result.tasks)
         println(result.output)
