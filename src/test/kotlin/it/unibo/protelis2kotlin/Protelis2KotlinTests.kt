@@ -7,7 +7,7 @@ import java.io.File
 import java.io.File.separator as SEP
 
 class Protelis2KotlinTests : StringSpec({
-    fun folder(closure: TemporaryFolder.() -> Unit) = TemporaryFolder(File("..")).apply {
+    fun folder(closure: TemporaryFolder.() -> Unit) = TemporaryFolder().apply {
         create()
         closure()
     }

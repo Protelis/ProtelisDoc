@@ -99,7 +99,7 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         mainKotlinSrcset.kotlin.setSrcDirs(setOf(File(extension.kotlinDestDir.get())))
 
         project.task(generateKotlinFromProtelisTaskName) {
-            it.inputs.files(extension.baseDir.get())
+            it.inputs.files(project.fileTree(extension.baseDir.get()))
             it.doLast {
                 main(arrayOf(extension.baseDir.get(), extension.kotlinDestDir.get(), if (extension.debug.get()) "1" else "0"))
             }
@@ -107,7 +107,7 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         }
 
         project.task(generateProtelisDocTaskName) {
-            it.inputs.files(extension.kotlinDestDir.get())
+            it.inputs.files(project.fileTree(extension.kotlinDestDir.get()))
             it.outputs.files(project.fileTree(extension.destDir.get()))
             it.dependsOn(dokkaTaskName)
         }
