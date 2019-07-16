@@ -142,7 +142,7 @@ public def aggregation(local, reduce) {
             // destDir.set("${this.root.absolutePath!!}${SEP}docs")
             // kotlinVersion.set("+")
             // protelisVersion.set("+")
-            outputFormat.set("javadoc")
+            outputFormat.set("html") // "javadoc"
             debug.set(true)
         }
     """ }
