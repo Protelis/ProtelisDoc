@@ -28,6 +28,37 @@ class Protelis2KotlinDocTests : StringSpec({
             */
             public static void main(String[] args){ }
         """.trimIndent())
+        File("${this.root.absolutePath}${SEP}src${SEP}main${SEP}protelis${SEP}collect.pt").writeText("""
+module protelis:coord:some_collection
+
+/**
+ * Aggregate a field of type T within a spanning tree built according to the maximum
+ * decrease in potential. Accumulate the potential according to the reduce function.
+ *
+ * @param potential num, gradient of which gives aggregation direction
+ * @param reduce    (T, T) -> T, function
+ * @param local     T, local value
+ * @param null      T, evaluated when the field is empty
+ * @return          T, aggregated value
+ */
+public def C(potential, reduce, local, null) {
+    share (v <- local) {
+        reduce.apply(local,
+            /*
+             * TODO: switch to accumulateHood
+             */
+            hood(
+                (a, b) -> { reduce.apply(a, b) },
+                // expression that will be evaluated if the field is empty
+                null,
+                mux (nbr(getParent(potential, x -> { x.getDeviceUID() })) == self.getDeviceUID()) {
+                    v
+                } else { null }
+            )
+        )
+    }
+}
+        """.trimIndent())
         File("${this.root.absolutePath}${SEP}src${SEP}main${SEP}protelis${SEP}file.pt").writeText("""
 module protelis:coord:accumulation
 import protelis:coord:meta
@@ -111,6 +142,7 @@ public def aggregation(local, reduce) {
             // destDir.set("${this.root.absolutePath!!}${SEP}docs")
             // kotlinVersion.set("+")
             // protelisVersion.set("+")
+            outputFormat.set("html") // "javadoc"
             debug.set(true)
         }
     """ }
