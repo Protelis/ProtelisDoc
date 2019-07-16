@@ -104,6 +104,7 @@ def sth(){}
         val result = GradleRunner.create()
                 .withProjectDir(workingDirectory.root)
                 .withPluginClasspath(classpath)
+                .withDebug(true)
                 .withArguments("generateKotlinFromProtelis", "dokka")
                 .build()
         println(result.tasks)
