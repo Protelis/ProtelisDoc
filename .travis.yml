@@ -1,11 +1,21 @@
+reference_jdk: &reference_jdk
+  'JDK="adopt@1.8.212-04"'
+reference_os: &reference_os
+  'windows'
+official_repo: &official_repo
+  'Protelis/Protelis-KDoc-generator'
 language: bash
 git:
   depth: false
 os:
-#  - osx
-#  - linux
-  - windows
+  - osx
+#  - windows
+  - *reference_os
 dist: xenial
+stages:
+  - check
+  - test
+  - deploy
 env:
   global:
     - secure: "vF5CiE9oFPX0UepdmAou8uCajcQdccFaRcFKxO1KPWiVMYiSDaWjU+T1NxSWExLPpVty7YV9lSEPEZgNYlYtNyWkxANPDrVevbvvYBr5PyQ9PBDvCW5LSIPg8ywhHyEEaAkm0vzGfApCdVrKs1YsLjG6IQ1MUc0iNqKibdRS7AJfwWjtwhuxRNZ/BZtzSOLf7jHcc/0H7zq1quHFvKMcKzPNfuPJ3GkrLVFni9tOKAcfhlEtq9cOzKFbJDHY1Nh8vySJSEkTWMIYixsOo6nvTnnR3xBzE6Uxo1uE6CzN8ZSMSMmxTGg4KfXkp3wxFC/jWkYr2I4m1yil175TZ7MRvxlvcAFSvTDiw73UifdN5v6b8A4YLz3u7hx9CxPTBzFajPlRxxEXYR9UGSh27r4vStLTHiOWO+R37NJT70lpzTgO6C0KOk+lrzqpYwaN9d5txP7IhQfq5zFnTQDE6dWCRC370Dk2/WKrIZ4jSI+sw7mecqA8Aak+rrxz6EHCj6WZFmWx5YTnX9O446TTvsfR4yWm/p7jfadH3Gyv1uzl2kPrtXcGdPsCoiRrTGaC0sfp1SSDqEAl7fZrbCDFnyPHEs8qdPytfp0T2m4M8m9ypUvnY3TfAwMj8NaAYKrg1HtwY+XYH9T0LBCtOcaIz3mBAb7yeK1w9SgITk3BPa1oLXY="
@@ -14,39 +24,49 @@ env:
     - GRAVIS="https://raw.githubusercontent.com/DanySK/Gravis-CI/master/"
     - PUBLISH="false"
     - TERM=dumb
+    - OFFICIAL_REPO_SLUG="Protelis/Protelis-KDoc-generator"
   matrix:
-    - JDK="adopt@1.8.212-04"
+    - *reference_jdk
     - JDK="adopt-openj9@1.8.212-04"
-    - JDK="adopt@1.9.181-0"
-    - JDK="adopt@1.10.0-2"
     - JDK="adopt@1.11.28-0"
     - JDK="adopt-openj9@1.11.0-3"
     - JDK="adopt@1.12.33-0"
+    - JDK="adopt-openj9@1.12.33-0"
     - JDK="1.12.0-1"
 matrix:
-  include:
-    - os: linux
-      env: PUBLISH="true" JDK="adopt@1.8.212-04"
   exclude:
-    - os: linux
-      env: JDK="adopt@1.8.212-04"
-    # No certificates configured
-    - os: windows
-      env: JDK="adopt@1.9.181-0"
-    - os: windows
-      env: JDK="adopt@1.10.0-2"
+    - os: *reference_os
+      env: *reference_jdk
+jobs:
+  include:
+    - stage: check
+      name: "Deep check on reference OS and JDK"
+      os: *reference_os
+      env:
+        - *reference_jdk
+      script:
+        - ./gradlew clean check --scan --parallel
+    - stage: deploy
+      name: "Reports and deployment"
+      if: repo = env(OFFICIAL_REPO_SLUG) AND type != pull_request
+      os: *reference_os
+      env:
+        - PUBLISH="true"
+        - *reference_jdk
+      install:
+        - openssl aes-256-cbc -K $encrypted_c3e4142aebb8_key -iv $encrypted_c3e4142aebb8_iv -in prepare_environment.sh.enc -out prepare_environment.sh -d
+        - bash prepare_environment.sh
+      script:
+        - ./gradlew sign -x test --scan --parallel
+      after_success:
+        - ./gradlew publish publishPlugins --scan --parallel
 before_install:
-    - curl "${GRAVIS}.install-jdk-travis.sh" --output ~/.install-jdk-travis.sh
-    - bash ~/.install-jdk-travis.sh && source ~/.jdk_config
-    - export SHOULD_CONFIGURE="$(if ! $TRAVIS_PULL_REQUEST && [ $TRAVIS_REPO_SLUG="Protelis/Protelis-KDoc-generator" ] && [ $TRAVIS_OS_NAME = 'linux' ]; then echo "true"; else echo "false"; fi)"
-install: >-
-    if $SHOULD_CONFIGURE; then
-        openssl aes-256-cbc -K $encrypted_c3e4142aebb8_key -iv $encrypted_c3e4142aebb8_iv -in prepare_environment.sh.enc -out prepare_environment.sh -d
-        bash prepare_environment.sh
-    fi
+  - curl "${GRAVIS}.disable-windows-defender.sh" --output .disable-windows-defender.sh
+  - source .disable-windows-defender.sh
+  - curl "${GRAVIS}.install-jdk-travis.sh" --output ~/.install-jdk-travis.sh
+  - bash ~/.install-jdk-travis.sh && source ~/.jdk_config
 script:
-  - java -version
-  - ./gradlew --debug clean check sourcesJar javadocJar --scan
+  - ./gradlew clean test --scan
 before_cache:
   - curl "${GRAVIS}.clean_gradle_cache.sh" --output .clean_gradle_cache.sh
   - bash .clean_gradle_cache.sh
@@ -54,7 +74,6 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
-    - $HOME/.jabba/
 after_success:
   - if $SHOULD_CONFIGURE && $PUBLISH; then ./gradlew publishPlugins; ./gradlew publish; fi
 notifications:
