@@ -107,7 +107,7 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         }
 
         project.task(generateProtelisDocTaskName) {
-            it.inputs.files(project.fileTree(extension.kotlinDestDir.get()))
+            it.inputs.files(project.fileTree(extension.baseDir.get()))
             it.outputs.files(project.fileTree(extension.destDir.get()))
             it.dependsOn(dokkaTaskName)
         }
