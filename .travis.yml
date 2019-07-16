@@ -45,7 +45,7 @@ jobs:
       env:
         - *reference_jdk
       script:
-        - (set -o pipefail; ./gradlew clean check --scan --parallel --debug | grep -Ev "(org.gradle)|(sun.rmi)")
+        - ./gradlew clean check --scan --parallel --debug
     - stage: deploy
       name: "Reports and deployment"
       if: repo = env(OFFICIAL_REPO_SLUG) AND type != pull_request
@@ -66,7 +66,7 @@ before_install:
   - curl "${GRAVIS}.install-jdk-travis.sh" --output ~/.install-jdk-travis.sh
   - bash ~/.install-jdk-travis.sh && source ~/.jdk_config
 script:
-  - (set -o pipefail; ./gradlew clean test --scan --debug | grep -Ev "(org.gradle)|(sun.rmi)")
+  - ./gradlew clean test --scan --debug
 before_cache:
   - curl "${GRAVIS}.clean_gradle_cache.sh" --output .clean_gradle_cache.sh
   - bash .clean_gradle_cache.sh
