@@ -100,7 +100,7 @@ def sth(){}
         reader.readLines().map { File(it) }
     }
     "Generation of Kotlin interfaces from Protelis sources should work" {
-        println(workingDirectory.root)
+        File(workingDirectory.root.toURI()).walkTopDown().forEach { println(it) }
         val result = GradleRunner.create()
                 .withProjectDir(workingDirectory.root)
                 .withPluginClasspath(classpath)
