@@ -38,7 +38,6 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
     private val dokkaTaskName = "dokka"
     private val dokkaPluginName = "org.jetbrains.dokka"
     private val kotlinPluginName = "org.jetbrains.kotlin.jvm"
-    private val protelis2KotlinPlugin = "Protelis2Kotlin"
     private val protelis2KotlinDocPlugin = "Protelis2KotlinDoc"
 
     private val protelisGroup = "org.protelis"
@@ -104,14 +103,14 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
                 main(arrayOf(extension.baseDir.get(), extension.kotlinDestDir.get(), if (extension.debug.get()) "1" else "0"))
             }
             it.outputs.files(project.fileTree(extension.destDir.get()))
-            Log.log("[${it.name}]\nInputs: ${it.inputs}\nOutputs: ${it.outputs}")
+            Log.log("[${it.name}]\nInputs: ${it.inputs.files}\nOutputs: ${it.outputs.files}")
         }
 
         project.task(generateProtelisDocTaskName) {
             it.inputs.files(project.fileTree(extension.baseDir.get()))
             it.outputs.files(project.fileTree(extension.destDir.get()))
             it.dependsOn(dokkaTaskName)
-            Log.log("[${it.name}]\nInputs: ${it.inputs}\nOutputs: ${it.outputs}")
+            Log.log("[${it.name}]\nInputs: ${it.inputs.files}\nOutputs: ${it.outputs.files}")
         }
     }
 }
