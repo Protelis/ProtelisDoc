@@ -1,7 +1,7 @@
 reference_jdk: &reference_jdk
   'JDK="adopt@1.8.212-04"'
 reference_os: &reference_os
-  'windows'
+  'linux'
 official_repo: &official_repo
   'Protelis/Protelis-KDoc-generator'
 language: bash
@@ -45,7 +45,7 @@ jobs:
       env:
         - *reference_jdk
       script:
-        - (set -o pipefail; ./gradlew clean test --scan --debug --project-cache-dir=../cache | grep -Ev "(org\.gradle)|(sun\.)")
+        - ./gradlew clean check --scan --parallel
     - stage: deploy
       name: "Reports and deployment"
       if: repo = env(OFFICIAL_REPO_SLUG) AND type != pull_request
@@ -66,7 +66,7 @@ before_install:
   - curl "${GRAVIS}.install-jdk-travis.sh" --output ~/.install-jdk-travis.sh
   - bash ~/.install-jdk-travis.sh && source ~/.jdk_config
 script:
-  - ./gradlew clean test --scan --debug
+  - ./gradlew clean test --scan
 before_cache:
   - curl "${GRAVIS}.clean_gradle_cache.sh" --output .clean_gradle_cache.sh
   - bash .clean_gradle_cache.sh
