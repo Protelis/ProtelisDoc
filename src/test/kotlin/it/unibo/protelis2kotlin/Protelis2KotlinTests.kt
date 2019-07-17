@@ -79,7 +79,7 @@ def sth(){}
 
         Protelis2KotlinDoc {
             baseDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis$MS)
-            destDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}kotlin$MS)
+            destDir.set("..")
             debug.set(true)
         }
 
