@@ -19,6 +19,7 @@ open class Protelis2KotlinDocPluginExtension @JvmOverloads constructor(
     private val project: Project,
     val baseDir: Property<String> = project.propertyWithDefault("."),
     val destDir: Property<String> = project.propertyWithDefault(project.buildDir.path + "${SEP}protelis-docs$SEP"),
+    val kotlinDestDir: Property<String> = project.propertyWithDefault(project.buildDir.path + "${SEP}kotlin-for-protelis$SEP"),
     val kotlinVersion: Property<String> = project.propertyWithDefault("+"),
     val protelisVersion: Property<String> = project.propertyWithDefault("+"),
     val outputFormat: Property<String> = project.propertyWithDefault("javadoc"),
@@ -30,7 +31,6 @@ open class Protelis2KotlinDocPluginExtension @JvmOverloads constructor(
  * Protelis2KotlinDoc Gradle Plugin: reuses the Protelis2Kotlin and Dokka plugins to generate Kotlin docs from Protelis code.
  */
 class Protelis2KotlinDocPlugin : Plugin<Project> {
-    private val configureGenerateProtelisDocTaskName = "configureGenerateProtelisDoc"
     private val generateProtelisDocTaskName = "generateProtelisDoc"
     private val generateKotlinFromProtelisTaskName = "generateKotlinFromProtelis"
     private val compileKotlinTaskName = "compileKotlin"
@@ -38,7 +38,6 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
     private val dokkaTaskName = "dokka"
     private val dokkaPluginName = "org.jetbrains.dokka"
     private val kotlinPluginName = "org.jetbrains.kotlin.jvm"
-    private val protelis2KotlinPlugin = "Protelis2Kotlin"
     private val protelis2KotlinDocPlugin = "Protelis2KotlinDoc"
 
     private val protelisGroup = "org.protelis"
@@ -75,49 +74,49 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
             }
         }
 
-        if (!project.pluginManager.hasPlugin(protelis2KotlinDocPlugin)) {
-            project.pluginManager.apply(Protelis2KotlinPlugin::class.java)
-        }
         if (!project.pluginManager.hasPlugin(dokkaPluginName)) {
             project.pluginManager.apply(dokkaPluginName)
         }
 
-        // Configure Protelis2Kotlin plugin
-        val p2kp = project.extensions.getByName("Protelis2Kotlin") as Protelis2KotlinPluginExtension
-        p2kp.destDir.set("${project.buildDir.path}${SEP}protelis2kotlin${SEP}src${SEP}main${SEP}kotlin")
-        p2kp.debug.set(extension.debug.get())
-        val protelis2kotlintask = project.tasks.getByName(generateKotlinFromProtelisTaskName)
-        protelis2kotlintask.dependsOn(configureGenerateProtelisDocTaskName)
+        val compileKotlin = project.tasks.getByPath(compileKotlinTaskName)
+        compileKotlin.dependsOn(generateKotlinFromProtelisTaskName)
 
         // Configure Dokka plugin
         val dokkaTask = project.tasks.getByName(dokkaTaskName)
         dokkaTask.setProperty("jdkVersion", 8)
         dokkaTask.setProperty("reportUndocumented", true)
         dokkaTask.dependsOn(compileKotlinTaskName)
+        dokkaTask.setProperty("outputDirectory", extension.destDir.get())
+        dokkaTask.setProperty("outputFormat", extension.outputFormat.get())
 
         // Configure Kotlin plugin
         val kotlinPluginExt = project.extensions.getByName("kotlin") as KotlinJvmProjectExtension
         val mainKotlinSrcset = kotlinPluginExt.sourceSets.getByName("main")
-        // This doesn't work: mainKotlinSrcset.kotlin.srcDirs.add(File(p2kp.destDir.get()))
-        // This also doesn't work: mainKotlinSrcset.resources.srcDirs.add(File(p2kp.destDir.get()))
-        // This doesn't work as well: mainKotlinSrcset.kotlin.sourceDirectories.files.add(File(p2kp.destDir.get()))
-        mainKotlinSrcset.kotlin.setSrcDirs(setOf(File(p2kp.destDir.get())))
+        // This doesn't work: mainKotlinSrcset.kotlin.srcDirs.add(File(*))
+        // This also doesn't work: mainKotlinSrcset.resources.srcDirs.add(File(*))
+        // This doesn't work as well: mainKotlinSrcset.kotlin.sourceDirectories.files.add(File(*))
+        mainKotlinSrcset.kotlin.setSrcDirs(setOf(File(extension.kotlinDestDir.get())))
 
-        val compileKotlin = project.tasks.getByPath(compileKotlinTaskName)
-        compileKotlin.dependsOn(generateKotlinFromProtelisTaskName)
-
-        project.task(configureGenerateProtelisDocTaskName) {
+        val genKotlinTask = project.task(generateKotlinFromProtelisTaskName) {
             it.doLast {
-                p2kp.baseDir.set(extension.baseDir.get())
-                dokkaTask.setProperty("outputDirectory", extension.destDir.get())
-                dokkaTask.setProperty("outputFormat", extension.outputFormat.get())
+                main(arrayOf(extension.baseDir.get(), extension.kotlinDestDir.get(), if (extension.debug.get()) "1" else "0"))
             }
+            Log.log("[${it.name}]\nInputs: ${it.inputs.files.files}\nOutputs: ${it.outputs.files.files}")
         }
 
-        project.task(generateProtelisDocTaskName) {
-            it.inputs.files(p2kp.destDir.get())
-            it.outputs.files(project.fileTree(extension.destDir.get()))
+        val genDocTask = project.task(generateProtelisDocTaskName) {
             it.dependsOn(dokkaTaskName)
+            Log.log("[${it.name}]\nInputs: ${it.inputs.files.files}\nOutputs: ${it.outputs.files.files}")
+        }
+
+        project.task("configureProtelis2KotlinPluginTasks") {
+            genKotlinTask.dependsOn(it.name)
+            it.doLast {
+                genKotlinTask.inputs.files(project.fileTree(extension.baseDir.get()))
+                genKotlinTask.outputs.files(project.fileTree(extension.kotlinDestDir.get()))
+                genDocTask.inputs.files(project.fileTree(extension.baseDir.get()))
+                genDocTask.outputs.files(project.fileTree(extension.destDir.get()))
+            }
         }
     }
 }

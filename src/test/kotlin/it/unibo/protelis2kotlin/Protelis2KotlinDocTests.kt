@@ -14,16 +14,18 @@ class Protelis2KotlinDocTests : StringSpec({
     fun TemporaryFolder.file(name: String, content: () -> String) =
             newFile(name).writeText(content().trimIndent())
 
+    val MS = "\"\"\""
+
     val workingDirectory = folder {
         file("settings.gradle") { "rootProject.name = 'testproject'" }
-        File("${this.root.absolutePath}${SEP}src${SEP}main${SEP}protelis").mkdirs()
-        File("${this.root.absolutePath}${SEP}src${SEP}main${SEP}protelis${SEP}file2.pt").writeText("""
+        File("""${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis""").mkdirs()
+        File("""${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis${SEP}file2.pt""").writeText("""
             unformed protelis file
             def prova
             /* ..
             hello
             """)
-        File("${this.root.absolutePath}${SEP}src${SEP}main${SEP}protelis${SEP}file.java").writeText("""
+        File("""${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis${SEP}file.java""").writeText("""
             /** prova
             */
             public static void main(String[] args){ }
@@ -138,8 +140,8 @@ public def aggregation(local, reduce) {
         // }
 
         Protelis2KotlinDoc {
-            baseDir.set("${this.root.absolutePath!!}${SEP}src${SEP}main${SEP}protelis")
-            // destDir.set("${this.root.absolutePath!!}${SEP}docs")
+            baseDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis$MS)
+            destDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}docs$MS)
             // kotlinVersion.set("+")
             // protelisVersion.set("+")
             outputFormat.set("html") // "javadoc"
