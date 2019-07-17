@@ -5,6 +5,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.io.File
 import java.io.File.separator as SEP
 
@@ -46,9 +47,21 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
     private val kotlinStdlibDepName = "kotlin-stdlib"
 
     private val implConfiguration = "implementation"
+    private val protelis2KotlinPluginConfig = "protelis2KotlinPluginConfig"
 
     override fun apply(project: Project) {
         val extension = project.extensions.create(protelis2KotlinDocPlugin, Protelis2KotlinDocPluginExtension::class.java, project)
+        Log.log("""Applying plugin $protelis2KotlinDocPlugin.
+            Default configuration:
+            - debug = ${extension.debug.get()}
+            - baseDir = ${extension.baseDir.get()}
+            - destDir = ${extension.destDir.get()}
+            - protelisVersion = ${extension.protelisVersion.get()}
+            - outputFormat = ${extension.outputFormat.get()}
+            - automaticDependencies = ${extension.automaticDependencies.get()}
+            - kotlinDestDir = ${extension.kotlinDestDir.get()}
+            """.trimIndent())
+
         if (JavaVersion.current() > JavaVersion.VERSION_1_8) extension.outputFormat.set("html")
 
         if (!project.repositories.contains(project.repositories.jcenter())) {
@@ -63,23 +76,19 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         }
 
         // Add dependency to Kotlin stdlib for TODO()s and Protelis
-        if (extension.automaticDependencies.get()) {
-            val deps = project.configurations.getByName(implConfiguration).dependencies
-            if (!deps.any { it.group==kotlinGroup && it.name==kotlinStdlibDepName }) {
-                project.dependencies.add(implConfiguration, "$kotlinGroup:$kotlinStdlibDepName:${extension.kotlinVersion.get()}")
-            }
-
-            if (!deps.any { it.group==protelisGroup && it.name==protelisInterpreterDepName }) {
-                project.dependencies.add(implConfiguration, "$protelisGroup:$protelisInterpreterDepName:${extension.protelisVersion.get()}")
-            }
-        }
+        val config = project.configurations.create(protelis2KotlinPluginConfig)
+        assert(project.configurations.add(config))
+        project.dependencies.add(config.name, "$kotlinGroup:$kotlinStdlibDepName:${extension.kotlinVersion.get()}")
+        project.dependencies.add(config.name, "$protelisGroup:$protelisInterpreterDepName:${extension.protelisVersion.get()}")
+        // project.configurations.getByName(implConfiguration).extendsFrom(config) // We want them to be decoupled
 
         if (!project.pluginManager.hasPlugin(dokkaPluginName)) {
             project.pluginManager.apply(dokkaPluginName)
         }
 
-        val compileKotlin = project.tasks.getByPath(compileKotlinTaskName)
+        val compileKotlin = project.tasks.getByPath(compileKotlinTaskName) as KotlinCompile
         compileKotlin.dependsOn(generateKotlinFromProtelisTaskName)
+        // compileKotlin.taskDependencies.getDependencies(compileKotlin).addAll(config.dependencies)
 
         // Configure Dokka plugin
         val dokkaTask = project.tasks.getByName(dokkaTaskName)
@@ -112,6 +121,17 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         project.task("configureProtelis2KotlinPluginTasks") {
             genKotlinTask.dependsOn(it.name)
             it.doLast {
+                if (extension.automaticDependencies.get()) {
+                    val deps = project.configurations.getByName(implConfiguration).dependencies
+                    if (!deps.any { it.group==kotlinGroup && it.name==kotlinStdlibDepName }) {
+                        project.dependencies.add(implConfiguration, "$kotlinGroup:$kotlinStdlibDepName:${extension.kotlinVersion.get()}")
+                    }
+
+                    if (!deps.any { it.group==protelisGroup && it.name==protelisInterpreterDepName }) {
+                        project.dependencies.add(implConfiguration, "$protelisGroup:$protelisInterpreterDepName:${extension.protelisVersion.get()}")
+                    }
+                }
+
                 genKotlinTask.inputs.files(project.fileTree(extension.baseDir.get()))
                 genKotlinTask.outputs.files(project.fileTree(extension.kotlinDestDir.get()))
                 genDocTask.inputs.files(project.fileTree(extension.baseDir.get()))

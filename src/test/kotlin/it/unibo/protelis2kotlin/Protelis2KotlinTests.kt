@@ -81,6 +81,7 @@ def sth(){}
             baseDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis$MS)
             destDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}kotlin$MS)
             debug.set(true)
+            automaticDependencies.set(false)
         }
 
         val dokka by tasks.getting(DokkaTask::class) {
