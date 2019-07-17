@@ -97,20 +97,26 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         // This doesn't work as well: mainKotlinSrcset.kotlin.sourceDirectories.files.add(File(*))
         mainKotlinSrcset.kotlin.setSrcDirs(setOf(File(extension.kotlinDestDir.get())))
 
-        project.task(generateKotlinFromProtelisTaskName) {
-            it.inputs.files(project.fileTree(extension.baseDir.get()))
+        val genKotlinTask = project.task(generateKotlinFromProtelisTaskName) {
             it.doLast {
                 main(arrayOf(extension.baseDir.get(), extension.kotlinDestDir.get(), if (extension.debug.get()) "1" else "0"))
             }
-            it.outputs.files(project.fileTree(extension.kotlinDestDir.get()))
             Log.log("[${it.name}]\nInputs: ${it.inputs.files.files}\nOutputs: ${it.outputs.files.files}")
         }
 
-        project.task(generateProtelisDocTaskName) {
-            it.inputs.files(project.fileTree(extension.baseDir.get()))
-            it.outputs.files(project.fileTree(extension.destDir.get()))
+        val genDocTask = project.task(generateProtelisDocTaskName) {
             it.dependsOn(dokkaTaskName)
             Log.log("[${it.name}]\nInputs: ${it.inputs.files.files}\nOutputs: ${it.outputs.files.files}")
+        }
+
+        project.task("configureProtelis2KotlinPluginTasks") {
+            genKotlinTask.dependsOn(it.name)
+            it.doLast {
+                genKotlinTask.inputs.files(project.fileTree(extension.baseDir.get()))
+                genKotlinTask.outputs.files(project.fileTree(extension.kotlinDestDir.get()))
+                genDocTask.inputs.files(project.fileTree(extension.baseDir.get()))
+                genDocTask.outputs.files(project.fileTree(extension.destDir.get()))
+            }
         }
     }
 }
