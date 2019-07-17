@@ -102,7 +102,7 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
             it.doLast {
                 main(arrayOf(extension.baseDir.get(), extension.kotlinDestDir.get(), if (extension.debug.get()) "1" else "0"))
             }
-            it.outputs.files(project.fileTree(extension.destDir.get()))
+            it.outputs.files(project.fileTree(extension.kotlinDestDir.get()))
             Log.log("[${it.name}]\nInputs: ${it.inputs.files.files}\nOutputs: ${it.outputs.files.files}")
         }
 

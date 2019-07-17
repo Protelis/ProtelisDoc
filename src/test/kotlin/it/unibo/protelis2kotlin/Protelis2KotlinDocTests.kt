@@ -141,7 +141,7 @@ public def aggregation(local, reduce) {
 
         Protelis2KotlinDoc {
             baseDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis$MS)
-            destDir.set("..")
+            destDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}docs$MS)
             // kotlinVersion.set("+")
             // protelisVersion.set("+")
             outputFormat.set("html") // "javadoc"
