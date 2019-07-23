@@ -222,7 +222,7 @@ fun parseProtelisFunction(fline: String): ProtelisFun {
 fun parseFile(content: String): List<ProtelisItem> {
     val pitems = mutableListOf<ProtelisItem>()
 
-    """^\s*(/\*\*(.*?)\*/)?\n*([\w\s]*def[^\{]*?\{)"""
+    """^\s*(/\*\*(.*?)\*/)?\n*((^|[\w\s]*\s)def\s[^\{]*?\{)"""
             .toRegex(setOf(MULTILINE, DOT_MATCHES_ALL))
             .findAll(content)
             .forEach { matchRes ->
