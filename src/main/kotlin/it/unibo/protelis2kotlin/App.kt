@@ -205,7 +205,7 @@ fun parseDoc(doc: String): ProtelisFunDoc {
  */
 fun parseProtelisFunction(fline: String): ProtelisFun {
     return ProtelisFun(
-            name = """def\s+(\w+)""".toRegex().find(fline)?.groupValues?.get(1) ?: throw IllegalStateException("Cannot parse function name in: $fline"),
+            name = """def\s+(\w+)\s*\(""".toRegex().find(fline)?.groupValues?.get(1) ?: throw IllegalStateException("Cannot parse function name in: $fline"),
             params = """\(([^\)]*)\)""".toRegex().find(fline)?.groupValues?.get(1)?.split(",")
                     ?.filter { !it.isEmpty() }
                     ?.map {
@@ -222,7 +222,7 @@ fun parseProtelisFunction(fline: String): ProtelisFun {
 fun parseFile(content: String): List<ProtelisItem> {
     val pitems = mutableListOf<ProtelisItem>()
 
-    """^\s*(/\*\*(.*?)\*/)\n*([^\n]*)"""
+    """^\s*(/\*\*(.*?)\*/)?\n*([\w\s]*def[^\{]*?\{)"""
             .toRegex(setOf(MULTILINE, DOT_MATCHES_ALL))
             .findAll(content)
             .forEach { matchRes ->
@@ -237,10 +237,12 @@ fun parseFile(content: String): List<ProtelisItem> {
                 var parsedDoc: ProtelisFunDoc
                 var parsedFun: ProtelisFun
 
+                val parsedString = matchRes.value.lines().map { "> " + it }.joinToString("\n")
+
                 try {
                     parsedDoc = parseDoc(doc)
                 } catch (e: Exception) {
-                    Log.log("Failed to parse doc\n\"\"\"${matchRes.value}\"\"\" [$doc]")
+                    Log.log("\t\tFailed to parse doc: $doc\n${parsedString}")
                     Log.logException(e)
                     return@forEach
                 }
@@ -251,10 +253,12 @@ fun parseFile(content: String): List<ProtelisItem> {
                 try {
                     parsedFun = parseProtelisFunction(funLine)
                 } catch (e: Exception) {
-                    Log.log("Failed to parse function\n\"\"\"${matchRes.value}\"\"\" [$funLine]")
+                    Log.log("\t\tFailed to parse function: ${funLine.trim()}\n${parsedString}")
                     Log.logException(e)
                     return@forEach
                 }
+
+                Log.log("\t\tParsed${if (!parsedDoc.docPieces.fold("", { a,b -> a + b }).isEmpty()) " documented " else " "}function: ${parsedFun.name}")
 
                 pitems.add(ProtelisItem(parsedFun, parsedDoc))
             }
