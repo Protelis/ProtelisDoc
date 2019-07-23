@@ -13,15 +13,18 @@ It works as follows:
 
 ## Usage
 
-Simply import the plugin in Gradle:
+Simply import the plugin in Gradle. If you have a Kotlin build file:
 
-```koltin
+```kotlin
 plugins {
-    id("org.protelis.protelisdoc") version "0.1.0"
+    id("org.protelis.protelisdoc") version <pluginVersion>
 }
 ```
 
 and run ``./gradlew generateProtelisDoc``.
+
+You can find the available versions on the [Gradle Plugin Portal](https://plugins.gradle.org/plugin/org.protelis.protelisdoc).
+You will also find the syntax for importing the plugin in Groovy-based Gradle builds.
 
 It follows the convention-over-configuration principle. So, with standard Gradle/Maven-like, you should expect it to find protelis code under the working directory and generate docs under `build/protelis-docs`.
 
@@ -79,10 +82,3 @@ I.e.,
 * Return type should be described as follows `@return <retType>, <retDescription>`
 * Function types take form `(T) -> T`, where single-letter uppercase symbols are assumed to be generic parameter types
 * Tuple types are denoted as `[A,B,C]`
-
-
-## Release notes
-
-**0.1.0**
-
-- A basically working plugin
