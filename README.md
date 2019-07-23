@@ -44,7 +44,7 @@ Note: when automatic resolution of dependencies is disabled (default), you shoul
 ```kotlin
 dependencies {
     implementation("org.protelis:protelis-interpreter:11.1.0")
-    implementation(kotlin("stdlib"))
+    implementation(kotlin("stdlib")) // shortcut for dep "org.jetbrains.kotlin:kotlin-stdlib:+"
 }
 ```
 

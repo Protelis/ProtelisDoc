@@ -60,6 +60,17 @@ public def C(potential, reduce, local, null) {
         )
     }
 }
+
+public def another (
+  x,
+  y,z)
+  {
+
+}
+
+def some_other_fun
+ (param1,
+  param2)  { }
         """.trimIndent())
         File("${this.root.absolutePath}${SEP}src${SEP}main${SEP}protelis${SEP}file.pt").writeText("""
 module protelis:coord:accumulation
