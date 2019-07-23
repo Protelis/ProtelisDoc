@@ -58,7 +58,8 @@ jobs:
       script:
         - ./gradlew sign -x test --scan --parallel
       after_success:
-        - ./gradlew publish publishPlugins --scan --parallel
+        - ./gradlew publishPlugins
+        - ./gradlew publish
 before_install:
   - curl "${GRAVIS}.disable-windows-defender.sh" --output .disable-windows-defender.sh
   - source .disable-windows-defender.sh
