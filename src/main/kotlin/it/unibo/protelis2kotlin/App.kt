@@ -325,7 +325,7 @@ fun generateKotlinFun(fn: ProtelisFun): String {
     var genTypesStr = fn.genericTypes.joinToString(",")
     if (!genTypesStr.isEmpty()) genTypesStr = " <$genTypesStr>"
 
-    return "fun$genTypesStr ${sanitizeNameForKotlin(fn.name)}(" +
+    return "@Suppress(\"UNUSED_PARAMETER\")\nfun$genTypesStr ${sanitizeNameForKotlin(fn.name)}(" +
             fn.params.map { "${sanitizeNameForKotlin(it.name)}: ${generateKotlinType(it.type)}" }.joinToString(", ") +
             "): ${generateKotlinType(fn.returnType)} = TODO()"
 }
