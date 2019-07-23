@@ -21,6 +21,8 @@ plugins {
 }
 ```
 
+and run ``./gradlew generateProtelisDoc``.
+
 You can find the available versions on the [Gradle Plugin Portal](https://plugins.gradle.org/plugin/org.protelis.protelisdoc).
 You will also find the syntax for importing the plugin in Groovy-based Gradle builds.
 
@@ -35,6 +37,17 @@ Protelis2KotlinDoc {
   kotlinVersion.set("+")
   protelisVersion.set("+")
   outputFormat.set("javadoc") // Dokka's output format (alternative: 'html')
+  automaticDependencies.set(false) // Automatic resolution of deps (e.g., protelis-interpreter)
+  debug.set(false) // Debug prints are disabled by default
+}
+```
+
+Note: when automatic resolution of dependencies is disabled (default), you should add the following dependencies for the plugin to work:
+
+```kotlin
+dependencies {
+    implementation("org.protelis:protelis-interpreter:11.1.0")
+    implementation(kotlin("stdlib")) // shortcut for dep "org.jetbrains.kotlin:kotlin-stdlib:+"
 }
 ```
 
@@ -69,10 +82,3 @@ I.e.,
 * Return type should be described as follows `@return <retType>, <retDescription>`
 * Function types take form `(T) -> T`, where single-letter uppercase symbols are assumed to be generic parameter types
 * Tuple types are denoted as `[A,B,C]`
-
-
-## Release notes
-
-**0.1.0**
-
-- A basically working plugin

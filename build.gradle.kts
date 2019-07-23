@@ -3,15 +3,17 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     application
-    kotlin("jvm") version "1.3.21"
+    kotlin("jvm") version Versions.org_jetbrains_kotlin
     `maven-publish`
     signing
-    id("com.gradle.build-scan") version "2.1"
-    id("com.gradle.plugin-publish") version "0.10.1"
-    id("org.danilopianini.git-sensitive-semantic-versioning") version "0.1.0"
-    id("org.danilopianini.publish-on-central") version "0.1.1"
-    id("org.jetbrains.dokka") version "0.9.16"
-    id("org.jlleitschuh.gradle.ktlint") version "7.3.0"
+    id("de.fayard.buildSrcVersions") version Versions.de_fayard_buildsrcversions_gradle_plugin
+    id("com.gradle.build-scan") version Versions.com_gradle_build_scan_gradle_plugin
+    id("com.gradle.plugin-publish") version Versions.com_gradle_plugin_publish_gradle_plugin
+    id("org.danilopianini.git-sensitive-semantic-versioning") version
+        Versions.org_danilopianini_git_sensitive_semantic_versioning_gradle_plugin
+    id("org.danilopianini.publish-on-central") version Versions.org_danilopianini_publish_on_central_gradle_plugin
+    id("org.jetbrains.dokka") version Versions.org_jetbrains_dokka
+    id("org.jlleitschuh.gradle.ktlint") version Versions.org_jlleitschuh_gradle_ktlint_gradle_plugin
     `java-gradle-plugin`
 }
 
@@ -23,20 +25,21 @@ repositories {
 }
 
 gitSemVer {
+    maxVersionLength.set(20)
     version = computeGitSemVer() // THIS IS MANDATORY, AND MUST BE LAST IN BLOCK
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib")
-    implementation(kotlin("reflect"))
+    implementation(Libs.kotlin_stdlib)
+    implementation(Libs.kotlin_reflect)
     implementation(gradleApi())
-    implementation("org.jetbrains.dokka:dokka-gradle-plugin:0.9.18")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.21")
+    implementation(Libs.dokka_gradle_plugin)
+    implementation(Libs.kotlin_gradle_plugin)
 
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+    testImplementation(Libs.kotlin_test)
+    testImplementation(Libs.kotlin_test_junit)
     testImplementation(gradleTestKit())
-    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.2")
+    testImplementation(Libs.kotlintest_runner_junit5)
 }
 
 application {
@@ -121,12 +124,6 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        create("Protelis2Kotlin") {
-            id = "org.protelis.protelis2kotlin"
-            displayName = "Protelis to Kotlin API converter"
-            description = "A plugin that translates Protelis modules into Kotlin collections of functions"
-            implementationClass = "it.unibo.protelis2kotlin.Protelis2KotlinPlugin"
-        }
         create("Protelis2KotlinDoc") {
             id = "org.protelis.protelisdoc"
             displayName = "Protelis Documentation Engine"

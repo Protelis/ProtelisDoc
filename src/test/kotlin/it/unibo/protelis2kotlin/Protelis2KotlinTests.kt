@@ -4,6 +4,7 @@ import io.kotlintest.specs.StringSpec
 import org.gradle.internal.impldep.org.junit.rules.TemporaryFolder
 import org.gradle.testkit.runner.GradleRunner
 import java.io.File
+import java.io.File.separator as SEP
 
 class Protelis2KotlinTests : StringSpec({
     fun folder(closure: TemporaryFolder.() -> Unit) = TemporaryFolder().apply {
@@ -13,10 +14,12 @@ class Protelis2KotlinTests : StringSpec({
     fun TemporaryFolder.file(name: String, content: () -> String) =
             newFile(name).writeText(content().trimIndent())
 
+    val MS = "\"\"\""
+
     val workingDirectory = folder {
         file("settings.gradle") { "rootProject.name = 'testproject'" }
-        File("${this.root.absolutePath}/src/main/protelis").mkdirs()
-        File("${this.root.absolutePath}/src/main/protelis/file.pt").writeText("""
+        File("""${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis""").mkdirs()
+        File("""${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis${SEP}file.pt""").writeText("""
 module protelis:coord:accumulation
 import protelis:coord:meta
 import protelis:coord:spreading
@@ -31,9 +34,28 @@ import java.lang.Math.pow
  * @param b bool, second condition
  * @return  bool, true if both the conditions are true
  */
-public def and(a, b) {
+public  def   and(a, b) {
     a && b
 }
+
+public def or+(x,y){}
+
+/**
+ * a
+ */
+
+/**
+  * b
+  */
+/**
+  * c
+  */
+def add+(x,y){}
+
+/**
+  * d
+  */
+def sth(){}
         """.trimIndent()
         )
 
@@ -42,7 +64,7 @@ public def and(a, b) {
 
         plugins {
             kotlin("jvm") version "1.3.21"
-            id("it.unibo.protelis2kotlin")
+            id("it.unibo.protelis2kotlindoc")
             id("org.jetbrains.dokka") version "0.9.18"
         }
 
@@ -55,14 +77,15 @@ public def and(a, b) {
             jcenter() // or maven { url 'https://dl.bintray.com/kotlin/dokka' }
         }
 
-        Protelis2Kotlin {
-            baseDir.set("${this.root.absolutePath!!}/src/main/protelis")
-            destDir.set("${this.root.absolutePath!!}/src/main/kotlin")
+        Protelis2KotlinDoc {
+            baseDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis$MS)
+            destDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}kotlin$MS)
+            debug.set(true)
         }
 
         val dokka by tasks.getting(DokkaTask::class) {
             outputFormat = "html"
-            outputDirectory = "${"$"}buildDir/dokka"
+            outputDirectory = $MS${"$"}buildDir${SEP}dokka$MS
             jdkVersion = 8
             reportUndocumented = true
             dependsOn("generateKotlinFromProtelis")

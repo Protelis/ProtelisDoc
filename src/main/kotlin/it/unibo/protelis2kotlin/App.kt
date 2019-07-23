@@ -6,10 +6,33 @@ import java.io.File
 import kotlin.text.RegexOption.MULTILINE
 import kotlin.text.RegexOption.DOT_MATCHES_ALL
 import java.io.File.separator as SEP
+import java.io.PrintWriter
+import java.io.StringWriter
+import java.lang.IllegalStateException
 
 var context = Context(setOf())
 
 val protelisFileExt = "pt"
+
+object Log {
+    var debug = true
+
+    fun log(msg: String) {
+        if (debug) {
+            println(msg)
+        }
+    }
+
+    fun printInfo(msg: String) {
+        println(msg)
+    }
+
+    fun logException(e: Exception) {
+        val errorStr = StringWriter()
+        e.printStackTrace(PrintWriter(errorStr))
+        log(errorStr.toString())
+    }
+}
 
 /**
  * Data class containing information that should be collected during parsing.
@@ -182,10 +205,14 @@ fun parseDoc(doc: String): ProtelisFunDoc {
  */
 fun parseProtelisFunction(fline: String): ProtelisFun {
     return ProtelisFun(
-            name = """def (\w+)""".toRegex().find(fline)!!.groupValues[1],
-            params = """\(([^\)]*)\)""".toRegex().find(fline)!!.groupValues[1].split(",")
-                    .filter { !it.isEmpty() }.map { ProtelisFunArg(it.trim(), "") }.toList(),
-            public = """(public def)""".toRegex().find(fline) != null)
+            name = """def\s+(\w+)\s*\(""".toRegex().find(fline)?.groupValues?.get(1) ?: throw IllegalStateException("Cannot parse function name in: $fline"),
+            params = """\(([^\)]*)\)""".toRegex().find(fline)?.groupValues?.get(1)?.split(",")
+                    ?.filter { !it.isEmpty() }
+                    ?.map {
+                        // if (!"""\w""".toRegex().matches(it)) throw IllegalStateException("Bad argument name: $it")
+                        ProtelisFunArg(it.trim(), "")
+                    }?.toList() ?: throw IllegalStateException("Cannot parse arglist in: $fline"),
+            public = """(public\s+def)""".toRegex().find(fline) != null)
 }
 
 /**
@@ -195,7 +222,7 @@ fun parseProtelisFunction(fline: String): ProtelisFun {
 fun parseFile(content: String): List<ProtelisItem> {
     val pitems = mutableListOf<ProtelisItem>()
 
-    """^\s*(/\*\*(.*?)\*/)\n*([^\n]*)"""
+    """^\s*(/\*\*(.*?)\*/)?\n*([\w\s]*def[^\{]*?\{)"""
             .toRegex(setOf(MULTILINE, DOT_MATCHES_ALL))
             .findAll(content)
             .forEach { matchRes ->
@@ -207,8 +234,32 @@ fun parseFile(content: String): List<ProtelisItem> {
 //                    println("Doc piece: $p")
 //                }
 //                println("Function line: $funLine\n${parseProtelisFunction(funLine)}")
-                val parsedDoc = parseDoc(doc)
-                val parsedFun = parseProtelisFunction(funLine)
+                var parsedDoc: ProtelisFunDoc
+                var parsedFun: ProtelisFun
+
+                val parsedString = matchRes.value.lines().map { "> " + it }.joinToString("\n")
+
+                try {
+                    parsedDoc = parseDoc(doc)
+                } catch (e: Exception) {
+                    Log.log("\t\tFailed to parse doc: $doc\n$parsedString")
+                    Log.logException(e)
+                    return@forEach
+                }
+
+                // Easy check to control if we actually have a function
+                if (!funLine.contains("def")) return@forEach
+
+                try {
+                    parsedFun = parseProtelisFunction(funLine)
+                } catch (e: Exception) {
+                    Log.log("\t\tFailed to parse function: ${funLine.trim()}\n$parsedString")
+                    Log.logException(e)
+                    return@forEach
+                }
+
+                Log.log("\t\tParsed${if (!parsedDoc.docPieces.fold("", { a,b -> a + b }).isEmpty()) " documented " else " "}function: ${parsedFun.name}")
+
                 pitems.add(ProtelisItem(parsedFun, parsedDoc))
             }
     return pitems
@@ -314,6 +365,13 @@ fun generateKotlin(protelisItems: List<ProtelisItem>): String {
 }
 
 /**
+ * Turns a Protelis package to a class name using camelcase convention
+ */
+fun packageToClassName(pkg: String): String {
+    return pkg.split(':').last().split('_').map { it.capitalize() }.joinToString("")
+}
+
+/**
  * Main function: reads all Protelis files under a base directory, parses them, and generates corresponding Kotlin files in a destination directory.
  *
  * This is to be called with two arguments:
@@ -322,39 +380,59 @@ fun generateKotlin(protelisItems: List<ProtelisItem>): String {
  */
 fun main(args: Array<String>) {
     if (args.size < 2) {
-        println("USAGE: program <dir> <destDir>")
+        println("USAGE: program <dir> <destDir> <debug>")
         return
     }
 
+    val header = "[Protelis2Kotlin]"
+
     val dir = args[0]
     val destDir = args[1]
+    Log.debug = if (args.size == 3) args[2] == "1" else false
+
+    Log.log("$header Base directory: $dir\n$header Destination directory: $destDir")
+
+    var k = 0
 
     File(dir).walkTopDown().forEach { file ->
         if (!file.isFile || file.extension != protelisFileExt) return@forEach
 
         val fileText: String = file.readText()
 
-        println("Processing " + file.absolutePath)
+        Log.log("Processing " + file.absolutePath)
 
         val pkg = """module (.+)""".toRegex().find(fileText)?.groupValues?.component2() ?: ""
         if (pkg.isEmpty()) {
-            println("\tCannot parse Protelis package. Skipping.")
+            Log.log("\tCannot parse Protelis package. Skipping.")
             return@forEach
         }
 
         val pkgParts = pkg.split(':')
-        println("\tPackage: " + pkg)
+        Log.log("\tPackage: " + pkg)
 
         // RESET CONTEXT
         context = Context(setOf())
 
-        val protelisItems = parseFile(fileText)
-        println("\tFound " + protelisItems.size + " Protelis items.")
+        var protelisItems: List<ProtelisItem>
 
-        val pkgCode = "package ${pkgParts.joinToString(".")}\n\n"
+        try {
+            protelisItems = parseFile(fileText)
+        } catch (e: Exception) {
+            Log.log("Failed to parse $file")
+            Log.logException(e)
+            return@forEach
+        }
+
+        Log.log("\tFound " + protelisItems.size + " Protelis items.")
+
+        val pkgCode = """
+            @file:JvmName("${packageToClassName(pkg)}")
+            package ${pkgParts.joinToString(".")}
+
+        """.trimIndent()
         val kotlinCode = generateKotlin(protelisItems)
 
-        println("\tContext: " + context)
+        Log.log("\tContext: " + context)
 
         val importCode = context.protelisTypes.map { when (it) {
             "ExecutionContext", "ExecutionEnvironment" -> "org.protelis.vm.$it"
@@ -366,12 +444,14 @@ fun main(args: Array<String>) {
 
         val outPath = "$destDir$SEP${pkgParts.joinToString(SEP)}$SEP${file.name.replace(".pt",".kt")}"
 
-        println("\tWriting " + outPath)
+        Log.log("\tWriting " + outPath)
 
         File(outPath).let {
             it.parentFile.mkdirs()
             it.createNewFile()
             it
-        }.writeText(kotlinFullCode)
+        }.writeText(kotlinFullCode).let { k++ }
     }
+
+    Log.log("$header Converted $k .pt files to Kotlin")
 }

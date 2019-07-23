@@ -4,6 +4,7 @@ import io.kotlintest.specs.StringSpec
 import org.gradle.internal.impldep.org.junit.rules.TemporaryFolder
 import org.gradle.testkit.runner.GradleRunner
 import java.io.File
+import java.io.File.separator as SEP
 
 class Protelis2KotlinDocTests : StringSpec({
     fun folder(closure: TemporaryFolder.() -> Unit) = TemporaryFolder().apply {
@@ -13,21 +14,65 @@ class Protelis2KotlinDocTests : StringSpec({
     fun TemporaryFolder.file(name: String, content: () -> String) =
             newFile(name).writeText(content().trimIndent())
 
+    val MS = "\"\"\""
+
     val workingDirectory = folder {
         file("settings.gradle") { "rootProject.name = 'testproject'" }
-        File("${this.root.absolutePath}/src/main/protelis").mkdirs()
-        File("${this.root.absolutePath}/src/main/protelis/file2.pt").writeText("""
+        File("""${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis""").mkdirs()
+        File("""${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis${SEP}file2.pt""").writeText("""
             unformed protelis file
             def prova
             /* ..
             hello
             """)
-        File("${this.root.absolutePath}/src/main/protelis/file.java").writeText("""
+        File("""${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis${SEP}file.java""").writeText("""
             /** prova
             */
             public static void main(String[] args){ }
         """.trimIndent())
-        File("${this.root.absolutePath}/src/main/protelis/file.pt").writeText("""
+        File("${this.root.absolutePath}${SEP}src${SEP}main${SEP}protelis${SEP}collect.pt").writeText("""
+module protelis:coord:some_collection
+
+/**
+ * Aggregate a field of type T within a spanning tree built according to the maximum
+ * decrease in potential. Accumulate the potential according to the reduce function.
+ *
+ * @param potential num, gradient of which gives aggregation direction
+ * @param reduce    (T, T) -> T, function
+ * @param local     T, local value
+ * @param null      T, evaluated when the field is empty
+ * @return          T, aggregated value
+ */
+public def C(potential, reduce, local, null) {
+    share (v <- local) {
+        reduce.apply(local,
+            /*
+             * TODO: switch to accumulateHood
+             */
+            hood(
+                (a, b) -> { reduce.apply(a, b) },
+                // expression that will be evaluated if the field is empty
+                null,
+                mux (nbr(getParent(potential, x -> { x.getDeviceUID() })) == self.getDeviceUID()) {
+                    v
+                } else { null }
+            )
+        )
+    }
+}
+
+public def another (
+  x,
+  y,z)
+  {
+
+}
+
+def some_other_fun
+ (param1,
+  param2)  { }
+        """.trimIndent())
+        File("${this.root.absolutePath}${SEP}src${SEP}main${SEP}protelis${SEP}file.pt").writeText("""
 module protelis:coord:accumulation
 import protelis:coord:meta
 import protelis:coord:spreading
@@ -93,8 +138,12 @@ public def aggregation(local, reduce) {
 
         file("build.gradle.kts") { """
         plugins {
-            // kotlin("jvm") version "1.3.21"
             id("it.unibo.protelis2kotlindoc")
+        }
+
+        dependencies {
+            implementation("org.protelis:protelis-interpreter:11.1.0")
+            implementation(kotlin("stdlib"))
         }
 
         // repositories {
@@ -102,10 +151,12 @@ public def aggregation(local, reduce) {
         // }
 
         Protelis2KotlinDoc {
-            baseDir.set("${this.root.absolutePath!!}/src/main/protelis")
-            // destDir.set("${this.root.absolutePath!!}/docs")
+            baseDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis$MS)
+            destDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}docs$MS)
             // kotlinVersion.set("+")
             // protelisVersion.set("+")
+            outputFormat.set("html") // "javadoc"
+            debug.set(true)
         }
     """ }
     }

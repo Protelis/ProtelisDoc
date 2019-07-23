@@ -9,3 +9,5 @@ build
 out
 
 .kotlintest
+
+.java-version
