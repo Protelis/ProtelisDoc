@@ -9,7 +9,7 @@ git:
   depth: false
 os:
   - osx
-#  - windows
+  - windows
   - *reference_os
 dist: xenial
 stages:
