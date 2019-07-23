@@ -242,7 +242,7 @@ fun parseFile(content: String): List<ProtelisItem> {
                 try {
                     parsedDoc = parseDoc(doc)
                 } catch (e: Exception) {
-                    Log.log("\t\tFailed to parse doc: $doc\n${parsedString}")
+                    Log.log("\t\tFailed to parse doc: $doc\n$parsedString")
                     Log.logException(e)
                     return@forEach
                 }
@@ -253,7 +253,7 @@ fun parseFile(content: String): List<ProtelisItem> {
                 try {
                     parsedFun = parseProtelisFunction(funLine)
                 } catch (e: Exception) {
-                    Log.log("\t\tFailed to parse function: ${funLine.trim()}\n${parsedString}")
+                    Log.log("\t\tFailed to parse function: ${funLine.trim()}\n$parsedString")
                     Log.logException(e)
                     return@forEach
                 }
