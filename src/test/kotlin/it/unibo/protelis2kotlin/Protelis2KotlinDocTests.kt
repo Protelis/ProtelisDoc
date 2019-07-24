@@ -71,6 +71,10 @@ public def another (
 def some_other_fun
  (param1,
   param2)  { }
+
+var default = 10;
+{ /* b */; 2 }
+default = 8; { 3 }
         """.trimIndent())
         File("${this.root.absolutePath}${SEP}src${SEP}main${SEP}protelis${SEP}file.pt").writeText("""
 module protelis:coord:accumulation

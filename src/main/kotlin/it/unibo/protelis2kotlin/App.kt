@@ -222,7 +222,7 @@ fun parseProtelisFunction(fline: String): ProtelisFun {
 fun parseFile(content: String): List<ProtelisItem> {
     val pitems = mutableListOf<ProtelisItem>()
 
-    """^\s*(/\*\*(.*?)\*/)?\n*([\w\s]*def[^\{]*?\{)"""
+    """^\s*(/\*\*(.*?)\*/)?\n*((^|[\w\s]*\s)def\s[^\{]*?\{)"""
             .toRegex(setOf(MULTILINE, DOT_MATCHES_ALL))
             .findAll(content)
             .forEach { matchRes ->
@@ -325,7 +325,7 @@ fun generateKotlinFun(fn: ProtelisFun): String {
     var genTypesStr = fn.genericTypes.joinToString(",")
     if (!genTypesStr.isEmpty()) genTypesStr = " <$genTypesStr>"
 
-    return "fun$genTypesStr ${sanitizeNameForKotlin(fn.name)}(" +
+    return "@Suppress(\"UNUSED_PARAMETER\")\nfun$genTypesStr ${sanitizeNameForKotlin(fn.name)}(" +
             fn.params.map { "${sanitizeNameForKotlin(it.name)}: ${generateKotlinType(it.type)}" }.joinToString(", ") +
             "): ${generateKotlinType(fn.returnType)} = TODO()"
 }
