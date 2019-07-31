@@ -71,6 +71,10 @@ public def another (
 def some_other_fun
  (param1,
   param2)  { }
+
+var default = 10;
+{ /* b */; 2 }
+default = 8; { 3 }
         """.trimIndent())
         File("${this.root.absolutePath}${SEP}src${SEP}main${SEP}protelis${SEP}file.pt").writeText("""
 module protelis:coord:accumulation
@@ -142,8 +146,8 @@ public def aggregation(local, reduce) {
         }
 
         dependencies {
-            implementation("org.protelis:protelis-interpreter:11.1.0")
-            implementation(kotlin("stdlib"))
+            //implementation("org.protelis:protelis-interpreter:11.1.0")
+            //implementation(kotlin("stdlib"))
         }
 
         // repositories {
@@ -157,6 +161,7 @@ public def aggregation(local, reduce) {
             // protelisVersion.set("+")
             outputFormat.set("html") // "javadoc"
             debug.set(true)
+            automaticDependencies.set(true)
         }
     """ }
     }
