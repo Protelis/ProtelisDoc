@@ -17,7 +17,7 @@ Simply import the plugin in Gradle. If you have a Kotlin build file:
 
 ```kotlin
 plugins {
-    id("org.protelis.protelisdoc") version <pluginVersion>
+    id("org.protelis.protelisdoc") version "0.2.0"
 }
 ```
 
@@ -49,6 +49,15 @@ dependencies {
     implementation("org.protelis:protelis-interpreter:11.1.0")
     implementation(kotlin("stdlib")) // shortcut for dep "org.jetbrains.kotlin:kotlin-stdlib:+"
 }
+```
+
+### Troubleshooting
+
+- [A Dokka issue](https://github.com/Kotlin/dokka/issues/294) causes failure when generating `javadoc` format with Java version `> 8`. As a workaround, use JDK 8 or generate `html` format.
+```
+* What went wrong:
+Execution failed for task ':dokkaJavadoc'.
+> com/sun/tools/doclets/formats/html/HtmlDoclet
 ```
 
 ## Documenting Protelis code
