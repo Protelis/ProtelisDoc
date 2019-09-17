@@ -136,6 +136,8 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
                 genKotlinTask.outputs.files(project.fileTree(extension.kotlinDestDir.get()))
                 genDocTask.inputs.files(project.fileTree(extension.baseDir.get()))
                 genDocTask.outputs.files(project.fileTree(extension.destDir.get()))
+
+                Log.log("[${it.name}] Protelis2KotlinDoc plugin configured")
             }
         }
     }
