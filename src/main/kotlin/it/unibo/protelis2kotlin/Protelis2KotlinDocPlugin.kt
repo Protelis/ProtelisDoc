@@ -18,7 +18,7 @@ import java.io.File.separator as SEP
  */
 open class Protelis2KotlinDocPluginExtension @JvmOverloads constructor(
     private val project: Project,
-    val baseDir: Property<String> = project.propertyWithDefault("."),
+    val baseDir: Property<String> = project.propertyWithDefault(project.rootDir.path),
     val destDir: Property<String> = project.propertyWithDefault(project.buildDir.path + "${SEP}protelis-docs$SEP"),
     val kotlinDestDir: Property<String> = project.propertyWithDefault(project.buildDir.path + "${SEP}kotlin-for-protelis$SEP"),
     val kotlinVersion: Property<String> = project.propertyWithDefault("+"),
