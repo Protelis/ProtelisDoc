@@ -53,13 +53,7 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         val extension = project.extensions.create(protelis2KotlinDocPlugin, Protelis2KotlinDocPluginExtension::class.java, project)
         Log.log("""Applying plugin $protelis2KotlinDocPlugin.
             Default configuration:
-            - debug = ${extension.debug.get()}
-            - baseDir = ${extension.baseDir.get()}
-            - destDir = ${extension.destDir.get()}
-            - protelisVersion = ${extension.protelisVersion.get()}
-            - outputFormat = ${extension.outputFormat.get()}
-            - automaticDependencies = ${extension.automaticDependencies.get()}
-            - kotlinDestDir = ${extension.kotlinDestDir.get()}
+            ${pluginProperties(extension)}
             """.trimIndent())
 
         if (JavaVersion.current() > JavaVersion.VERSION_1_8) extension.outputFormat.set("html")
@@ -137,8 +131,20 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
                 genDocTask.inputs.files(project.fileTree(extension.baseDir.get()))
                 genDocTask.outputs.files(project.fileTree(extension.destDir.get()))
 
-                Log.log("[${it.name}] Protelis2KotlinDoc plugin configured")
+                Log.log("[${it.name}] Protelis2KotlinDoc plugin configured\n${pluginProperties(extension)}")
             }
         }
+    }
+
+    fun pluginProperties(extension: Protelis2KotlinDocPluginExtension) {
+        """
+            - debug = ${extension.debug.get()}
+            - baseDir = ${extension.baseDir.get()}
+            - destDir = ${extension.destDir.get()}
+            - protelisVersion = ${extension.protelisVersion.get()}
+            - outputFormat = ${extension.outputFormat.get()}
+            - automaticDependencies = ${extension.automaticDependencies.get()}
+            - kotlinDestDir = ${extension.kotlinDestDir.get()}
+        """.trimIndent()
     }
 }
