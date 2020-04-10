@@ -12,7 +12,6 @@ os:
   - osx
   - windows
   - *reference_os
-dist: xenial
 stages:
   - check
   - test
