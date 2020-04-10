@@ -3,17 +3,14 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     application
-    kotlin("jvm") version Versions.org_jetbrains_kotlin
+    kotlin("jvm")
     `maven-publish`
     signing
-    id("de.fayard.buildSrcVersions") version Versions.de_fayard_buildsrcversions_gradle_plugin
-    id("com.gradle.build-scan") version Versions.com_gradle_build_scan_gradle_plugin
-    id("com.gradle.plugin-publish") version Versions.com_gradle_plugin_publish_gradle_plugin
-    id("org.danilopianini.git-sensitive-semantic-versioning") version
-        Versions.org_danilopianini_git_sensitive_semantic_versioning_gradle_plugin
-    id("org.danilopianini.publish-on-central") version Versions.org_danilopianini_publish_on_central_gradle_plugin
-    id("org.jetbrains.dokka") version Versions.org_jetbrains_dokka
-    id("org.jlleitschuh.gradle.ktlint") version Versions.org_jlleitschuh_gradle_ktlint_gradle_plugin
+    id("com.gradle.plugin-publish")
+    id("org.danilopianini.git-sensitive-semantic-versioning")
+    id("org.danilopianini.publish-on-central")
+    id("org.jetbrains.dokka")
+    id("org.jlleitschuh.gradle.ktlint")
     `java-gradle-plugin`
 }
 
@@ -26,20 +23,20 @@ repositories {
 
 gitSemVer {
     maxVersionLength.set(20)
-    version = computeGitSemVer() // THIS IS MANDATORY, AND MUST BE LAST IN BLOCK
+    version = computeGitSemVer()
 }
 
 dependencies {
-    implementation(Libs.kotlin_stdlib)
-    implementation(Libs.kotlin_reflect)
+    implementation(kotlin("stdlib"))
+    implementation(kotlin("reflect"))
     implementation(gradleApi())
-    implementation(Libs.dokka_gradle_plugin)
-    implementation(Libs.kotlin_gradle_plugin)
+    implementation("org.jetbrains.dokka:dokka-gradle-plugin:_")
+    implementation(kotlin("gradle-plugin"))
 
-    testImplementation(Libs.kotlin_test)
-    testImplementation(Libs.kotlin_test_junit)
+    testImplementation(kotlin("test"))
+    testImplementation(kotlin("test-junit"))
     testImplementation(gradleTestKit())
-    testImplementation(Libs.kotlintest_runner_junit5)
+    testImplementation("io.kotlintest:kotlintest-runner-junit5:_")
 }
 
 application {
@@ -131,9 +128,4 @@ gradlePlugin {
             implementationClass = "it.unibo.protelis2kotlin.Protelis2KotlinDocPlugin"
         }
     }
-}
-
-buildScan {
-    setTermsOfServiceUrl("https://gradle.com/terms-of-service")
-    setTermsOfServiceAgree("yes")
 }
