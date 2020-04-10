@@ -36,6 +36,7 @@ matrix:
   exclude:
     - os: *reference_os
       env: *reference_jdk
+      stage: test
 jobs:
   include:
     - stage: check
