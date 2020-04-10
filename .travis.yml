@@ -23,7 +23,6 @@ env:
     - secure: "aHGOT4KDg0PVzE3Hd3+Z89Mf+e9cruNQ5WCbm8A1ecIgKRzwGARuijjCWHsBxOFxi4TrPv5q3QOS6urR2s0W2tIIXs21jBIiWWMowo7O5wIhqu/V5L/PeZUtq9ms8kvS8jjp5t6x895lNv1DVVzZ+oufjZsehzpyHmwb73Ks+vlDHRxucvBfNl9t1m1gh0Eem0J40adPVas/FmINcVsLWR9l3ICb8NBkwdfO/zdZCWUP+7VTCCTT/6CR2fib5ogErxYAv55NusiMQQiHYjgDPgOKX7vwEZq8VaqmLXjchqeYAdVbfQxL3PQVX/KmlpE3aK8GpISi+yWghy+kt5AyhASPhTyiq7GsW2riy22HIkOQu6znLOurQriVTfsjZZrS0CZqJz6tgxUnLB1pEoNVpg9ZrNF1ujUBTklOv3JVDmSSpXS/o+ylpm8Tv6Ql9tuymuj11YDFStu9ohR28s/VPyVTDRlqvjE7QusEtgfxQW9qcswCsM75i5mboex7oFgoW3bBhnEYhxGukSdRxXnhdGaXGPdd71EY2ROwBEuFGQEcbwP9uWIroOf272D/8h5yJXO+JXT2VtOuUCMWPWd8jYQCQC99WzlaKGQDb3hMJRWnk70xsGj8dXITBFQ9Hdfkbzt/MMhdTVZCZqzhsbCFb/FI+PFT5KyZ9sw/vF79xKo="
     - GRAVIS_REPO="https://github.com/DanySK/Gravis-CI.git"
     - GRAVIS="$HOME/gravis"
-    - PUBLISH="false"
     - TERM=dumb
   matrix:
     - *reference_jdk
@@ -43,8 +42,6 @@ jobs:
       os: *reference_os
       env:
         - *reference_jdk
-      script:
-        - ./gradlew clean check --scan --parallel
     - stage: deploy
       name: "Reports and deployment"
       if: type != pull_request AND repo = Protelis/Protelis-KDoc-generator
@@ -55,24 +52,26 @@ jobs:
       install:
         - openssl aes-256-cbc -K $encrypted_c3e4142aebb8_key -iv $encrypted_c3e4142aebb8_iv -in prepare_environment.sh.enc -out prepare_environment.sh -d
         - bash prepare_environment.sh
+        - rm prepare_environment.sh
       script:
-        - ./gradlew sign -x test --scan --parallel
-      after_success:
-        - ./gradlew publishPlugins
-        - ./gradlew publish
+        - travis_retry ./gradlew sign -x test --scan --parallel
+        - travis_retry ./gradlew publishPlugins publish
+
 before_install:
   - travis_retry git clone --depth 1 $GRAVIS_REPO $GRAVIS
   - source $GRAVIS/install-jdk
+
 script:
-  - ./gradlew clean test --scan --stacktrace
+  - travis_retry ./gradlew check --scan --stacktrace
+
 before_cache:
   - $GRAVIS/clean-gradle-cache
+
 cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
-after_success:
-  - if $SHOULD_CONFIGURE && $PUBLISH; then ./gradlew publishPlugins; ./gradlew publish; fi
+
 notifications:
   email:
     - danilo.pianini@unibo.it
