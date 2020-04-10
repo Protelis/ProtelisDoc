@@ -25,7 +25,6 @@ env:
     - GRAVIS="$HOME/gravis"
     - PUBLISH="false"
     - TERM=dumb
-    - OFFICIAL_REPO_SLUG="Protelis/Protelis-KDoc-generator"
   matrix:
     - *reference_jdk
     - JDK="adopt-openj9@1.8"
@@ -48,7 +47,7 @@ jobs:
         - ./gradlew clean check --scan --parallel
     - stage: deploy
       name: "Reports and deployment"
-      if: repo = env(OFFICIAL_REPO_SLUG) AND type != pull_request
+      if: type != pull_request AND repo = Protelis/Protelis-KDoc-generator
       os: *reference_os
       env:
         - PUBLISH="true"
