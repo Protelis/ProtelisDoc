@@ -7,7 +7,6 @@ plugins {
     `maven-publish`
     signing
     id("de.fayard.buildSrcVersions") version Versions.de_fayard_buildsrcversions_gradle_plugin
-    id("com.gradle.build-scan") version Versions.com_gradle_build_scan_gradle_plugin
     id("com.gradle.plugin-publish") version Versions.com_gradle_plugin_publish_gradle_plugin
     id("org.danilopianini.git-sensitive-semantic-versioning") version
         Versions.org_danilopianini_git_sensitive_semantic_versioning_gradle_plugin
@@ -131,9 +130,4 @@ gradlePlugin {
             implementationClass = "it.unibo.protelis2kotlin.Protelis2KotlinDocPlugin"
         }
     }
-}
-
-buildScan {
-    setTermsOfServiceUrl("https://gradle.com/terms-of-service")
-    setTermsOfServiceAgree("yes")
 }
