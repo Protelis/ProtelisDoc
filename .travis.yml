@@ -54,7 +54,10 @@ jobs:
         - rm prepare_environment.sh
       script:
         - travis_retry ./gradlew sign -x test --scan --parallel
-        - travis_retry ./gradlew publishPlugins publish
+        - travis_retry ./gradlew publish
+      after_script:
+        - travis_retry ./gradlew publishPlugins
+      
 
 before_install:
   - travis_retry git clone --depth 1 $GRAVIS_REPO $GRAVIS
