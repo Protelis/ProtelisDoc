@@ -54,7 +54,7 @@ jobs:
         - rm prepare_environment.sh
       script:
         - travis_retry ./gradlew sign -x test --scan --parallel
-        - travis_retry ./gradlew publish
+        - travis_retry ./gradlew publishMavenCentralPublicationToMavenRepository
       after_success:
         - travis_retry ./gradlew publishPlugins
 

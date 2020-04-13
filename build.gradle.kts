@@ -2,7 +2,6 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    application
     kotlin("jvm")
     `maven-publish`
     signing
@@ -18,7 +17,7 @@ group = "org.protelis"
 
 repositories {
     mavenCentral()
-    jcenter()
+    gradlePluginPortal()
 }
 
 gitSemVer {
@@ -38,10 +37,6 @@ dependencies {
     testImplementation("io.kotlintest:kotlintest-runner-junit5:_")
 }
 
-application {
-    mainClassName = "it.unibo.protelis2kotlin.AppKt"
-}
-
 tasks {
     javadocJar {
         dependsOn(dokka)
@@ -51,41 +46,6 @@ tasks {
 
 ktlint {
     ignoreFailures.set(false)
-}
-
-val websiteUrl = "https://github.com/Protelis/Protelis-KDoc-generator"
-
-publishOnCentral {
-    projectDescription.set("A translator from documented Protelis code to compiling Kotlin interfaces")
-    projectLongName.set("Protelis KDoc generator")
-    projectUrl.set(websiteUrl)
-    scmConnection.set("git@github.com:Protelis/Protelis-KDoc-generator.git")
-}
-
-pluginBundle {
-    website = websiteUrl
-    vcsUrl = websiteUrl
-    tags = listOf("protelis", "javadoc", "documentation", "protelisdoc", "dokka", "kotlin")
-}
-
-publishing {
-    publications {
-        withType<MavenPublication> {
-            pom {
-                developers {
-                    developer {
-                        name.set("Danilo Pianini")
-                        email.set("danilo.pianini@unibo.it")
-                        url.set("http://www.danilopianini.org/")
-                    }
-                    developer {
-                        name.set("Roberto Casadei")
-                        email.set("roby.casadei@unibo.it")
-                    }
-                }
-            }
-        }
-    }
 }
 
 tasks {
@@ -116,6 +76,41 @@ tasks {
 // Add the classpath file to the test runtime classpath
 dependencies {
     testRuntimeOnly(files(tasks["createClasspathManifest"]))
+}
+
+val websiteUrl = "https://github.com/Protelis/Protelis-KDoc-generator"
+
+publishOnCentral {
+    projectDescription.set("A translator from documented Protelis code to compiling Kotlin interfaces")
+    projectLongName.set("Protelis KDoc generator")
+    projectUrl.set(websiteUrl)
+    scmConnection.set("git@github.com:Protelis/Protelis-KDoc-generator.git")
+}
+
+publishing {
+    publications {
+        withType<MavenPublication> {
+            pom {
+                developers {
+                    developer {
+                        name.set("Danilo Pianini")
+                        email.set("danilo.pianini@unibo.it")
+                        url.set("http://www.danilopianini.org/")
+                    }
+                    developer {
+                        name.set("Roberto Casadei")
+                        email.set("roby.casadei@unibo.it")
+                    }
+                }
+            }
+        }
+    }
+}
+
+pluginBundle {
+    website = websiteUrl
+    vcsUrl = websiteUrl
+    tags = listOf("protelis", "javadoc", "documentation", "protelisdoc", "dokka", "kotlin")
 }
 
 gradlePlugin {

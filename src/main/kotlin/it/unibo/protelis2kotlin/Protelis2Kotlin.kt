@@ -140,7 +140,7 @@ fun parseTypeAndRest(line: String): Pair<String, String> {
     var parentheses = ""
     var type = line.takeWhile { c ->
         k++
-        val cond = (c != ',' || stillType) && !(c == ',' && k>0 && parentheses.isEmpty())
+        val cond = (c != ',' || stillType) && !(c == ',' && k > 0 && parentheses.isEmpty())
         if (stillType && (c == '(' || c == '[')) parentheses += c
         if (stillType && (c == ')' || c == ']')) {
             parentheses = parentheses.dropLast(1)
@@ -191,8 +191,9 @@ fun parseDoc(doc: String): ProtelisFunDoc {
             }
         }
     }
-    if (!txt.isEmpty()) pieces.add(0, DocText(txt))
-
+    if (!txt.isEmpty()) {
+        pieces.add(0, DocText(txt))
+    }
     return ProtelisFunDoc(pieces)
 }
 
