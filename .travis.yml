@@ -55,7 +55,7 @@ jobs:
       script:
         - travis_retry ./gradlew sign -x test --scan --parallel
         - travis_retry ./gradlew publishMavenCentralPublicationToMavenRepository
-      after_success:
+      after_script:
         - travis_retry ./gradlew publishPlugins
 
 before_install:
