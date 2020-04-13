@@ -63,34 +63,21 @@ def sth(){}
         import org.jetbrains.dokka.gradle.DokkaTask
 
         plugins {
-            kotlin("jvm") version "1.3.21"
-            id("it.unibo.protelis2kotlindoc")
-            id("org.jetbrains.dokka") version "0.9.18"
-        }
-
-        dependencies {
-            implementation(kotlin("stdlib"))
-            implementation("org.protelis:protelis-interpreter:11.1.0")
+            id("org.protelis.protelisdoc")
         }
 
         repositories {
             jcenter() // or maven { url 'https://dl.bintray.com/kotlin/dokka' }
         }
 
-        Protelis2KotlinDoc {
+        dependencies {
+            protelisdoc("org.protelis:protelis-interpreter:11.1.0")
+        }
+
+        protelisdoc {
             baseDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis$MS)
             destDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}kotlin$MS)
             debug.set(true)
-            automaticDependencies.set(false)
-        }
-
-        val dokka by tasks.getting(DokkaTask::class) {
-            outputFormat = "html"
-            outputDirectory = $MS${"$"}buildDir${SEP}dokka$MS
-            jdkVersion = 8
-            reportUndocumented = true
-            dependsOn("generateKotlinFromProtelis")
-            dependsOn("compileKotlin")
         }
     """ }
     }
@@ -105,7 +92,7 @@ def sth(){}
         val result = GradleRunner.create()
                 .withProjectDir(workingDirectory.root)
                 .withPluginClasspath(classpath)
-                .withArguments("generateKotlinFromProtelis", "dokka")
+                .withArguments("generateKotlinFromProtelis", "--stacktrace")
                 .build()
         println(result.tasks)
         println(result.output)

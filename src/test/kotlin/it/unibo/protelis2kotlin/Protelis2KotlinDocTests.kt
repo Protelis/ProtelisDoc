@@ -141,28 +141,25 @@ public def aggregation(local, reduce) {
         )
 
         file("build.gradle.kts") { """
-        plugins {
-            id("it.unibo.protelis2kotlindoc")
-        }
+plugins {
+    id("org.protelis.protelisdoc")
+}
 
-        dependencies {
-            //implementation("org.protelis:protelis-interpreter:11.1.0")
-            //implementation(kotlin("stdlib"))
-        }
+repositories {
+    mavenCentral()
+    maven { url = uri("https://dl.bintray.com/kotlin/dokka") }
+}
 
-        // repositories {
-        //    jcenter() // or maven { url 'https://dl.bintray.com/kotlin/dokka' }
-        // }
+dependencies {
+    protelisdoc("org.protelis:protelis-interpreter:13.0.0")
+}
 
-        Protelis2KotlinDoc {
-            baseDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis$MS)
-            destDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}docs$MS)
-            // kotlinVersion.set("+")
-            // protelisVersion.set("+")
-            outputFormat.set("html") // "javadoc"
-            debug.set(true)
-            automaticDependencies.set(true)
-        }
+protelisdoc {
+    baseDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis$MS)
+    destDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}docs$MS)
+    outputFormat.set("html") // "javadoc"
+    debug.set(true)
+}
     """ }
     }
     val pluginClasspathResource = ClassLoader.getSystemClassLoader()
@@ -176,7 +173,7 @@ public def aggregation(local, reduce) {
         val result = GradleRunner.create()
                 .withProjectDir(workingDirectory.root)
                 .withPluginClasspath(classpath)
-                .withArguments("generateProtelisDoc")
+                .withArguments("generateProtelisDoc", "--stacktrace")
                 .build()
         println(result.tasks)
         println(result.output)
