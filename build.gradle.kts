@@ -121,7 +121,7 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        create("Protelis2KotlinDoc") {
+        create("ProtelisDoc") {
             id = "org.protelis.protelisdoc"
             displayName = "Protelis Documentation Engine"
             description = "A plugin that translates Protelis modules to Kotlin code, then generates the function documentation via Dokka"

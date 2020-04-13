@@ -63,17 +63,15 @@ def sth(){}
         import org.jetbrains.dokka.gradle.DokkaTask
 
         plugins {
-            kotlin("jvm")
-            id("it.unibo.protelis2kotlindoc")
-        }
-
-        dependencies {
-            implementation(kotlin("stdlib"))
-            implementation("org.protelis:protelis-interpreter:11.1.0")
+            id("org.protelis.protelisdoc")
         }
 
         repositories {
             jcenter() // or maven { url 'https://dl.bintray.com/kotlin/dokka' }
+        }
+
+        dependencies {
+            protelisdoc("org.protelis:protelis-interpreter:11.1.0")
         }
 
         Protelis2KotlinDoc {
@@ -94,7 +92,7 @@ def sth(){}
         val result = GradleRunner.create()
                 .withProjectDir(workingDirectory.root)
                 .withPluginClasspath(classpath)
-                .withArguments("generateKotlinFromProtelis", "dokka")
+                .withArguments("generateKotlinFromProtelis", "--stacktrace")
                 .build()
         println(result.tasks)
         println(result.output)

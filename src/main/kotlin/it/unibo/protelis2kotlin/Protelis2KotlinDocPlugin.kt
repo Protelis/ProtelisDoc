@@ -19,11 +19,9 @@ import java.io.File.separator as SEP
  */
 open class Protelis2KotlinDocPluginExtension @JvmOverloads constructor(
     private val project: Project,
-    val baseDir: Property<String> = project.propertyWithDefault("."),
+    val baseDir: Property<String> = project.propertyWithDefault(project.path),
     val destDir: Property<String> = project.propertyWithDefault(project.buildDir.path + "${SEP}protelis-docs$SEP"),
     val kotlinDestDir: Property<String> = project.propertyWithDefault(project.buildDir.path + "${SEP}kotlin-for-protelis$SEP"),
-    val kotlinVersion: Property<String> = project.propertyWithDefault("+"),
-    val protelisVersion: Property<String> = project.propertyWithDefault("+"),
     val outputFormat: Property<String> = project.propertyWithDefault("javadoc"),
     val debug: Property<Boolean> = project.propertyWithDefault(false)
 )
@@ -38,10 +36,6 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
     private val dokkaPluginName = "org.jetbrains.dokka"
     private val protelis2KotlinDocPlugin = "Protelis2KotlinDoc"
 
-    private val protelisGroup = "org.protelis"
-    private val protelisInterpreterDepName = "protelis-interpreter"
-    private val kotlinGroup = "org.jetbrains.kotlin"
-    private val kotlinStdlibDepName = "kotlin-stdlib"
     private val protelis2KotlinPluginConfig = "protelisdoc"
 
     override fun apply(project: Project) {
@@ -51,33 +45,15 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
             - debug = ${extension.debug.get()}
             - baseDir = ${extension.baseDir.get()}
             - destDir = ${extension.destDir.get()}
-            - protelisVersion = ${extension.protelisVersion.get()}
             - outputFormat = ${extension.outputFormat.get()}
             - kotlinDestDir = ${extension.kotlinDestDir.get()}
             """.trimIndent())
 
         if (JavaVersion.current() > JavaVersion.VERSION_1_8) extension.outputFormat.set("html")
 
-//        if (!project.repositories.contains(project.repositories.jcenter())) {
-//            project.repositories.add(project.repositories.jcenter())
-//        }
-//        if (!project.repositories.contains(project.repositories.mavenCentral())) {
-//            project.repositories.add(project.repositories.mavenCentral())
-//        }
-//        if (!project.pluginManager.hasPlugin(kotlinPluginName)) {
-//            project.pluginManager.apply(kotlinPluginName)
-//        }
-
         val config = project.configurations.create(protelis2KotlinPluginConfig) { configuration ->
-            configuration.extendsFrom(project.configurations.getByName("implementation"))
-            val kotliStdlibDependency = "$kotlinGroup:$kotlinStdlibDepName"
-            val protelisInterpreter = "$protelisGroup:$protelisInterpreterDepName"
-            val allDependencies = configuration.dependencies.map { "${it.group}:${it.name}" }
-            if (kotliStdlibDependency !in allDependencies) {
-                project.dependencies.add(configuration.name, "$kotliStdlibDependency:${extension.kotlinVersion.get()}")
-            }
-            if (protelisInterpreter !in allDependencies) {
-                project.dependencies.add(configuration.name, "$protelisInterpreter:${extension.protelisVersion.get()}")
+            project.configurations.findByName("implementation")?.let {
+                configuration.extendsFrom(it)
             }
         }
 
