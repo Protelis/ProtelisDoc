@@ -27,11 +27,10 @@ gitSemVer {
 }
 
 dependencies {
+    implementation(gradleApi())
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
-    implementation(gradleApi())
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:_")
-    implementation(kotlin("gradle-plugin"))
 
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
