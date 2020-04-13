@@ -3,15 +3,13 @@
  */
 package it.unibo.protelis2kotlin
 import java.io.File
-import kotlin.text.RegexOption.MULTILINE
-import kotlin.text.RegexOption.DOT_MATCHES_ALL
-import java.io.File.separator as SEP
 import java.io.PrintWriter
 import java.io.StringWriter
-import java.lang.IllegalStateException
+import kotlin.text.RegexOption.DOT_MATCHES_ALL
+import kotlin.text.RegexOption.MULTILINE
+import java.io.File.separator as SEP
 
 var context = Context(setOf())
-
 val protelisFileExt = "pt"
 
 object Log {
