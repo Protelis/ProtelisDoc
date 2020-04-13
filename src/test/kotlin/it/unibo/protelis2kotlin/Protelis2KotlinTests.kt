@@ -63,9 +63,8 @@ def sth(){}
         import org.jetbrains.dokka.gradle.DokkaTask
 
         plugins {
-            kotlin("jvm") version "1.3.21"
+            kotlin("jvm")
             id("it.unibo.protelis2kotlindoc")
-            id("org.jetbrains.dokka") version "0.9.18"
         }
 
         dependencies {
@@ -81,16 +80,6 @@ def sth(){}
             baseDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis$MS)
             destDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}kotlin$MS)
             debug.set(true)
-            automaticDependencies.set(false)
-        }
-
-        val dokka by tasks.getting(DokkaTask::class) {
-            outputFormat = "html"
-            outputDirectory = $MS${"$"}buildDir${SEP}dokka$MS
-            jdkVersion = 8
-            reportUndocumented = true
-            dependsOn("generateKotlinFromProtelis")
-            dependsOn("compileKotlin")
         }
     """ }
     }

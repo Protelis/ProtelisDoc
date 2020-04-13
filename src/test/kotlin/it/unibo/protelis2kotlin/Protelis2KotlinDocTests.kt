@@ -142,6 +142,7 @@ public def aggregation(local, reduce) {
 
         file("build.gradle.kts") { """
         plugins {
+            kotlin("jvm")
             id("it.unibo.protelis2kotlindoc")
         }
 
@@ -150,9 +151,10 @@ public def aggregation(local, reduce) {
             //implementation(kotlin("stdlib"))
         }
 
-        // repositories {
-        //    jcenter() // or maven { url 'https://dl.bintray.com/kotlin/dokka' }
-        // }
+         repositories {
+            mavenCentral()
+            maven { url = uri("https://dl.bintray.com/kotlin/dokka") }
+         }
 
         Protelis2KotlinDoc {
             baseDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis$MS)
@@ -161,7 +163,6 @@ public def aggregation(local, reduce) {
             // protelisVersion.set("+")
             outputFormat.set("html") // "javadoc"
             debug.set(true)
-            automaticDependencies.set(true)
         }
     """ }
     }
@@ -176,7 +177,7 @@ public def aggregation(local, reduce) {
         val result = GradleRunner.create()
                 .withProjectDir(workingDirectory.root)
                 .withPluginClasspath(classpath)
-                .withArguments("generateProtelisDoc")
+                .withArguments("generateProtelisDoc", "--stacktrace")
                 .build()
         println(result.tasks)
         println(result.output)
