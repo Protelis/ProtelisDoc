@@ -72,7 +72,7 @@ you should expect it to find protelis code under the working directory and gener
 The configuration syntax, configuration options, and default values are shown in the following listing:
 
 ```kotlin
-Protelis2KotlinDoc {
+protelisdoc {
   baseDir.set(project.path) // base dir from which recursively looking for .pt files
   destDir.set("${project.buildDir.path}/protelis-docs/") // output dir for docs
   outputFormat.set("javadoc") // Dokka's output format (alternative: 'html')
