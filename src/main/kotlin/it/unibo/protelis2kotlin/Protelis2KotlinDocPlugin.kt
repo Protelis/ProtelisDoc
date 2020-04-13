@@ -17,7 +17,7 @@ import java.io.File.separator as SEP
  * @param kotlinVersion
  * @param protelisVersion
  */
-open class Protelis2KotlinDocPluginExtension @JvmOverloads constructor(
+open class ProtelisDocExtension @JvmOverloads constructor(
     private val project: Project,
     val baseDir: Property<String> = project.propertyWithDefault(project.path),
     val destDir: Property<String> = project.propertyWithDefault(project.buildDir.path + "${SEP}protelis-docs$SEP"),
@@ -32,15 +32,12 @@ open class Protelis2KotlinDocPluginExtension @JvmOverloads constructor(
 class Protelis2KotlinDocPlugin : Plugin<Project> {
     private val generateProtelisDocTaskName = "generateProtelisDoc"
     private val generateKotlinFromProtelisTaskName = "generateKotlinFromProtelis"
-
-    private val dokkaPluginName = "org.jetbrains.dokka"
-    private val protelis2KotlinDocPlugin = "Protelis2KotlinDoc"
-
     private val protelis2KotlinPluginConfig = "protelisdoc"
+    private val dokkaPluginName = "org.jetbrains.dokka"
 
     override fun apply(project: Project) {
-        val extension = project.extensions.create(protelis2KotlinDocPlugin, Protelis2KotlinDocPluginExtension::class.java, project)
-        project.logger.debug("""Applying plugin $protelis2KotlinDocPlugin.
+        val extension = project.extensions.create(protelis2KotlinPluginConfig, ProtelisDocExtension::class.java, project)
+        project.logger.debug("""Applying plugin ProtelisDoc.
             Default configuration:
             - debug = ${extension.debug.get()}
             - baseDir = ${extension.baseDir.get()}
@@ -48,17 +45,16 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
             - outputFormat = ${extension.outputFormat.get()}
             - kotlinDestDir = ${extension.kotlinDestDir.get()}
             """.trimIndent())
-
-        if (JavaVersion.current() > JavaVersion.VERSION_1_8) extension.outputFormat.set("html")
-
+        if (JavaVersion.current() > JavaVersion.VERSION_1_8) {
+            extension.outputFormat.set("html")
+        }
+        if (!project.pluginManager.hasPlugin(dokkaPluginName)) {
+            project.pluginManager.apply(dokkaPluginName)
+        }
         val config = project.configurations.create(protelis2KotlinPluginConfig) { configuration ->
             project.configurations.findByName("implementation")?.let {
                 configuration.extendsFrom(it)
             }
-        }
-
-        if (!project.pluginManager.hasPlugin(dokkaPluginName)) {
-            project.pluginManager.apply(dokkaPluginName)
         }
         // Kotlin generation task
         val genKotlinTask = project.task(generateKotlinFromProtelisTaskName) {

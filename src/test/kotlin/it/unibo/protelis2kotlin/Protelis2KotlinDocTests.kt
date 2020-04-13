@@ -154,7 +154,7 @@ dependencies {
     protelisdoc("org.protelis:protelis-interpreter:13.0.0")
 }
 
-Protelis2KotlinDoc {
+protelisdoc {
     baseDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis$MS)
     destDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}docs$MS)
     outputFormat.set("html") // "javadoc"
