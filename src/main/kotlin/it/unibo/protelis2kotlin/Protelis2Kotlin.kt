@@ -49,9 +49,12 @@ fun registerProtelisType(pt: String) {
  */
 interface DocPiece {
     companion object {
-        val docParamRegex = """@param\s+(\w+)\s*([^\n]*)""".toRegex()
-        val docReturnRegex = """@return\s+([^\n]*)""".toRegex()
-        val docOtherDirectiveRegex = """@(\w+)\s+([^\n]*)""".toRegex()
+        val docParamRegex =
+            """@param\s+(\w+)\s*([^\n]*)""".toRegex()
+        val docReturnRegex =
+            """@return\s+([^\n]*)""".toRegex()
+        val docOtherDirectiveRegex =
+            """@(\w+)\s+([^\n]*)""".toRegex()
     }
 
     fun extendWith(txt: String): DocPiece
@@ -204,14 +207,17 @@ fun parseDoc(doc: String): ProtelisFunDoc {
  */
 fun parseProtelisFunction(fline: String): ProtelisFun {
     return ProtelisFun(
-            name = """def\s+(\w+)\s*\(""".toRegex().find(fline)?.groupValues?.get(1) ?: throw IllegalStateException("Cannot parse function name in: $fline"),
-            params = """\(([^\)]*)\)""".toRegex().find(fline)?.groupValues?.get(1)?.split(",")
-                    ?.filter { !it.isEmpty() }
-                    ?.map {
-                        // if (!"""\w""".toRegex().matches(it)) throw IllegalStateException("Bad argument name: $it")
-                        ProtelisFunArg(it.trim(), "")
-                    }?.toList() ?: throw IllegalStateException("Cannot parse arglist in: $fline"),
-            public = """(public\s+def)""".toRegex().find(fline) != null)
+        name =
+            """def\s+(\w+)\s*\(""".toRegex().find(fline)?.groupValues?.get(1) ?: throw IllegalStateException("Cannot parse function name in: $fline"),
+        params =
+            """\(([^\)]*)\)""".toRegex().find(fline)?.groupValues?.get(1)?.split(",")
+                ?.filter { !it.isEmpty() }
+                ?.map {
+                    // if (!"""\w""".toRegex().matches(it)) throw IllegalStateException("Bad argument name: $it")
+                    ProtelisFunArg(it.trim(), "")
+                }?.toList() ?: throw IllegalStateException("Cannot parse arglist in: $fline"),
+        public = "(public\\s+def)".toRegex().find(fline) != null
+    )
 }
 
 /**
@@ -222,45 +228,40 @@ fun parseFile(content: String): List<ProtelisItem> {
     val pitems = mutableListOf<ProtelisItem>()
 
     """^\s*(/\*\*(.*?)\*/)?\n*((^|[\w\s]*\s)def\s[^\{]*?\{)"""
-            .toRegex(setOf(MULTILINE, DOT_MATCHES_ALL))
-            .findAll(content)
-            .forEach { matchRes ->
-                val groups = matchRes.groupValues
-                val doc = groups[2]
-                val funLine = groups[3]
-//                println("-----------------\nDoc: $doc")
-//                parseDoc(doc).docPieces.forEach { p ->
-//                    println("Doc piece: $p")
-//                }
-//                println("Function line: $funLine\n${parseProtelisFunction(funLine)}")
-                var parsedDoc: ProtelisFunDoc
-                var parsedFun: ProtelisFun
+        .toRegex(setOf(MULTILINE, DOT_MATCHES_ALL))
+        .findAll(content)
+        .forEach { matchRes ->
+            val groups = matchRes.groupValues
+            val doc = groups[2]
+            val funLine = groups[3]
+            var parsedDoc: ProtelisFunDoc
+            var parsedFun: ProtelisFun
 
-                val parsedString = matchRes.value.lines().map { "> " + it }.joinToString("\n")
+            val parsedString = matchRes.value.lines().map { "> " + it }.joinToString("\n")
 
-                try {
-                    parsedDoc = parseDoc(doc)
-                } catch (e: Exception) {
-                    Log.log("\t\tFailed to parse doc: $doc\n$parsedString")
-                    Log.logException(e)
-                    return@forEach
-                }
-
-                // Easy check to control if we actually have a function
-                if (!funLine.contains("def")) return@forEach
-
-                try {
-                    parsedFun = parseProtelisFunction(funLine)
-                } catch (e: Exception) {
-                    Log.log("\t\tFailed to parse function: ${funLine.trim()}\n$parsedString")
-                    Log.logException(e)
-                    return@forEach
-                }
-
-                Log.log("\t\tParsed${if (!parsedDoc.docPieces.fold("", { a,b -> a + b }).isEmpty()) " documented " else " "}function: ${parsedFun.name}")
-
-                pitems.add(ProtelisItem(parsedFun, parsedDoc))
+            try {
+                parsedDoc = parseDoc(doc)
+            } catch (e: Exception) {
+                Log.log("\t\tFailed to parse doc: $doc\n$parsedString")
+                Log.logException(e)
+                return@forEach
             }
+
+            // Easy check to control if we actually have a function
+            if (!funLine.contains("def")) return@forEach
+
+            try {
+                parsedFun = parseProtelisFunction(funLine)
+            } catch (e: Exception) {
+                Log.log("\t\tFailed to parse function: ${funLine.trim()}\n$parsedString")
+                Log.logException(e)
+                return@forEach
+            }
+
+            Log.log("\t\tParsed${if (!parsedDoc.docPieces.fold("", { a,b -> a + b }).isEmpty()) " documented " else " "}function: ${parsedFun.name}")
+
+            pitems.add(ProtelisItem(parsedFun, parsedDoc))
+        }
     return pitems
 }
 
@@ -271,17 +272,17 @@ fun parseFile(content: String): List<ProtelisItem> {
 fun generateKotlinDoc(docs: ProtelisFunDoc): String {
     val docPieces = docs.docPieces
     return "/**\n" +
-            docPieces.map { p ->
-                if (p is DocText) {
-                    p.text.lines().map { "  * $it" }.joinToString("\n")
-                } else if (p is DocParam) {
-                    "  * @param ${p.paramName} ${p.paramDescription}"
-                } else if (p is DocReturn) {
-                    "  * @return ${p.returnDescription}"
-                } else if (p is DocDirective) {
-                    "  * @${p.directive} ${p.description}"
-                } else ""
-            }.joinToString("\n") + "\n  */"
+        docPieces.map { p ->
+            if (p is DocText) {
+                p.text.lines().map { "  * $it" }.joinToString("\n")
+            } else if (p is DocParam) {
+                "  * @param ${p.paramName} ${p.paramDescription}"
+            } else if (p is DocReturn) {
+                "  * @return ${p.returnDescription}"
+            } else if (p is DocDirective) {
+                "  * @${p.directive} ${p.description}"
+            } else ""
+        }.joinToString("\n") + "\n  */"
 }
 
 /**
@@ -325,8 +326,8 @@ fun generateKotlinFun(fn: ProtelisFun): String {
     if (!genTypesStr.isEmpty()) genTypesStr = " <$genTypesStr>"
 
     return "@Suppress(\"UNUSED_PARAMETER\")\nfun$genTypesStr ${sanitizeNameForKotlin(fn.name)}(" +
-            fn.params.map { "${sanitizeNameForKotlin(it.name)}: ${generateKotlinType(it.type)}" }.joinToString(", ") +
-            "): ${generateKotlinType(fn.returnType)} = TODO()"
+        fn.params.map { "${sanitizeNameForKotlin(it.name)}: ${generateKotlinType(it.type)}" }.joinToString(", ") +
+        "): ${generateKotlinType(fn.returnType)} = TODO()"
 }
 
 /**
@@ -346,18 +347,33 @@ fun generateKotlin(protelisItems: List<ProtelisItem>): String {
     val pitems = protelisItems.map { pitem ->
         val doc = pitem.docs
         var fn = pitem.function
-        pitem.copy(function = fn.copy(
-                returnType = doc.docPieces.filter { it is DocReturn }.map { (it as DocReturn).returnType }.firstOrNull() ?: "",
-                params = fn.params.map { param ->
-                    param.copy(type = doc.docPieces.filter { it is DocParam && it.paramName == param.name }
-                            .map { (it as DocParam).paramType }.firstOrNull() ?: "Any") },
-                genericTypes = doc.docPieces.map {
-                    if (!(it is DocParam)) "" else it.paramType
-                }.flatMap { """([A-Z]'?)""".toRegex().findAll(it).map {
-                    if (it.value.length == 2 && it.value[1] == '\'') "${it.value[0].inc()}"
-                    else it.value
-                }.toList() }.toSet()
-        ))
+        pitem.copy(
+            function = fn.copy(
+                returnType = doc.docPieces
+                    .filter { it is DocReturn }
+                    .map { (it as DocReturn).returnType }
+                    .firstOrNull()
+                    ?: "",
+                params = fn.params
+                    .map { param ->
+                        param.copy(
+                            type = doc.docPieces
+                                .filter { it is DocParam && it.paramName == param.name }
+                                .map { (it as DocParam).paramType }
+                                .firstOrNull()
+                                ?: "Any"
+                        )
+                    },
+                genericTypes = doc.docPieces
+                    .map { if (!(it is DocParam)) "" else it.paramType }
+                    .flatMap { type ->
+                        "([A-Z]'?)".toRegex()
+                            .findAll(type)
+                            .map { if (it.value.length == 2 && it.value[1] == '\'') "${it.value[0].inc()}" else it.value }
+                            .toList()
+                    }.toSet()
+            )
+        )
     }
 
     return pitems.map { generateKotlinItem(it) }.joinToString("\n\n")
@@ -400,7 +416,7 @@ fun main(args: Array<String>) {
 
         Log.log("Processing " + file.absolutePath)
 
-        val pkg = """module (.+)""".toRegex().find(fileText)?.groupValues?.component2() ?: ""
+        val pkg = "module (.+)".toRegex().find(fileText)?.groupValues?.component2() ?: ""
         if (pkg.isEmpty()) {
             Log.log("\tCannot parse Protelis package. Skipping.")
             return@forEach
@@ -424,20 +440,26 @@ fun main(args: Array<String>) {
 
         Log.log("\tFound " + protelisItems.size + " Protelis items.")
 
-        val pkgCode = """
+        val pkgCode =
+            """
             @file:JvmName("${packageToClassName(pkg)}")
             package ${pkgParts.joinToString(".")}
-
-        """.trimIndent()
+            """.trimIndent()
         val kotlinCode = generateKotlin(protelisItems)
 
         Log.log("\tContext: " + context)
 
-        val importCode = context.protelisTypes.map { when (it) {
-            "ExecutionContext", "ExecutionEnvironment" -> "org.protelis.vm.$it"
-            "Tuple" -> "org.protelis.lang.datatype.$it"
-            else -> ""
-        } }.filterNot { it.isEmpty() }.map { "import " + it }.joinToString("\n") + "\n\n"
+        val importCode = context.protelisTypes
+            .map {
+                when (it) {
+                    "ExecutionContext", "ExecutionEnvironment" -> "org.protelis.vm.$it"
+                    "Tuple" -> "org.protelis.lang.datatype.$it"
+                    else -> ""
+                }
+            }
+            .filterNot { it.isEmpty() }
+            .map { "import " + it }
+            .joinToString("\n") + "\n\n"
 
         val kotlinFullCode = pkgCode + importCode + kotlinCode
 

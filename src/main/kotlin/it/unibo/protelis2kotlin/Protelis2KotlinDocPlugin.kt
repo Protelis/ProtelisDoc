@@ -37,14 +37,17 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
         val extension = project.extensions.create(protelis2KotlinPluginConfig, ProtelisDocExtension::class.java, project)
-        project.logger.debug("""Applying plugin ProtelisDoc.
-            Default configuration:
-            - debug = ${extension.debug.get()}
-            - baseDir = ${extension.baseDir.get()}
-            - destDir = ${extension.destDir.get()}
-            - outputFormat = ${extension.outputFormat.get()}
-            - kotlinDestDir = ${extension.kotlinDestDir.get()}
-            """.trimIndent())
+        project.logger.debug(
+            """
+                Applying plugin ProtelisDoc.
+                Default configuration:
+                - debug = ${extension.debug.get()}
+                - baseDir = ${extension.baseDir.get()}
+                - destDir = ${extension.destDir.get()}
+                - outputFormat = ${extension.outputFormat.get()}
+                - kotlinDestDir = ${extension.kotlinDestDir.get()}
+            """.trimIndent()
+        )
         if (JavaVersion.current() > JavaVersion.VERSION_1_8) {
             extension.outputFormat.set("html")
         }
@@ -68,12 +71,14 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
             dokkaTask.dependsOn(genKotlinTask)
             dokkaTask.outputDirectory = extension.destDir.get()
             dokkaTask.outputFormat = extension.outputFormat.get()
-            dokkaTask.configuration(Action<GradlePassConfigurationImpl> { dokkaConf ->
-                dokkaConf.sourceRoot(Action<GradleSourceRootImpl> { t -> t.path = extension.kotlinDestDir.get() })
-                dokkaTask.doFirst {
-                    dokkaConf.classpath = config.resolve().map { it.absolutePath }
+            dokkaTask.configuration(
+                Action<GradlePassConfigurationImpl> { dokkaConf ->
+                    dokkaConf.sourceRoot(Action<GradleSourceRootImpl> { t -> t.path = extension.kotlinDestDir.get() })
+                    dokkaTask.doFirst {
+                        dokkaConf.classpath = config.resolve().map { it.absolutePath }
+                    }
                 }
-            })
+            )
             dokkaTask.outputDirectory = extension.destDir.get()
             dokkaTask.outputFormat = extension.outputFormat.get()
         }
