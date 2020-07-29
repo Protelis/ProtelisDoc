@@ -75,8 +75,8 @@ cache:
 
 notifications:
   email:
-    on_success: never
     recipients:
       - danilo.pianini@unibo.it
       - roby.casadei@unibo.it
       - jake.beal@raytheon.com
+    on_success: never

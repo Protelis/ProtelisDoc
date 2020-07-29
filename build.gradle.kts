@@ -27,6 +27,7 @@ gitSemVer {
 
 dependencies {
     implementation(gradleApi())
+    implementation(gradleKotlinDsl())
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:_")
