@@ -157,7 +157,13 @@ class Protelis2KotlinDocTests : StringSpec({
             
             repositories {
                 mavenCentral()
-                maven { url = uri("https://dl.bintray.com/kotlin/dokka") }
+                jcenter {
+                    content {
+                        includeGroup("com.soywiz.korlibs.korte")
+                        includeGroup("org.jetbrains")
+                        includeGroupByRegex("org.jetbrains.(dokka|kotlinx)")
+                    }
+                }
             }
             
             dependencies {
@@ -167,7 +173,6 @@ class Protelis2KotlinDocTests : StringSpec({
             protelisdoc {
                 baseDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis$MS)
                 destDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}docs$MS)
-                outputFormat.set("html") // "javadoc"
                 debug.set(true)
             }
             """

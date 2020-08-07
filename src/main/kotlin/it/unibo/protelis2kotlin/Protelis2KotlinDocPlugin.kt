@@ -1,28 +1,26 @@
 package it.unibo.protelis2kotlin
 
-import org.gradle.api.Action
-import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
+import org.gradle.kotlin.dsl.invoke
+import org.jetbrains.dokka.DokkaVersion
+import org.jetbrains.dokka.SourceRootImpl
 import org.jetbrains.dokka.gradle.DokkaTask
-import org.jetbrains.dokka.gradle.GradlePassConfigurationImpl
-import org.jetbrains.dokka.gradle.GradleSourceRootImpl
 import java.io.File.separator as SEP
 
 /**
  * Extension for the Protelis2KotlinDoc plugin.
  * @param baseDir The base directory from which looking for Protelis files
  * @param destDir The directory that will contain the generated docs
- * @param kotlinVersion
- * @param protelisVersion
+ * @param kotlinDestDir destubatuib directirt for the intermediate Kotlin kode
+ * @param
  */
 open class ProtelisDocExtension @JvmOverloads constructor(
     private val project: Project,
     val baseDir: Property<String> = project.propertyWithDefault(project.path),
     val destDir: Property<String> = project.propertyWithDefault(project.buildDir.path + "${SEP}protelis-docs$SEP"),
     val kotlinDestDir: Property<String> = project.propertyWithDefault(project.buildDir.path + "${SEP}kotlin-for-protelis$SEP"),
-    val outputFormat: Property<String> = project.propertyWithDefault("javadoc"),
     val debug: Property<Boolean> = project.propertyWithDefault(false)
 )
 
@@ -44,13 +42,9 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
                 - debug = ${extension.debug.get()}
                 - baseDir = ${extension.baseDir.get()}
                 - destDir = ${extension.destDir.get()}
-                - outputFormat = ${extension.outputFormat.get()}
                 - kotlinDestDir = ${extension.kotlinDestDir.get()}
             """.trimIndent()
         )
-        if (JavaVersion.current() > JavaVersion.VERSION_1_8) {
-            extension.outputFormat.set("html")
-        }
         if (!project.pluginManager.hasPlugin(dokkaPluginName)) {
             project.pluginManager.apply(dokkaPluginName)
         }
@@ -68,19 +62,18 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         }
         // ProtelisDoc task, based on Dokka
         project.tasks.register(generateProtelisDocTaskName, DokkaTask::class.java) { dokkaTask ->
+            dokkaTask.plugins.dependencies.add(
+                project.dependencies.create("org.jetbrains.dokka:javadoc-plugin:${ DokkaVersion.version}")
+            )
             dokkaTask.dependsOn(genKotlinTask)
             dokkaTask.outputDirectory = extension.destDir.get()
-            dokkaTask.outputFormat = extension.outputFormat.get()
-            dokkaTask.configuration(
-                Action<GradlePassConfigurationImpl> { dokkaConf ->
-                    dokkaConf.sourceRoot(Action<GradleSourceRootImpl> { t -> t.path = extension.kotlinDestDir.get() })
-                    dokkaTask.doFirst {
-                        dokkaConf.classpath = config.resolve().map { it.absolutePath }
-                    }
+            dokkaTask.dokkaSourceSets {
+                create("protelisdoc") { sourceSet ->
+                    sourceSet.classpath = config.resolve().map { it.absolutePath }
+                    sourceSet.sourceRoots = mutableListOf(SourceRootImpl(extension.kotlinDestDir.get()))
                 }
-            )
+            }
             dokkaTask.outputDirectory = extension.destDir.get()
-            dokkaTask.outputFormat = extension.outputFormat.get()
         }
     }
 }
