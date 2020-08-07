@@ -398,38 +398,26 @@ fun main(args: Array<String>) {
         println("USAGE: program <dir> <destDir> <debug>")
         return
     }
-
     val header = "[Protelis2Kotlin]"
-
     val dir = args[0]
     val destDir = args[1]
     Log.debug = if (args.size == 3) args[2] == "1" else false
-
     Log.log("$header Base directory: $dir\n$header Destination directory: $destDir")
-
     var k = 0
-
     File(dir).walkTopDown().forEach { file ->
         if (!file.isFile || file.extension != protelisFileExt) return@forEach
-
         val fileText: String = file.readText()
-
         Log.log("Processing " + file.absolutePath)
-
         val pkg = "module (.+)".toRegex().find(fileText)?.groupValues?.component2() ?: ""
         if (pkg.isEmpty()) {
             Log.log("\tCannot parse Protelis package. Skipping.")
             return@forEach
         }
-
         val pkgParts = pkg.split(':')
         Log.log("\tPackage: " + pkg)
-
         // RESET CONTEXT
         context = Context(setOf())
-
         var protelisItems: List<ProtelisItem>
-
         try {
             protelisItems = parseFile(fileText)
         } catch (e: Exception) {
@@ -437,18 +425,14 @@ fun main(args: Array<String>) {
             Log.logException(e)
             return@forEach
         }
-
         Log.log("\tFound " + protelisItems.size + " Protelis items.")
-
         val pkgCode =
             """
             @file:JvmName("${packageToClassName(pkg)}")
             package ${pkgParts.joinToString(".")}
             """.trimIndent()
         val kotlinCode = generateKotlin(protelisItems)
-
         Log.log("\tContext: " + context)
-
         val importCode = context.protelisTypes
             .map {
                 when (it) {
@@ -460,13 +444,9 @@ fun main(args: Array<String>) {
             .filterNot { it.isEmpty() }
             .map { "import " + it }
             .joinToString("\n") + "\n\n"
-
         val kotlinFullCode = pkgCode + importCode + kotlinCode
-
         val outPath = "$destDir$SEP${pkgParts.joinToString(SEP)}$SEP${file.name.replace(".pt",".kt")}"
-
         Log.log("\tWriting " + outPath)
-
         File(outPath).let {
             it.parentFile.mkdirs()
             it.createNewFile()

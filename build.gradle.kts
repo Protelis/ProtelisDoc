@@ -18,6 +18,11 @@ group = "org.protelis"
 repositories {
     mavenCentral()
     gradlePluginPortal()
+    jcenter {
+        content {
+            includeGroup("org.jetbrains.dokka")
+        }
+    }
 }
 
 gitSemVer {
@@ -30,6 +35,9 @@ dependencies {
     implementation(gradleKotlinDsl())
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
+    implementation(kotlin("gradle-plugin"))
+    implementation("org.jetbrains.dokka:dokka-core:_")
+    implementation("org.jetbrains.dokka:javadoc-plugin:_")
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:_")
 
     testImplementation(kotlin("test"))
@@ -39,10 +47,6 @@ dependencies {
 }
 
 tasks {
-    javadocJar {
-        dependsOn(dokka)
-        from(dokka.get().outputDirectory)
-    }
 }
 
 ktlint {
@@ -50,6 +54,9 @@ ktlint {
 }
 
 tasks {
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
     "test"(Test::class) {
         useJUnitPlatform()
         testLogging.showStandardStreams = true
@@ -69,8 +76,9 @@ tasks {
             file("$outputDir/plugin-classpath.txt").writeText(sourceSets.main.get().runtimeClasspath.joinToString("\n"))
         }
     }
-    withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "1.6"
+    javadocJar {
+        dependsOn(dokkaJavadoc)
+        from(dokkaJavadoc.get().outputDirectory)
     }
 }
 
