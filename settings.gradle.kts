@@ -1,4 +1,4 @@
-import de.fayard.dependencies.bootstrapRefreshVersionsAndDependencies
+import de.fayard.refreshVersions.bootstrapRefreshVersions
 import org.danilopianini.VersionAliases.justAdditionalAliases
 
 buildscript {
@@ -7,12 +7,12 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("de.fayard:dependencies:+")
+        classpath("de.fayard.refreshVersions:refreshVersions:0.9.5")
         classpath("org.danilopianini:refreshversions-aliases:+")
     }
 }
 
-bootstrapRefreshVersionsAndDependencies(justAdditionalAliases)
+bootstrapRefreshVersions(justAdditionalAliases)
 
 rootProject.name = "protelis-kdoc-generator"
 
