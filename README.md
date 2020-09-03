@@ -30,16 +30,19 @@ then you need to explicitly add the repository where Dokka is to be found:
 
 ```kotlin
 repositories {
-    // Your repository configuration
-    maven {
-        // Required, as Dokka is not released on Maven Central
-        url = uri("https://dl.bintray.com/kotlin/dokka")
-        // Optional, but avoids checking this repository but for Dokka
+    // Your repository configuration here, plus
+
+    // You need to add JCenter.
+    // Some dokka components are not released on Maven Central
+    // Of course you can skip this if you are using JCenter already.
+    jcenter {
+        // You can filter though to avoid leaking dependencies
         content {
-            includeGroup("org.jetbrains.dokka")
+            includeGroup("com.soywiz.korlibs.korte")
+            includeGroup("org.jetbrains")
+            includeGroupByRegex("org.jetbrains.(dokka|kotlinx)")
         }
     }
-}
 ```
 
 The plugin imports all the dependencies in your `implementation` configuration
