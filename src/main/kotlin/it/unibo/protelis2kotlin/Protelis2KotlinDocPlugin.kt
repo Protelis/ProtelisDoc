@@ -5,8 +5,8 @@ import org.gradle.api.Project
 import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.invoke
 import org.jetbrains.dokka.DokkaVersion
-import org.jetbrains.dokka.SourceRootImpl
 import org.jetbrains.dokka.gradle.DokkaTask
+import java.io.File
 import java.io.File.separator as SEP
 
 /**
@@ -66,14 +66,14 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
                 project.dependencies.create("org.jetbrains.dokka:javadoc-plugin:${ DokkaVersion.version}")
             )
             dokkaTask.dependsOn(genKotlinTask)
-            dokkaTask.outputDirectory = extension.destDir.get()
+            dokkaTask.outputDirectory.set(extension.destDir.map { File(it) })
             dokkaTask.dokkaSourceSets {
                 create("protelisdoc") { sourceSet ->
-                    sourceSet.classpath = config.resolve().map { it.absolutePath }
-                    sourceSet.sourceRoots = mutableListOf(SourceRootImpl(extension.kotlinDestDir.get()))
+                    sourceSet.classpath.setFrom(config.resolve())
+                    sourceSet.sourceRoots.setFrom(extension.kotlinDestDir.get())
                 }
             }
-            dokkaTask.outputDirectory = extension.destDir.get()
+            dokkaTask.outputDirectory.set(extension.destDir.map { File(it) })
         }
     }
 }

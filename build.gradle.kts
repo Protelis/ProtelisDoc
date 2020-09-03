@@ -18,11 +18,6 @@ group = "org.protelis"
 repositories {
     mavenCentral()
     gradlePluginPortal()
-    jcenter {
-        content {
-            includeGroup("org.jetbrains.dokka")
-        }
-    }
 }
 
 gitSemVer {
@@ -75,10 +70,6 @@ tasks {
             outputDir.mkdirs()
             file("$outputDir/plugin-classpath.txt").writeText(sourceSets.main.get().runtimeClasspath.joinToString("\n"))
         }
-    }
-    javadocJar {
-        dependsOn(dokkaJavadoc)
-        from(dokkaJavadoc.get().outputDirectory)
     }
 }
 
