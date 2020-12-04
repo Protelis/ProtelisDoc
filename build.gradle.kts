@@ -22,7 +22,7 @@ repositories {
 
 gitSemVer {
     maxVersionLength.set(20)
-    version = computeGitSemVer()
+    version = computeGitSemVer().replace('+', '-')
 }
 
 dependencies {
@@ -76,6 +76,14 @@ tasks {
 // Add the classpath file to the test runtime classpath
 dependencies {
     testRuntimeOnly(files(tasks["createClasspathManifest"]))
+}
+
+if (System.getenv("CI") == true.toString()) {
+    signing {
+        val signingKey: String? by project
+        val signingPassword: String? by project
+        useInMemoryPgpKeys(signingKey, signingPassword)
+    }
 }
 
 val websiteUrl = "https://github.com/Protelis/Protelis-KDoc-generator"
