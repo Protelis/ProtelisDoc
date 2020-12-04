@@ -22,7 +22,7 @@ repositories {
 
 gitSemVer {
     maxVersionLength.set(20)
-    version = computeGitSemVer()
+    version = computeGitSemVer().replace('+', '-')
 }
 
 dependencies {
