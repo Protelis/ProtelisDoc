@@ -67,8 +67,8 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
             )
             dokkaTask.dependsOn(genKotlinTask)
             dokkaTask.outputDirectory.set(extension.destDir.map { File(it) })
-            dokkaTask.dokkaSourceSets {
-                create("protelisdoc") { sourceSet ->
+            dokkaTask.dokkaSourceSets { sourceSetContainer ->
+                sourceSetContainer.create("protelisdoc") { sourceSet ->
                     sourceSet.classpath.setFrom(config.resolve())
                     sourceSet.sourceRoots.setFrom(extension.kotlinDestDir.get())
                 }
