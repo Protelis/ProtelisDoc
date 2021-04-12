@@ -41,14 +41,14 @@ dependencies {
     testImplementation("io.kotlintest:kotlintest-runner-junit5:_")
 }
 
-tasks {
-}
-
 ktlint {
     ignoreFailures.set(false)
 }
 
 tasks {
+    withType<Copy> {
+        duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.WARN
+    }
     withType<KotlinCompile> {
         kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
