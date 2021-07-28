@@ -1,5 +1,13 @@
-import de.fayard.refreshVersions.bootstrapRefreshVersions
 import org.danilopianini.VersionAliases.justAdditionalAliases
+
+plugins {
+    id("de.fayard.refreshVersions") version "0.10.1"
+    id("com.gradle.enterprise") version "3.6.3"
+}
+
+refreshVersions {
+    extraArtifactVersionKeyRules = justAdditionalAliases
+}
 
 buildscript {
     repositories {
@@ -7,17 +15,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("de.fayard.refreshVersions:refreshVersions:0.9.5")
         classpath("org.danilopianini:refreshversions-aliases:+")
     }
-}
-
-bootstrapRefreshVersions(justAdditionalAliases)
-
-rootProject.name = "protelis-kdoc-generator"
-
-plugins {
-    id("com.gradle.enterprise") version "3.2"
 }
 
 gradleEnterprise {
@@ -26,3 +25,6 @@ gradleEnterprise {
         termsOfServiceAgree = "yes"
     }
 }
+
+rootProject.name = "protelis-kdoc-generator"
+
