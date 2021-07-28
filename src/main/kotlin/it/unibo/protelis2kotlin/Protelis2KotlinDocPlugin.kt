@@ -14,18 +14,21 @@ import java.io.File.separator as SEP
  * @param baseDir The base directory from which looking for Protelis files
  * @param destDir The directory that will contain the generated docs
  * @param kotlinDestDir destubatuib directirt for the intermediate Kotlin kode
+ * @param debug enables debug output
  * @param
  */
 open class ProtelisDocExtension @JvmOverloads constructor(
     private val project: Project,
     val baseDir: Property<String> = project.propertyWithDefault(project.path),
     val destDir: Property<String> = project.propertyWithDefault(project.buildDir.path + "${SEP}protelis-docs$SEP"),
-    val kotlinDestDir: Property<String> = project.propertyWithDefault(project.buildDir.path + "${SEP}kotlin-for-protelis$SEP"),
+    val kotlinDestDir: Property<String> =
+        project.propertyWithDefault(project.buildDir.path + "${SEP}kotlin-for-protelis$SEP"),
     val debug: Property<Boolean> = project.propertyWithDefault(false)
 )
 
 /**
- * Protelis2KotlinDoc Gradle Plugin: reuses the Protelis2Kotlin and Dokka plugins to generate Kotlin docs from Protelis code.
+ * Protelis2KotlinDoc Gradle Plugin:
+ * reuses the Protelis2Kotlin and Dokka plugins to generate Kotlin docs from Protelis code.
  */
 class Protelis2KotlinDocPlugin : Plugin<Project> {
     private val generateProtelisDocTaskName = "generateProtelisDoc"
@@ -34,7 +37,8 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
     private val dokkaPluginName = "org.jetbrains.dokka"
 
     override fun apply(project: Project) {
-        val extension = project.extensions.create(protelis2KotlinPluginConfig, ProtelisDocExtension::class.java, project)
+        val extension =
+            project.extensions.create(protelis2KotlinPluginConfig, ProtelisDocExtension::class.java, project)
         project.logger.debug(
             """
                 Applying plugin ProtelisDoc.
@@ -56,7 +60,8 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         // Kotlin generation task
         val genKotlinTask = project.task(generateKotlinFromProtelisTaskName) {
             it.doLast {
-                main(arrayOf(extension.baseDir.get(), extension.kotlinDestDir.get(), if (extension.debug.get()) "1" else "0"))
+                val debugFlag = if (extension.debug.get()) "1" else "0"
+                main(arrayOf(extension.baseDir.get(), extension.kotlinDestDir.get(), debugFlag))
             }
             Log.log("[${it.name}]\nInputs: ${it.inputs.files.files}\nOutputs: ${it.outputs.files.files}")
         }

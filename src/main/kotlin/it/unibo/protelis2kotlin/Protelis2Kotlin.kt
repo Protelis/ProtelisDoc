@@ -9,9 +9,15 @@ import kotlin.text.RegexOption.DOT_MATCHES_ALL
 import kotlin.text.RegexOption.MULTILINE
 import java.io.File.separator as SEP
 
-var context = Context(setOf())
-val protelisFileExt = "pt"
+private var context = Context(setOf())
+/**
+ * Protelis file extension.
+ */
+const val PROTELIS_FILE_EXTENSION = "pt"
 
+/**
+ * A simple custom console logger.
+ */
 object Log {
     var debug = true
 
@@ -25,7 +31,7 @@ object Log {
         println(msg)
     }
 
-    fun logException(e: Exception) {
+    fun logException(e: Throwable) {
         val errorStr = StringWriter()
         e.printStackTrace(PrintWriter(errorStr))
         log(errorStr.toString())
@@ -33,115 +39,128 @@ object Log {
 }
 
 /**
- * Data class containing information that should be collected during parsing.
+ * Data class containing [protelisTypes] information that should be collected during parsing.
  */
 data class Context(var protelisTypes: Set<String>)
 
 /**
- * Utility function to extend contextual info with a Protelis type
+ * Utility function to extend contextual info with a Protelis type.
  */
-fun registerProtelisType(pt: String) {
+private fun registerProtelisType(pt: String) {
     context = context.copy(context.protelisTypes + pt)
 }
 
 /**
- * Interface for a "piece of documentation"
+ * Interface for a "piece of documentation".
  */
-interface DocPiece {
+private interface DocPiece {
     companion object {
+        /**
+         * matches a @param tag.
+         */
         val docParamRegex =
             """@param\s+(\w+)\s*([^\n]*)""".toRegex()
+        /**
+         * matches a @return tag.
+         */
         val docReturnRegex =
             """@return\s+([^\n]*)""".toRegex()
+        /**
+         * matches other directives.
+         */
         val docOtherDirectiveRegex =
             """@(\w+)\s+([^\n]*)""".toRegex()
     }
 
-    fun extendWith(txt: String): DocPiece
+    /**
+     * Creates a new [DocPiece] that extends this [DocPiece] with some [text].
+     */
+    fun extendWith(text: String): DocPiece
 }
 
 /**
- * Data class for a piece of documentation text (like this very comment)
+ * Data class for a piece of documentation [text] (like this very comment).
  */
-data class DocText(val text: String) : DocPiece {
-    override fun extendWith(txt: String): DocPiece {
-        return DocText(text + txt)
+private data class DocText(val text: String) : DocPiece {
+    override fun extendWith(text: String): DocPiece {
+        return DocText(this.text + text)
     }
 }
 
 /**
- * Data class for a piece of documentation describing a function parameter
+ * Data class for a piece of documentation describing a function parameter with its [name], [type], and [description].
  */
-data class DocParam(
-    val paramName: String,
-    val paramType: String,
-    val paramDescription: String
+private data class DocParam(
+    val name: String,
+    val type: String,
+    val description: String
 ) : DocPiece {
-    override fun extendWith(txt: String): DocPiece {
-        return DocParam(paramName, paramType, paramDescription + txt)
+    override fun extendWith(text: String): DocPiece {
+        return DocParam(name, type, description + text)
     }
 }
 
 /**
- * Data class for a piece of documentation describing a function's return value/type
+ * Data class for a piece of documentation with a [description] a function's [returnType].
  */
-data class DocReturn(
+private data class DocReturn(
     val returnType: String,
-    val returnDescription: String
+    val description: String
 ) : DocPiece {
-    override fun extendWith(txt: String): DocPiece {
-        return DocReturn(returnType, returnDescription + txt)
+    override fun extendWith(text: String): DocPiece {
+        return DocReturn(returnType, description + text)
     }
 }
 
 /**
- * Data class for a generic documentation directive `@<directive> description`
+ * Data class for a generic documentation [directive] `@<directive> [description]`.
  */
-data class DocDirective(
+private data class DocDirective(
     val directive: String,
     val description: String
 ) : DocPiece {
-    override fun extendWith(txt: String): DocPiece {
-        return DocDirective(directive, description + txt)
+    override fun extendWith(text: String): DocPiece {
+        return DocDirective(directive, description + text)
     }
 }
 
 /**
- * Data class describing a Protelis function parameter (name and type)
+ * Data class describing a Protelis function parameter ([name] and [type]).
  */
-data class ProtelisFunArg(val name: String, val type: String)
+private data class ProtelisFunArg(val name: String, val type: String)
 
 /**
- * Data class describing a Protelis function: name, parameters, return type, visibility, and type parameters (generics)
+ * Data class describing a Protelis function: [name], [parameters], [returnType],
+ * visibility ([public] or not), and type parameters ([genericTypes]).
  */
-data class ProtelisFun(
+private data class ProtelisFun(
     val name: String,
-    val params: List<ProtelisFunArg> = listOf(),
+    val parameters: List<ProtelisFunArg> = listOf(),
     val returnType: String = "",
     val public: Boolean = false,
     val genericTypes: Set<String> = setOf()
 )
 
 /**
- * Data class containing the various documentation pieces for a Protelis function
+ * Data class containing the various [documentationPieces] for a Protelis function.
  */
-data class ProtelisFunDoc(val docPieces: List<DocPiece>)
+private data class ProtelisFunDoc(val documentationPieces: List<DocPiece>)
 
 /**
- * Data class pairing a Protelis function with its documentation
+ * Data class pairing a Protelis [function] with its [docs].
  */
-data class ProtelisItem(val function: ProtelisFun, val docs: ProtelisFunDoc)
+private data class ProtelisItem(val function: ProtelisFun, val docs: ProtelisFunDoc)
 
 /**
- * Parses a type and returns both the parsed type and the remaining text
+ * Parses a type and returns both the parsed type and the remaining text.
  * @param line The text line to be parsed
  */
-fun parseTypeAndRest(line: String): Pair<String, String> {
+private fun parseTypeAndRest(line: String): Pair<String, String> {
     // Works by finding the first comma which is not contained within parentheses
     var stillType = true
     var k = 0
     var parentheses = ""
-    var type = line.takeWhile { c ->
+    val type = line.takeWhile { c ->
         k++
         val cond = (c != ',' || stillType) && !(c == ',' && k > 0 && parentheses.isEmpty())
         if (stillType && (c == '(' || c == '[')) parentheses += c
@@ -155,38 +174,37 @@ fun parseTypeAndRest(line: String): Pair<String, String> {
 }
 
 /**
- * Parses the documentation of a Protelis function
+ * Parses the documentation of a Protelis function.
  * @param doc The documentation string to be parsed
  * @return [ProtelisFunDoc]
  */
-fun parseDoc(doc: String): ProtelisFunDoc {
+private fun parseDoc(doc: String): ProtelisFunDoc {
     var txt = ""
     val pieces: MutableList<DocPiece> = mutableListOf()
-    doc.lines().map { """\s*\*\s*""".trimMargin().toRegex().replace(it, "").trim() }.forEach { l ->
-        if (!l.startsWith("@")) {
-            val partialtxt = l
+    doc.lines().map { """\s*\*\s*""".trimMargin().toRegex().replace(it, "").trim() }.forEach { partialtxt ->
+        if (!partialtxt.startsWith("@")) {
             if (pieces.isEmpty()) txt += if (txt.isEmpty()) partialtxt else "\n $partialtxt"
             else {
                 val last = pieces.last()
                 pieces.remove(last)
-                pieces.add(last.extendWith(" " + partialtxt))
+                pieces.add(last.extendWith(" $partialtxt"))
             }
         } else {
-            DocPiece.docParamRegex.matchEntire(l)?.let { matchRes ->
+            DocPiece.docParamRegex.matchEntire(partialtxt)?.let { matchRes ->
                 val gs = matchRes.groupValues
                 val (type, desc) = parseTypeAndRest(gs[2])
                 pieces.add(DocParam(gs[1], type, desc))
                 return@forEach
             }
 
-            DocPiece.docReturnRegex.matchEntire(l)?.let { matchRes ->
+            DocPiece.docReturnRegex.matchEntire(partialtxt)?.let { matchRes ->
                 val gs = matchRes.groupValues
                 val (type, desc) = parseTypeAndRest(gs[1])
                 pieces.add(DocReturn(type, desc))
                 return@forEach
             }
 
-            DocPiece.docOtherDirectiveRegex.matchEntire(l)?.let { matchRes ->
+            DocPiece.docOtherDirectiveRegex.matchEntire(partialtxt)?.let { matchRes ->
                 val directive = matchRes.groupValues[1]
                 val desc = matchRes.groupValues[2]
                 pieces.add(DocDirective(directive, desc))
@@ -201,15 +219,16 @@ fun parseDoc(doc: String): ProtelisFunDoc {
 }
 
 /**
- * Parses a Protelis function definition
+ * Parses a Protelis function definition.
  * @param fline The string of a Protelis function definition to be parsed
  * @return [ProtelisFun]
  */
-fun parseProtelisFunction(fline: String): ProtelisFun {
+private fun parseProtelisFunction(fline: String): ProtelisFun {
     return ProtelisFun(
         name =
-        """def\s+(\w+)\s*\(""".toRegex().find(fline)?.groupValues?.get(1) ?: throw IllegalStateException("Cannot parse function name in: $fline"),
-        params =
+        """def\s+(\w+)\s*\(""".toRegex().find(fline)?.groupValues?.get(1)
+            ?: throw IllegalStateException("Cannot parse function name in: $fline"),
+        parameters =
         """\(([^\)]*)\)""".toRegex().find(fline)?.groupValues?.get(1)?.split(",")
             ?.filter { !it.isEmpty() }
             ?.map {
@@ -221,10 +240,10 @@ fun parseProtelisFunction(fline: String): ProtelisFun {
 }
 
 /**
- * Parses Protelis source code into a list of [ProtelisItem]s
+ * Parses Protelis source code into a list of [ProtelisItem]s.
  * @param content The string of Protelis source code to be parsed
  */
-fun parseFile(content: String): List<ProtelisItem> {
+private fun parseFile(content: String): List<ProtelisItem> {
     val pitems = mutableListOf<ProtelisItem>()
 
     """^\s*(/\*\*(.*?)\*/)?\n*((^|[\w\s]*\s)def\s[^\{]*?\{)"""
@@ -234,51 +253,44 @@ fun parseFile(content: String): List<ProtelisItem> {
             val groups = matchRes.groupValues
             val doc = groups[2]
             val funLine = groups[3]
-            var parsedDoc: ProtelisFunDoc
-            var parsedFun: ProtelisFun
-
             val parsedString = matchRes.value.lines().map { "> " + it }.joinToString("\n")
-
-            try {
-                parsedDoc = parseDoc(doc)
-            } catch (e: Exception) {
+            val parsedDoc: ProtelisFunDoc = runCatching {
+                parseDoc(doc)
+            }.onFailure {
                 Log.log("\t\tFailed to parse doc: $doc\n$parsedString")
-                Log.logException(e)
+                Log.logException(it)
                 return@forEach
-            }
-
+            }.getOrThrow()
             // Easy check to control if we actually have a function
             if (!funLine.contains("def")) return@forEach
-
-            try {
-                parsedFun = parseProtelisFunction(funLine)
-            } catch (e: Exception) {
+            val parsedFun = runCatching {
+                parseProtelisFunction(funLine)
+            }.onFailure {
                 Log.log("\t\tFailed to parse function: ${funLine.trim()}\n$parsedString")
-                Log.logException(e)
+                Log.logException(it)
                 return@forEach
-            }
-
-            Log.log("\t\tParsed${if (!parsedDoc.docPieces.fold("", { a,b -> a + b }).isEmpty()) " documented " else " "}function: ${parsedFun.name}")
-
+            }.getOrThrow()
+            val isDocumented = parsedDoc.documentationPieces.fold("", { a, b -> a + b }).isNotEmpty()
+            Log.log("\t\tParsed${if (isDocumented) " documented " else " "}function: ${parsedFun.name}")
             pitems.add(ProtelisItem(parsedFun, parsedDoc))
         }
     return pitems
 }
 
 /**
- * Generates (Dokka ) Kotlin documentation from a [ProtelisFunDoc]
+ * Generates (Dokka ) Kotlin documentation from a [ProtelisFunDoc].
  * @param docs The [ProtelisFunDoc] object encapsulating the docs for a Protelis function
  */
-fun generateKotlinDoc(docs: ProtelisFunDoc): String {
-    val docPieces = docs.docPieces
+private fun generateKotlinDoc(docs: ProtelisFunDoc): String {
+    val docPieces = docs.documentationPieces
     return "/**\n" +
         docPieces.map { p ->
             if (p is DocText) {
                 p.text.lines().map { "  * $it" }.joinToString("\n")
             } else if (p is DocParam) {
-                "  * @param ${p.paramName} ${p.paramDescription}"
+                "  * @param ${p.name} ${p.description}"
             } else if (p is DocReturn) {
-                "  * @return ${p.returnDescription}"
+                "  * @return ${p.description}"
             } else if (p is DocDirective) {
                 "  * @${p.directive} ${p.description}"
             } else ""
@@ -286,9 +298,9 @@ fun generateKotlinDoc(docs: ProtelisFunDoc): String {
 }
 
 /**
- * Generates a Kotlin type from a Protelis type
+ * Generates a Kotlin type from a Protelis type.
  */
-fun generateKotlinType(protelisType: String): String = when (protelisType) {
+private fun generateKotlinType(protelisType: String): String = when (protelisType) {
     "" -> "Unit"
     "bool" -> "Boolean"
     "num" -> "Number"
@@ -300,76 +312,84 @@ fun generateKotlinType(protelisType: String): String = when (protelisType) {
         } ?: """\[.*\]""".toRegex().matchEntire(protelisType)?.let { _ ->
             registerProtelisType("Tuple")
             "Tuple" // "List<${generateKotlinType()}>"
-        } ?: if (protelisType.length == 1 && protelisType.any { it.isUpperCase() })
+        } ?: if (protelisType.length == 1 && protelisType.any { it.isUpperCase() }) {
             protelisType
-        else if ("""[A-Z]'""".toRegex().matches(protelisType))
+        } else if ("""[A-Z]'""".toRegex().matches(protelisType)) {
             "${protelisType[0].inc()}"
-        else if ("""\w+""".toRegex().matches(protelisType)) {
+        } else if ("""\w+""".toRegex().matches(protelisType)) {
             registerProtelisType(protelisType)
             protelisType
-        } else "Any"
+        } else {
+            "Any"
+        }
 }
 
 /**
- * Symbols used frely in Protelis but that are not valid in Kotlin (e.g., as they are reserved words) are sanitized
+ * Symbols used frely in Protelis but that are not valid in Kotlin (e.g., as they are reserved words) are sanitized.
  */
-fun sanitizeNameForKotlin(name: String): String = when (name) {
+private fun sanitizeNameForKotlin(name: String): String = when (name) {
     "null" -> "`null`"
     else -> name
 }
 
 /**
- * Generates a Kotlin function from a Protelis function descriptor
+ * Generates a Kotlin function from a Protelis function descriptor.
  */
-fun generateKotlinFun(fn: ProtelisFun): String {
+private fun generateKotlinFun(fn: ProtelisFun): String {
     var genTypesStr = fn.genericTypes.joinToString(",")
     if (!genTypesStr.isEmpty()) genTypesStr = " <$genTypesStr>"
 
     return "@Suppress(\"UNUSED_PARAMETER\")\nfun$genTypesStr ${sanitizeNameForKotlin(fn.name)}(" +
-        fn.params.map { "${sanitizeNameForKotlin(it.name)}: ${generateKotlinType(it.type)}" }.joinToString(", ") +
+        fn.parameters.map { "${sanitizeNameForKotlin(it.name)}: ${generateKotlinType(it.type)}" }.joinToString(", ") +
         "): ${generateKotlinType(fn.returnType)} = TODO()"
 }
 
 /**
- * Generates a Kotlin item (doc + fun signature) from a Protelis item (doc + fun)
+ * Generates a Kotlin item (doc + fun signature) from a Protelis item (doc + fun).
  */
-fun generateKotlinItem(pitem: ProtelisItem): String {
+private fun generateKotlinItem(pitem: ProtelisItem): String {
     val doc = pitem.docs
-    var fn = pitem.function
+    val fn = pitem.function
     return generateKotlinDoc(doc) + "\n" + generateKotlinFun(fn)
 }
 
 /**
- * Generates a string from a list of Protelis items (function and docs pairs)
+ * Generates a string from a list of Protelis items (function and docs pairs).
  */
-fun generateKotlin(protelisItems: List<ProtelisItem>): String {
+private fun generateKotlin(protelisItems: List<ProtelisItem>): String {
     // Retrieve type info from docs
     val pitems = protelisItems.map { pitem ->
         val doc = pitem.docs
-        var fn = pitem.function
+        val fn = pitem.function
         pitem.copy(
             function = fn.copy(
-                returnType = doc.docPieces
+                returnType = doc.documentationPieces
                     .filter { it is DocReturn }
                     .map { (it as DocReturn).returnType }
                     .firstOrNull()
                     ?: "",
-                params = fn.params
+                parameters = fn.parameters
                     .map { param ->
                         param.copy(
-                            type = doc.docPieces
-                                .filter { it is DocParam && it.paramName == param.name }
-                                .map { (it as DocParam).paramType }
+                            type = doc.documentationPieces
+                                .filter { it is DocParam && it.name == param.name }
+                                .map { (it as DocParam).type }
                                 .firstOrNull()
                                 ?: "Any"
                         )
                     },
-                genericTypes = doc.docPieces
-                    .map { if (!(it is DocParam)) "" else it.paramType }
+                genericTypes = doc.documentationPieces
+                    .map { if (!(it is DocParam)) "" else it.type }
                     .flatMap { type ->
                         "([A-Z]'?)".toRegex()
                             .findAll(type)
-                            .map { if (it.value.length == 2 && it.value[1] == '\'') "${it.value[0].inc()}" else it.value }
+                            .map {
+                                if (it.value.length == 2 && it.value[1] == '\'') {
+                                    "${it.value[0].inc()}"
+                                } else {
+                                    it.value
+                                }
+                            }
                             .toList()
                     }.toSet()
             )
@@ -380,14 +400,15 @@ fun generateKotlin(protelisItems: List<ProtelisItem>): String {
 }
 
 /**
- * Turns a Protelis package to a class name using camelcase convention
+ * Turns a Protelis package to a class name using camelcase convention.
  */
-fun packageToClassName(pkg: String): String {
+private fun packageToClassName(pkg: String): String {
     return pkg.split(':').last().split('_').map { it.capitalize() }.joinToString("")
 }
 
 /**
- * Main function: reads all Protelis files under a base directory, parses them, and generates corresponding Kotlin files in a destination directory.
+ * Main function: reads all Protelis files under a base directory, parses them,
+ * and generates corresponding Kotlin files in a destination directory.
  *
  * This is to be called with two arguments:
  * 1) The base directory from which recursively looking for Protelis files
@@ -405,7 +426,7 @@ fun main(args: Array<String>) {
     Log.log("$header Base directory: $dir\n$header Destination directory: $destDir")
     var k = 0
     File(dir).walkTopDown().forEach { file ->
-        if (!file.isFile || file.extension != protelisFileExt) return@forEach
+        if (!file.isFile || file.extension != PROTELIS_FILE_EXTENSION) return@forEach
         val fileText: String = file.readText()
         Log.log("Processing " + file.absolutePath)
         val pkg = "module (.+)".toRegex().find(fileText)?.groupValues?.component2() ?: ""
@@ -417,14 +438,13 @@ fun main(args: Array<String>) {
         Log.log("\tPackage: " + pkg)
         // RESET CONTEXT
         context = Context(setOf())
-        var protelisItems: List<ProtelisItem>
-        try {
-            protelisItems = parseFile(fileText)
-        } catch (e: Exception) {
+        val protelisItems: List<ProtelisItem> = runCatching {
+            parseFile(fileText)
+        }.onFailure {
             Log.log("Failed to parse $file")
-            Log.logException(e)
+            Log.logException(it)
             return@forEach
-        }
+        }.getOrThrow()
         Log.log("\tFound " + protelisItems.size + " Protelis items.")
         val pkgCode =
             """

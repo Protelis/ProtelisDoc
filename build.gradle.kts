@@ -9,7 +9,7 @@ plugins {
     id("org.danilopianini.git-sensitive-semantic-versioning")
     id("org.danilopianini.publish-on-central")
     id("org.jetbrains.dokka")
-    id("org.jlleitschuh.gradle.ktlint")
+    id("kotlin-qa")
     `java-gradle-plugin`
 }
 
