@@ -403,7 +403,8 @@ private fun generateKotlin(protelisItems: List<ProtelisItem>): String {
  * Turns a Protelis package to a class name using camelcase convention.
  */
 private fun packageToClassName(pkg: String): String {
-    return pkg.split(':').last().split('_').map { it.capitalize() }.joinToString("")
+    return pkg.split(':').last().split('_')
+        .joinToString("") { it.replaceFirstChar(Char::titlecaseChar) }
 }
 
 /**
