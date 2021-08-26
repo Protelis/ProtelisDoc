@@ -35,8 +35,6 @@ dependencies {
     implementation("org.jetbrains.dokka:javadoc-plugin:_")
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:_")
 
-    testImplementation(kotlin("test"))
-    testImplementation(kotlin("test-junit"))
     testImplementation(gradleTestKit())
     testImplementation("io.kotlintest:kotlintest-runner-junit5:_")
 }
