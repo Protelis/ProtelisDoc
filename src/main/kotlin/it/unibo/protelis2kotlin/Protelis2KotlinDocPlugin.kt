@@ -2,13 +2,11 @@ package it.unibo.protelis2kotlin
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDependency
 import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.invoke
 import org.jetbrains.dokka.DokkaVersion
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
-import java.io.File
 import java.io.File.separator as SEP
 
 /**
@@ -59,10 +57,8 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
                 configuration.extendsFrom(it)
             }
             configuration.dependencies.add(
-                DefaultExternalModuleDependency(
-                    "org.jetbrains.kotlin",
-                    "kotlin-stdlib",
-                    KotlinCompilerVersion.VERSION,
+                project.dependencies.create(
+                    "org.jetbrains.kotlin:kotlin-stdlib:${KotlinCompilerVersion.VERSION}"
                 )
             )
         }
@@ -74,19 +70,22 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
             }
         }
         // ProtelisDoc task, based on Dokka
-        project.tasks.register(generateProtelisDocTaskName, DokkaTask::class.java) { dokkaTask ->
+        val protelisdoc = project.tasks.register(generateProtelisDocTaskName, DokkaTask::class.java) { dokkaTask ->
             dokkaTask.plugins.dependencies.add(
-                project.dependencies.create("org.jetbrains.dokka:javadoc-plugin:${ DokkaVersion.version}")
+                project.dependencies.create("org.jetbrains.dokka:javadoc-plugin:${DokkaVersion.version}")
             )
             dokkaTask.dependsOn(genKotlinTask)
-            dokkaTask.outputDirectory.set(extension.destDir.map { File(it) })
-            dokkaTask.dokkaSourceSets { sourceSetContainer ->
-                sourceSetContainer.create("protelisdoc") { sourceSet ->
-                    sourceSet.classpath.setFrom(config.resolve())
-                    sourceSet.sourceRoots.setFrom(extension.kotlinDestDir.get())
+        }
+        project.afterEvaluate {
+            protelisdoc.get().apply {
+                dokkaSourceSets { sourceSetContainer ->
+                    sourceSetContainer.create("protelisdoc") { sourceSet ->
+                        sourceSet.classpath.setFrom(config.resolve())
+                        sourceSet.sourceRoots.setFrom(extension.kotlinDestDir.get())
+                    }
                 }
+                outputDirectory.set(extension.destDir.map { project.file(it) })
             }
-            dokkaTask.outputDirectory.set(extension.destDir.map { File(it) })
         }
     }
 }
