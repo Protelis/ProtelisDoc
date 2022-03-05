@@ -63,7 +63,6 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
                 val debugFlag = if (extension.debug.get()) "1" else "0"
                 main(arrayOf(extension.baseDir.get(), extension.kotlinDestDir.get(), debugFlag))
             }
-            Log.log("[${it.name}]\nInputs: ${it.inputs.files.files}\nOutputs: ${it.outputs.files.files}")
         }
         // ProtelisDoc task, based on Dokka
         project.tasks.register(generateProtelisDocTaskName, DokkaTask::class.java) { dokkaTask ->
