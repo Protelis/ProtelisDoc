@@ -1,3 +1,19 @@
+## [2.0.0](https://github.com/Protelis/ProtelisDoc/compare/1.0.3...2.0.0) (2022-03-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename the task into 'protelisdoc'
+
+### Features
+
+* rename the task into 'protelisdoc' ([b3709ba](https://github.com/Protelis/ProtelisDoc/commit/b3709baf86b8dd2e7284de5c78e5ac88390340e6))
+
+
+### Bug Fixes
+
+* defer the protelisdoc task configuration until after project evaluation ([97cb57e](https://github.com/Protelis/ProtelisDoc/commit/97cb57ea84717a1c81c7f0b50b3bcd6e45aa55f1))
+
 ### [1.0.3](https://github.com/Protelis/ProtelisDoc/compare/1.0.2...1.0.3) (2022-03-05)
 
 
