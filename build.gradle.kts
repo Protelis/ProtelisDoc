@@ -1,7 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-import org.gradle.api.tasks.testing.logging.TestLogEvent
-
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     `maven-publish`
