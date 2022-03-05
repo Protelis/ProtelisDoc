@@ -46,20 +46,19 @@ dependencies {
     testImplementation(libs.bundles.kotlin.testing)
 }
 
-tasks {
-    withType<Copy> {
-        duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.WARN
+tasks.withType<Test> {
+    useJUnitPlatform()
+    testLogging {
+        showStandardStreams = true
+        showCauses = true
+        showStackTraces = true
+        events(*org.gradle.api.tasks.testing.logging.TestLogEvent.values())
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
     }
-    "test"(Test::class) {
-        useJUnitPlatform()
-        testLogging.showStandardStreams = true
-        testLogging {
-            showCauses = true
-            showStackTraces = true
-            showStandardStreams = true
-            events(*TestLogEvent.values())
-        }
-    }
+}
+
+tasks.withType<Copy> {
+    duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.WARN
 }
 
 if (System.getenv("CI") == true.toString()) {
