@@ -1,3 +1,26 @@
+### [1.0.1](https://github.com/Protelis/ProtelisDoc/compare/1.0.0...1.0.1) (2022-03-05)
+
+
+### Bug Fixes
+
+* **release:** generate a release ([7b8e483](https://github.com/Protelis/ProtelisDoc/commit/7b8e483e7067c13667f54b51a0320b4614dc716f))
+
+
+### Dependency updates
+
+* **core-deps:** update kotlin to 1.5.31 ([59ddc98](https://github.com/Protelis/ProtelisDoc/commit/59ddc98b6afbce709368cb07f4c60d4a5cfb5123))
+* **core-deps:** update plugin dokka to v1.6.10 ([b7174a6](https://github.com/Protelis/ProtelisDoc/commit/b7174a68eac90c7dc0561b66a3568f5e677f0170))
+* **core-deps:** update plugin kotlin-jvm to v1.6.10 ([06a7ce5](https://github.com/Protelis/ProtelisDoc/commit/06a7ce534b53b977f5e7af68499d2723745464eb))
+* **deps:** update plugin com.gradle.enterprise to v3.6.4 ([0ff4f44](https://github.com/Protelis/ProtelisDoc/commit/0ff4f4418a0cf8bf85ec3a0683c6ff6398adc957))
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v1.2.4 ([c4d5020](https://github.com/Protelis/ProtelisDoc/commit/c4d50207c8976dd8c19fda8e9f675a8d607d286b))
+* enable renovate ([92e59ee](https://github.com/Protelis/ProtelisDoc/commit/92e59ee91a26ee5ee661d315e14501456a425859))
+* only run the highest priority workflow ([364d147](https://github.com/Protelis/ProtelisDoc/commit/364d147df9a8b383c266e3a4a1003cabf7979a79))
+* **renovate:** include forks ([7cf7d0e](https://github.com/Protelis/ProtelisDoc/commit/7cf7d0eca9677dff7b13de212028b242de590685))
+
 ## [1.0.0](https://github.com/Protelis/ProtelisDoc/compare/0.4.2...1.0.0) (2022-03-05)
 
 
