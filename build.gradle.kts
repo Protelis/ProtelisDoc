@@ -7,11 +7,11 @@ plugins {
     kotlin("jvm")
     `maven-publish`
     signing
-    id("org.jetbrains.dokka")
     `java-gradle-plugin`
     alias(libs.plugins.gitSemVer)
     alias(libs.plugins.gradlePluginPublish)
     alias(libs.plugins.publishOnCentral)
+    alias(libs.plugins.dokka)
 }
 
 group = "org.protelis"
@@ -32,9 +32,7 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
     implementation(kotlin("gradle-plugin"))
-    implementation("org.jetbrains.dokka:dokka-core:_")
-    implementation("org.jetbrains.dokka:javadoc-plugin:_")
-    implementation("org.jetbrains.dokka:dokka-gradle-plugin:_")
+    implementation(libs.bundles.dokka)
 
     testImplementation(gradleTestKit())
     testImplementation("io.kotlintest:kotlintest-runner-junit5:_")

@@ -1,4 +1,5 @@
 [versions]
+dokka = "1.5.0"
 konf = "1.1.2"
 kotest = "4.6.4"
 kotlin = "1.6.10"
@@ -10,12 +11,16 @@ konf-yaml = { module = "com.uchuhimo:konf-yaml", version.ref = "konf" }
 kotest-junit5-jvm = { module = "io.kotest:kotest-runner-junit5-jvm", version.ref = "kotest" }
 kotest-assertions-core-jvm = { module = "io.kotest:kotest-assertions-core-jvm", version.ref = "kotest" }
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
+dokka-core = { module = "org.jetbrains.dokka:dokka-core", version.ref = "dokka" }
+dokka-dokka-gradle-plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
+dokka-javadoc-plugin = { module = "org.jetbrains.dokka:javadoc-plugin", version.ref = "dokka" }
 
 [bundles]
+dokka = [ "dokka-core", "dokka-dokka-gradle-plugin", "dokka-javadoc-plugin" ]
 kotlin-testing = [ "kotest-junit5-jvm", "kotest-assertions-core-jvm", "mockito-core" ]
 
 [plugins]
-dokka = { id = "org.jetbrains.dokka", version.ref = "kotlin" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 gitSemVer = { id = "org.danilopianini.git-sensitive-semantic-versioning", version = "0.3.0" }
 gradlePluginPublish = { id = "com.gradle.plugin-publish", version = "0.15.0" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
