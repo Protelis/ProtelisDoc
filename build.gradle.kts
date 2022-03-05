@@ -5,11 +5,11 @@ plugins {
     kotlin("jvm")
     `maven-publish`
     signing
-    id("com.gradle.plugin-publish")
     id("org.danilopianini.git-sensitive-semantic-versioning")
     id("org.danilopianini.publish-on-central")
     id("org.jetbrains.dokka")
     `java-gradle-plugin`
+    alias(libs.plugins.gradlePluginPublish)
 }
 
 group = "org.protelis"
