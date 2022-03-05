@@ -1,3 +1,15 @@
+### [1.0.3](https://github.com/Protelis/ProtelisDoc/compare/1.0.2...1.0.3) (2022-03-05)
+
+
+### Bug Fixes
+
+* always add the Kotlin standard library in the protelisdoc configuration ([0fbe137](https://github.com/Protelis/ProtelisDoc/commit/0fbe13725cdd541744a93dce368b8352e502abaa))
+
+
+### Tests
+
+* test compatibility with the gradle toolchains ([e99a40b](https://github.com/Protelis/ProtelisDoc/commit/e99a40ba3d99e71972b20f8f01d003864627db73))
+
 ### [1.0.2](https://github.com/Protelis/ProtelisDoc/compare/1.0.1...1.0.2) (2022-03-05)
 
 
