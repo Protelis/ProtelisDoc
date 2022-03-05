@@ -1,3 +1,10 @@
+### [1.0.2](https://github.com/Protelis/ProtelisDoc/compare/1.0.1...1.0.2) (2022-03-05)
+
+
+### Bug Fixes
+
+* remove disturbing println ([2096d2f](https://github.com/Protelis/ProtelisDoc/commit/2096d2f679c8e9af550031b459b3853fe0261e93))
+
 ### [1.0.1](https://github.com/Protelis/ProtelisDoc/compare/1.0.0...1.0.1) (2022-03-05)
 
 
