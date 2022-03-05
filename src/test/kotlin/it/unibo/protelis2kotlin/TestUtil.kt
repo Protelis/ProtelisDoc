@@ -20,15 +20,9 @@ internal object TestUtil {
         newFile(name).writeText(content().trimIndent())
 
     fun StringSpecScope.runGradleTask(workingDirectory: TemporaryFolder, task: String) {
-        val pluginClasspathResource = ClassLoader.getSystemClassLoader()
-            .getResource("plugin-classpath.txt")
-            ?: throw IllegalStateException("Did not find plugin classpath resource, run \"testClasses\" build task.")
-        val classpath = pluginClasspathResource.openStream().bufferedReader().use { reader ->
-            reader.readLines().map { File(it) }
-        }
         val result = GradleRunner.create()
             .withProjectDir(workingDirectory.root)
-            .withPluginClasspath(classpath)
+            .withPluginClasspath()
             .withArguments(task, "--stacktrace")
             .build()
         result.task(":$task")?.outcome shouldBe TaskOutcome.SUCCESS

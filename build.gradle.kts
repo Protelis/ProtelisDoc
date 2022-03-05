@@ -1,19 +1,20 @@
 @file:Suppress("UnstableApiUsage")
 
 import org.gradle.api.tasks.testing.logging.TestLogEvent
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     `maven-publish`
     signing
     `java-gradle-plugin`
+    alias(libs.plugins.dokka)
     alias(libs.plugins.gitSemVer)
     alias(libs.plugins.gradlePluginPublish)
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.qa)
+    alias(libs.plugins.multiJvmTesting)
     alias(libs.plugins.publishOnCentral)
-    alias(libs.plugins.dokka)
+    alias(libs.plugins.taskTree)
 }
 
 group = "org.protelis"
@@ -26,6 +27,11 @@ repositories {
 gitSemVer {
     maxVersionLength.set(20)
     buildMetadataSeparator.set("-")
+}
+
+multiJvm {
+    jvmVersionForCompilation.set(8)
+    maximumSupportedJvmVersion.set(latestJavaSupportedByGradle)
 }
 
 dependencies {
@@ -44,9 +50,6 @@ tasks {
     withType<Copy> {
         duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.WARN
     }
-    withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
     "test"(Test::class) {
         useJUnitPlatform()
         testLogging.showStandardStreams = true
@@ -57,20 +60,6 @@ tasks {
             events(*TestLogEvent.values())
         }
     }
-    register("createClasspathManifest") {
-        val outputDir = file("$buildDir/$name")
-        inputs.files(sourceSets.main.get().runtimeClasspath)
-        outputs.dir(outputDir)
-        doLast {
-            outputDir.mkdirs()
-            file("$outputDir/plugin-classpath.txt").writeText(sourceSets.main.get().runtimeClasspath.joinToString("\n"))
-        }
-    }
-}
-
-// Add the classpath file to the test runtime classpath
-dependencies {
-    testRuntimeOnly(files(tasks["createClasspathManifest"]))
 }
 
 if (System.getenv("CI") == true.toString()) {
