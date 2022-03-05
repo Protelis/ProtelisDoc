@@ -2,10 +2,12 @@ package it.unibo.protelis2kotlin
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDependency
 import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.invoke
 import org.jetbrains.dokka.DokkaVersion
 import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.kotlin.config.KotlinCompilerVersion
 import java.io.File
 import java.io.File.separator as SEP
 
@@ -37,8 +39,8 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
     private val dokkaPluginName = "org.jetbrains.dokka"
 
     override fun apply(project: Project) {
-        val extension =
-            project.extensions.create(protelis2KotlinPluginConfig, ProtelisDocExtension::class.java, project)
+        val extension = project.extensions
+            .create(protelis2KotlinPluginConfig, ProtelisDocExtension::class.java, project)
         project.logger.debug(
             """
                 Applying plugin ProtelisDoc.
@@ -56,6 +58,13 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
             project.configurations.findByName("implementation")?.let {
                 configuration.extendsFrom(it)
             }
+            configuration.dependencies.add(
+                DefaultExternalModuleDependency(
+                    "org.jetbrains.kotlin",
+                    "kotlin-stdlib",
+                    KotlinCompilerVersion.VERSION,
+                )
+            )
         }
         // Kotlin generation task
         val genKotlinTask = project.task(generateKotlinFromProtelisTaskName) {
