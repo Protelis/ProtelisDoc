@@ -1,3 +1,15 @@
+### [3.0.1](https://github.com/Protelis/ProtelisDoc/compare/3.0.0...3.0.1) (2022-03-05)
+
+
+### Bug Fixes
+
+* **release:** fix GitHub maven repo name ([fcd58a1](https://github.com/Protelis/ProtelisDoc/commit/fcd58a1c694c757f34c43d8a9652693af7a1fdd2))
+
+
+### Build and continuous integration
+
+* **release:** do not run the release on forks ([8117844](https://github.com/Protelis/ProtelisDoc/commit/81178445a88b01c63cebc9d08134cd755320b655))
+
 ## [3.0.0](https://github.com/Protelis/ProtelisDoc/compare/2.0.0...3.0.0) (2022-03-05)
 
 
