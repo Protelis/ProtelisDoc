@@ -1,3 +1,14 @@
+## [3.0.0](https://github.com/Protelis/ProtelisDoc/compare/2.0.0...3.0.0) (2022-03-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* major change to all internals
+
+### Refactoring
+
+* major change to all internals ([da6d142](https://github.com/Protelis/ProtelisDoc/commit/da6d1420bd91f627f1ae4836bf3461da97c2d117))
+
 ## [2.0.0](https://github.com/Protelis/ProtelisDoc/compare/1.0.3...2.0.0) (2022-03-05)
 
 
