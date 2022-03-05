@@ -1,25 +1,15 @@
 package it.unibo.protelis2kotlin
 
 import io.kotest.core.spec.style.StringSpec
-import org.gradle.internal.impldep.org.junit.rules.TemporaryFolder
-import org.gradle.testkit.runner.GradleRunner
-import java.io.File
+import it.unibo.protelis2kotlin.TestUtil.file
+import it.unibo.protelis2kotlin.TestUtil.folder
+import it.unibo.protelis2kotlin.TestUtil.runGradleTask
 import java.io.File.separator as SEP
 
 class Protelis2KotlinTests : StringSpec({
-    fun folder(closure: TemporaryFolder.() -> Unit) = TemporaryFolder().apply {
-        create()
-        closure()
-    }
-    fun TemporaryFolder.file(name: String, content: () -> String) =
-        newFile(name).writeText(content().trimIndent())
-
-    val MS = "\"\"\""
 
     val workingDirectory = folder {
-        file("settings.gradle") { "rootProject.name = 'testproject'" }
-        File("""${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis""").mkdirs()
-        File("""${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis${SEP}file.pt""").writeText(
+        file("src${SEP}main${SEP}protelis${SEP}file.pt") {
             """
             module protelis:coord:accumulation
             import protelis:coord:meta
@@ -58,8 +48,7 @@ class Protelis2KotlinTests : StringSpec({
               */
             def sth(){}
             """.trimIndent()
-        )
-
+        }
         file("build.gradle.kts") {
             """
             import org.jetbrains.dokka.gradle.DokkaTask
@@ -77,28 +66,14 @@ class Protelis2KotlinTests : StringSpec({
             }
     
             protelisdoc {
-                baseDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}protelis$MS)
-                destDir.set($MS${this.root.absoluteFile.absolutePath}${SEP}src${SEP}main${SEP}kotlin$MS)
+                baseDir.set("src/main/protelis")
+                destDir.set("src/main/kotlin")
                 debug.set(true)
             }
             """.trimIndent()
         }
     }
-    val pluginClasspathResource = ClassLoader.getSystemClassLoader()
-        .getResource("plugin-classpath.txt")
-        ?: throw IllegalStateException("Did not find plugin classpath resource, run \"testClasses\" build task.")
-    val classpath = pluginClasspathResource.openStream().bufferedReader().use { reader ->
-        reader.readLines().map { File(it) }
-    }
     "Generation of Kotlin interfaces from Protelis sources should work" {
-        println(workingDirectory.root)
-        val result = GradleRunner.create()
-            .withProjectDir(workingDirectory.root)
-            .withPluginClasspath(classpath)
-            .withArguments("generateKotlinFromProtelis", "--stacktrace")
-            .build()
-        println(result.tasks)
-        println(result.output)
-        File(workingDirectory.root.toURI()).walkTopDown().forEach { println(it) }
+        runGradleTask(workingDirectory, "generateKotlinFromProtelis")
     }
 })

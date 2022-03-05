@@ -18,7 +18,7 @@ const val PROTELIS_FILE_EXTENSION = "pt"
 /**
  * A simple custom console logger.
  */
-object Log {
+internal object Log {
     var debug = true
 
     fun log(msg: String) {

@@ -3,6 +3,7 @@
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     `maven-publish`
     signing
@@ -10,6 +11,7 @@ plugins {
     alias(libs.plugins.gitSemVer)
     alias(libs.plugins.gradlePluginPublish)
     alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.qa)
     alias(libs.plugins.publishOnCentral)
     alias(libs.plugins.dokka)
 }
