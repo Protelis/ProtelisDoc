@@ -26,4 +26,4 @@ gradleEnterprise {
     }
 }
 
-rootProject.name = "protelis-kdoc-generator"
+rootProject.name = "protelisdoc"
