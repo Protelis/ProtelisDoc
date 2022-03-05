@@ -4,12 +4,12 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm")
     `maven-publish`
     signing
     `java-gradle-plugin`
     alias(libs.plugins.gitSemVer)
     alias(libs.plugins.gradlePluginPublish)
+    alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.publishOnCentral)
     alias(libs.plugins.dokka)
 }
