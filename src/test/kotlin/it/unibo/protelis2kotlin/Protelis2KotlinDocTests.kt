@@ -138,8 +138,8 @@ class Protelis2KotlinDocTests : StringSpec({
             """
             plugins {
                 id("org.protelis.protelisdoc")
+                id("org.danilopianini.multi-jvm-test-plugin") version "0.3.4"
             }
-            
             repositories {
                 mavenCentral()
                 jcenter {
@@ -150,11 +150,13 @@ class Protelis2KotlinDocTests : StringSpec({
                     }
                 }
             }
-            
             dependencies {
                 protelisdoc("org.protelis:protelis-interpreter:13.0.0")
             }
-            
+            multiJvm {
+                jvmVersionForCompilation.set(8)
+                maximumSupportedJvmVersion.set(latestJava)
+            }
             protelisdoc {
                 baseDir.set("src/main/protelis")
                 destDir.set("docs")
