@@ -9,7 +9,6 @@ plugins {
     id("org.danilopianini.git-sensitive-semantic-versioning")
     id("org.danilopianini.publish-on-central")
     id("org.jetbrains.dokka")
-    id("kotlin-qa")
     `java-gradle-plugin`
 }
 
@@ -37,10 +36,6 @@ dependencies {
 
     testImplementation(gradleTestKit())
     testImplementation("io.kotlintest:kotlintest-runner-junit5:_")
-}
-
-ktlint {
-    ignoreFailures.set(false)
 }
 
 tasks {
