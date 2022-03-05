@@ -70,10 +70,10 @@ if (System.getenv("CI") == true.toString()) {
 val websiteUrl = "https://github.com/Protelis/Protelis-KDoc-generator"
 
 publishOnCentral {
-    projectDescription = "A translator from documented Protelis code to compiling Kotlin interfaces"
-    projectLongName = "Protelis KDoc generator"
-    projectUrl = websiteUrl
-    scmConnection = "git@github.com:Protelis/Protelis-KDoc-generator.git"
+    projectDescription.set("A translator from documented Protelis code to compiling Kotlin interfaces")
+    projectLongName.set("ProtelisDoc generator")
+    projectUrl.set(websiteUrl)
+    scmConnection.set("git@github.com:Protelis/Protelis-KDoc-generator.git")
 }
 
 publishing {
