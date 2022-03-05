@@ -27,10 +27,6 @@ internal object Log {
         }
     }
 
-    fun printInfo(msg: String) {
-        println(msg)
-    }
-
     fun logException(e: Throwable) {
         val errorStr = StringWriter()
         e.printStackTrace(PrintWriter(errorStr))
@@ -253,7 +249,7 @@ private fun parseFile(content: String): List<ProtelisItem> {
             val groups = matchRes.groupValues
             val doc = groups[2]
             val funLine = groups[3]
-            val parsedString = matchRes.value.lines().map { "> " + it }.joinToString("\n")
+            val parsedString = matchRes.value.lines().map { "> $it" }.joinToString("\n")
             val parsedDoc: ProtelisFunDoc = runCatching {
                 parseDoc(doc)
             }.onFailure {
@@ -337,8 +333,7 @@ private fun sanitizeNameForKotlin(name: String): String = when (name) {
  */
 private fun generateKotlinFun(fn: ProtelisFun): String {
     var genTypesStr = fn.genericTypes.joinToString(",")
-    if (!genTypesStr.isEmpty()) genTypesStr = " <$genTypesStr>"
-
+    if (genTypesStr.isNotEmpty()) genTypesStr = " <$genTypesStr>"
     return "@Suppress(\"UNUSED_PARAMETER\")\nfun$genTypesStr ${sanitizeNameForKotlin(fn.name)}(" +
         fn.parameters.map { "${sanitizeNameForKotlin(it.name)}: ${generateKotlinType(it.type)}" }.joinToString(", ") +
         "): ${generateKotlinType(fn.returnType)} = TODO()"
@@ -364,7 +359,7 @@ private fun generateKotlin(protelisItems: List<ProtelisItem>): String {
         pitem.copy(
             function = fn.copy(
                 returnType = doc.documentationPieces
-                    .filter { it is DocReturn }
+                    .filterIsInstance<DocReturn>()
                     .map { (it as DocReturn).returnType }
                     .firstOrNull()
                     ?: "",
@@ -379,7 +374,7 @@ private fun generateKotlin(protelisItems: List<ProtelisItem>): String {
                         )
                     },
                 genericTypes = doc.documentationPieces
-                    .map { if (!(it is DocParam)) "" else it.type }
+                    .map { if (it !is DocParam) "" else it.type }
                     .flatMap { type ->
                         "([A-Z]'?)".toRegex()
                             .findAll(type)
@@ -436,7 +431,7 @@ fun main(args: Array<String>) {
             return@forEach
         }
         val pkgParts = pkg.split(':')
-        Log.log("\tPackage: " + pkg)
+        Log.log("\tPackage: $pkg")
         // RESET CONTEXT
         context = Context(setOf())
         val protelisItems: List<ProtelisItem> = runCatching {
@@ -453,7 +448,7 @@ fun main(args: Array<String>) {
             package ${pkgParts.joinToString(".")}
             """.trimIndent()
         val kotlinCode = generateKotlin(protelisItems)
-        Log.log("\tContext: " + context)
+        Log.log("\tContext: $context")
         val importCode = context.protelisTypes
             .map {
                 when (it) {
@@ -463,11 +458,10 @@ fun main(args: Array<String>) {
                 }
             }
             .filterNot { it.isEmpty() }
-            .map { "import " + it }
-            .joinToString("\n") + "\n\n"
+            .joinToString("\n") { "import $it" } + "\n\n"
         val kotlinFullCode = pkgCode + importCode + kotlinCode
         val outPath = "$destDir$SEP${pkgParts.joinToString(SEP)}$SEP${file.name.replace(".pt",".kt")}"
-        Log.log("\tWriting " + outPath)
+        Log.log("\tWriting $outPath")
         File(outPath).let {
             it.parentFile.mkdirs()
             it.createNewFile()
