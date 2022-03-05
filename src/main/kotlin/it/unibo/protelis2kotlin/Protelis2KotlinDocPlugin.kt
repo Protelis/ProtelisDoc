@@ -31,7 +31,7 @@ open class ProtelisDocExtension @JvmOverloads constructor(
  * reuses the Protelis2Kotlin and Dokka plugins to generate Kotlin docs from Protelis code.
  */
 class Protelis2KotlinDocPlugin : Plugin<Project> {
-    private val generateProtelisDocTaskName = "generateProtelisDoc"
+    private val generateProtelisDocTaskName = "protelisdoc"
     private val generateKotlinFromProtelisTaskName = "generateKotlinFromProtelis"
     private val protelis2KotlinPluginConfig = "protelisdoc"
     private val dokkaPluginName = "org.jetbrains.dokka"

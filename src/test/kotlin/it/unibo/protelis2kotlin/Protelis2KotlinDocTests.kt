@@ -166,6 +166,6 @@ class Protelis2KotlinDocTests : StringSpec({
         }
     }
     "Generation of Kotlin docs from Protelis sources should work" {
-        runGradleTask(workingDirectory, "generateProtelisDoc")
+        runGradleTask(workingDirectory, "protelisdoc")
     }
 })
