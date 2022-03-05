@@ -35,7 +35,7 @@ dependencies {
     implementation(libs.bundles.dokka)
 
     testImplementation(gradleTestKit())
-    testImplementation("io.kotlintest:kotlintest-runner-junit5:_")
+    testImplementation(libs.bundles.kotlin.testing)
 }
 
 tasks {
