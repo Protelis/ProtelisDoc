@@ -25,6 +25,7 @@ internal object TestUtil {
             .withPluginClasspath()
             .withArguments(task, "--stacktrace")
             .build()
+        println(result.output)
         result.task(":$task")?.outcome shouldBe TaskOutcome.SUCCESS
     }
 }

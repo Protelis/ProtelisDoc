@@ -1,9 +1,12 @@
 package it.unibo.protelis2kotlin
 
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.collections.shouldNotBeEmpty
+import io.kotest.matchers.sequences.shouldNotBeEmpty
 import it.unibo.protelis2kotlin.TestUtil.file
 import it.unibo.protelis2kotlin.TestUtil.folder
 import it.unibo.protelis2kotlin.TestUtil.runGradleTask
+import java.io.File
 import java.io.File.separator as SEP
 
 class Protelis2KotlinTests : StringSpec({
@@ -29,7 +32,7 @@ class Protelis2KotlinTests : StringSpec({
                 a && b
             }
             
-            public def or+(x,y){}
+            public def or(x,y){}
             
             /**
              * a
@@ -41,7 +44,7 @@ class Protelis2KotlinTests : StringSpec({
             /**
               * c
               */
-            def add+(x,y){}
+            def add(x,y) = { x + y }
             
             /**
               * d
@@ -51,23 +54,17 @@ class Protelis2KotlinTests : StringSpec({
         }
         file("build.gradle.kts") {
             """
-            import org.jetbrains.dokka.gradle.DokkaTask
-    
             plugins {
                 id("org.protelis.protelisdoc")
             }
-    
             repositories {
-                jcenter() // or maven { url 'https://dl.bintray.com/kotlin/dokka' }
+                mavenCentral()
             }
-    
             dependencies {
                 protelisdoc("org.protelis:protelis-interpreter:11.1.0")
             }
-    
             protelisdoc {
                 baseDir.set("src/main/protelis")
-                destDir.set("src/main/kotlin")
                 debug.set(true)
             }
             """.trimIndent()
@@ -75,5 +72,8 @@ class Protelis2KotlinTests : StringSpec({
     }
     "Generation of Kotlin interfaces from Protelis sources should work" {
         runGradleTask(workingDirectory, "generateKotlinFromProtelis")
+        File(workingDirectory.root, "build").walkTopDown()
+            .filter { it.extension == "kt" }
+            .shouldNotBeEmpty()
     }
 })

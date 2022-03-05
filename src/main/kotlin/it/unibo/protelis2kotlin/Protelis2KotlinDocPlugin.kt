@@ -31,31 +31,18 @@ open class ProtelisDocExtension @JvmOverloads constructor(
  * reuses the Protelis2Kotlin and Dokka plugins to generate Kotlin docs from Protelis code.
  */
 class Protelis2KotlinDocPlugin : Plugin<Project> {
-    private val generateProtelisDocTaskName = "protelisdoc"
+    private val protelisDocTaskName = "protelisdoc"
     private val generateKotlinFromProtelisTaskName = "generateKotlinFromProtelis"
-    private val protelis2KotlinPluginConfig = "protelisdoc"
+    private val extensionName = "protelisdoc"
     private val dokkaPluginName = "org.jetbrains.dokka"
 
     override fun apply(project: Project) {
         val extension = project.extensions
-            .create(protelis2KotlinPluginConfig, ProtelisDocExtension::class.java, project)
-        project.logger.debug(
-            """
-                Applying plugin ProtelisDoc.
-                Default configuration:
-                - debug = ${extension.debug.get()}
-                - baseDir = ${extension.baseDir.get()}
-                - destDir = ${extension.destDir.get()}
-                - kotlinDestDir = ${extension.kotlinDestDir.get()}
-            """.trimIndent()
-        )
+            .create(extensionName, ProtelisDocExtension::class.java, project)
         if (!project.pluginManager.hasPlugin(dokkaPluginName)) {
             project.pluginManager.apply(dokkaPluginName)
         }
-        val config = project.configurations.create(protelis2KotlinPluginConfig) { configuration ->
-            project.configurations.findByName("implementation")?.let {
-                configuration.extendsFrom(it)
-            }
+        val config = project.configurations.create(extensionName) { configuration ->
             configuration.dependencies.add(
                 project.dependencies.create(
                     "org.jetbrains.kotlin:kotlin-stdlib:${KotlinCompilerVersion.VERSION}"
@@ -65,12 +52,20 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         // Kotlin generation task
         val genKotlinTask = project.task(generateKotlinFromProtelisTaskName) {
             it.doLast {
-                val debugFlag = if (extension.debug.get()) "1" else "0"
-                main(arrayOf(extension.baseDir.get(), extension.kotlinDestDir.get(), debugFlag))
+                project.logger.debug(
+                    """
+                    Applying plugin ProtelisDoc. Configuration:
+                    - debug = ${extension.debug.get()}
+                    - baseDir = ${extension.baseDir.get()}
+                    - destDir = ${extension.destDir.get()}
+                    - kotlinDestDir = ${extension.kotlinDestDir.get()}
+                    """.trimIndent()
+                )
+                project.protelis2Kt(extension.baseDir.get(), extension.kotlinDestDir.get())
             }
         }
         // ProtelisDoc task, based on Dokka
-        val protelisdoc = project.tasks.register(generateProtelisDocTaskName, DokkaTask::class.java) { dokkaTask ->
+        val protelisdoc = project.tasks.register(protelisDocTaskName, DokkaTask::class.java) { dokkaTask ->
             dokkaTask.plugins.dependencies.add(
                 project.dependencies.create("org.jetbrains.dokka:javadoc-plugin:${DokkaVersion.version}")
             )
@@ -80,8 +75,15 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
             protelisdoc.get().apply {
                 dokkaSourceSets { sourceSetContainer ->
                     sourceSetContainer.create("protelisdoc") { sourceSet ->
-                        sourceSet.classpath.setFrom(config.resolve())
                         sourceSet.sourceRoots.setFrom(extension.kotlinDestDir.get())
+                        val resolvedConfiguration = config.resolvedConfiguration
+                        if (resolvedConfiguration.hasError()) {
+                            kotlin.runCatching { resolvedConfiguration.rethrowFailure() }.onFailure {
+                                logger.warn("ProtelisDoc failed dependecy resolution!", it)
+                            }
+                        } else {
+                            sourceSet.classpath.setFrom(config.resolvedConfiguration.files)
+                        }
                     }
                 }
                 outputDirectory.set(extension.destDir.map { project.file(it) })
