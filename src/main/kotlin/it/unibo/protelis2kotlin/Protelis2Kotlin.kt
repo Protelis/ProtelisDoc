@@ -360,7 +360,7 @@ private fun generateKotlin(protelisItems: List<ProtelisItem>): String {
             function = fn.copy(
                 returnType = doc.documentationPieces
                     .filterIsInstance<DocReturn>()
-                    .map { (it as DocReturn).returnType }
+                    .map { it.returnType }
                     .firstOrNull()
                     ?: "",
                 parameters = fn.parameters
