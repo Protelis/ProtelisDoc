@@ -1,3 +1,22 @@
+### [3.0.2](https://github.com/Protelis/ProtelisDoc/compare/3.0.1...3.0.2) (2022-03-10)
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v3 ([a96ae22](https://github.com/Protelis/ProtelisDoc/commit/a96ae228ebfddb6289ab65dd29b741037631998b))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v1.2.6 ([7f6c100](https://github.com/Protelis/ProtelisDoc/commit/7f6c100b15a8626a4e9e26c9bdee936d5e3bda80))
+* never attempt parallel releases ([ce5ed67](https://github.com/Protelis/ProtelisDoc/commit/ce5ed671c9af40729dbf0ef85b0cad3e581effb1))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v7.4.1 ([f02dd44](https://github.com/Protelis/ProtelisDoc/commit/f02dd44dcb5a4cf049c1af2951f557f5fc157fdd))
+* **deps:** update dependency org.mockito:mockito-core to v4.4.0 ([5b4ba0f](https://github.com/Protelis/ProtelisDoc/commit/5b4ba0fc8e7064777de6c446e25f54f3c57c2ed4))
+* **deps:** update plugin com.gradle.enterprise to v3.8.1 ([9d368a6](https://github.com/Protelis/ProtelisDoc/commit/9d368a65e84dc0f5cb332370d947321a823990a4))
+* **deps:** update plugin gradlepluginpublish to v0.20.0 ([10446a6](https://github.com/Protelis/ProtelisDoc/commit/10446a6709ae8f7f260f939f8f20e9146a483e4f))
+* **deps:** update plugin kotlin-qa to v0.12.0 ([b8e46e4](https://github.com/Protelis/ProtelisDoc/commit/b8e46e4e2ca23ee9ff80c5990da03effecf59e9d))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.0.5 ([54ca1bf](https://github.com/Protelis/ProtelisDoc/commit/54ca1bfee28d48d4c303168a6e130a7331837c84))
+
 ### [3.0.1](https://github.com/Protelis/ProtelisDoc/compare/3.0.0...3.0.1) (2022-03-05)
 
 
