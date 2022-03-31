@@ -1,3 +1,25 @@
+### [3.0.3](https://github.com/Protelis/ProtelisDoc/compare/3.0.2...3.0.3) (2022-03-31)
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v1.2.7 ([16300af](https://github.com/Protelis/ProtelisDoc/commit/16300afc3b92473dcf63d26fb45c4407faf64075))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v7.4.2 ([9adc2a0](https://github.com/Protelis/ProtelisDoc/commit/9adc2a08193bc78de5c261c0b2a81cc4703b5778))
+* **deps:** update dependency io.github.classgraph:classgraph to v4.8.143 ([07def02](https://github.com/Protelis/ProtelisDoc/commit/07def026e814c3a2758bff4f9cf02389e359d79f))
+* **deps:** update io.kotest ([3dad124](https://github.com/Protelis/ProtelisDoc/commit/3dad124ee15e684a1a537e4a28ff4078c05cb9d6))
+* **deps:** update io.kotest to v5.2.1 ([16e5b9a](https://github.com/Protelis/ProtelisDoc/commit/16e5b9ae51580228bc56854f64fe44e759f745a0))
+* **deps:** update io.kotest to v5.2.2 ([560a968](https://github.com/Protelis/ProtelisDoc/commit/560a9684e2f924232bea202a6da1b3bd402e23e5))
+* **deps:** update plugin com.gradle.enterprise to v3.9 ([7dfb83d](https://github.com/Protelis/ProtelisDoc/commit/7dfb83de4b6213dfa8d4db9842adafdd76eea12b))
+* **deps:** update plugin gradlepluginpublish to v0.21.0 ([f440c2d](https://github.com/Protelis/ProtelisDoc/commit/f440c2d79140d07971bb4b1003c6677de190a564))
+* **deps:** update plugin kotlin-qa to v0.12.1 ([01ac01d](https://github.com/Protelis/ProtelisDoc/commit/01ac01db3b28909d5249b27c3f81be9af2ddc761))
+* **deps:** update plugin kotlin-qa to v0.13.0 ([78604a6](https://github.com/Protelis/ProtelisDoc/commit/78604a66b9184163790c044b219d07682c0a76e6))
+* **deps:** update plugin kotlin-qa to v0.14.0 ([88d7ecc](https://github.com/Protelis/ProtelisDoc/commit/88d7ecc83c708b91b0f728c0f519cf0278ea42c6))
+* **deps:** update plugin publishoncentral to v0.7.14 ([41ecd7a](https://github.com/Protelis/ProtelisDoc/commit/41ecd7a11437ecafcbf066d1907d39e200625963))
+
 ### [3.0.2](https://github.com/Protelis/ProtelisDoc/compare/3.0.1...3.0.2) (2022-03-10)
 
 
