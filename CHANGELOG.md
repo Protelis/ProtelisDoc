@@ -1,3 +1,19 @@
+### [3.0.4](https://github.com/Protelis/ProtelisDoc/compare/3.0.3...3.0.4) (2022-04-01)
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v1.2.8 ([5945e61](https://github.com/Protelis/ProtelisDoc/commit/5945e61552d73d2babb19bfc963f263729c8bc12))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v1.2.9 ([7cfa58b](https://github.com/Protelis/ProtelisDoc/commit/7cfa58b5df147852bfc854b96b4c7290e16afdd6))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin:kotlin-compiler-embeddable to v1.6.20 ([103fe36](https://github.com/Protelis/ProtelisDoc/commit/103fe3628796298e15f1872c971619118c30885d))
+* **deps:** update plugin kotlin-qa to v0.14.1 ([9267b5c](https://github.com/Protelis/ProtelisDoc/commit/9267b5c54668fc6334297392e278021bc58983e0))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.0.6 ([7a20157](https://github.com/Protelis/ProtelisDoc/commit/7a2015752ffbcd02c0767ce489714177163507d0))
+* **deps:** update plugin publishoncentral to v0.7.15 ([55fc8c6](https://github.com/Protelis/ProtelisDoc/commit/55fc8c6d30157f2647cff10ae411988db7207b29))
+
 ### [3.0.3](https://github.com/Protelis/ProtelisDoc/compare/3.0.2...3.0.3) (2022-03-31)
 
 
