@@ -1,3 +1,22 @@
+### [3.0.5](https://github.com/Protelis/ProtelisDoc/compare/3.0.4...3.0.5) (2022-04-14)
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v1.2.10 ([f7078d0](https://github.com/Protelis/ProtelisDoc/commit/f7078d03b461b29edb90bc9c2657f2a1a036ecc5))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v1.2.12 ([f5064d3](https://github.com/Protelis/ProtelisDoc/commit/f5064d3eb50100bcdb64bf92ba85564df10aba54))
+
+
+### Dependency updates
+
+* **core-deps:** update org.jetbrains.dokka to v1.6.20 ([9bc2736](https://github.com/Protelis/ProtelisDoc/commit/9bc2736884edcbdf0a5e38484842988f9136641e))
+* **deps:** update io.kotest to v5.2.3 ([65239e2](https://github.com/Protelis/ProtelisDoc/commit/65239e2f438ede447de865a0d02a0c1e81c9a028))
+* **deps:** update plugin kotlin-qa to v0.14.2 ([bc27bb5](https://github.com/Protelis/ProtelisDoc/commit/bc27bb505f6b08403abecaee1a9178c1f062e88b))
+* **deps:** update plugin kotlin-qa to v0.15.0 ([cb26abe](https://github.com/Protelis/ProtelisDoc/commit/cb26abe540a5a092308ca09d471922e5bf60bbdc))
+* **deps:** update plugin multijvmtesting to v0.3.5 ([323bcf4](https://github.com/Protelis/ProtelisDoc/commit/323bcf466375216643ce882f5f94d85f50e6fe63))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.0.7 ([c393eb2](https://github.com/Protelis/ProtelisDoc/commit/c393eb20e76a14f7950910ce09cbf6baed9577eb))
+* **deps:** update plugin publishoncentral to v0.7.16 ([2a380c4](https://github.com/Protelis/ProtelisDoc/commit/2a380c40cc2b6c241a7cce318ab2d12df4669f43))
+
 ### [3.0.4](https://github.com/Protelis/ProtelisDoc/compare/3.0.3...3.0.4) (2022-04-01)
 
 
