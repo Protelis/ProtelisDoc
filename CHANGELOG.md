@@ -1,3 +1,23 @@
+### [3.0.6](https://github.com/Protelis/ProtelisDoc/compare/3.0.5...3.0.6) (2022-04-19)
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v3.0.1 ([07edaf8](https://github.com/Protelis/ProtelisDoc/commit/07edaf8b8be71c7c499c3c97c499ee67ef062457))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin:kotlin-compiler-embeddable to v1.6.21 ([4e7ef31](https://github.com/Protelis/ProtelisDoc/commit/4e7ef3143fa407c996cdfdda1af6dc289b0210ff))
+* **deps:** update dependency io.github.classgraph:classgraph to v4.8.145 ([a7e5ff9](https://github.com/Protelis/ProtelisDoc/commit/a7e5ff938ef1a30bb339af48f5c19b85fcef4135))
+* **deps:** update dependency io.github.classgraph:classgraph to v4.8.146 ([b2d6065](https://github.com/Protelis/ProtelisDoc/commit/b2d606533ad9d177076f375d8c1e349dcbce7822))
+* **deps:** update plugin com.gradle.enterprise to v3.10 ([f845a78](https://github.com/Protelis/ProtelisDoc/commit/f845a7888562c55091ff5ee9a91f7a13060da9df))
+* **deps:** update plugin kotlin-qa to v0.15.1 ([7e836b0](https://github.com/Protelis/ProtelisDoc/commit/7e836b0fc5c0aa2a29e54578a7573504e872e6fc))
+* **deps:** update plugin kotlin-qa to v0.16.0 ([5bf4d76](https://github.com/Protelis/ProtelisDoc/commit/5bf4d76786efd598210b96cf837f5551deb51a81))
+* **deps:** update plugin multijvmtesting to v0.3.6 ([f0e3d8a](https://github.com/Protelis/ProtelisDoc/commit/f0e3d8a25db86ffebe172394e86b318a108bbd7d))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.0.8 ([b77728d](https://github.com/Protelis/ProtelisDoc/commit/b77728d3207fea846466e8c7d2e2f8b9f25217fe))
+* **deps:** update plugin publishoncentral to v0.7.17 ([6cc3cc5](https://github.com/Protelis/ProtelisDoc/commit/6cc3cc5aa67d4c50c765ae705f732998646f4655))
+
 ### [3.0.5](https://github.com/Protelis/ProtelisDoc/compare/3.0.4...3.0.5) (2022-04-14)
 
 
