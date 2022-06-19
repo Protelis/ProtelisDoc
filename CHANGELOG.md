@@ -1,3 +1,13 @@
+## [3.0.9](https://github.com/Protelis/ProtelisDoc/compare/3.0.8...3.0.9) (2022-06-19)
+
+
+### Dependency updates
+
+* **core-deps:** update dokka to v1.7.0 ([d570f7a](https://github.com/Protelis/ProtelisDoc/commit/d570f7a68f63c550d006a06f318db808af510661))
+* **deps:** update plugin multijvmtesting to v0.4.3 ([b42142d](https://github.com/Protelis/ProtelisDoc/commit/b42142d4875f745a4d7184cd5dee2fb579867e5b))
+* **deps:** update plugin publishoncentral to v0.8.3 ([7cf50c4](https://github.com/Protelis/ProtelisDoc/commit/7cf50c48119450fb298fe09efa9c0c7e3b632e18))
+* **deps:** update plugin publishoncentral to v1 ([b637492](https://github.com/Protelis/ProtelisDoc/commit/b63749267a94754c0f2fac72dc3e84fbf83ac864))
+
 ## [3.0.8](https://github.com/Protelis/ProtelisDoc/compare/3.0.7...3.0.8) (2022-06-11)
 
 
