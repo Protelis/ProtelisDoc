@@ -1,3 +1,22 @@
+## [3.0.10](https://github.com/Protelis/ProtelisDoc/compare/3.0.9...3.0.10) (2022-07-07)
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.0.3 ([1d4304c](https://github.com/Protelis/ProtelisDoc/commit/1d4304c190cced15d5f44c20be662c56673dab77))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.0 ([ba1d722](https://github.com/Protelis/ProtelisDoc/commit/ba1d722c080a24a325118e9920eb6259758a6b80))
+
+
+### Dependency updates
+
+* **core-deps:** update kotlin to v1.7.10 ([8d5fb0b](https://github.com/Protelis/ProtelisDoc/commit/8d5fb0bba95df73b4ae776c64c4b5f5ac24984df))
+* **deps:** update dependency io.github.classgraph:classgraph to v4.8.148 ([e7b20b4](https://github.com/Protelis/ProtelisDoc/commit/e7b20b4ca4669691fe538539de0148fabea9c515))
+* **deps:** update dependency io.github.classgraph:classgraph to v4.8.149 ([65a3a3e](https://github.com/Protelis/ProtelisDoc/commit/65a3a3e7e577b6603c49f1dd4b11ae52350308aa))
+* **deps:** update plugin gradlepluginpublish to v1 ([2860017](https://github.com/Protelis/ProtelisDoc/commit/2860017eee31ea2bdaa270e54320f333f75abeb3))
+* **deps:** update plugin multijvmtesting to v0.4.4 ([f1e911b](https://github.com/Protelis/ProtelisDoc/commit/f1e911b6b686e914406ab2db2b4e1edbf473d78d))
+* **deps:** update plugin multijvmtesting to v0.4.5 ([00e063d](https://github.com/Protelis/ProtelisDoc/commit/00e063d00c287a144cc204a9332755a109adc4cf))
+* **deps:** update plugin publishoncentral to v2 ([dca219b](https://github.com/Protelis/ProtelisDoc/commit/dca219b0380e0ed02c4f67b0dc5c9465da9542e3))
+
 ## [3.0.9](https://github.com/Protelis/ProtelisDoc/compare/3.0.8...3.0.9) (2022-06-19)
 
 
