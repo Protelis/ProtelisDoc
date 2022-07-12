@@ -1,3 +1,22 @@
+## [3.0.11](https://github.com/Protelis/ProtelisDoc/compare/3.0.10...3.0.11) (2022-07-12)
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.1 ([e316d97](https://github.com/Protelis/ProtelisDoc/commit/e316d97f4b5cfc5c5fadb5787cad38cfbb6e5d2e))
+
+
+### Dependency updates
+
+* **core-deps:** update dokka to v1.7.10 ([8a62f6f](https://github.com/Protelis/ProtelisDoc/commit/8a62f6f8cbac0c838089775b4dae0785345beb6d))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.9 ([7ed458c](https://github.com/Protelis/ProtelisDoc/commit/7ed458c4eed958e467ef7c80066489fe7fee5e55))
+* **deps:** update node.js to 16.16 ([5b70e1c](https://github.com/Protelis/ProtelisDoc/commit/5b70e1ccfe96c8e6c290091c7a59101f75ba22c2))
+* **deps:** update plugin com.gradle.enterprise to v3.10.3 ([534c968](https://github.com/Protelis/ProtelisDoc/commit/534c9680f1e36fdaa7d0e42fdb081e8006e42e5c))
+* **deps:** update plugin multijvmtesting to v0.4.6 ([7573233](https://github.com/Protelis/ProtelisDoc/commit/75732334919a32a55e3899fcee9fbdb63be70d66))
+* **deps:** update plugin multijvmtesting to v0.4.7 ([430b799](https://github.com/Protelis/ProtelisDoc/commit/430b79929d49e922cec4bbae05c110362364e41c))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.0.14 ([857ebb8](https://github.com/Protelis/ProtelisDoc/commit/857ebb876e89c0295fba688081e69816925b9e3c))
+* **deps:** update plugin publishoncentral to v2.0.3 ([268e4a7](https://github.com/Protelis/ProtelisDoc/commit/268e4a74d0921514c947dd2f4e6eb36799ef9579))
+
 ## [3.0.10](https://github.com/Protelis/ProtelisDoc/compare/3.0.9...3.0.10) (2022-07-07)
 
 
