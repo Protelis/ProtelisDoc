@@ -1,3 +1,20 @@
+## [3.0.13](https://github.com/Protelis/ProtelisDoc/compare/3.0.12...3.0.13) (2022-07-28)
+
+
+### Bug Fixes
+
+* **deps:** update kotest to v5.4.1 ([a76fad2](https://github.com/Protelis/ProtelisDoc/commit/a76fad23b6a60cf29890777962bfdbecd89a9c48))
+
+
+### Dependency updates
+
+* **deps:** update kotest to v5.3.2 ([4bb460f](https://github.com/Protelis/ProtelisDoc/commit/4bb460f42cbc127213a59e4a137e61c0fc03c1d2))
+* **deps:** update kotest to v5.4.0 ([1890ee1](https://github.com/Protelis/ProtelisDoc/commit/1890ee16203537f2ed91d4cc1e5cc6690ec7c695))
+* **deps:** update plugin kotlin-qa to v0.20.4 ([9b3333a](https://github.com/Protelis/ProtelisDoc/commit/9b3333ab3180c51f7c9a121d54a72c35a03fe0c9))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.0.16 ([856e622](https://github.com/Protelis/ProtelisDoc/commit/856e622f1b39385376c3e55668b696865eb2a5b5))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.0.17 ([ab170b2](https://github.com/Protelis/ProtelisDoc/commit/ab170b2a0b1b83ead4921805fcd4432bb1b7352a))
+* **deps:** update plugin publishoncentral to v2.0.5 ([963534e](https://github.com/Protelis/ProtelisDoc/commit/963534ef7d8c95ab441abf747f6b6ee49a752422))
+
 ## [3.0.12](https://github.com/Protelis/ProtelisDoc/compare/3.0.11...3.0.12) (2022-07-14)
 
 
