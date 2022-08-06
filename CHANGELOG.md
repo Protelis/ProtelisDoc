@@ -1,3 +1,17 @@
+## [3.0.14](https://github.com/Protelis/ProtelisDoc/compare/3.0.13...3.0.14) (2022-08-06)
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.3 ([13c3e5b](https://github.com/Protelis/ProtelisDoc/commit/13c3e5be57abec4bc8031baa3fae586fb320a4a9))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v7.5.1 ([8ae2aea](https://github.com/Protelis/ProtelisDoc/commit/8ae2aea8c549553a088a6f643c74ce4780e37935))
+* **deps:** update plugin multijvmtesting to v0.4.9 ([cadcb62](https://github.com/Protelis/ProtelisDoc/commit/cadcb625a5566fd0b804d48ed5bbf4d6378f046f))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.0.18 ([396843f](https://github.com/Protelis/ProtelisDoc/commit/396843fc5607ab707c59b4acb18b7a5f11a29894))
+
 ## [3.0.13](https://github.com/Protelis/ProtelisDoc/compare/3.0.12...3.0.13) (2022-07-28)
 
 
