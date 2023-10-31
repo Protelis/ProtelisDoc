@@ -8,8 +8,8 @@
     {
       "description": "Trigger a patch update on some dependencies",
       "matchPackagePatterns": [
-        ".*jetbrains.*dokka.*",
-        ".*jetbrains.*kotlin.*"
+        ".*dokka.*",
+        ".*kotlin.*"
       ],
       "semanticCommitScope": "core-deps"
     }
