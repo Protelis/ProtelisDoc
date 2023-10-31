@@ -202,16 +202,18 @@ private fun parseDoc(doc: String): ProtelisFunDoc {
  */
 private fun parseProtelisFunction(fline: String): ProtelisFun {
     return ProtelisFun(
-        name =
-        """def\s+(\w+)\s*\(""".toRegex().find(fline)?.groupValues?.get(1)
-            ?: throw IllegalStateException("Cannot parse function name in: $fline"),
+        name = checkNotNull("""def\s+(\w+)\s*\(""".toRegex().find(fline)?.groupValues?.get(1)) {
+            "Cannot parse function name in: $fline"
+        },
         parameters =
         """\(([^\)]*)\)""".toRegex().find(fline)?.groupValues?.get(1)?.split(",")
             ?.filter { it.isNotEmpty() }
             ?.map {
                 // if (!"""\w""".toRegex().matches(it)) throw IllegalStateException("Bad argument name: $it")
                 ProtelisFunArg(it.trim(), "")
-            }?.toList() ?: throw IllegalStateException("Cannot parse arglist in: $fline"),
+            }
+            ?.toList()
+            ?: error("Cannot parse arglist in: $fline"),
         public = "(public\\s+def)".toRegex().find(fline) != null
     )
 }
