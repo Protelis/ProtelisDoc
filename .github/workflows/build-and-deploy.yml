@@ -54,6 +54,7 @@ jobs:
   release:
     needs:
       - build
+      - dry-deploy
     runs-on: ubuntu-22.04
     if: github.event_name == 'push' && contains(github.repository, 'Protelis/ProtelisDoc')
     permissions:
@@ -84,6 +85,7 @@ jobs:
     runs-on: ubuntu-22.04
     needs:
       - build
+      - dry-deploy
       - release
     if: >-
       always() && (
