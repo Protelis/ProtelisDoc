@@ -206,7 +206,7 @@ private fun parseProtelisFunction(fline: String): ProtelisFun {
             "Cannot parse function name in: $fline"
         },
         parameters =
-        """\(([^\)]*)\)""".toRegex().find(fline)?.groupValues?.get(1)?.split(",")
+        """\(([^)]*)\)""".toRegex().find(fline)?.groupValues?.get(1)?.split(",")
             ?.filter { it.isNotEmpty() }
             ?.map {
                 // if (!"""\w""".toRegex().matches(it)) throw IllegalStateException("Bad argument name: $it")
@@ -225,7 +225,7 @@ private fun parseProtelisFunction(fline: String): ProtelisFun {
 private fun parseFile(content: String): List<ProtelisItem> {
     val pitems = mutableListOf<ProtelisItem>()
 
-    """^\s*(/\*\*(.*?)\*/)?\n*((^|[\w\s]*\s)def\s[^\{]*?\{)"""
+    """^\s*(/\*\*(.*?)\*/)?\n*((^|[\w\s]*\s)def\s[^{]*?\{)"""
         .toRegex(setOf(MULTILINE, DOT_MATCHES_ALL))
         .findAll(content)
         .forEach { matchRes ->
@@ -267,11 +267,11 @@ private fun generateKotlinType(context: Context, protelisType: String): String =
     "bool" -> "Boolean"
     "num" -> "Number"
     else ->
-        """\(([^\)]*)\)\s*->\s*(.*)""".toRegex().matchEntire(protelisType)?.let { matchRes ->
+        """\(([^)]*)\)\s*->\s*(.*)""".toRegex().matchEntire(protelisType)?.let { matchRes ->
             val args = matchRes.groupValues[1].split(",").map { generateKotlinType(context, it.trim()) }
             val ret = generateKotlinType(context, matchRes.groupValues[2])
             """(${args.joinToString(",")}) -> $ret"""
-        } ?: """\[.*\]""".toRegex().matchEntire(protelisType)?.let { _ ->
+        } ?: """\[.*]""".toRegex().matchEntire(protelisType)?.let { _ ->
             context.registerProtelisType("Tuple")
             "Tuple"
         } ?: if (protelisType.length == 1 && protelisType.any { it.isUpperCase() }) {
