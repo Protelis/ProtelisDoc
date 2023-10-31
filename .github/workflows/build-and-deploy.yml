@@ -1,25 +1,16 @@
-name: CI
+name: CI/CD Process
 on:
-  push:
-    tags: '*'
-    branches-ignore:
-      - 'autodelivery**'
-      - 'bump-**'
-      - 'renovate/**'
-    paths-ignore:
-      - 'CHANGELOG.md'
-      - 'LICENSE'
-      - 'README.md'
-      - 'renovate.json'
-  pull_request:
+  workflow_call:
   workflow_dispatch:
 
 jobs:
-  Build:
+
+  build:
     strategy:
+      fail-fast: false
       matrix:
-        os: [windows, macos, ubuntu]
-    runs-on: ${{ matrix.os }}-latest
+        os: [ windows-2022, macos-12, ubuntu-22.04 ]
+    runs-on: ${{ matrix.os }}
     concurrency:
       group: ${{ github.workflow }}-build-${{ matrix.os }}-${{ github.event.number || github.ref }}
       cancel-in-progress: true
@@ -30,13 +21,16 @@ jobs:
         with:
           should-run-codecov: ${{ runner.os == 'Linux' }}
           should-deploy: false
-  Release:
+
+  release:
     needs:
-      - Build
-    runs-on: ubuntu-latest
+      - build
+    runs-on: ubuntu-22.04
     if: github.event_name == 'push' && contains(github.repository, 'Protelis/ProtelisDoc')
+    permissions:
+      contents: write
     concurrency:
-      group: release
+      group: release-${{ github.event.number || github.ref }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3.1.0
@@ -55,3 +49,17 @@ jobs:
           maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
           signing-key: ${{ secrets.SIGNING_KEY }}
           signing-password: ${{ secrets.SIGNING_PASSWORD }}
+
+  success:
+    runs-on: ubuntu-22.04
+    needs:
+      - build
+      - release
+    if: >-
+      always() && (
+        contains(join(needs.*.result, ','), 'failure')
+        || !contains(join(needs.*.result, ','), 'cancelled')
+      )
+    steps:
+      - name: Verify that there were no failures
+        run: ${{ !contains(join(needs.*.result, ','), 'failure') }}
