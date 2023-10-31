@@ -416,7 +416,7 @@ fun Project?.protelis2Kt(base: String, destination: String) {
     logger.debug("$header base directory: $base\n$header destination directory: $destination")
     var k = 0
     val root = this?.file(base) ?: File(base)
-    logger.debug("{}: fetching Protelis files in {}", root.absolutePath)
+    logger.debug("fetching Protelis files in {}", root.absolutePath)
     root.walkTopDown()
         .filter { it.isFile && it.extension == PROTELIS_FILE_EXTENSION }
         .forEach { file ->
