@@ -70,7 +70,7 @@ private data class DocText(val text: String) : DocPiece {
 private data class DocParam(
     val name: String,
     val type: String,
-    val description: String
+    val description: String,
 ) : DocPiece {
     override fun extendWith(text: String): DocPiece {
         return DocParam(name, type, description + text)
@@ -82,7 +82,7 @@ private data class DocParam(
  */
 private data class DocReturn(
     val returnType: String,
-    val description: String
+    val description: String,
 ) : DocPiece {
     override fun extendWith(text: String): DocPiece {
         return DocReturn(returnType, description + text)
@@ -94,7 +94,7 @@ private data class DocReturn(
  */
 private data class DocDirective(
     val directive: String,
-    val description: String
+    val description: String,
 ) : DocPiece {
     override fun extendWith(text: String): DocPiece {
         return DocDirective(directive, description + text)
@@ -115,7 +115,7 @@ private data class ProtelisFun(
     val parameters: List<ProtelisFunArg> = listOf(),
     val returnType: String = "",
     val public: Boolean = false,
-    val genericTypes: Set<String> = setOf()
+    val genericTypes: Set<String> = setOf(),
 )
 
 /**
@@ -160,8 +160,9 @@ private fun parseDoc(doc: String): ProtelisFunDoc {
     val pieces: MutableList<DocPiece> = mutableListOf()
     doc.lines().map { """\s*\*\s*""".trimMargin().toRegex().replace(it, "").trim() }.forEach { partialtxt ->
         if (!partialtxt.startsWith("@")) {
-            if (pieces.isEmpty()) txt += if (txt.isEmpty()) partialtxt else "\n $partialtxt"
-            else {
+            if (pieces.isEmpty()) {
+                txt += if (txt.isEmpty()) partialtxt else "\n $partialtxt"
+            } else {
                 val last = pieces.last()
                 pieces.remove(last)
                 pieces.add(last.extendWith(" $partialtxt"))
@@ -214,7 +215,7 @@ private fun parseProtelisFunction(fline: String): ProtelisFun {
             }
             ?.toList()
             ?: error("Cannot parse arglist in: $fline"),
-        public = "(public\\s+def)".toRegex().find(fline) != null
+        public = "(public\\s+def)".toRegex().find(fline) != null,
     )
 }
 
@@ -303,10 +304,10 @@ private fun generateKotlinFun(context: Context, fn: ProtelisFun): String {
     return "@Suppress(\"UNUSED_PARAMETER\")\nfun$genTypesStr ${sanitizeNameForKotlin(fn.name)}(" +
         fn.parameters.joinToString(", ") {
             "${sanitizeNameForKotlin(it.name)}: ${
-            generateKotlinType(
-                context,
-                it.type
-            )
+                generateKotlinType(
+                    context,
+                    it.type,
+                )
             }"
         } +
         "): ${generateKotlinType(context, fn.returnType)} = TODO()"
@@ -333,7 +334,7 @@ private fun generateKotlin(context: Context, protelisItems: List<ProtelisItem>):
                 .filterIsInstance<DocReturn>()
                 .map { it.returnType }
                 .firstOrNull()
-                ?: "",
+                .orEmpty(),
             parameters = fn.parameters
                 .map { param ->
                     param.copy(
@@ -341,7 +342,7 @@ private fun generateKotlin(context: Context, protelisItems: List<ProtelisItem>):
                             .filter { it is DocParam && it.name == param.name }
                             .map { (it as DocParam).type }
                             .firstOrNull()
-                            ?: "Any"
+                            ?: "Any",
                     )
                 },
             genericTypes = doc.documentationPieces
@@ -357,8 +358,8 @@ private fun generateKotlin(context: Context, protelisItems: List<ProtelisItem>):
                             }
                         }
                         .toList()
-                }.toSet()
-        )
+                }.toSet(),
+        ),
     )
 }.joinToString("\n\n") { generateKotlinItem(context, it) }
 

@@ -23,7 +23,7 @@ open class ProtelisDocExtension @JvmOverloads constructor(
     val destDir: Property<String> = project.propertyWithDefault(project.buildDir.path + "${SEP}protelis-docs$SEP"),
     val kotlinDestDir: Property<String> =
         project.propertyWithDefault(project.buildDir.path + "${SEP}kotlin-for-protelis$SEP"),
-    val debug: Property<Boolean> = project.propertyWithDefault(false)
+    val debug: Property<Boolean> = project.propertyWithDefault(false),
 )
 
 /**
@@ -45,8 +45,8 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         val config = project.configurations.create(extensionName) { configuration ->
             configuration.dependencies.add(
                 project.dependencies.create(
-                    "org.jetbrains.kotlin:kotlin-stdlib:${KotlinCompilerVersion.VERSION}"
-                )
+                    "org.jetbrains.kotlin:kotlin-stdlib:${KotlinCompilerVersion.VERSION}",
+                ),
             )
         }
         // Kotlin generation task
@@ -59,7 +59,7 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
                     - baseDir = ${extension.baseDir.get()}
                     - destDir = ${extension.destDir.get()}
                     - kotlinDestDir = ${extension.kotlinDestDir.get()}
-                    """.trimIndent()
+                    """.trimIndent(),
                 )
                 project.protelis2Kt(extension.baseDir.get(), extension.kotlinDestDir.get())
             }
@@ -67,7 +67,7 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
         // ProtelisDoc task, based on Dokka
         val protelisdoc = project.tasks.register(protelisDocTaskName, DokkaTask::class.java) { dokkaTask ->
             dokkaTask.plugins.dependencies.add(
-                project.dependencies.create("org.jetbrains.dokka:javadoc-plugin:${DokkaVersion.version}")
+                project.dependencies.create("org.jetbrains.dokka:javadoc-plugin:${DokkaVersion.version}"),
             )
             dokkaTask.dependsOn(genKotlinTask)
         }
