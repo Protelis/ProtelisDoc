@@ -86,7 +86,7 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
                         }
                     }
                 }
-                outputDirectory.set(extension.destDir.map { project.file(it) })
+                outputDirectory.set(extension.destDir.map { project.file(it) }.get())
             }
         }
     }
