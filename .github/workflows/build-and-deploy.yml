@@ -64,7 +64,7 @@ jobs:
       group: release-${{ github.event.number || github.ref }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3.6.0
       - uses: DanySK/build-check-deploy-gradle-action@2.1.26
         with:
           build-command: true
