@@ -30,7 +30,7 @@ jobs:
     steps:
       - name: Checkout
         uses: DanySK/action-checkout@0.2.14
-      - uses: DanySK/build-check-deploy-gradle-action@2.1.14
+      - uses: DanySK/build-check-deploy-gradle-action@2.1.26
         with:
           build-command: true
           check-command: |
