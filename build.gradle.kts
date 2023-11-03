@@ -111,7 +111,7 @@ publishing {
 gradlePlugin {
     plugins {
         website.set(websiteUrl)
-        vcsUrl.set(publishOnCentral.scmConnection)
+        vcsUrl.set("https://github.com/Protelis/ProtelisDoc.git")
         create("ProtelisDoc") {
             id = "org.protelis.protelisdoc"
             displayName = "Protelis Documentation Engine"
