@@ -1,3 +1,13 @@
+## [3.0.16](https://github.com/Protelis/ProtelisDoc/compare/3.0.15...3.0.16) (2023-11-03)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8 ([e427d45](https://github.com/Protelis/ProtelisDoc/commit/e427d4577e984e92d7712d72497a6b1b91610013))
+* **deps:** update dependency io.github.classgraph:classgraph to v4.8.164 ([248bdad](https://github.com/Protelis/ProtelisDoc/commit/248bdadd12de9d5505f1c0e880a38716594a5c72))
+* **deps:** update dependency org.mockito:mockito-core to v5.7.0 ([a870252](https://github.com/Protelis/ProtelisDoc/commit/a8702525b1a1d43bb39904ab1a0390c541e5a1ff))
+* **deps:** update kotest to v5.8.0 ([8bdcfac](https://github.com/Protelis/ProtelisDoc/commit/8bdcface1105b7ceb4d4db0dac5d1194613eba44))
+
 ## [3.0.15](https://github.com/Protelis/ProtelisDoc/compare/3.0.14...3.0.15) (2023-11-01)
 
 
