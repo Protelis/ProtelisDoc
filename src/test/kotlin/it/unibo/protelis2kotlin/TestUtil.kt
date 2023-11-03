@@ -8,9 +8,18 @@ import org.gradle.testkit.runner.TaskOutcome
 import java.io.File
 
 internal object TestUtil {
+
+    fun projectRoot() = File(".").findProjectRoot()
+
+    fun catalog() = File(File(projectRoot(), "gradle"), "libs.versions.toml").readText()
+
+    fun multiJvmVersion() = requireNotNull(
+        Regex("\"org\\.danilopianini\\.multi-jvm-test-plugin:(.*?)\"").find(catalog()),
+    ).groupValues[1]
+
     fun folder(closure: TemporaryFolder.() -> Unit) = TemporaryFolder().apply {
         create()
-        file("settings.gradle") { "rootProject.name = 'testproject'" }
+        makeSettingsFile()
         File("${root.absoluteFile.absolutePath}${File.separator}src${File.separator}main${File.separator}protelis")
             .mkdirs()
         closure()
@@ -27,5 +36,18 @@ internal object TestUtil {
             .build()
         println(result.output)
         result.task(":$task")?.outcome shouldBe TaskOutcome.SUCCESS
+    }
+
+    fun File.isProjectRoot(): Boolean = exists() &&
+        listFiles().orEmpty().map { it.name }.count { it == "build.gradle.kts" || it == "settings.gradle.kts" } == 2
+
+    tailrec fun File.findProjectRoot(): File =
+        takeIf { isProjectRoot() } ?: checkNotNull(parentFile).findProjectRoot()
+
+    fun TemporaryFolder.makeSettingsFile() = file("settings.gradle.kts") {
+        File(projectRoot(), "settings.gradle.kts")
+            .readText()
+            .replace(Regex("^\\s*rootProject\\s*\\.\\s*name.*$"), "rootProject.name = \"protelisdoc-test")
+            .replace("createHooks()", "")
     }
 }

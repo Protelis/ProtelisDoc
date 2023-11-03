@@ -1,5 +1,8 @@
 @file:Suppress("UnstableApiUsage")
 
+import org.apache.tools.ant.taskdefs.condition.Os
+
+
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     `maven-publish`
@@ -30,6 +33,10 @@ gitSemVer {
 multiJvm {
     jvmVersionForCompilation.set(8)
     maximumSupportedJvmVersion.set(latestJavaSupportedByGradle)
+    // Print hello if running on Windows
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        testByDefaultWith(latestJavaSupportedByGradle)
+    }
 }
 
 dependencies {
@@ -57,7 +64,7 @@ tasks.withType<Test> {
 }
 
 tasks.withType<Copy> {
-    duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.WARN
+    duplicatesStrategy = DuplicatesStrategy.WARN
 }
 
 if (System.getenv("CI") == true.toString()) {
@@ -75,7 +82,7 @@ publishOnCentral {
     projectLongName.set("ProtelisDoc generator")
     projectUrl.set(websiteUrl)
     scmConnection.set("git@github.com:Protelis/Protelis-KDoc-generator.git")
-    repository("https://maven.pkg.github.com/Protelis/${rootProject.name}".toLowerCase(), name = "github") {
+    repository("https://maven.pkg.github.com/Protelis/${rootProject.name}".lowercase(), name = "github") {
         user.set("danysk")
         password.set(System.getenv("GITHUB_TOKEN"))
     }
@@ -101,19 +108,16 @@ publishing {
     }
 }
 
-pluginBundle {
-    website = websiteUrl
-    vcsUrl = websiteUrl
-    tags = listOf("protelis", "javadoc", "documentation", "protelisdoc", "dokka", "kotlin")
-}
-
 gradlePlugin {
     plugins {
+        website.set(websiteUrl)
+        vcsUrl.set(publishOnCentral.scmConnection)
         create("ProtelisDoc") {
             id = "org.protelis.protelisdoc"
             displayName = "Protelis Documentation Engine"
             description = "A plugin that translates Protelis modules to Kotlin code, then generates the function documentation via Dokka"
             implementationClass = "it.unibo.protelis2kotlin.Protelis2KotlinDocPlugin"
+            tags.set(listOf("protelis", "documentation", "api", "dokka", "javadoc", "aggregate computing"))
         }
     }
 }
