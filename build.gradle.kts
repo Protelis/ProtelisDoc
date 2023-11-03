@@ -81,7 +81,7 @@ publishOnCentral {
     projectDescription.set("A translator from documented Protelis code to compiling Kotlin interfaces")
     projectLongName.set("ProtelisDoc generator")
     projectUrl.set(websiteUrl)
-    scmConnection.set("git@github.com:Protelis/Protelis-KDoc-generator.git")
+    scmConnection.set("git:git@github.com:Protelis/ProtelisDoc.git")
     repository("https://maven.pkg.github.com/Protelis/${rootProject.name}".lowercase(), name = "github") {
         user.set("danysk")
         password.set(System.getenv("GITHUB_TOKEN"))
