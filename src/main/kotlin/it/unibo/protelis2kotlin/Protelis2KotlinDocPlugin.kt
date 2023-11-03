@@ -3,6 +3,7 @@ package it.unibo.protelis2kotlin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
+import org.gradle.api.provider.Provider
 import org.gradle.kotlin.dsl.invoke
 import org.jetbrains.dokka.DokkaVersion
 import org.jetbrains.dokka.gradle.DokkaTask
@@ -20,11 +21,17 @@ import java.io.File.separator as SEP
 open class ProtelisDocExtension @JvmOverloads constructor(
     private val project: Project,
     val baseDir: Property<String> = project.propertyWithDefault(project.path),
-    val destDir: Property<String> = project.propertyWithDefault(project.buildDir.path + "${SEP}protelis-docs$SEP"),
-    val kotlinDestDir: Property<String> =
-        project.propertyWithDefault(project.buildDir.path + "${SEP}kotlin-for-protelis$SEP"),
+    val destDir: Property<String> = project.propertyWithDefault(
+        project.buildDirectory.map { "$it${SEP}kotlin-for-protelis$SEP" },
+    ),
+    val kotlinDestDir: Property<String> = project.propertyWithDefault(project.buildDirectory),
     val debug: Property<Boolean> = project.propertyWithDefault(false),
-)
+) {
+    companion object {
+        private val Project.buildDirectory: Provider<String> get() =
+            project.layout.buildDirectory.asFile.map { it.absolutePath }
+    }
+}
 
 /**
  * Protelis2KotlinDoc Gradle Plugin:
