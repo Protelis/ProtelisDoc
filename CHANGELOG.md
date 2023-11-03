@@ -1,3 +1,10 @@
+## [3.0.17](https://github.com/Protelis/ProtelisDoc/compare/3.0.16...3.0.17) (2023-11-03)
+
+
+### Bug Fixes
+
+* **build:** use a Maven Central-compatible scm link ([fc3ff78](https://github.com/Protelis/ProtelisDoc/commit/fc3ff788baceb06d6b15ec83dab68c7c39cccb80))
+
 ## [3.0.16](https://github.com/Protelis/ProtelisDoc/compare/3.0.15...3.0.16) (2023-11-03)
 
 
