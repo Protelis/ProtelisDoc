@@ -4,10 +4,13 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
+import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.kotlin.dsl.invoke
+import org.gradle.kotlin.dsl.withType
 import org.jetbrains.dokka.DokkaVersion
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.io.File.separator as SEP
 
 /**
@@ -77,6 +80,14 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
                 project.dependencies.create("org.jetbrains.dokka:javadoc-plugin:${DokkaVersion.version}"),
             )
             dokkaTask.dependsOn(genKotlinTask)
+            val kotlinCompileTasks = project.tasks.withType<KotlinCompile>()
+            val javaCompileTasks = project.tasks.withType<JavaCompile>()
+            (kotlinCompileTasks + javaCompileTasks).forEach { task ->
+                dokkaTask.dependsOn(task)
+            }
+            kotlinCompileTasks.forEach {
+                it.mustRunAfter(genKotlinTask)
+            }
         }
         project.afterEvaluate {
             protelisdoc.get().apply {
