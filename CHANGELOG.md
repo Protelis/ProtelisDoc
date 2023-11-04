@@ -1,3 +1,15 @@
+## [3.0.18](https://github.com/Protelis/ProtelisDoc/compare/3.0.17...3.0.18) (2023-11-04)
+
+
+### Bug Fixes
+
+* **build:** change the plugin scm URL to https ([5ee21bc](https://github.com/Protelis/ProtelisDoc/commit/5ee21bcb35a34390e52cf29a8c0b7a4bb56b2478))
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.11 ([10dc69b](https://github.com/Protelis/ProtelisDoc/commit/10dc69b183fd43d583a64ddca12d936c8c945f57))
+
 ## [3.0.17](https://github.com/Protelis/ProtelisDoc/compare/3.0.16...3.0.17) (2023-11-03)
 
 
