@@ -1,3 +1,10 @@
+## [3.0.19](https://github.com/Protelis/ProtelisDoc/compare/3.0.18...3.0.19) (2023-11-04)
+
+
+### Bug Fixes
+
+* make protelisdoc explicitly dependent on java and kotlin compilation tasks ([3110586](https://github.com/Protelis/ProtelisDoc/commit/3110586ca5dd3a9a184023a5b735006260238599))
+
 ## [3.0.18](https://github.com/Protelis/ProtelisDoc/compare/3.0.17...3.0.18) (2023-11-04)
 
 
