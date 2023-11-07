@@ -1,3 +1,15 @@
+## [3.0.20](https://github.com/Protelis/ProtelisDoc/compare/3.0.19...3.0.20) (2023-11-07)
+
+
+### Dependency updates
+
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.71 ([55944be](https://github.com/Protelis/ProtelisDoc/commit/55944be29cb80fca0ac513185124c9cd49f5c089))
+
+
+### Bug Fixes
+
+* move the default intermediate directory to `protelis2kt` ([592cb93](https://github.com/Protelis/ProtelisDoc/commit/592cb938760427af5dc19705618ac92ab217419b))
+
 ## [3.0.19](https://github.com/Protelis/ProtelisDoc/compare/3.0.18...3.0.19) (2023-11-04)
 
 
