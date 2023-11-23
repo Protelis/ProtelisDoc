@@ -1,3 +1,22 @@
+## [3.0.21](https://github.com/Protelis/ProtelisDoc/compare/3.0.20...3.0.21) (2023-11-23)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin:kotlin-compiler-embeddable to v1.9.21 ([654aac8](https://github.com/Protelis/ProtelisDoc/commit/654aac83dc994b14c9fe9cfefce36a0be06eb75c))
+* **deps:** update dependency io.github.classgraph:classgraph to v4.8.165 ([d03f448](https://github.com/Protelis/ProtelisDoc/commit/d03f448fdceec19a19767e4a311aeaff9ea23e7e))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.72 ([b8be065](https://github.com/Protelis/ProtelisDoc/commit/b8be0658bab1a8e95cbea411d31ef05ee5c29154))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.73 ([0065a01](https://github.com/Protelis/ProtelisDoc/commit/0065a011564969ef793a16365d12632178f73b94))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.74 ([e23f0cc](https://github.com/Protelis/ProtelisDoc/commit/e23f0cc37cd6cdb4d19def720f547e500b801d7a))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.75 ([45f7dfe](https://github.com/Protelis/ProtelisDoc/commit/45f7dfe46b4b6aa13fd04d84a2b0e548c67490d5))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.76 ([a7ace59](https://github.com/Protelis/ProtelisDoc/commit/a7ace591b4a30c683df3a6727cd73a59cd9f8e97))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.77 ([30d90cd](https://github.com/Protelis/ProtelisDoc/commit/30d90cd620b25be6c1e145ea6b13420dc17be23b))
+* **deps:** update node.js to 20.10 ([edc3449](https://github.com/Protelis/ProtelisDoc/commit/edc3449366f04f6d1a7a7d4fdbf2363ce66ebb68))
+* **deps:** update plugin gitsemver to v2.0.2 ([b3f79a7](https://github.com/Protelis/ProtelisDoc/commit/b3f79a7fbd6b4ab63dc44762f29e5934c8350ad4))
+* **deps:** update plugin gitsemver to v2.0.3 ([0a8d83c](https://github.com/Protelis/ProtelisDoc/commit/0a8d83c108f625414e19b7ab16e229e277d8a154))
+* **deps:** update plugin publishoncentral to v5.0.19 ([d44146b](https://github.com/Protelis/ProtelisDoc/commit/d44146b8223beee7d247511f0d5005bded00d0b4))
+* **deps:** update plugin publishoncentral to v5.0.20 ([a32371f](https://github.com/Protelis/ProtelisDoc/commit/a32371f58e27169bf3c0c5dc5ecd37807525215e))
+
 ## [3.0.20](https://github.com/Protelis/ProtelisDoc/compare/3.0.19...3.0.20) (2023-11-07)
 
 
