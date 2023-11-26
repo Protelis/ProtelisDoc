@@ -1,3 +1,11 @@
+## [3.0.23](https://github.com/Protelis/ProtelisDoc/compare/3.0.22...3.0.23) (2023-11-26)
+
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.55.1 ([ee780d8](https://github.com/Protelis/ProtelisDoc/commit/ee780d80dc9da1051e56a6caeeff48edadf676e4))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.78 ([2d19ce7](https://github.com/Protelis/ProtelisDoc/commit/2d19ce7aaa1dd3dc7e5fba9ff35744aeaa466458))
+
 ## [3.0.22](https://github.com/Protelis/ProtelisDoc/compare/3.0.21...3.0.22) (2023-11-23)
 
 
