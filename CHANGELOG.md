@@ -1,3 +1,11 @@
+## [3.0.24](https://github.com/Protelis/ProtelisDoc/compare/3.0.23...3.0.24) (2023-11-29)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.5 ([94a1c97](https://github.com/Protelis/ProtelisDoc/commit/94a1c97a6b40b3c85351d64a079313645be4131b))
+* **deps:** update plugin multijvmtesting to v0.5.7 ([19fcb1c](https://github.com/Protelis/ProtelisDoc/commit/19fcb1c79fda374e8532b392a5840a71de11a57d))
+
 ## [3.0.23](https://github.com/Protelis/ProtelisDoc/compare/3.0.22...3.0.23) (2023-11-26)
 
 
