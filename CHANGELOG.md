@@ -1,3 +1,14 @@
+## [3.0.27](https://github.com/Protelis/ProtelisDoc/compare/3.0.26...3.0.27) (2023-12-11)
+
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.57.0 ([9e23012](https://github.com/Protelis/ProtelisDoc/commit/9e230121da4271fd3381c4b4423bb9ceb00ccc3a))
+* **deps:** update dependency org.mockito:mockito-core to v5.8.0 ([5be6b02](https://github.com/Protelis/ProtelisDoc/commit/5be6b02173184449fb279f2c6e3e4d34ffc082e8))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.79 ([a843b17](https://github.com/Protelis/ProtelisDoc/commit/a843b17af52349cf4c9b55428f7c4d1a438c4040))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.80 ([3d3d59a](https://github.com/Protelis/ProtelisDoc/commit/3d3d59a90a9d0ad9cff866e923a12006d4334a0b))
+* **deps:** update plugin com.gradle.enterprise to v3.16 ([e316ef5](https://github.com/Protelis/ProtelisDoc/commit/e316ef56eeff10a9051125405e339917d233d899))
+
 ## [3.0.26](https://github.com/Protelis/ProtelisDoc/compare/3.0.25...3.0.26) (2023-12-02)
 
 
