@@ -1,3 +1,14 @@
+## [3.0.28](https://github.com/Protelis/ProtelisDoc/compare/3.0.27...3.0.28) (2023-12-21)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v1.9.22 ([5b7f8a7](https://github.com/Protelis/ProtelisDoc/commit/5b7f8a728ba8b0f3437fab11e3c1d691fca0dc30))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.81 ([638b6df](https://github.com/Protelis/ProtelisDoc/commit/638b6dffa67614e6ea3b76176e9e381f765a18b0))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.83 ([949c875](https://github.com/Protelis/ProtelisDoc/commit/949c87508624307e0798638f8d02f152b9be3094))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.84 ([6baa836](https://github.com/Protelis/ProtelisDoc/commit/6baa836334e6aa4217a1bcfd12bf138e4e6166a8))
+* **deps:** update plugin com.gradle.enterprise to v3.16.1 ([f59caf7](https://github.com/Protelis/ProtelisDoc/commit/f59caf79c14a4c9c47913b39788ec3f89307ac76))
+
 ## [3.0.27](https://github.com/Protelis/ProtelisDoc/compare/3.0.26...3.0.27) (2023-12-11)
 
 
