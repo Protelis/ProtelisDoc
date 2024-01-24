@@ -3,7 +3,7 @@ dokka = "1.9.10"
 konf = "1.1.2"
 kotest = "5.8.0"
 kotlin = "1.9.22"
-mockito = "5.9.0"
+mockito = "5.10.0"
 
 [libraries]
 classgraph = "io.github.classgraph:classgraph:4.8.165"
