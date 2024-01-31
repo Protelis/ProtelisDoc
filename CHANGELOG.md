@@ -1,3 +1,23 @@
+## [3.0.31](https://github.com/Protelis/ProtelisDoc/compare/3.0.30...3.0.31) (2024-01-31)
+
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.59.0 ([bfc9210](https://github.com/Protelis/ProtelisDoc/commit/bfc9210f81986708d90f8c04c3792f4d25eb83ee))
+* **deps:** update dependency org.mockito:mockito-core to v5.10.0 ([f45fb43](https://github.com/Protelis/ProtelisDoc/commit/f45fb43dd523f4fe0ba03e48e84bcbc8487109d9))
+* **deps:** update dependency org.mockito:mockito-core to v5.9.0 ([150b5b6](https://github.com/Protelis/ProtelisDoc/commit/150b5b6a8faad097d0c294dd08849fb8251f7625))
+* **deps:** update plugin gitsemver to v3 ([9ebbfc5](https://github.com/Protelis/ProtelisDoc/commit/9ebbfc5c8ddc6ab912ada5279d267202bfc45a63))
+* **deps:** update plugin gitsemver to v3.1.0 ([d08fb8b](https://github.com/Protelis/ProtelisDoc/commit/d08fb8bcba52e81998d01aefd02e8522e86bc05c))
+* **deps:** update plugin org.gradle.toolchains.foojay-resolver-convention to v0.8.0 ([c749888](https://github.com/Protelis/ProtelisDoc/commit/c749888e3db61e0d15214aeb60aec43eca0da9fb))
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.13 ([4a643dc](https://github.com/Protelis/ProtelisDoc/commit/4a643dcbdbb5e50875c7a88d76ad72b5bba4624c))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.14 ([ea230f1](https://github.com/Protelis/ProtelisDoc/commit/ea230f1daac1a03cb13e58701904e431a2963010))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.15 ([bbfc4f2](https://github.com/Protelis/ProtelisDoc/commit/bbfc4f2803020c577a307f06bfa7a1c523c8973f))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.16 ([0117225](https://github.com/Protelis/ProtelisDoc/commit/0117225d102129dc8677586ac954980a6b17f9d3))
+
 ## [3.0.30](https://github.com/Protelis/ProtelisDoc/compare/3.0.29...3.0.30) (2024-01-10)
 
 
