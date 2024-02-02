@@ -1,3 +1,20 @@
+## [3.0.32](https://github.com/Protelis/ProtelisDoc/compare/3.0.31...3.0.32) (2024-02-02)
+
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.59.1 ([4f67e11](https://github.com/Protelis/ProtelisDoc/commit/4f67e1182b7cb876ea81952a3e9699b9579b669c))
+* **deps:** update plugin com.gradle.enterprise to v3.16.2 ([d065cc4](https://github.com/Protelis/ProtelisDoc/commit/d065cc48bb31125c3c5624af8c5ec13a187aa127))
+* **deps:** update plugin multijvmtesting to v0.5.8 ([cd329ab](https://github.com/Protelis/ProtelisDoc/commit/cd329ab164507f4a4883f6fe760aa9cca77d1319))
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.17 ([ace93e2](https://github.com/Protelis/ProtelisDoc/commit/ace93e2afa0708036acd04bb4828507e8388107d))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.18 ([572ecec](https://github.com/Protelis/ProtelisDoc/commit/572ecec01aa7ce56ab057332c5b91215e94d9ce5))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.19 ([559d395](https://github.com/Protelis/ProtelisDoc/commit/559d39574fc9af1b3bc5273d1944e645f85c99fa))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.20 ([f1a77d0](https://github.com/Protelis/ProtelisDoc/commit/f1a77d0486def3db689e037f76034f78426eac7b))
+
 ## [3.0.31](https://github.com/Protelis/ProtelisDoc/compare/3.0.30...3.0.31) (2024-01-31)
 
 
