@@ -1,3 +1,11 @@
+## [3.0.33](https://github.com/Protelis/ProtelisDoc/compare/3.0.32...3.0.33) (2024-02-03)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.6 ([a9cd8cd](https://github.com/Protelis/ProtelisDoc/commit/a9cd8cd300cced74ebb45911829b517e426fa17f))
+* **deps:** update plugin publishoncentral to v5.0.23 ([f8c89c5](https://github.com/Protelis/ProtelisDoc/commit/f8c89c5f8d9854be47c171d975180f7069ac9bdb))
+
 ## [3.0.32](https://github.com/Protelis/ProtelisDoc/compare/3.0.31...3.0.32) (2024-02-02)
 
 
