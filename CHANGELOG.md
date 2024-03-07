@@ -1,3 +1,12 @@
+## [3.0.37](https://github.com/Protelis/ProtelisDoc/compare/3.0.36...3.0.37) (2024-03-07)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v1.9.23 ([8ba2f13](https://github.com/Protelis/ProtelisDoc/commit/8ba2f139e9feb1c8df6e395b815975363254531f))
+* **deps:** update dependency io.github.classgraph:classgraph to v4.8.166 ([d4576e2](https://github.com/Protelis/ProtelisDoc/commit/d4576e2dac7960df682f843977252133e1e0a455))
+* **deps:** update dependency io.github.classgraph:classgraph to v4.8.167 ([19f1bd5](https://github.com/Protelis/ProtelisDoc/commit/19f1bd5328da323134f7a9fd444024bdbf49bfcd))
+
 ## [3.0.36](https://github.com/Protelis/ProtelisDoc/compare/3.0.35...3.0.36) (2024-03-04)
 
 
