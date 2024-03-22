@@ -1,3 +1,21 @@
+## [3.0.39](https://github.com/Protelis/ProtelisDoc/compare/3.0.38...3.0.39) (2024-03-22)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.7 ([0ffc597](https://github.com/Protelis/ProtelisDoc/commit/0ffc597b69c20886f60b15b2faf17681651039b0))
+* **deps:** update dependency io.github.classgraph:classgraph to v4.8.168 ([1f3ec43](https://github.com/Protelis/ProtelisDoc/commit/1f3ec439baa6f4fbe2006a21ba70fe3e4c40c50b))
+* **deps:** update kotest to v5.8.1 ([8608009](https://github.com/Protelis/ProtelisDoc/commit/8608009c428186a9ffa7e269a7ef43becac7cdcf))
+* **deps:** update plugin gitsemver to v3.1.3 ([9daea1d](https://github.com/Protelis/ProtelisDoc/commit/9daea1d7a35e69062d555e07f5215449bd1e64a4))
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.10 ([67e6918](https://github.com/Protelis/ProtelisDoc/commit/67e6918e9bc66538568f8e0ca8a3f0526a97665f))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.7 ([dc7edf7](https://github.com/Protelis/ProtelisDoc/commit/dc7edf71b34e34749ba26fe8103c0f15e2f0f48c))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.8 ([67a38ce](https://github.com/Protelis/ProtelisDoc/commit/67a38ce7f1caf918d3933d8ffc73c6d0a1030696))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.9 ([ee37197](https://github.com/Protelis/ProtelisDoc/commit/ee3719775a08601de89e6a604f955fc9bbb0dd12))
+
 ## [3.0.38](https://github.com/Protelis/ProtelisDoc/compare/3.0.37...3.0.38) (2024-03-07)
 
 
