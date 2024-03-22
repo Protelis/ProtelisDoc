@@ -1,3 +1,13 @@
+## [3.0.40](https://github.com/Protelis/ProtelisDoc/compare/3.0.39...3.0.40) (2024-03-22)
+
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.60.4 ([790709c](https://github.com/Protelis/ProtelisDoc/commit/790709c94ce1f815f99961778c8e05055024a49f))
+* **deps:** update plugin gitsemver to v3.1.4 ([fda2b07](https://github.com/Protelis/ProtelisDoc/commit/fda2b0722630d8ba8e4cf57e730c5373ded0e063))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.4 ([99e4457](https://github.com/Protelis/ProtelisDoc/commit/99e4457d50135be9bb61004df04f0660939f7f77))
+* **deps:** update plugin publishoncentral to v5.0.26 ([9e0c298](https://github.com/Protelis/ProtelisDoc/commit/9e0c2981e341d068597c32d715c3805f52ae14f7))
+
 ## [3.0.39](https://github.com/Protelis/ProtelisDoc/compare/3.0.38...3.0.39) (2024-03-22)
 
 
