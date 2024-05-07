@@ -1,3 +1,37 @@
+## [3.0.42](https://github.com/Protelis/ProtelisDoc/compare/3.0.41...3.0.42) (2024-05-07)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin:kotlin-compiler-embeddable to v1.9.24 ([340d2ba](https://github.com/Protelis/ProtelisDoc/commit/340d2ba3ac5050dfd02b9687e5b5822946b468d6))
+* **deps:** update dependency io.github.classgraph:classgraph to v4.8.170 ([8d90bbe](https://github.com/Protelis/ProtelisDoc/commit/8d90bbe952688060d0d11a06b84398b2117bdae6))
+* **deps:** update dependency io.github.classgraph:classgraph to v4.8.171 ([97d971a](https://github.com/Protelis/ProtelisDoc/commit/97d971afa729fba88c7b88748f6f9fee70fffd42))
+* **deps:** update dependency io.github.classgraph:classgraph to v4.8.172 ([0775525](https://github.com/Protelis/ProtelisDoc/commit/07755258b13b813f6c54e4d0309a8fbdcc79bd09))
+* **deps:** update node.js to 20.12 ([36ae8b4](https://github.com/Protelis/ProtelisDoc/commit/36ae8b4ac39f8ff6721f3616b3c56b4c7761820f))
+* **deps:** update plugin com.gradle.enterprise to v3.17 ([f06ef3d](https://github.com/Protelis/ProtelisDoc/commit/f06ef3df9244bf76fcf9e38620d4a3caa5c5c6bf))
+* **deps:** update plugin com.gradle.enterprise to v3.17.1 ([50dd8a2](https://github.com/Protelis/ProtelisDoc/commit/50dd8a265a6fb363885bc1d4a3aec49b86d9e0e5))
+* **deps:** update plugin com.gradle.enterprise to v3.17.2 ([692c55d](https://github.com/Protelis/ProtelisDoc/commit/692c55d1887d620a61c424114f7172799ba2fc33))
+* **deps:** update plugin publishoncentral to v5.1.0 ([129ea17](https://github.com/Protelis/ProtelisDoc/commit/129ea17131e55b564ecbd2587a4257648784c3c4))
+* **deps:** update plugin tasktree to v3 ([7cfc18b](https://github.com/Protelis/ProtelisDoc/commit/7cfc18b94e07f1c02dd9fa71d205dc1cd14c2e76))
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v4.1.3 ([76fa883](https://github.com/Protelis/ProtelisDoc/commit/76fa883001a51e0da1a670d3ce7909bfc73ab013))
+* **deps:** update actions/checkout action to v4.1.4 ([609d488](https://github.com/Protelis/ProtelisDoc/commit/609d488519bda8f3b9a6a156849826b2b2def5da))
+* **deps:** update danysk/action-checkout action to v0.2.15 ([d77d99b](https://github.com/Protelis/ProtelisDoc/commit/d77d99b3f48ff098780afdf06cad58760a55ce63))
+* **deps:** update danysk/action-checkout action to v0.2.16 ([7681475](https://github.com/Protelis/ProtelisDoc/commit/7681475e61da22dfbd8a2819c8f29fbf8fdc145d))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.11 ([f60ecd8](https://github.com/Protelis/ProtelisDoc/commit/f60ecd845606c9eeb5076f3ca3a8699766bff833))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.12 ([8f0d461](https://github.com/Protelis/ProtelisDoc/commit/8f0d461a970c432cfc12d1a37ea34a7bdab72c2f))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.13 ([8fea332](https://github.com/Protelis/ProtelisDoc/commit/8fea33233bbe2e68577e1ba192a188b16d0fd187))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.14 ([02d1026](https://github.com/Protelis/ProtelisDoc/commit/02d1026924980f079a672ebbed03172327a0d978))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.15 ([3c687a4](https://github.com/Protelis/ProtelisDoc/commit/3c687a4ebaa5ac51783a79a291cef055d76dcdc8))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.16 ([8e19b82](https://github.com/Protelis/ProtelisDoc/commit/8e19b82e71bdce9070d0d851de04b1e377d131de))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.17 ([8de502f](https://github.com/Protelis/ProtelisDoc/commit/8de502fe911517f32a4c00f517ec4f3893bef992))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.18 ([071e868](https://github.com/Protelis/ProtelisDoc/commit/071e868d79f994cd19117e1d99b9ff0ef9f027cb))
+* **deps:** update dependency macos github actions runner to v13 ([0dcf9a2](https://github.com/Protelis/ProtelisDoc/commit/0dcf9a220293c9de791511b4bc91beac774b5fa0))
+* **deps:** update dependency macos github actions runner to v14 ([1069860](https://github.com/Protelis/ProtelisDoc/commit/1069860052e2e928e362be2d0830e400ef3a0804))
+
 ## [3.0.41](https://github.com/Protelis/ProtelisDoc/compare/3.0.40...3.0.41) (2024-03-25)
 
 
