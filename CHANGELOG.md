@@ -1,3 +1,28 @@
+## [3.0.45](https://github.com/Protelis/ProtelisDoc/compare/3.0.44...3.0.45) (2024-06-01)
+
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.62.1 ([94fd300](https://github.com/Protelis/ProtelisDoc/commit/94fd300e32d65f27275596033a422b9f24c1a30f))
+* **deps:** update dependency org.mockito:mockito-core to v5.12.0 ([d1cb9bf](https://github.com/Protelis/ProtelisDoc/commit/d1cb9bfedf4bfdd756afcf348f96e7896eed330c))
+* **deps:** update kotest to v5.9.0 ([35cb591](https://github.com/Protelis/ProtelisDoc/commit/35cb59130b4161d797da87062310f9380d891de2))
+* **deps:** update node.js to 20.13 ([9b47e14](https://github.com/Protelis/ProtelisDoc/commit/9b47e14ee050343b3d59fd7f5756ff887aaf29f4))
+* **deps:** update node.js to 20.14 ([9aaa241](https://github.com/Protelis/ProtelisDoc/commit/9aaa241a3e5f4a730b04892080191e826eb1d82b))
+* **deps:** update plugin com.gradle.enterprise to v3.17.3 ([84fa8b7](https://github.com/Protelis/ProtelisDoc/commit/84fa8b7ea40640682090a400c5fe7b637cde99e7))
+* **deps:** update plugin com.gradle.enterprise to v3.17.4 ([5ebf302](https://github.com/Protelis/ProtelisDoc/commit/5ebf30245d4059a73f5b2d91ae6ad0aee13b6b6f))
+* **deps:** update plugin gitsemver to v3.1.6 ([0fec7c1](https://github.com/Protelis/ProtelisDoc/commit/0fec7c1317e2535c70397ec2f5ff861f519a27c2))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.6 ([313c6af](https://github.com/Protelis/ProtelisDoc/commit/313c6af63642d46344842b29213efc92fca1d5b8))
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v4.1.5 ([4fe3a44](https://github.com/Protelis/ProtelisDoc/commit/4fe3a444c78bd55d1506eda0a3353300bd3de8c2))
+* **deps:** update actions/checkout action to v4.1.6 ([0b88ce7](https://github.com/Protelis/ProtelisDoc/commit/0b88ce765393abd2377462fc0bbd61ea3fd9194c))
+* **deps:** update danysk/action-checkout action to v0.2.17 ([4d68f76](https://github.com/Protelis/ProtelisDoc/commit/4d68f76c9cdc2cc14710b006efccbaf2624205c4))
+* **deps:** update danysk/action-checkout action to v0.2.18 ([2527122](https://github.com/Protelis/ProtelisDoc/commit/25271225c90f32923e97f04386c2cb35b20a2e1f))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.19 ([2d6f1b9](https://github.com/Protelis/ProtelisDoc/commit/2d6f1b9f25b4ac596b9bd1f34fcf975d735db9ed))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.20 ([238987e](https://github.com/Protelis/ProtelisDoc/commit/238987ee86e3779205ae935f2996584c59e9d5d6))
+
 ## [3.0.44](https://github.com/Protelis/ProtelisDoc/compare/3.0.43...3.0.44) (2024-05-07)
 
 
