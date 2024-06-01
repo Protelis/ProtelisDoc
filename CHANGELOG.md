@@ -1,3 +1,12 @@
+## [3.0.46](https://github.com/Protelis/ProtelisDoc/compare/3.0.45...3.0.46) (2024-06-01)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.8 ([d8d0e5d](https://github.com/Protelis/ProtelisDoc/commit/d8d0e5d2e01c70eb7c2d1af95069efe532329008))
+* **deps:** update plugin gitsemver to v3.1.7 ([5a711d0](https://github.com/Protelis/ProtelisDoc/commit/5a711d02375f38af34d35acb33e1d859c34a1da3))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.7 ([caabc22](https://github.com/Protelis/ProtelisDoc/commit/caabc22cf22c7a3059ee8004f8621c8baa9b892e))
+
 ## [3.0.45](https://github.com/Protelis/ProtelisDoc/compare/3.0.44...3.0.45) (2024-06-01)
 
 
