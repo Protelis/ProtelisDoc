@@ -1,3 +1,22 @@
+## [3.0.47](https://github.com/Protelis/ProtelisDoc/compare/3.0.46...3.0.47) (2024-06-03)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v2 ([ab63373](https://github.com/Protelis/ProtelisDoc/commit/ab63373b94db71cc86aa4432e9133a784752b7fd))
+* **deps:** switch to develocity ([c6fa657](https://github.com/Protelis/ProtelisDoc/commit/c6fa657ee93d8daa0045a7982682aef1bf43856e))
+* **deps:** update plugin publishoncentral to v5.1.2 ([ca784b4](https://github.com/Protelis/ProtelisDoc/commit/ca784b49b9bfc20f80c09732ba3e30177321a8cc))
+
+
+### General maintenance
+
+* ignore `.kotlin/` ([fab49b7](https://github.com/Protelis/ProtelisDoc/commit/fab49b70ba0db76340ddf9db4c1dcf80c49c2260))
+
+
+### Style improvements
+
+* rewrite `tailrec` function to work around https://youtrack.jetbrains.com/issue/KT-31391/ ([d66dfdf](https://github.com/Protelis/ProtelisDoc/commit/d66dfdf36099dbafdd81307af8218b0a918b17ee))
+
 ## [3.0.46](https://github.com/Protelis/ProtelisDoc/compare/3.0.45...3.0.46) (2024-06-01)
 
 
