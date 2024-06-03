@@ -41,8 +41,11 @@ internal object TestUtil {
     fun File.isProjectRoot(): Boolean = exists() &&
         listFiles().orEmpty().map { it.name }.count { it == "build.gradle.kts" || it == "settings.gradle.kts" } == 2
 
-    tailrec fun File.findProjectRoot(): File =
-        takeIf { isProjectRoot() } ?: checkNotNull(parentFile).findProjectRoot()
+    tailrec fun File.findProjectRoot(): File = when {
+        isProjectRoot() -> this
+        parentFile == null -> error("No project root found")
+        else -> parentFile.findProjectRoot()
+    }
 
     fun TemporaryFolder.makeSettingsFile() = file("settings.gradle.kts") {
         File(projectRoot(), "settings.gradle.kts")
