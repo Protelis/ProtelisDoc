@@ -1,3 +1,12 @@
+## [3.0.48](https://github.com/Protelis/ProtelisDoc/compare/3.0.47...3.0.48) (2024-06-06)
+
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.62.3 ([93e5471](https://github.com/Protelis/ProtelisDoc/commit/93e54719a67a733033d2cdf30e989b34bc0cea0d))
+* **deps:** update dependency io.github.classgraph:classgraph to v4.8.173 ([f08ed46](https://github.com/Protelis/ProtelisDoc/commit/f08ed46ce96fa984e1c59a9c9353e8e55c2eeea5))
+* **deps:** update plugin publishoncentral to v5.1.3 ([7ce9607](https://github.com/Protelis/ProtelisDoc/commit/7ce9607720e5353b8540c2c5b1c2e4710275db78))
+
 ## [3.0.47](https://github.com/Protelis/ProtelisDoc/compare/3.0.46...3.0.47) (2024-06-03)
 
 
