@@ -1,3 +1,34 @@
+## [3.0.49](https://github.com/Protelis/ProtelisDoc/compare/3.0.48...3.0.49) (2024-07-16)
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.9 ([f7e6046](https://github.com/Protelis/ProtelisDoc/commit/f7e604659b382dd537880d1bd1d87906725198d3))
+* **deps:** update dependency io.github.classgraph:classgraph to v4.8.174 ([9fe99ac](https://github.com/Protelis/ProtelisDoc/commit/9fe99ac86bcd307458a7cef8b6ed746e8506db6c))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.86 ([e0fa640](https://github.com/Protelis/ProtelisDoc/commit/e0fa64049af62a42543125ae2d0471f62b7f7348))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.87 ([9a23d04](https://github.com/Protelis/ProtelisDoc/commit/9a23d040ebc67f035aa18f1556e7f60789b3c0cd))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.91 ([f91dba1](https://github.com/Protelis/ProtelisDoc/commit/f91dba1138e3b5d15be4479deb7f8768e78162df))
+* **deps:** update kotest to v5.9.1 ([893c902](https://github.com/Protelis/ProtelisDoc/commit/893c9025b2f84e1ddb161dc0823fef64c05ac751))
+* **deps:** update node.js to 20.15 ([45c8ecf](https://github.com/Protelis/ProtelisDoc/commit/45c8ecff2b6761c8a864ff42fa4b4eae01952dd8))
+* **deps:** update plugin com.gradle.develocity to v3.17.5 ([927d11c](https://github.com/Protelis/ProtelisDoc/commit/927d11c6dd492b2eb7f2762d5391a924255d3c76))
+* **deps:** update plugin multijvmtesting to v1 ([0092b4c](https://github.com/Protelis/ProtelisDoc/commit/0092b4c3301eece86820aab21984a8138132ad46))
+* **deps:** update plugin tasktree to v4 ([8eb77ae](https://github.com/Protelis/ProtelisDoc/commit/8eb77aeac4141fb35263f88955024abd0400bc2e))
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v4.1.7 ([d0db1f1](https://github.com/Protelis/ProtelisDoc/commit/d0db1f1b65a6d959a8f989f6c3eccc7fd4209b34))
+* **deps:** update danysk/action-checkout action to v0.2.19 ([0001ddc](https://github.com/Protelis/ProtelisDoc/commit/0001ddcd26cb5d6fec0ddf8daa28d3da539c52d3))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.21 ([8774953](https://github.com/Protelis/ProtelisDoc/commit/877495367c27cd2290c0b43a5b03ecde032b08a0))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.22 ([915209d](https://github.com/Protelis/ProtelisDoc/commit/915209d33f6e8e47f889e16ebd7aaf8ddf54756d))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.24 ([096d80a](https://github.com/Protelis/ProtelisDoc/commit/096d80ae33ad1ad3bf0ac96ff648e617155cafce))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3 ([a3bcb5e](https://github.com/Protelis/ProtelisDoc/commit/a3bcb5e805aca6a7c246a048bf1f3b5c47bfcd1d))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.1.0 ([29b1bc3](https://github.com/Protelis/ProtelisDoc/commit/29b1bc33291a386642559ac56494e87b553d9f33))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.1.1 ([41d9bce](https://github.com/Protelis/ProtelisDoc/commit/41d9bcea75b6fb20bff7de2fedb9e70e58bc20aa))
+* do not use multiJvm inside tests (as they are already executed using multiJvm externally) ([1abbec5](https://github.com/Protelis/ProtelisDoc/commit/1abbec5534199eb74de45cc2e11d40f68624a7fb))
+* install the version of node from the package.json ([1198281](https://github.com/Protelis/ProtelisDoc/commit/1198281aff9c42fc4e38118a142f8cd7cbd36832))
+* **release:** switch to a ECMA6-compliant semantic release configuration ([9b204a5](https://github.com/Protelis/ProtelisDoc/commit/9b204a5e329731c10217939645a62f926be52462))
+* switch to the new Central authentication system ([995fd22](https://github.com/Protelis/ProtelisDoc/commit/995fd22b0d9bae61ea32672ac85eb5372f6d8279))
+* use the codecov token ([b28db71](https://github.com/Protelis/ProtelisDoc/commit/b28db7177f790985a09590cf5406a7e52b2ce528))
+
 ## [3.0.48](https://github.com/Protelis/ProtelisDoc/compare/3.0.47...3.0.48) (2024-06-06)
 
 
