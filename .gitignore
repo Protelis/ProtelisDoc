@@ -8,6 +8,7 @@ build
 .idea
 out
 .kotlin/
+node_modules/
 
 .kotlintest
 .java-version

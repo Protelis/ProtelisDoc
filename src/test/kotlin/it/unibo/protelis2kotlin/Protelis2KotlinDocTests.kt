@@ -3,7 +3,6 @@ package it.unibo.protelis2kotlin
 import io.kotest.core.spec.style.StringSpec
 import it.unibo.protelis2kotlin.TestUtil.file
 import it.unibo.protelis2kotlin.TestUtil.folder
-import it.unibo.protelis2kotlin.TestUtil.multiJvmVersion
 import it.unibo.protelis2kotlin.TestUtil.runGradleTask
 import java.io.File.separator as SEP
 
@@ -139,7 +138,6 @@ class Protelis2KotlinDocTests : StringSpec({
             """
             plugins {
                 id("org.protelis.protelisdoc")
-                id("org.danilopianini.multi-jvm-test-plugin") version "${multiJvmVersion()}"
             }
             repositories {
                 mavenCentral()
@@ -153,10 +151,6 @@ class Protelis2KotlinDocTests : StringSpec({
             }
             dependencies {
                 protelisdoc("org.protelis:protelis-interpreter:13.0.0")
-            }
-            multiJvm {
-                jvmVersionForCompilation.set(8)
-                maximumSupportedJvmVersion.set(latestJava)
             }
             protelisdoc {
                 baseDir.set("src/main/protelis")
