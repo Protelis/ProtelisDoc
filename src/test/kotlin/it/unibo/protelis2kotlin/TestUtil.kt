@@ -1,6 +1,5 @@
 package it.unibo.protelis2kotlin
 
-import io.kotest.core.spec.style.scopes.StringSpecScope
 import io.kotest.matchers.shouldBe
 import org.gradle.internal.impldep.org.junit.rules.TemporaryFolder
 import org.gradle.testkit.runner.GradleRunner
@@ -10,12 +9,6 @@ import java.io.File
 internal object TestUtil {
 
     fun projectRoot() = File(".").findProjectRoot()
-
-    fun catalog() = File(File(projectRoot(), "gradle"), "libs.versions.toml").readText()
-
-    fun multiJvmVersion() = requireNotNull(
-        Regex("\"org\\.danilopianini\\.multi-jvm-test-plugin:(.*?)\"").find(catalog()),
-    ).groupValues[1]
 
     fun folder(closure: TemporaryFolder.() -> Unit) = TemporaryFolder().apply {
         create()
@@ -28,7 +21,7 @@ internal object TestUtil {
     fun TemporaryFolder.file(name: String, content: () -> String) =
         newFile(name).writeText(content().trimIndent())
 
-    fun StringSpecScope.runGradleTask(workingDirectory: TemporaryFolder, task: String) {
+    fun runGradleTask(workingDirectory: TemporaryFolder, task: String) {
         val result = GradleRunner.create()
             .withProjectDir(workingDirectory.root)
             .withPluginClasspath()
