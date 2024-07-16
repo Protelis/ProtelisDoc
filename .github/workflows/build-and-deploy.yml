@@ -45,6 +45,7 @@ jobs:
             --dry-run
           deploy-command: ./gradlew uploadKotlinOSSRHToMavenCentralNexus uploadPluginMavenToMavenCentralNexus uploadPluginMarkerMavenToMavenCentralNexus close drop
           should-run-codecov: ${{ runner.os == 'Linux' }}
+          codecov-token: ${{ secrets.CODECOV_TOKEN }}
           should-deploy: ${{ !github.event.repository.fork && github.event_name != 'pull_request' }}
           maven-central-username: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
