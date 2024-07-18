@@ -1,3 +1,14 @@
+## [3.0.51](https://github.com/Protelis/ProtelisDoc/compare/3.0.50...3.0.51) (2024-07-18)
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.63.0 ([767a411](https://github.com/Protelis/ProtelisDoc/commit/767a411ab4a9a20ca516c9882ba724719f893f62))
+* **deps:** update plugin publishoncentral to v5.1.4 ([e220807](https://github.com/Protelis/ProtelisDoc/commit/e220807542d60844d05f32f3b1154de2d6c72674))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.4.0 ([4b8cadf](https://github.com/Protelis/ProtelisDoc/commit/4b8cadf0e9e3b253e962defe71113f9799ef6d8c))
+
 ## [3.0.50](https://github.com/Protelis/ProtelisDoc/compare/3.0.49...3.0.50) (2024-07-17)
 
 ### Dependency updates
