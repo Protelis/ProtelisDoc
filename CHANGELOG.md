@@ -1,3 +1,14 @@
+## [3.0.57](https://github.com/Protelis/ProtelisDoc/compare/3.0.56...3.0.57) (2024-08-06)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin:kotlin-compiler-embeddable to v2.0.10 ([8ae0d22](https://github.com/Protelis/ProtelisDoc/commit/8ae0d2256d58553636fcfe3eb5f138b60a7c3b2a))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.95 ([5be0b35](https://github.com/Protelis/ProtelisDoc/commit/5be0b35fc34c7e5dc2d7c7544540478d4a295735))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.2 ([1c71697](https://github.com/Protelis/ProtelisDoc/commit/1c71697ce671a171f67cfee6da9ca9eb583ec02a))
+
 ## [3.0.56](https://github.com/Protelis/ProtelisDoc/compare/3.0.55...3.0.56) (2024-07-31)
 
 ### Dependency updates
