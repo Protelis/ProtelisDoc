@@ -1,3 +1,14 @@
+## [3.0.59](https://github.com/Protelis/ProtelisDoc/compare/3.0.58...3.0.59) (2024-08-14)
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.10 ([86a77bd](https://github.com/Protelis/ProtelisDoc/commit/86a77bd6cd2f021d5f58fcdf69973b0f37d53ff5))
+* **deps:** update plugin multijvmtesting to v1.2.3 ([ffed6d0](https://github.com/Protelis/ProtelisDoc/commit/ffed6d03cb23dde1bc0894272f4528a4e183fc06))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.3 ([66a4a65](https://github.com/Protelis/ProtelisDoc/commit/66a4a6528d72297f708fb26b888967df01854103))
+
 ## [3.0.58](https://github.com/Protelis/ProtelisDoc/compare/3.0.57...3.0.58) (2024-08-06)
 
 ### Dependency updates
