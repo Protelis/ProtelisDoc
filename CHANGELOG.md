@@ -1,3 +1,14 @@
+## [3.0.61](https://github.com/Protelis/ProtelisDoc/compare/3.0.60...3.0.61) (2024-08-22)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin:kotlin-compiler-embeddable to v2.0.20 ([83cc94f](https://github.com/Protelis/ProtelisDoc/commit/83cc94f3e34e00961742646002646f144a1d87fe))
+* **deps:** update dependency io.github.classgraph:classgraph to v4.8.175 ([667ce6d](https://github.com/Protelis/ProtelisDoc/commit/667ce6d013acca09d00f0a6cb3ae573416c14dea))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.96 ([fe194e4](https://github.com/Protelis/ProtelisDoc/commit/fe194e4b0759f4965b0385f7348811f242494e78))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.97 ([ecc2dcc](https://github.com/Protelis/ProtelisDoc/commit/ecc2dccb1b17c6567d853fdcfafc6f37691881cc))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.98 ([b0258c2](https://github.com/Protelis/ProtelisDoc/commit/b0258c2965cecf3e599de9e80526156dc9cbcc08))
+* **deps:** update plugin com.gradle.develocity to v3.18 ([0f039f7](https://github.com/Protelis/ProtelisDoc/commit/0f039f74055921ab924f75c706a01bb88e3d0619))
+
 ## [3.0.60](https://github.com/Protelis/ProtelisDoc/compare/3.0.59...3.0.60) (2024-08-14)
 
 ### Dependency updates
