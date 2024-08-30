@@ -1,3 +1,20 @@
+## [3.0.62](https://github.com/Protelis/ProtelisDoc/compare/3.0.61...3.0.62) (2024-08-30)
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.66.0 ([725ddf3](https://github.com/Protelis/ProtelisDoc/commit/725ddf3cbc9786c0b27f52bca47ce8c955ad2655))
+* **deps:** update dependency org.mockito:mockito-core to v5.13.0 ([d543c3a](https://github.com/Protelis/ProtelisDoc/commit/d543c3aa6c270fda2267694e094b037b1c4e7217))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.100 ([80647ed](https://github.com/Protelis/ProtelisDoc/commit/80647edb872318c38d1261f5b70084c808e3db7a))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.101 ([54c2378](https://github.com/Protelis/ProtelisDoc/commit/54c2378a71481276b2182fcf1a299050497fb2dc))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.99 ([dfcfd18](https://github.com/Protelis/ProtelisDoc/commit/dfcfd189ef73814867ab1573d5a08ec42401fa5e))
+* **deps:** update node.js to 20.17 ([f5ce685](https://github.com/Protelis/ProtelisDoc/commit/f5ce68547f24db7c1289b366255e4745369ec48c))
+* **deps:** update plugin gradlepluginpublish to v1.2.2 ([d6c88e5](https://github.com/Protelis/ProtelisDoc/commit/d6c88e5827de18ff0496390f121f76998e2b5904))
+* **deps:** update plugin multijvmtesting to v1.2.5 ([4f0ae46](https://github.com/Protelis/ProtelisDoc/commit/4f0ae4660bffd3e42bf23490f5bebfd35829d5ef))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.4 ([84e36a3](https://github.com/Protelis/ProtelisDoc/commit/84e36a376a2287ff7064159eb352af453164f719))
+
 ## [3.0.61](https://github.com/Protelis/ProtelisDoc/compare/3.0.60...3.0.61) (2024-08-22)
 
 ### Dependency updates
