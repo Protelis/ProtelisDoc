@@ -30,7 +30,7 @@ open class ProtelisDocExtension @JvmOverloads constructor(
     ),
     val debug: Property<Boolean> = project.propertyWithDefault(false),
 ) {
-    companion object {
+    private companion object {
         private val Project.buildDirectory: Provider<String> get() =
             project.layout.buildDirectory.asFile.map { it.absolutePath }
     }
