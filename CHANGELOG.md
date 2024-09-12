@@ -1,3 +1,23 @@
+## [3.0.65](https://github.com/Protelis/ProtelisDoc/compare/3.0.64...3.0.65) (2024-09-12)
+
+### Dependency updates
+
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.103 ([177bc26](https://github.com/Protelis/ProtelisDoc/commit/177bc26522d104dee9b804c7a986605cc29a1b09))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.104 ([f627fec](https://github.com/Protelis/ProtelisDoc/commit/f627fecbe202ac0e2149199c07284023a4a124f6))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.105 ([b9f02e3](https://github.com/Protelis/ProtelisDoc/commit/b9f02e3868c8090029b34f73ce23ed55b6c0532b))
+* **deps:** update plugin com.gradle.develocity to v3.18.1 ([8af05aa](https://github.com/Protelis/ProtelisDoc/commit/8af05aa374b820993ec16fa877270951a4db2b03))
+* **deps:** update plugin gradlepluginpublish to v1.3.0 ([3e3acf1](https://github.com/Protelis/ProtelisDoc/commit/3e3acf1b75d3975f7dc0c74a6fb571a6b8d7b45e))
+* **deps:** update plugin multijvmtesting to v1.2.6 ([e32e78c](https://github.com/Protelis/ProtelisDoc/commit/e32e78c4140b8e4455a287c2aa18d6ead4382921))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.10 ([e078fe3](https://github.com/Protelis/ProtelisDoc/commit/e078fe3138b924b9fc5c72273267fe1fafe832dd))
+
+### Bug Fixes
+
+* make `ProtelisDocExtension.Companion` private ([28a8b57](https://github.com/Protelis/ProtelisDoc/commit/28a8b5757de469b677ce7d57cd7e2f8b2c3e522f))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.5 ([5ce10a8](https://github.com/Protelis/ProtelisDoc/commit/5ce10a88c11e4af1d1c397be585e49e5a07c3de0))
+
 ## [3.0.64](https://github.com/Protelis/ProtelisDoc/compare/3.0.63...3.0.64) (2024-09-09)
 
 ### Dependency updates
