@@ -1,3 +1,19 @@
+## [3.0.68](https://github.com/Protelis/ProtelisDoc/compare/3.0.67...3.0.68) (2024-09-23)
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.10.2 ([31aa6af](https://github.com/Protelis/ProtelisDoc/commit/31aa6af4102196bbe0c0b743a2335131270e62b0))
+* **deps:** update dependency io.github.classgraph:classgraph to v4.8.176 ([a40eef0](https://github.com/Protelis/ProtelisDoc/commit/a40eef028da445167c74621d5d296e4d37e2ba70))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.106 ([535509c](https://github.com/Protelis/ProtelisDoc/commit/535509ca72a5bdc3f87c094e5854a3b9652abdec))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.107 ([b7b3fc0](https://github.com/Protelis/ProtelisDoc/commit/b7b3fc03b658f73dd5f6e309b4eb73eec892dbae))
+* **deps:** update plugin multijvmtesting to v1.2.7 ([3b0b9b1](https://github.com/Protelis/ProtelisDoc/commit/3b0b9b10c4ee4ec5a24633799db0fc072cdab0af))
+* **deps:** update plugin publishoncentral to v5.1.7 ([cb64d36](https://github.com/Protelis/ProtelisDoc/commit/cb64d363f8d8a107cc1f86c35f6d868fc5a415f4))
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v4.0.4 ([6152351](https://github.com/Protelis/ProtelisDoc/commit/6152351e946814488734df805a57ba0ec5b464c6))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.6 ([d87c36f](https://github.com/Protelis/ProtelisDoc/commit/d87c36fae5b91863144318292382c677fcac60c3))
+
 ## [3.0.67](https://github.com/Protelis/ProtelisDoc/compare/3.0.66...3.0.67) (2024-09-12)
 
 ### Dependency updates
