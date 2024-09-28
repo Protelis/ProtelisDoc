@@ -1,3 +1,21 @@
+## [3.0.70](https://github.com/Protelis/ProtelisDoc/compare/3.0.69...3.0.70) (2024-09-28)
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.68.0 ([a7a3f80](https://github.com/Protelis/ProtelisDoc/commit/a7a3f80f56f2735959f035e182f07a787da99f59))
+* **deps:** update dependency org.mockito:mockito-core to v5.14.0 ([7932e26](https://github.com/Protelis/ProtelisDoc/commit/7932e264d5a30a6c552fdd2bb028e2911a151a76))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.108 ([77e415a](https://github.com/Protelis/ProtelisDoc/commit/77e415a78d9f31e0bf994ab3ee07e95e28aac9b8))
+* **deps:** update plugin multijvmtesting to v1.2.8 ([f3cf72f](https://github.com/Protelis/ProtelisDoc/commit/f3cf72f0468907d8d96a22243d307f2e26915e2d))
+* **deps:** update plugin publishoncentral to v5.1.8 ([379bff1](https://github.com/Protelis/ProtelisDoc/commit/379bff12d34b74fe93f895185d12f400392d3d0c))
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v4.2.0 ([b8885ce](https://github.com/Protelis/ProtelisDoc/commit/b8885ce57b2d0dac66b6ca07470eee96d7a551ed))
+* **deps:** update danysk/action-checkout action to v0.2.20 ([8f23d06](https://github.com/Protelis/ProtelisDoc/commit/8f23d06f1ec2aeae46ecce30712cedc7ec735ba6))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.7 ([3c371d8](https://github.com/Protelis/ProtelisDoc/commit/3c371d8c94c07eb441db5812cfca2ac9458127e6))
+* **deps:** update dependency ubuntu github actions runner to v24 ([f2bae91](https://github.com/Protelis/ProtelisDoc/commit/f2bae91d2ae62c348ae8ae8091e85a8b70102f9c))
+* **deps:** update dependency ubuntu to v24 ([379e976](https://github.com/Protelis/ProtelisDoc/commit/379e9760fb9f66866062a2f5da47f04cb2ec7f67))
+
 ## [3.0.69](https://github.com/Protelis/ProtelisDoc/compare/3.0.68...3.0.69) (2024-09-24)
 
 ### Dependency updates
