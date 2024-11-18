@@ -1,3 +1,10 @@
+## [3.0.74](https://github.com/Protelis/ProtelisDoc/compare/3.0.73...3.0.74) (2024-11-18)
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.70.1 ([#717](https://github.com/Protelis/ProtelisDoc/issues/717)) ([e8bcd6a](https://github.com/Protelis/ProtelisDoc/commit/e8bcd6af7e7c1b879be79e785fafe7f7f03a10ae))
+* **deps:** update plugin publishoncentral to v5.1.10 ([#719](https://github.com/Protelis/ProtelisDoc/issues/719)) ([1141b4e](https://github.com/Protelis/ProtelisDoc/commit/1141b4eda3ca0ffa60f33fb84301e951780bc5d0))
+
 ## [3.0.73](https://github.com/Protelis/ProtelisDoc/compare/3.0.72...3.0.73) (2024-11-17)
 
 ### Dependency updates
