@@ -1,3 +1,19 @@
+## [3.0.76](https://github.com/Protelis/ProtelisDoc/compare/3.0.75...3.0.76) (2024-11-21)
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.11.1 ([#721](https://github.com/Protelis/ProtelisDoc/issues/721)) ([7e2eed8](https://github.com/Protelis/ProtelisDoc/commit/7e2eed8b7afe307a6eabe718227412cf589d0e38))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.15 ([#729](https://github.com/Protelis/ProtelisDoc/issues/729)) ([7be498d](https://github.com/Protelis/ProtelisDoc/commit/7be498d199027a0031cd894d1ff8a26327b06935))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.23 ([#731](https://github.com/Protelis/ProtelisDoc/issues/731)) ([c49cad5](https://github.com/Protelis/ProtelisDoc/commit/c49cad583b5a752cc54fb3b2abc686be60cdde43))
+* improve format of the build file ([84eaade](https://github.com/Protelis/ProtelisDoc/commit/84eaadef8b62e917598bdcd507619072f7f522de))
+
+### General maintenance
+
+* do not call deprecated `ResolvedConfiguration.files` ([d1f0a4e](https://github.com/Protelis/ProtelisDoc/commit/d1f0a4e14d9653733aec8c0b198c4110ff7399f4))
+
 ## [3.0.75](https://github.com/Protelis/ProtelisDoc/compare/3.0.74...3.0.75) (2024-11-21)
 
 ### Dependency updates
