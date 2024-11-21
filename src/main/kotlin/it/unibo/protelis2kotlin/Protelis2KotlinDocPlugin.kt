@@ -92,7 +92,7 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
                                 logger.warn("ProtelisDoc failed dependecy resolution!", it)
                             }
                         } else {
-                            sourceSet.classpath.setFrom(config.resolvedConfiguration.files)
+                            sourceSet.classpath.setFrom(resolvedConfiguration.resolvedArtifacts.map { it.file })
                         }
                     }
                 }
