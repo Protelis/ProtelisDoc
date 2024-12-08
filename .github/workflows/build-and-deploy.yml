@@ -32,7 +32,7 @@ jobs:
             uploadKotlinOSSRHToMavenCentralNexus \
             uploadPluginMavenToMavenCentralNexus \
             uploadPluginMarkerMavenToMavenCentralNexus \
-            release \
+            releaseStagingRepositoryOnMavenCentral \
             publishPlugins \
             publishKotlinOSSRHPublicationToGithubRepository \
             publishPluginMavenPublicationToGithubRepository \
