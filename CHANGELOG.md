@@ -1,3 +1,29 @@
+## [3.0.77](https://github.com/Protelis/ProtelisDoc/compare/3.0.76...3.0.77) (2024-12-08)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin:kotlin-compiler-embeddable to v2.1.0 ([#737](https://github.com/Protelis/ProtelisDoc/issues/737)) ([a720e73](https://github.com/Protelis/ProtelisDoc/commit/a720e73a44a93814e49914eeb629043c17828740))
+* **core-deps:** update plugin kotlin-qa to v0.77.1 ([b24a414](https://github.com/Protelis/ProtelisDoc/commit/b24a414ca61f7f506dd0b23c1e58098d346823a0))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.116 ([#750](https://github.com/Protelis/ProtelisDoc/issues/750)) ([f233636](https://github.com/Protelis/ProtelisDoc/commit/f233636cc923bf1e876dc8117d61f0a173a20bc7))
+* **deps:** update node.js to 22.12 ([#741](https://github.com/Protelis/ProtelisDoc/issues/741)) ([4211a90](https://github.com/Protelis/ProtelisDoc/commit/4211a90f14c167481bcc2f081b6e5454587aacd7))
+* **deps:** update plugin multijvmtesting to v2 ([#742](https://github.com/Protelis/ProtelisDoc/issues/742)) ([f15de89](https://github.com/Protelis/ProtelisDoc/commit/f15de89305166a4bb82a1744b1bf7c5bd29e4720))
+* **deps:** update plugin org.gradle.toolchains.foojay-resolver-convention to v0.9.0 ([#739](https://github.com/Protelis/ProtelisDoc/issues/739)) ([b548903](https://github.com/Protelis/ProtelisDoc/commit/b5489038aab73faeaf1c9fff2476f73e2ac6dbed))
+* **deps:** update plugin publishoncentral to v6 ([#740](https://github.com/Protelis/ProtelisDoc/issues/740)) ([fd06e78](https://github.com/Protelis/ProtelisDoc/commit/fd06e78f06d8828a105310e75a01bfef2aac96c3))
+* **deps:** update plugin publishoncentral to v6.0.1 ([#749](https://github.com/Protelis/ProtelisDoc/issues/749)) ([d418280](https://github.com/Protelis/ProtelisDoc/commit/d4182804edc444deeb5e7a28bea33c9f37145556))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.24 ([#745](https://github.com/Protelis/ProtelisDoc/issues/745)) ([88dcca1](https://github.com/Protelis/ProtelisDoc/commit/88dcca19955c19355f644569a4fa7e294fd1e96d))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.25 ([#746](https://github.com/Protelis/ProtelisDoc/issues/746)) ([ca295a9](https://github.com/Protelis/ProtelisDoc/commit/ca295a902d0f2b2f63a1d9a83912436b8f901591))
+* drop unused deps ([77949a2](https://github.com/Protelis/ProtelisDoc/commit/77949a23f40785d5a0f124c722f7fd6a288d4125))
+* make Jar tasks depend on copyKotlinVersion ([04673e8](https://github.com/Protelis/ProtelisDoc/commit/04673e8d62276284d453ce9d00b3f4219d1f6d73))
+* move the concurrency management into the dispatcher workflow ([63d4edc](https://github.com/Protelis/ProtelisDoc/commit/63d4edc6d53af1bfe686a899b52b4d1574990e6b))
+* only `compileKotlin` is finalized by `copyKotlinVersion`, other compilation tasks are not ([918c5ab](https://github.com/Protelis/ProtelisDoc/commit/918c5ab3fd488b81fc754930d50559c6d893f202))
+
+### General maintenance
+
+* ignore java crash logs ([3096f0f](https://github.com/Protelis/ProtelisDoc/commit/3096f0ff008cc07ffedc1e3e35042c41610a0ec2))
+
 ## [3.0.76](https://github.com/Protelis/ProtelisDoc/compare/3.0.75...3.0.76) (2024-11-21)
 
 ### Dependency updates
