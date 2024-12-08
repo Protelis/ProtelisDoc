@@ -3,8 +3,6 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import org.apache.tools.ant.taskdefs.condition.Os
 import org.gradle.jvm.tasks.Jar
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
 plugins {
@@ -76,8 +74,7 @@ val copyKotlinVersion by tasks.registering {
     }
 }
 
-tasks.withType<KotlinCompilationTask<*>>().configureEach { finalizedBy(copyKotlinVersion) }
-tasks.withType<KotlinCompile>().configureEach { finalizedBy(copyKotlinVersion) }
+tasks.compileKotlin.configure { finalizedBy(copyKotlinVersion) }
 tasks.withType<Detekt>().configureEach { dependsOn(copyKotlinVersion) }
 tasks.withType<PluginUnderTestMetadata>().configureEach { dependsOn(copyKotlinVersion) }
 tasks.withType<Test>().configureEach { dependsOn(copyKotlinVersion) }
