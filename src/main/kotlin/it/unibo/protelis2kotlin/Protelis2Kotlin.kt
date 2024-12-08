@@ -21,7 +21,9 @@ const val PROTELIS_FILE_EXTENSION = "pt"
 /**
  * Data class containing [protelisTypes] information that should be collected during parsing.
  */
-private data class Context(var protelisTypes: Set<String> = emptySet()) {
+private data class Context(
+    var protelisTypes: Set<String> = emptySet(),
+) {
     fun registerProtelisType(type: String) {
         this.protelisTypes += type
     }
@@ -32,7 +34,6 @@ private data class Context(var protelisTypes: Set<String> = emptySet()) {
  */
 private interface DocPiece {
     companion object {
-
         /**
          * matches a @param tag.
          */
@@ -58,10 +59,10 @@ private interface DocPiece {
 /**
  * Data class for a piece of documentation [text] (like this very comment).
  */
-private data class DocText(val text: String) : DocPiece {
-    override fun extendWith(text: String): DocPiece {
-        return DocText(this.text + text)
-    }
+private data class DocText(
+    val text: String,
+) : DocPiece {
+    override fun extendWith(text: String): DocPiece = DocText(this.text + text)
 }
 
 /**
@@ -72,9 +73,7 @@ private data class DocParam(
     val type: String,
     val description: String,
 ) : DocPiece {
-    override fun extendWith(text: String): DocPiece {
-        return DocParam(name, type, description + text)
-    }
+    override fun extendWith(text: String): DocPiece = DocParam(name, type, description + text)
 }
 
 /**
@@ -84,9 +83,7 @@ private data class DocReturn(
     val returnType: String,
     val description: String,
 ) : DocPiece {
-    override fun extendWith(text: String): DocPiece {
-        return DocReturn(returnType, description + text)
-    }
+    override fun extendWith(text: String): DocPiece = DocReturn(returnType, description + text)
 }
 
 /**
@@ -96,15 +93,16 @@ private data class DocDirective(
     val directive: String,
     val description: String,
 ) : DocPiece {
-    override fun extendWith(text: String): DocPiece {
-        return DocDirective(directive, description + text)
-    }
+    override fun extendWith(text: String): DocPiece = DocDirective(directive, description + text)
 }
 
 /**
  * Data class describing a Protelis function parameter ([name] and [type]).
  */
-private data class ProtelisFunArg(val name: String, val type: String)
+private data class ProtelisFunArg(
+    val name: String,
+    val type: String,
+)
 
 /**
  * Data class describing a Protelis function: [name], [parameters], [returnType],
@@ -121,12 +119,17 @@ private data class ProtelisFun(
 /**
  * Data class containing the various [documentationPieces] for a Protelis function.
  */
-private data class ProtelisFunDoc(val documentationPieces: List<DocPiece>)
+private data class ProtelisFunDoc(
+    val documentationPieces: List<DocPiece>,
+)
 
 /**
  * Data class pairing a Protelis [function] with its [docs].
  */
-private data class ProtelisItem(val function: ProtelisFun, val docs: ProtelisFunDoc)
+private data class ProtelisItem(
+    val function: ProtelisFun,
+    val docs: ProtelisFunDoc,
+)
 
 /**
  * Parses a type and returns both the parsed type and the remaining text.
@@ -137,16 +140,17 @@ private fun parseTypeAndRest(line: String): Pair<String, String> {
     var stillType = true
     var k = 0
     var parentheses = ""
-    val type = line.takeWhile { c ->
-        k++
-        val cond = (c != ',' || stillType) && !(c == ',' && k > 0 && parentheses.isEmpty())
-        if (stillType && (c == '(' || c == '[')) parentheses += c
-        if (stillType && (c == ')' || c == ']')) {
-            parentheses = parentheses.dropLast(1)
-            if (parentheses.isEmpty()) stillType = false
+    val type =
+        line.takeWhile { c ->
+            k++
+            val cond = (c != ',' || stillType) && !(c == ',' && k > 0 && parentheses.isEmpty())
+            if (stillType && (c == '(' || c == '[')) parentheses += c
+            if (stillType && (c == ')' || c == ']')) {
+                parentheses = parentheses.dropLast(1)
+                if (parentheses.isEmpty()) stillType = false
+            }
+            cond
         }
-        cond
-    }
     return Pair(type, line.substring(k).trim())
 }
 
@@ -201,23 +205,27 @@ private fun parseDoc(doc: String): ProtelisFunDoc {
  * @param fline The string of a Protelis function definition to be parsed
  * @return [ProtelisFun]
  */
-private fun parseProtelisFunction(fline: String): ProtelisFun {
-    return ProtelisFun(
-        name = checkNotNull("""def\s+(\w+)\s*\(""".toRegex().find(fline)?.groupValues?.get(1)) {
-            "Cannot parse function name in: $fline"
-        },
+private fun parseProtelisFunction(fline: String): ProtelisFun =
+    ProtelisFun(
+        name =
+            checkNotNull("""def\s+(\w+)\s*\(""".toRegex().find(fline)?.groupValues?.get(1)) {
+                "Cannot parse function name in: $fline"
+            },
         parameters =
-        """\(([^)]*)\)""".toRegex().find(fline)?.groupValues?.get(1)?.split(",")
-            ?.filter { it.isNotEmpty() }
-            ?.map {
-                // if (!"""\w""".toRegex().matches(it)) throw IllegalStateException("Bad argument name: $it")
-                ProtelisFunArg(it.trim(), "")
-            }
-            ?.toList()
-            ?: error("Cannot parse arglist in: $fline"),
+            """\(([^)]*)\)"""
+                .toRegex()
+                .find(fline)
+                ?.groupValues
+                ?.get(1)
+                ?.split(",")
+                ?.filter { it.isNotEmpty() }
+                ?.map {
+                    // if (!"""\w""".toRegex().matches(it)) throw IllegalStateException("Bad argument name: $it")
+                    ProtelisFunArg(it.trim(), "")
+                }?.toList()
+                ?: error("Cannot parse arglist in: $fline"),
         public = "(public\\s+def)".toRegex().find(fline) != null,
     )
-}
 
 /**
  * Parses Protelis source code into a list of [ProtelisItem]s.
@@ -263,42 +271,50 @@ private fun generateKotlinDoc(docs: ProtelisFunDoc): String {
 /**
  * Generates a Kotlin type from a Protelis type.
  */
-private fun generateKotlinType(context: Context, protelisType: String): String = when (protelisType) {
-    "" -> "Unit"
-    "bool" -> "Boolean"
-    "num" -> "Number"
-    else ->
-        """\(([^)]*)\)\s*->\s*(.*)""".toRegex().matchEntire(protelisType)?.let { matchRes ->
-            val args = matchRes.groupValues[1].split(",").map { generateKotlinType(context, it.trim()) }
-            val ret = generateKotlinType(context, matchRes.groupValues[2])
-            """(${args.joinToString(",")}) -> $ret"""
-        } ?: """\[.*]""".toRegex().matchEntire(protelisType)?.let { _ ->
-            context.registerProtelisType("Tuple")
-            "Tuple"
-        } ?: if (protelisType.length == 1 && protelisType.any { it.isUpperCase() }) {
-            protelisType
-        } else if ("""[A-Z]'""".toRegex().matches(protelisType)) {
-            "${protelisType[0].inc()}"
-        } else if ("""\w+""".toRegex().matches(protelisType)) {
-            context.registerProtelisType(protelisType)
-            protelisType
-        } else {
-            "Any"
-        }
-}
+private fun generateKotlinType(
+    context: Context,
+    protelisType: String,
+): String =
+    when (protelisType) {
+        "" -> "Unit"
+        "bool" -> "Boolean"
+        "num" -> "Number"
+        else ->
+            """\(([^)]*)\)\s*->\s*(.*)""".toRegex().matchEntire(protelisType)?.let { matchRes ->
+                val args = matchRes.groupValues[1].split(",").map { generateKotlinType(context, it.trim()) }
+                val ret = generateKotlinType(context, matchRes.groupValues[2])
+                """(${args.joinToString(",")}) -> $ret"""
+            } ?: """\[.*]""".toRegex().matchEntire(protelisType)?.let { _ ->
+                context.registerProtelisType("Tuple")
+                "Tuple"
+            } ?: if (protelisType.length == 1 && protelisType.any { it.isUpperCase() }) {
+                protelisType
+            } else if ("""[A-Z]'""".toRegex().matches(protelisType)) {
+                "${protelisType[0].inc()}"
+            } else if ("""\w+""".toRegex().matches(protelisType)) {
+                context.registerProtelisType(protelisType)
+                protelisType
+            } else {
+                "Any"
+            }
+    }
 
 /**
  * Valid Protelis symbols that are not valid in Kotlin (e.g., as they are reserved words) are sanitized.
  */
-private fun sanitizeNameForKotlin(name: String): String = when (name) {
-    "null" -> "`null`"
-    else -> name
-}
+private fun sanitizeNameForKotlin(name: String): String =
+    when (name) {
+        "null" -> "`null`"
+        else -> name
+    }
 
 /**
  * Generates a Kotlin function from a Protelis function descriptor.
  */
-private fun generateKotlinFun(context: Context, fn: ProtelisFun): String {
+private fun generateKotlinFun(
+    context: Context,
+    fn: ProtelisFun,
+): String {
     var genTypesStr = fn.genericTypes.joinToString(",")
     if (genTypesStr.isNotEmpty()) genTypesStr = " <$genTypesStr>"
     return "@Suppress(\"UNUSED_PARAMETER\")\nfun$genTypesStr ${sanitizeNameForKotlin(fn.name)}(" +
@@ -316,7 +332,10 @@ private fun generateKotlinFun(context: Context, fn: ProtelisFun): String {
 /**
  * Generates a Kotlin item (doc + fun signature) from a Protelis item (doc + fun).
  */
-private fun generateKotlinItem(context: Context, pitem: ProtelisItem): String {
+private fun generateKotlinItem(
+    context: Context,
+    pitem: ProtelisItem,
+): String {
     val doc = pitem.docs
     val fn = pitem.function
     return generateKotlinDoc(doc) + "\n" + generateKotlinFun(context, fn)
@@ -325,55 +344,68 @@ private fun generateKotlinItem(context: Context, pitem: ProtelisItem): String {
 /**
  * Generates a string from a list of Protelis items (function and docs pairs).
  */
-private fun generateKotlin(context: Context, protelisItems: List<ProtelisItem>): String = protelisItems.map { item ->
-    val doc = item.docs
-    val fn = item.function
-    item.copy(
-        function = fn.copy(
-            returnType = doc.documentationPieces
-                .filterIsInstance<DocReturn>()
-                .map { it.returnType }
-                .firstOrNull()
-                .orEmpty(),
-            parameters = fn.parameters
-                .map { param ->
-                    param.copy(
-                        type = doc.documentationPieces
-                            .filter { it is DocParam && it.name == param.name }
-                            .map { (it as DocParam).type }
-                            .firstOrNull()
-                            ?: "Any",
-                    )
-                },
-            genericTypes = doc.documentationPieces
-                .map { if (it !is DocParam) "" else it.type }
-                .flatMap { type ->
-                    "([A-Z]'?)".toRegex()
-                        .findAll(type)
-                        .map {
-                            if (it.value.length == 2 && it.value[1] == '\'') {
-                                "${it.value[0].inc()}"
-                            } else {
-                                it.value
-                            }
-                        }
-                        .toList()
-                }.toSet(),
-        ),
-    )
-}.joinToString("\n\n") { generateKotlinItem(context, it) }
+private fun generateKotlin(
+    context: Context,
+    protelisItems: List<ProtelisItem>,
+): String =
+    protelisItems
+        .map { item ->
+            val doc = item.docs
+            val fn = item.function
+            item.copy(
+                function =
+                    fn.copy(
+                        returnType =
+                            doc.documentationPieces
+                                .filterIsInstance<DocReturn>()
+                                .map { it.returnType }
+                                .firstOrNull()
+                                .orEmpty(),
+                        parameters =
+                            fn.parameters
+                                .map { param ->
+                                    param.copy(
+                                        type =
+                                            doc.documentationPieces
+                                                .filter { it is DocParam && it.name == param.name }
+                                                .map { (it as DocParam).type }
+                                                .firstOrNull()
+                                                ?: "Any",
+                                    )
+                                },
+                        genericTypes =
+                            doc.documentationPieces
+                                .map { if (it !is DocParam) "" else it.type }
+                                .flatMap { type ->
+                                    "([A-Z]'?)"
+                                        .toRegex()
+                                        .findAll(type)
+                                        .map {
+                                            if (it.value.length == 2 && it.value[1] == '\'') {
+                                                "${it.value[0].inc()}"
+                                            } else {
+                                                it.value
+                                            }
+                                        }.toList()
+                                }.toSet(),
+                    ),
+            )
+        }.joinToString("\n\n") { generateKotlinItem(context, it) }
 
 /**
  * Turns a Protelis package to a class name using camelcase convention.
  */
-private fun packageToClassName(pkg: String): String {
-    return pkg.split(':').last().split('_')
+private fun packageToClassName(pkg: String): String =
+    pkg
+        .split(':')
+        .last()
+        .split('_')
         .joinToString("") { it.replaceFirstChar(Char::titlecaseChar) }
-}
 
 @Suppress("MagicNumber")
 private fun String.sha256(): String =
-    BigInteger(MessageDigest.getInstance("SHA-256").digest(toByteArray())).toString(36)
+    BigInteger(MessageDigest.getInstance("SHA-256").digest(toByteArray()))
+        .toString(36)
 
 /**
  * Main function: calls [protelis2Kt] without a project.
@@ -398,33 +430,73 @@ fun main(args: Array<String>) {
  * 1) The base directory from which recursively looking for Protelis files
  * 2) The destination directory that will contain the output Kotlin files
  */
-fun Project?.protelis2Kt(base: String, destination: String) {
+fun Project?.protelis2Kt(
+    base: String,
+    destination: String,
+) {
     val header = "Protelis2Kt"
-    val logger = this?.logger ?: object : org.gradle.api.logging.Logger, Logger by LoggerFactory.getLogger(header) {
-        override fun isEnabled(level: LogLevel?) = true
-        override fun isLifecycleEnabled() = true
-        override fun isQuietEnabled(): Boolean = true
-        override fun lifecycle(message: String?) = debug(message)
-        override fun lifecycle(message: String?, vararg objects: Any?) = debug(message, objects)
-        override fun lifecycle(message: String?, throwable: Throwable?) = warn(message, throwable)
-        override fun quiet(message: String?) = info(message)
-        override fun quiet(message: String?, vararg objects: Any?) = info(message, objects)
-        override fun quiet(message: String?, throwable: Throwable?) = warn(message, throwable)
-        override fun log(level: LogLevel?, message: String?) = log(level, message, *emptyArray())
-        override fun log(level: LogLevel?, message: String?, vararg objects: Any?) = lifecycle(message, objects)
-        override fun log(level: LogLevel?, message: String?, throwable: Throwable?) = warn(message, throwable)
-    }
+    val logger =
+        this?.logger ?: object : org.gradle.api.logging.Logger, Logger by LoggerFactory.getLogger(header) {
+            override fun isEnabled(level: LogLevel?) = true
+
+            override fun isLifecycleEnabled() = true
+
+            override fun isQuietEnabled(): Boolean = true
+
+            override fun lifecycle(message: String?) = debug(message)
+
+            override fun lifecycle(
+                message: String?,
+                vararg objects: Any?,
+            ) = debug(message, objects)
+
+            override fun lifecycle(
+                message: String?,
+                throwable: Throwable?,
+            ) = warn(message, throwable)
+
+            override fun quiet(message: String?) = info(message)
+
+            override fun quiet(
+                message: String?,
+                vararg objects: Any?,
+            ) = info(message, objects)
+
+            override fun quiet(
+                message: String?,
+                throwable: Throwable?,
+            ) = warn(message, throwable)
+
+            override fun log(
+                level: LogLevel?,
+                message: String?,
+            ) = log(level, message, *emptyArray())
+
+            override fun log(
+                level: LogLevel?,
+                message: String?,
+                vararg objects: Any?,
+            ) = lifecycle(message, objects)
+
+            override fun log(
+                level: LogLevel?,
+                message: String?,
+                throwable: Throwable?,
+            ) = warn(message, throwable)
+        }
     logger.debug("$header base directory: $base\n$header destination directory: $destination")
     var k = 0
     val root = this?.file(base) ?: File(base)
     logger.debug("fetching Protelis files in {}", root.absolutePath)
-    root.walkTopDown()
+    root
+        .walkTopDown()
         .filter { it.isFile && it.extension == PROTELIS_FILE_EXTENSION }
         .forEach { file ->
             val fileText: String = file.readText()
             logger.debug("Processing " + file.absolutePath)
-            val pkg = "module (.+)".toRegex().find(fileText)?.groupValues?.component2()
-                ?: "anonymous_module_${fileText.sha256()}"
+            val pkg =
+                "module (.+)".toRegex().find(fileText)?.groupValues?.component2()
+                    ?: "anonymous_module_${fileText.sha256()}"
             val pkgParts = pkg.split(':')
             val context = Context()
             val protelisItems: List<ProtelisItem> = parseFile(fileText)
@@ -434,23 +506,24 @@ fun Project?.protelis2Kt(base: String, destination: String) {
                 package ${pkgParts.joinToString(".")}
                 """.trimIndent()
             val kotlinCode = generateKotlin(context, protelisItems)
-            val importCode = context.protelisTypes
-                .map {
-                    when (it) {
-                        "ExecutionContext", "ExecutionEnvironment" -> "org.protelis.vm.$it"
-                        "Tuple" -> "org.protelis.lang.datatype.$it"
-                        else -> ""
-                    }
-                }
-                .filterNot { it.isEmpty() }
-                .joinToString("\n") { "import $it" } + "\n\n"
+            val importCode =
+                context.protelisTypes
+                    .map {
+                        when (it) {
+                            "ExecutionContext", "ExecutionEnvironment" -> "org.protelis.vm.$it"
+                            "Tuple" -> "org.protelis.lang.datatype.$it"
+                            else -> ""
+                        }
+                    }.filterNot { it.isEmpty() }
+                    .joinToString("\n") { "import $it" } + "\n\n"
             val kotlinFullCode = pkgCode + importCode + kotlinCode
             val outPath = "$destination$SEP${pkgParts.joinToString(SEP)}$SEP${file.name.replace(".pt",".kt")}"
-            File(outPath).let {
-                it.parentFile.mkdirs()
-                it.createNewFile()
-                it
-            }.writeText(kotlinFullCode)
+            File(outPath)
+                .let {
+                    it.parentFile.mkdirs()
+                    it.createNewFile()
+                    it
+                }.writeText(kotlinFullCode)
             k++
         }
     logger.lifecycle("$header Converted $k .pt files to Kotlin")

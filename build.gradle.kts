@@ -1,9 +1,11 @@
 @file:Suppress("UnstableApiUsage")
 
+import io.gitlab.arturbosch.detekt.Detekt
 import org.apache.tools.ant.taskdefs.condition.Os
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     `maven-publish`
     signing
@@ -51,13 +53,44 @@ dependencies {
     testImplementation(libs.bundles.kotlin.testing)
 }
 
+val copyKotlinVersion by tasks.registering {
+    val inputFile = file("gradle/libs.versions.toml")
+    inputs.file(inputFile)
+    val outputFile =
+        project.layout.buildDirectory.map {
+            it.asFile.resolve("resources/main/protelisdoc/kotlinversion")
+        }
+    outputs.file(outputFile)
+    doLast {
+        val kotlinVersion = Regex("""kotlin\s*=\s*"(\d+(\.\d+)+)"""")
+        val version =
+            inputFile.useLines { lines ->
+                lines
+                    .mapNotNull {
+                        kotlinVersion.matchEntire(it)?.groupValues?.get(1)
+                    }.first()
+            }
+        outputFile.get().parentFile.mkdirs()
+        outputFile.get().writeText(version)
+    }
+}
+
+tasks.withType<KotlinCompilationTask<*>>().configureEach { finalizedBy(copyKotlinVersion) }
+tasks.withType<KotlinCompile>().configureEach { finalizedBy(copyKotlinVersion) }
+tasks.withType<Detekt>().configureEach { dependsOn(copyKotlinVersion) }
+tasks.withType<PluginUnderTestMetadata>().configureEach { dependsOn(copyKotlinVersion) }
+tasks.withType<Test>().configureEach { dependsOn(copyKotlinVersion) }
+
 tasks.withType<Test> {
     useJUnitPlatform()
     testLogging {
         showStandardStreams = true
         showCauses = true
         showStackTraces = true
-        events(*org.gradle.api.tasks.testing.logging.TestLogEvent.values())
+        events(
+            *org.gradle.api.tasks.testing.logging.TestLogEvent
+                .values(),
+        )
         exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
     }
 }
