@@ -1,3 +1,18 @@
+## [3.0.78](https://github.com/Protelis/ProtelisDoc/compare/3.0.77...3.0.78) (2024-12-09)
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.78.0 ([#753](https://github.com/Protelis/ProtelisDoc/issues/753)) ([8c8a8ca](https://github.com/Protelis/ProtelisDoc/commit/8c8a8ca4ae9eac3036813fc69227c2199be2e99c))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.16 ([#752](https://github.com/Protelis/ProtelisDoc/issues/752)) ([080e3ec](https://github.com/Protelis/ProtelisDoc/commit/080e3ec16253d9df0d264eb35d5d230d185a8dc0))
+* **deps:** update plugin publishoncentral to v7 ([#751](https://github.com/Protelis/ProtelisDoc/issues/751)) ([2016906](https://github.com/Protelis/ProtelisDoc/commit/20169061f13be3b3d74d347b70e6b7b3fb7b8714))
+
+### Build and continuous integration
+
+* disambiguate the drop task name ([6a2cbe4](https://github.com/Protelis/ProtelisDoc/commit/6a2cbe47f6eab7044a332213649efe5b414211d0))
+* disambiguate the release task name ([b6a6896](https://github.com/Protelis/ProtelisDoc/commit/b6a6896b65cfad507533c51d7ec63d002493952f))
+* **release:** disambiguate the release task name ([320ae45](https://github.com/Protelis/ProtelisDoc/commit/320ae45f098a3adfc6272a89e8f1bad1dd2d2af7))
+* **release:** do not retry releases on failure ([bba5da0](https://github.com/Protelis/ProtelisDoc/commit/bba5da0d15c8edbf9efca6f70d15d86d710a33b6))
+
 ## [3.0.77](https://github.com/Protelis/ProtelisDoc/compare/3.0.76...3.0.77) (2024-12-08)
 
 ### Dependency updates
