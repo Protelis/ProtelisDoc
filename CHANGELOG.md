@@ -1,3 +1,14 @@
+## [3.0.79](https://github.com/Protelis/ProtelisDoc/compare/3.0.78...3.0.79) (2024-12-16)
+
+### Dependency updates
+
+* **deps:** update plugin com.gradle.develocity to v3.19 ([#754](https://github.com/Protelis/ProtelisDoc/issues/754)) ([eb67c33](https://github.com/Protelis/ProtelisDoc/commit/eb67c338bc1bd5e43a89c9477e34eb331cad3c03))
+* **deps:** update plugin multijvmtesting to v3 ([#748](https://github.com/Protelis/ProtelisDoc/issues/748)) ([bbbab2e](https://github.com/Protelis/ProtelisDoc/commit/bbbab2e9dd80e5757cbee93505ba2bf69f79cdcc))
+
+### Documentation
+
+* **core-deps:** update dokka to v2 ([#755](https://github.com/Protelis/ProtelisDoc/issues/755)) ([e89cf01](https://github.com/Protelis/ProtelisDoc/commit/e89cf01ebebd110720a6c73c1bf4d60cb40f37e1))
+
 ## [3.0.78](https://github.com/Protelis/ProtelisDoc/compare/3.0.77...3.0.78) (2024-12-09)
 
 ### Dependency updates
