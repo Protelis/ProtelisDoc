@@ -109,6 +109,7 @@ if (System.getenv("CI") == true.toString()) {
 val websiteUrl = "https://github.com/Protelis/Protelis-KDoc-generator"
 
 publishOnCentral {
+    repoOwner = "Protelis"
     projectDescription.set("A translator from documented Protelis code to compiling Kotlin interfaces")
     projectLongName.set("ProtelisDoc generator")
     projectUrl.set(websiteUrl)
