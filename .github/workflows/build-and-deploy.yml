@@ -29,20 +29,15 @@ jobs:
           build-command: true
           check-command: |
             ./gradlew \
-            uploadKotlinOSSRHToMavenCentralNexus \
-            uploadPluginMavenToMavenCentralNexus \
-            uploadPluginMarkerMavenToMavenCentralNexus \
+            uploadAllToMavenCentralNexus \
             releaseStagingRepositoryOnMavenCentral \
             publishPlugins \
-            publishKotlinOSSRHPublicationToGithubRepository \
-            publishPluginMavenPublicationToGithubRepository \
+            publishAllToGithubRepository \
             --dry-run
           deploy-command: >-
             ./gradlew
-            uploadKotlinOSSRHToMavenCentralNexus
-            uploadPluginMavenToMavenCentralNexus
-            uploadPluginMarkerMavenToMavenCentralNexus
-            close
+            uploadAllToMavenCentralNexus
+            closeStaging
             dropStagingRepositoryOnMavenCentral
           should-run-codecov: ${{ runner.os == 'Linux' }}
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
