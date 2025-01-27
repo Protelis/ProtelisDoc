@@ -1,3 +1,18 @@
+## [3.0.82](https://github.com/Protelis/ProtelisDoc/compare/3.0.81...3.0.82) (2025-01-27)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin:kotlin-compiler-embeddable to v2.1.10 ([#790](https://github.com/Protelis/ProtelisDoc/issues/790)) ([1116637](https://github.com/Protelis/ProtelisDoc/commit/1116637fb060f9fffe90debfbd5b96617106f86f))
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v2.1.10 ([#789](https://github.com/Protelis/ProtelisDoc/issues/789)) ([12352ed](https://github.com/Protelis/ProtelisDoc/commit/12352eda699f36d0647f9d473b0ef22045187225))
+* **deps:** update plugin gitsemver to v3.1.10 ([#791](https://github.com/Protelis/ProtelisDoc/issues/791)) ([8f03b9d](https://github.com/Protelis/ProtelisDoc/commit/8f03b9da7b53069976e205b351c9735c022d23c0))
+* **deps:** update plugin gitsemver to v3.1.8 ([#786](https://github.com/Protelis/ProtelisDoc/issues/786)) ([0345d85](https://github.com/Protelis/ProtelisDoc/commit/0345d85725bf56d0a5e0a59151887453fae18076))
+* **deps:** update plugin gitsemver to v3.1.9 ([#787](https://github.com/Protelis/ProtelisDoc/issues/787)) ([99f3d76](https://github.com/Protelis/ProtelisDoc/commit/99f3d767858692eb3ae3fa5faa73110d11ec190f))
+* **deps:** update plugin multijvmtesting to v3.2.2 ([#792](https://github.com/Protelis/ProtelisDoc/issues/792)) ([6d922fa](https://github.com/Protelis/ProtelisDoc/commit/6d922fa3e16d624d83ef9abebc746ceb219eb37f))
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v4.2.0 ([#788](https://github.com/Protelis/ProtelisDoc/issues/788)) ([de787df](https://github.com/Protelis/ProtelisDoc/commit/de787df62813a5594579aa26c5eb659c99015e91))
+
 ## [3.0.81](https://github.com/Protelis/ProtelisDoc/compare/3.0.80...3.0.81) (2025-01-26)
 
 ### Dependency updates
