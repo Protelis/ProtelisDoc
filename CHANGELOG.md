@@ -1,3 +1,31 @@
+## [3.0.83](https://github.com/Protelis/ProtelisDoc/compare/3.0.82...3.0.83) (2025-02-25)
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.13 ([#812](https://github.com/Protelis/ProtelisDoc/issues/812)) ([ef75412](https://github.com/Protelis/ProtelisDoc/commit/ef754127718c97defb07699339769962d0782236))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.120 ([#800](https://github.com/Protelis/ProtelisDoc/issues/800)) ([5cee3c4](https://github.com/Protelis/ProtelisDoc/commit/5cee3c4c4f8a13ff253f6c591d9b0d31eefd9fe1))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.121 ([#801](https://github.com/Protelis/ProtelisDoc/issues/801)) ([5acdbfa](https://github.com/Protelis/ProtelisDoc/commit/5acdbfa2b096b1ae88310bbee1bf8f350c3a8776))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.122 ([#802](https://github.com/Protelis/ProtelisDoc/issues/802)) ([0199ba4](https://github.com/Protelis/ProtelisDoc/commit/0199ba44d931c379d7c6308a1e5899f59f8d5a33))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.123 ([#804](https://github.com/Protelis/ProtelisDoc/issues/804)) ([ee39e1e](https://github.com/Protelis/ProtelisDoc/commit/ee39e1eefe7b0aeee7063bcb22f0a0824dedd458))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.124 ([#805](https://github.com/Protelis/ProtelisDoc/issues/805)) ([aa76c3b](https://github.com/Protelis/ProtelisDoc/commit/aa76c3bb0a6ac8ce215904387e758e76f064896e))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.125 ([#809](https://github.com/Protelis/ProtelisDoc/issues/809)) ([ab9d2e9](https://github.com/Protelis/ProtelisDoc/commit/ab9d2e97ecb3c40ac5387cf3e2dbd67691736e17))
+* **deps:** update node.js to 22.14 ([#803](https://github.com/Protelis/ProtelisDoc/issues/803)) ([087c52d](https://github.com/Protelis/ProtelisDoc/commit/087c52d384c97bd2e3ab2e121cada9a172208fc0))
+* **deps:** update plugin com.gradle.develocity to v3.19.2 ([#807](https://github.com/Protelis/ProtelisDoc/issues/807)) ([80deec9](https://github.com/Protelis/ProtelisDoc/commit/80deec99a274727627e67173b537056919f31afa))
+* **deps:** update plugin gitsemver to v4 ([#794](https://github.com/Protelis/ProtelisDoc/issues/794)) ([b16d06c](https://github.com/Protelis/ProtelisDoc/commit/b16d06c0f04a399a48957bf1265ce81138dc57be))
+* **deps:** update plugin gitsemver to v4.0.2 ([#795](https://github.com/Protelis/ProtelisDoc/issues/795)) ([e38d77c](https://github.com/Protelis/ProtelisDoc/commit/e38d77cea28ef1bbffd2887131e0617106359c92))
+* **deps:** update plugin gradlepluginpublish to v1.3.1 ([#797](https://github.com/Protelis/ProtelisDoc/issues/797)) ([b9ce222](https://github.com/Protelis/ProtelisDoc/commit/b9ce2225ddac345fbeaf46b6bcfce12f088cdf45))
+* **deps:** update plugin multijvmtesting to v3.2.3 ([#810](https://github.com/Protelis/ProtelisDoc/issues/810)) ([1610be2](https://github.com/Protelis/ProtelisDoc/commit/1610be29761a83a355e103abba3744062a796582))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.20 ([#793](https://github.com/Protelis/ProtelisDoc/issues/793)) ([0068076](https://github.com/Protelis/ProtelisDoc/commit/00680767d35b142d2088baee4e4f8012db050a2b))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.21 ([#811](https://github.com/Protelis/ProtelisDoc/issues/811)) ([734bf98](https://github.com/Protelis/ProtelisDoc/commit/734bf989f0b11034892f69c70f4ddc546cc9a037))
+* **deps:** update plugin publishoncentral to v8.0.3 ([#799](https://github.com/Protelis/ProtelisDoc/issues/799)) ([c03067a](https://github.com/Protelis/ProtelisDoc/commit/c03067a04b771b16b16f63e95f3110272c11131e))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.10 ([#808](https://github.com/Protelis/ProtelisDoc/issues/808)) ([3460db1](https://github.com/Protelis/ProtelisDoc/commit/3460db130eb6edc7f2085662f28921779edba2ff))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.7 ([#796](https://github.com/Protelis/ProtelisDoc/issues/796)) ([86076c3](https://github.com/Protelis/ProtelisDoc/commit/86076c3b4414840d042b5c1f4552e4bf6653a122))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.8 ([#798](https://github.com/Protelis/ProtelisDoc/issues/798)) ([ff7974e](https://github.com/Protelis/ProtelisDoc/commit/ff7974e95db157273c718fa580b9133eb4b1a057))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.9 ([#806](https://github.com/Protelis/ProtelisDoc/issues/806)) ([de0e631](https://github.com/Protelis/ProtelisDoc/commit/de0e631fb0e89ffc3eee828f3f585db71b3321b8))
+
 ## [3.0.82](https://github.com/Protelis/ProtelisDoc/compare/3.0.81...3.0.82) (2025-01-27)
 
 ### Dependency updates
