@@ -1,3 +1,20 @@
+## [3.0.84](https://github.com/Protelis/ProtelisDoc/compare/3.0.83...3.0.84) (2025-03-20)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v2.1.20 ([#820](https://github.com/Protelis/ProtelisDoc/issues/820)) ([e52d1e5](https://github.com/Protelis/ProtelisDoc/commit/e52d1e55a667060990cc9d7776b00fed902c66b7))
+* **deps:** update dependency org.mockito:mockito-core to v5.16.0 ([#815](https://github.com/Protelis/ProtelisDoc/issues/815)) ([c4dca4a](https://github.com/Protelis/ProtelisDoc/commit/c4dca4a69951a4dd1f44c12a4700f19731acacfd))
+* **deps:** update dependency org.mockito:mockito-core to v5.16.1 ([#817](https://github.com/Protelis/ProtelisDoc/issues/817)) ([78b65fa](https://github.com/Protelis/ProtelisDoc/commit/78b65faf12249990135a89c9f97d73257e449799))
+* **deps:** update plugin multijvmtesting to v3.2.4 ([#822](https://github.com/Protelis/ProtelisDoc/issues/822)) ([2956759](https://github.com/Protelis/ProtelisDoc/commit/2956759d61a72705e30654ccc82d77e7ca13c738))
+* **deps:** update plugin publishoncentral to v8.0.4 ([#814](https://github.com/Protelis/ProtelisDoc/issues/814)) ([28eed4e](https://github.com/Protelis/ProtelisDoc/commit/28eed4e53a5328d775059fd629152361b7420428))
+* **deps:** update plugin tasktree to v4.0.1 ([#816](https://github.com/Protelis/ProtelisDoc/issues/816)) ([17d59a6](https://github.com/Protelis/ProtelisDoc/commit/17d59a6077bd0045debc3f11a80ad341fc66bb84))
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v4.3.0 ([#818](https://github.com/Protelis/ProtelisDoc/issues/818)) ([0bd5476](https://github.com/Protelis/ProtelisDoc/commit/0bd547663497c114f20720d025aa568c11394d4c))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.12 ([#813](https://github.com/Protelis/ProtelisDoc/issues/813)) ([fa9503b](https://github.com/Protelis/ProtelisDoc/commit/fa9503bde034e2e79c956dc60e9f13885afc98ae))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.13 ([#819](https://github.com/Protelis/ProtelisDoc/issues/819)) ([6c7e97d](https://github.com/Protelis/ProtelisDoc/commit/6c7e97d4f44944416a1260c6c30ffc5ba3603f4e))
+
 ## [3.0.83](https://github.com/Protelis/ProtelisDoc/compare/3.0.82...3.0.83) (2025-02-25)
 
 ### Dependency updates
