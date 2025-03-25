@@ -45,7 +45,6 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation(kotlin("reflect"))
     implementation(kotlin("gradle-plugin"))
-    implementation(libs.kotlin.compiler)
     implementation(libs.bundles.dokka)
 
     testImplementation(gradleTestKit())
