@@ -1,3 +1,20 @@
+## [3.0.85](https://github.com/Protelis/ProtelisDoc/compare/3.0.84...3.0.85) (2025-03-25)
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.84.1 ([#831](https://github.com/Protelis/ProtelisDoc/issues/831)) ([2618f0f](https://github.com/Protelis/ProtelisDoc/commit/2618f0fe69705b8e07b276d79ff7fe7fdd275db4))
+* **deps:** update plugin multijvmtesting to v3.3.0 ([#825](https://github.com/Protelis/ProtelisDoc/issues/825)) ([a0b7fe9](https://github.com/Protelis/ProtelisDoc/commit/a0b7fe9c85fffe4dec371896ead3542facd23f12))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.22 ([#823](https://github.com/Protelis/ProtelisDoc/issues/823)) ([2afba83](https://github.com/Protelis/ProtelisDoc/commit/2afba8301174ed9c84a02f3b1ea78287dd48ac31))
+* **deps:** update plugin publishoncentral to v8.0.5 ([#824](https://github.com/Protelis/ProtelisDoc/issues/824)) ([47a29e4](https://github.com/Protelis/ProtelisDoc/commit/47a29e4396acd4ac0ab9ca6e5caab297c0e38c1e))
+
+### Bug Fixes
+
+* drop unneeded dependency org.jetbrains.kotlin:kotlin-compiler-embeddable ([137eae5](https://github.com/Protelis/ProtelisDoc/commit/137eae544eba1d99b2d928e6acf174a99ed15d3b))
+
+### Tests
+
+* drop unused dependency mockito ([5fc4945](https://github.com/Protelis/ProtelisDoc/commit/5fc4945236d6b7b20228e93a5afa1191b9013674))
+
 ## [3.0.84](https://github.com/Protelis/ProtelisDoc/compare/3.0.83...3.0.84) (2025-03-20)
 
 ### Dependency updates
