@@ -1,3 +1,13 @@
+## [3.0.86](https://github.com/Protelis/ProtelisDoc/compare/3.0.85...3.0.86) (2025-03-28)
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.85.0 ([#833](https://github.com/Protelis/ProtelisDoc/issues/833)) ([cd89f22](https://github.com/Protelis/ProtelisDoc/commit/cd89f2218a1001d304249715f60aa53d3eed55c4))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.14 ([#832](https://github.com/Protelis/ProtelisDoc/issues/832)) ([c8b4fb8](https://github.com/Protelis/ProtelisDoc/commit/c8b4fb8b0447d135d9a32b07ec44d5cad80d8a19))
+
 ## [3.0.85](https://github.com/Protelis/ProtelisDoc/compare/3.0.84...3.0.85) (2025-03-25)
 
 ### Dependency updates
