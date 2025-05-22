@@ -1,3 +1,9 @@
+## [3.0.91](https://github.com/Protelis/ProtelisDoc/compare/3.0.90...3.0.91) (2025-05-22)
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.14.1 ([#865](https://github.com/Protelis/ProtelisDoc/issues/865)) ([d05a732](https://github.com/Protelis/ProtelisDoc/commit/d05a732ea869bf370617241555fee437bb3d60fa))
+
 ## [3.0.90](https://github.com/Protelis/ProtelisDoc/compare/3.0.89...3.0.90) (2025-05-22)
 
 ### Dependency updates
