@@ -1,3 +1,14 @@
+## [3.0.93](https://github.com/Protelis/ProtelisDoc/compare/3.0.92...3.0.93) (2025-05-30)
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.89.0 ([#876](https://github.com/Protelis/ProtelisDoc/issues/876)) ([aab1cc4](https://github.com/Protelis/ProtelisDoc/commit/aab1cc4ef915a8addcafe1e5742f24d2bdd42bf1))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.131 ([#872](https://github.com/Protelis/ProtelisDoc/issues/872)) ([ab1f616](https://github.com/Protelis/ProtelisDoc/commit/ab1f616aded325efb048d5f7414d908f42124153))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.132 ([#875](https://github.com/Protelis/ProtelisDoc/issues/875)) ([158cf3b](https://github.com/Protelis/ProtelisDoc/commit/158cf3bc629ac374dce3f8eda18e5afe2d4c0d74))
+* **deps:** update node.js to 22.16 ([#871](https://github.com/Protelis/ProtelisDoc/issues/871)) ([d9437d2](https://github.com/Protelis/ProtelisDoc/commit/d9437d2a304fad12de1f07938a8a0d39443ec85a))
+* **deps:** update plugin com.gradle.develocity to v4.0.2 ([#873](https://github.com/Protelis/ProtelisDoc/issues/873)) ([2177316](https://github.com/Protelis/ProtelisDoc/commit/21773160307dc414dfa1da0d48d633290f1be500))
+* **deps:** update plugin multijvmtesting to v3.5.0 ([#874](https://github.com/Protelis/ProtelisDoc/issues/874)) ([b3d3b15](https://github.com/Protelis/ProtelisDoc/commit/b3d3b159411b361a1032f8495ab624ed7d82c493))
+
 ## [3.0.92](https://github.com/Protelis/ProtelisDoc/compare/3.0.91...3.0.92) (2025-05-23)
 
 ### Dependency updates
