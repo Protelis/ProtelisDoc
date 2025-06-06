@@ -1,3 +1,10 @@
+## [3.0.94](https://github.com/Protelis/ProtelisDoc/compare/3.0.93...3.0.94) (2025-06-06)
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.14.2 ([#878](https://github.com/Protelis/ProtelisDoc/issues/878)) ([070e8b7](https://github.com/Protelis/ProtelisDoc/commit/070e8b7ba571b554690976e9c34b3d03ad5848ee))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.133 ([#877](https://github.com/Protelis/ProtelisDoc/issues/877)) ([c73463f](https://github.com/Protelis/ProtelisDoc/commit/c73463fc309c9a796ce94a61b4afe18ad50555a7))
+
 ## [3.0.93](https://github.com/Protelis/ProtelisDoc/compare/3.0.92...3.0.93) (2025-05-30)
 
 ### Dependency updates
