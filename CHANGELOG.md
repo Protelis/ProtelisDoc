@@ -1,3 +1,9 @@
+## [3.0.97](https://github.com/Protelis/ProtelisDoc/compare/3.0.96...3.0.97) (2025-06-23)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v2.2.0 ([#886](https://github.com/Protelis/ProtelisDoc/issues/886)) ([d384406](https://github.com/Protelis/ProtelisDoc/commit/d384406d1cc56fd67727e79fc03337089fe94e2e))
+
 ## [3.0.96](https://github.com/Protelis/ProtelisDoc/compare/3.0.95...3.0.96) (2025-06-23)
 
 ### Dependency updates
