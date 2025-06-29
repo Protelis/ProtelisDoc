@@ -1,3 +1,10 @@
+## [3.0.99](https://github.com/Protelis/ProtelisDoc/compare/3.0.98...3.0.99) (2025-06-29)
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.90.1 ([#891](https://github.com/Protelis/ProtelisDoc/issues/891)) ([d218207](https://github.com/Protelis/ProtelisDoc/commit/d218207522900e2fc5375014f113ea0a0b169261))
+* **deps:** update plugin gitsemver to v5.1.5 ([#892](https://github.com/Protelis/ProtelisDoc/issues/892)) ([b48ce24](https://github.com/Protelis/ProtelisDoc/commit/b48ce245642cb2977314c94234473abed7e7d53d))
+
 ## [3.0.98](https://github.com/Protelis/ProtelisDoc/compare/3.0.97...3.0.98) (2025-06-27)
 
 ### Dependency updates
