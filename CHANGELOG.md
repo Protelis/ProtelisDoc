@@ -1,3 +1,23 @@
+## [3.0.100](https://github.com/Protelis/ProtelisDoc/compare/3.0.99...3.0.100) (2025-07-04)
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.14.3 ([#897](https://github.com/Protelis/ProtelisDoc/issues/897)) ([4f53f8f](https://github.com/Protelis/ProtelisDoc/commit/4f53f8fe06101d155f3d980909b06cbfd98cfdea))
+* **core-deps:** update plugin kotlin-qa to v0.90.2 ([#898](https://github.com/Protelis/ProtelisDoc/issues/898)) ([adc82c3](https://github.com/Protelis/ProtelisDoc/commit/adc82c3955f85f3dcebde0d3b53d2b50b01bfd81))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.134 ([#893](https://github.com/Protelis/ProtelisDoc/issues/893)) ([349a4f1](https://github.com/Protelis/ProtelisDoc/commit/349a4f133a4111382975b6d0f9a0594b732e546d))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.135 ([#896](https://github.com/Protelis/ProtelisDoc/issues/896)) ([cbfce27](https://github.com/Protelis/ProtelisDoc/commit/cbfce271a4fbbbd931238165ddf9525c52806263))
+* **deps:** update plugin gitsemver to v5.1.7 ([#894](https://github.com/Protelis/ProtelisDoc/issues/894)) ([7b1c736](https://github.com/Protelis/ProtelisDoc/commit/7b1c73620d67282c4dc46e340475315f583f09bf))
+* **deps:** update plugin multijvmtesting to v3.5.4 ([#895](https://github.com/Protelis/ProtelisDoc/issues/895)) ([a038a4c](https://github.com/Protelis/ProtelisDoc/commit/a038a4ce5f4f38b3720ee672aa4ab377c38b9982))
+* **deps:** update plugin publishoncentral to v9.0.7 ([#899](https://github.com/Protelis/ProtelisDoc/issues/899)) ([95d4fbd](https://github.com/Protelis/ProtelisDoc/commit/95d4fbde5db3a1b51b43606001739a638cd406d1))
+
+### Bug Fixes
+
+* **release:** migrate to the Maven Central Portal ([adc5308](https://github.com/Protelis/ProtelisDoc/commit/adc530805b5cd6899315cdda0ee5617d82150eaf))
+
+### Build and continuous integration
+
+* fix the dry-deployment job ([fe74e86](https://github.com/Protelis/ProtelisDoc/commit/fe74e8649729da9ca10234f86f47f6f37cec3674))
+
 ## [3.0.99](https://github.com/Protelis/ProtelisDoc/compare/3.0.98...3.0.99) (2025-06-29)
 
 ### Dependency updates
