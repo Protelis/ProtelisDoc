@@ -36,9 +36,10 @@ jobs:
             --dry-run
           deploy-command: >-
             ./gradlew
-            uploadAllToMavenCentralNexus
-            closeStaging
-            dropStagingRepositoryOnMavenCentral
+            publishAllPublicationsToProjectLocalRepository
+            zipMavenCentralPortalPublication
+            releaseMavenCentralPortalPublication
+            --dry-run
           should-run-codecov: ${{ runner.os == 'Linux' }}
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
           should-deploy: ${{ !github.event.repository.fork && github.event_name != 'pull_request' }}
