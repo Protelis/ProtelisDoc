@@ -17,6 +17,7 @@ jobs:
       - uses: DanySK/build-check-deploy-gradle-action@4.0.1
         with:
           should-run-codecov: ${{ runner.os == 'Linux' }}
+          codecov-token: ${{ secrets.CODECOV_TOKEN }}
           should-deploy: false
 
   dry-deploy:
@@ -27,21 +28,14 @@ jobs:
       - uses: DanySK/build-check-deploy-gradle-action@4.0.1
         with:
           build-command: true
-          check-command: |
-            ./gradlew \
-            uploadAllToMavenCentralNexus \
-            releaseStagingRepositoryOnMavenCentral \
-            publishPlugins \
-            publishAllToGithubRepository \
-            --dry-run
+          check-command: true
           deploy-command: >-
             ./gradlew
             publishAllPublicationsToProjectLocalRepository
             zipMavenCentralPortalPublication
             releaseMavenCentralPortalPublication
             --dry-run
-          should-run-codecov: ${{ runner.os == 'Linux' }}
-          codecov-token: ${{ secrets.CODECOV_TOKEN }}
+          should-run-codecov: false
           should-deploy: ${{ !github.event.repository.fork && github.event_name != 'pull_request' }}
           maven-central-username: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
