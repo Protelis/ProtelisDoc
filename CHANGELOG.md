@@ -1,3 +1,15 @@
+## [3.0.102](https://github.com/Protelis/ProtelisDoc/compare/3.0.101...3.0.102) (2025-07-25)
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.92.0 ([#908](https://github.com/Protelis/ProtelisDoc/issues/908)) ([dc0b012](https://github.com/Protelis/ProtelisDoc/commit/dc0b0128b7e5fe89df4ee1cd3c964beafe946040))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.137 ([#905](https://github.com/Protelis/ProtelisDoc/issues/905)) ([23dbbc6](https://github.com/Protelis/ProtelisDoc/commit/23dbbc6efea07bcf33e9e7b58fb115a7a00c4e68))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.138 ([#907](https://github.com/Protelis/ProtelisDoc/issues/907)) ([44b6d64](https://github.com/Protelis/ProtelisDoc/commit/44b6d644198d6010dd52cff3d08594a1c680240f))
+* **deps:** update plugin com.gradle.develocity to v4.1 ([#904](https://github.com/Protelis/ProtelisDoc/issues/904)) ([ef5b321](https://github.com/Protelis/ProtelisDoc/commit/ef5b3216225ecbf1a9a90009ff1ea3af99c3e682))
+* **deps:** update plugin multijvmtesting to v3.6.0 ([#906](https://github.com/Protelis/ProtelisDoc/issues/906)) ([f8634ec](https://github.com/Protelis/ProtelisDoc/commit/f8634eccbeca97dcbfdbb8f4eea5d1d938691f73))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.28 ([#902](https://github.com/Protelis/ProtelisDoc/issues/902)) ([7987d9c](https://github.com/Protelis/ProtelisDoc/commit/7987d9c7d012e7e8240f2d85c655b2806f7194b1))
+* **deps:** update plugin publishoncentral to v9.0.8 ([#903](https://github.com/Protelis/ProtelisDoc/issues/903)) ([9042c2c](https://github.com/Protelis/ProtelisDoc/commit/9042c2ca635596ea99819983227e79a9d21470a0))
+
 ## [3.0.101](https://github.com/Protelis/ProtelisDoc/compare/3.0.100...3.0.101) (2025-07-08)
 
 ### Dependency updates
