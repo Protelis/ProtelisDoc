@@ -13,7 +13,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
-        uses: DanySK/action-checkout@0.2.22
+        uses: DanySK/action-checkout@0.2.23
       - uses: DanySK/build-check-deploy-gradle-action@4.0.3
         with:
           should-run-codecov: ${{ runner.os == 'Linux' }}
@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: DanySK/action-checkout@0.2.22
+        uses: DanySK/action-checkout@0.2.23
       - uses: DanySK/build-check-deploy-gradle-action@4.0.3
         with:
           build-command: true
