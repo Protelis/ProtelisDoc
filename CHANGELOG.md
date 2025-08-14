@@ -1,3 +1,24 @@
+## [3.0.104](https://github.com/Protelis/ProtelisDoc/compare/3.0.103...3.0.104) (2025-08-14)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v2.2.10 ([#925](https://github.com/Protelis/ProtelisDoc/issues/925)) ([897d68d](https://github.com/Protelis/ProtelisDoc/commit/897d68d7d7c604a1738ffd40dcc231ef0a1af56c))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.139 ([#914](https://github.com/Protelis/ProtelisDoc/issues/914)) ([2064bf3](https://github.com/Protelis/ProtelisDoc/commit/2064bf365d799bb11e337458c7696590a540c5bf))
+* **deps:** update node.js to 22.18 ([#912](https://github.com/Protelis/ProtelisDoc/issues/912)) ([40bb114](https://github.com/Protelis/ProtelisDoc/commit/40bb114842b57090d7d38e306cc57cd95a13cf9c))
+* **deps:** update plugin gitsemver to v6 ([#923](https://github.com/Protelis/ProtelisDoc/issues/923)) ([ae7f6e7](https://github.com/Protelis/ProtelisDoc/commit/ae7f6e77179fd2cce836cd588aaf6cfe6177cf80))
+* **deps:** update plugin multijvmtesting to v3.6.1 ([#916](https://github.com/Protelis/ProtelisDoc/issues/916)) ([db4396f](https://github.com/Protelis/ProtelisDoc/commit/db4396ff245ecf863510e64c880befdf86723a07))
+* **deps:** update plugin multijvmtesting to v4 ([#917](https://github.com/Protelis/ProtelisDoc/issues/917)) ([24860a9](https://github.com/Protelis/ProtelisDoc/commit/24860a94ecbc0b128e1fa978f9ab0d105a3851ce))
+* **deps:** update plugin multijvmtesting to v4.0.2 ([#927](https://github.com/Protelis/ProtelisDoc/issues/927)) ([8bc2b58](https://github.com/Protelis/ProtelisDoc/commit/8bc2b58d10ef5d28b883bc0246fc031e260b17e8))
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v4.3.0 ([#918](https://github.com/Protelis/ProtelisDoc/issues/918)) ([fe5fef0](https://github.com/Protelis/ProtelisDoc/commit/fe5fef09eda3d64767358c2ad7919c26e0a6d9cc))
+* **deps:** update actions/checkout action to v5 ([#919](https://github.com/Protelis/ProtelisDoc/issues/919)) ([1d577a1](https://github.com/Protelis/ProtelisDoc/commit/1d577a161a35bd66e3c94257c92d7efe8e2b4bc4))
+* **deps:** update danysk/action-checkout action to v0.2.23 ([#920](https://github.com/Protelis/ProtelisDoc/issues/920)) ([48fa551](https://github.com/Protelis/ProtelisDoc/commit/48fa5510aed1cf3f0501f7656ec0843da3f20123))
+* **deps:** update danysk/action-checkout action to v0.2.24 ([#922](https://github.com/Protelis/ProtelisDoc/issues/922)) ([0c7e956](https://github.com/Protelis/ProtelisDoc/commit/0c7e956a7c771aa157a58800c001a92320bc4c7f))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.2 ([#913](https://github.com/Protelis/ProtelisDoc/issues/913)) ([bd529a5](https://github.com/Protelis/ProtelisDoc/commit/bd529a5b33e346f54e218627c873eeb2dc4275f1))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.3 ([#915](https://github.com/Protelis/ProtelisDoc/issues/915)) ([ea99541](https://github.com/Protelis/ProtelisDoc/commit/ea99541a009a2b1c09e6bdcb68be872cc2bd7f4c))
+
 ## [3.0.103](https://github.com/Protelis/ProtelisDoc/compare/3.0.102...3.0.103) (2025-07-29)
 
 ### Dependency updates
