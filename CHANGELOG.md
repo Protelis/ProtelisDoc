@@ -1,3 +1,29 @@
+## [3.0.106](https://github.com/Protelis/ProtelisDoc/compare/3.0.105...3.0.106) (2025-08-14)
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v9 ([#911](https://github.com/Protelis/ProtelisDoc/issues/911)) ([0beb6f6](https://github.com/Protelis/ProtelisDoc/commit/0beb6f65a13459ccb82b6011c0b97dc098788a24))
+* **deps:** update plugin org.gradle.toolchains.foojay-resolver-convention to v1 ([#863](https://github.com/Protelis/ProtelisDoc/issues/863)) ([9c16188](https://github.com/Protelis/ProtelisDoc/commit/9c1618884e4339e85c2bb780478d4730ea10f2b8))
+* **deps:** update plugin publishoncentral to v9.1.2 ([#924](https://github.com/Protelis/ProtelisDoc/issues/924)) ([6bd178d](https://github.com/Protelis/ProtelisDoc/commit/6bd178d47f584466f8d6027c2117887653957338))
+
+### Tests
+
+* drop call to `jcenter`, sunsetted long ago ([7343134](https://github.com/Protelis/ProtelisDoc/commit/73431346d49ef220e1fb1499a755bb1e0d364883))
+* drop usages of `org.gradle.internal.impldep.org.junit.rules.TemporaryFolder` ([0abe7e5](https://github.com/Protelis/ProtelisDoc/commit/0abe7e5309001a7aa0a021b4f96356c827df0052))
+
+### Build and continuous integration
+
+* auto-detect the oldest Java version the plugin is compatible with ([#929](https://github.com/Protelis/ProtelisDoc/issues/929)) ([ce66a9c](https://github.com/Protelis/ProtelisDoc/commit/ce66a9c0db0f757a3020c2ab0a3e9edb15c8e4e9))
+* run in parallel by default ([4bf6c91](https://github.com/Protelis/ProtelisDoc/commit/4bf6c91414d22682f6ae2b24dc97c5439646000d))
+
+### General maintenance
+
+* bind helper types to non-nullables ([98b91e7](https://github.com/Protelis/ProtelisDoc/commit/98b91e7142375fda905f99c5eec41c75b3eb1a74))
+
+### Style improvements
+
+* switch to `ktlint_code_style=intellij_idea` ([19c7a48](https://github.com/Protelis/ProtelisDoc/commit/19c7a48a53ced2fe0942d95e30a0bb8e458c375d))
+
 ## [3.0.105](https://github.com/Protelis/ProtelisDoc/compare/3.0.104...3.0.105) (2025-08-14)
 
 ### Dependency updates
