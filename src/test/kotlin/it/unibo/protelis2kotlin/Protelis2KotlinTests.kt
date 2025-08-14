@@ -73,7 +73,9 @@ class Protelis2KotlinTests :
             }
         "Generation of Kotlin interfaces from Protelis sources should work" {
             runGradleTask(workingDirectory, "generateKotlinFromProtelis")
-            File(workingDirectory.root, "build")
+            workingDirectory
+                .resolve("build")
+                .toFile()
                 .walkTopDown()
                 .filter { it.extension == "kt" }
                 .shouldNotBeEmpty()
