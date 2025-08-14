@@ -146,7 +146,8 @@ gradlePlugin {
         create("ProtelisDoc") {
             id = "org.protelis.protelisdoc"
             displayName = "Protelis Documentation Engine"
-            description = "A plugin that translates Protelis modules to Kotlin code, then generates the function documentation via Dokka"
+            description =
+                "A plugin that translates Protelis modules to Kotlin code, then generates the function documentation via Dokka"
             implementationClass = "it.unibo.protelis2kotlin.Protelis2KotlinDocPlugin"
             tags.set(listOf("protelis", "documentation", "api", "dokka", "javadoc", "aggregate computing"))
         }
