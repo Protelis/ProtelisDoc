@@ -143,13 +143,6 @@ class Protelis2KotlinDocTests :
             }
             repositories {
                 mavenCentral()
-                jcenter {
-                    content {
-                        includeGroup("com.soywiz.korlibs.korte")
-                        includeGroup("org.jetbrains")
-                        includeGroupByRegex("org.jetbrains.(dokka|kotlinx)")
-                    }
-                }
             }
             dependencies {
                 protelisdoc("org.protelis:protelis-interpreter:13.0.0")
