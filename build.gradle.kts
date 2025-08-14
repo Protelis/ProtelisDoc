@@ -32,7 +32,7 @@ gitSemVer {
 }
 
 multiJvm {
-    jvmVersionForCompilation.set(8)
+    jvmVersionForCompilation.set(oldestJavaSupportedByGradle)
     maximumSupportedJvmVersion.set(latestJavaSupportedByGradle)
     if (Os.isFamily(Os.FAMILY_WINDOWS)) {
         testByDefaultWith(latestJavaSupportedByGradle)
