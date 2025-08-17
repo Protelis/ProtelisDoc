@@ -1,3 +1,9 @@
+## [3.0.108](https://github.com/Protelis/ProtelisDoc/compare/3.0.107...3.0.108) (2025-08-17)
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.93.3 ([#936](https://github.com/Protelis/ProtelisDoc/issues/936)) ([39e2316](https://github.com/Protelis/ProtelisDoc/commit/39e2316c4f4870b9f19f3ac660cc8149e4c467be))
+
 ## [3.0.107](https://github.com/Protelis/ProtelisDoc/compare/3.0.106...3.0.107) (2025-08-16)
 
 ### Dependency updates
