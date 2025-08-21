@@ -1,3 +1,20 @@
+## [3.0.109](https://github.com/Protelis/ProtelisDoc/compare/3.0.108...3.0.109) (2025-08-21)
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.94.0 ([#945](https://github.com/Protelis/ProtelisDoc/issues/945)) ([1dd0e9c](https://github.com/Protelis/ProtelisDoc/commit/1dd0e9c01b3075e9c03843b4fc033d1cf8fa3e2f))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.140 ([#937](https://github.com/Protelis/ProtelisDoc/issues/937)) ([83f1ea2](https://github.com/Protelis/ProtelisDoc/commit/83f1ea29627284a7dd0dbf993893993abeb213e5))
+* **deps:** update kotest to v6 ([#938](https://github.com/Protelis/ProtelisDoc/issues/938)) ([78d078a](https://github.com/Protelis/ProtelisDoc/commit/78d078afc301e5a0d7b928b6d28152613ed0accb))
+* **deps:** update plugin com.gradle.develocity to v4.1.1 ([#939](https://github.com/Protelis/ProtelisDoc/issues/939)) ([cb7ff52](https://github.com/Protelis/ProtelisDoc/commit/cb7ff52a2cc9b35f76c7f54c1894ce27db5e32f6))
+* **deps:** update plugin gitsemver to v6.0.2 ([#940](https://github.com/Protelis/ProtelisDoc/issues/940)) ([4c2f3ed](https://github.com/Protelis/ProtelisDoc/commit/4c2f3ed5ce99238d0b92fad3c254fec3772936ee))
+* **deps:** update plugin gitsemver to v7 ([#941](https://github.com/Protelis/ProtelisDoc/issues/941)) ([d1a4139](https://github.com/Protelis/ProtelisDoc/commit/d1a4139e97dbd156072d6f7a48a5a31212f085f6))
+* **deps:** update plugin gitsemver to v7.0.2 ([#943](https://github.com/Protelis/ProtelisDoc/issues/943)) ([d72da01](https://github.com/Protelis/ProtelisDoc/commit/d72da019c53e33ec478b086ae40d764631b57757))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.4 ([#942](https://github.com/Protelis/ProtelisDoc/issues/942)) ([ad37f4d](https://github.com/Protelis/ProtelisDoc/commit/ad37f4df7af5d5a25165af645aaf7d0aedce974a))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.5 ([#944](https://github.com/Protelis/ProtelisDoc/issues/944)) ([f057994](https://github.com/Protelis/ProtelisDoc/commit/f057994b2954d3f5cb95506fc75eaa11b217f2b8))
+
 ## [3.0.108](https://github.com/Protelis/ProtelisDoc/compare/3.0.107...3.0.108) (2025-08-17)
 
 ### Dependency updates
