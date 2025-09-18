@@ -1,3 +1,13 @@
+## [3.0.113](https://github.com/Protelis/ProtelisDoc/compare/3.0.112...3.0.113) (2025-09-18)
+
+### Dependency updates
+
+* **core-deps:** update gradle to v9.1.0 ([#970](https://github.com/Protelis/ProtelisDoc/issues/970)) ([a8e251f](https://github.com/Protelis/ProtelisDoc/commit/a8e251f833d6c0876ed9d23aa86e00829e1c7b93))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.144 ([#966](https://github.com/Protelis/ProtelisDoc/issues/966)) ([0403840](https://github.com/Protelis/ProtelisDoc/commit/0403840362b7fa78aef15d650caa23d4b06feaf2))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.145 ([#967](https://github.com/Protelis/ProtelisDoc/issues/967)) ([abc3bfd](https://github.com/Protelis/ProtelisDoc/commit/abc3bfd6952185b0e1b054b6566ebda938f76610))
+* **deps:** update plugin com.gradle.develocity to v4.2 ([#965](https://github.com/Protelis/ProtelisDoc/issues/965)) ([fc59d8a](https://github.com/Protelis/ProtelisDoc/commit/fc59d8a911561812ee9be535c1294f4847171628))
+* **deps:** update plugin gitsemver to v7.0.4 ([#968](https://github.com/Protelis/ProtelisDoc/issues/968)) ([821016e](https://github.com/Protelis/ProtelisDoc/commit/821016e9382f101898831f5485a4ecc012457888))
+
 ## [3.0.112](https://github.com/Protelis/ProtelisDoc/compare/3.0.111...3.0.112) (2025-09-14)
 
 ### Dependency updates
