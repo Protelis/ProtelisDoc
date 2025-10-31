@@ -1,3 +1,12 @@
+## [3.0.119](https://github.com/Protelis/ProtelisDoc/compare/3.0.118...3.0.119) (2025-10-31)
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.96.0 ([#1005](https://github.com/Protelis/ProtelisDoc/issues/1005)) ([0ae47a9](https://github.com/Protelis/ProtelisDoc/commit/0ae47a9a2a6b58ceaaa4668c55ae7b9eb664ac99))
+* **deps:** update node.js to v24 ([#1004](https://github.com/Protelis/ProtelisDoc/issues/1004)) ([5185ea9](https://github.com/Protelis/ProtelisDoc/commit/5185ea907b1c802195bff639a43766d2ff85d1d3))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.4 ([#1002](https://github.com/Protelis/ProtelisDoc/issues/1002)) ([c308bda](https://github.com/Protelis/ProtelisDoc/commit/c308bdac6088fc33c418bb7fa73b022bef22da10))
+* **deps:** update plugin publishoncentral to v9.1.7 ([#1003](https://github.com/Protelis/ProtelisDoc/issues/1003)) ([2c0b15d](https://github.com/Protelis/ProtelisDoc/commit/2c0b15d445c0dfcf4c61426d68bacfd12fe7a1ee))
+
 ## [3.0.118](https://github.com/Protelis/ProtelisDoc/compare/3.0.117...3.0.118) (2025-10-30)
 
 ### Dependency updates
