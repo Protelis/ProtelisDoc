@@ -1,3 +1,17 @@
+## [3.0.120](https://github.com/Protelis/ProtelisDoc/compare/3.0.119...3.0.120) (2025-11-14)
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.97.0 ([#1011](https://github.com/Protelis/ProtelisDoc/issues/1011)) ([025a5ef](https://github.com/Protelis/ProtelisDoc/commit/025a5ef7f8b498766a695e69d81013e914a5b967))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.153 ([#1007](https://github.com/Protelis/ProtelisDoc/issues/1007)) ([b2e389f](https://github.com/Protelis/ProtelisDoc/commit/b2e389fb4975a8188fc6a5d2084cec196ecefcc1))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.154 ([#1009](https://github.com/Protelis/ProtelisDoc/issues/1009)) ([00c477b](https://github.com/Protelis/ProtelisDoc/commit/00c477beaa46ba27135be9f40920cd741ea3c169))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.155 ([#1010](https://github.com/Protelis/ProtelisDoc/issues/1010)) ([c68562d](https://github.com/Protelis/ProtelisDoc/commit/c68562d700dd7ba6decdcc8b64b5f9ff8ba15e63))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.11 ([#1006](https://github.com/Protelis/ProtelisDoc/issues/1006)) ([1f67815](https://github.com/Protelis/ProtelisDoc/commit/1f67815ca38a942e51fb922a093fa9b5b087fdc0))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.12 ([#1008](https://github.com/Protelis/ProtelisDoc/issues/1008)) ([f63c19b](https://github.com/Protelis/ProtelisDoc/commit/f63c19b564de000031f6a35bfbc68e115a121138))
+
 ## [3.0.119](https://github.com/Protelis/ProtelisDoc/compare/3.0.118...3.0.119) (2025-10-31)
 
 ### Dependency updates
