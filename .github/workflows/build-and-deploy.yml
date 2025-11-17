@@ -54,7 +54,7 @@ jobs:
       packages: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v5.0.0
+        uses: actions/checkout@v5.0.1
         with:
           token: ${{ secrets.DEPLOYMENT_TOKEN }}
       - name: Install Node
