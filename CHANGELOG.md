@@ -1,3 +1,17 @@
+## [3.0.125](https://github.com/Protelis/ProtelisDoc/compare/3.0.124...3.0.125) (2026-02-05)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v2.3.10 ([#1067](https://github.com/Protelis/ProtelisDoc/issues/1067)) ([4050ddc](https://github.com/Protelis/ProtelisDoc/commit/4050ddc82a0872343cc9bf768b83e98f692c944c))
+* **deps:** update plugin gitsemver to v7.0.11 ([#1063](https://github.com/Protelis/ProtelisDoc/issues/1063)) ([958d12d](https://github.com/Protelis/ProtelisDoc/commit/958d12d9d9c851c3bf6dd0d6f6dd43aa5a627406))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.8 ([#1062](https://github.com/Protelis/ProtelisDoc/issues/1062)) ([4234420](https://github.com/Protelis/ProtelisDoc/commit/4234420f478804a6baebf055ee80ddbab2450554))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.9 ([#1069](https://github.com/Protelis/ProtelisDoc/issues/1069)) ([469e5f8](https://github.com/Protelis/ProtelisDoc/commit/469e5f855380a1404dd693ed17ad97263e0296e2))
+* **deps:** update plugin publishoncentral to v9.1.12 ([#1064](https://github.com/Protelis/ProtelisDoc/issues/1064)) ([ad8b4c2](https://github.com/Protelis/ProtelisDoc/commit/ad8b4c2c954292d72447b330763d9ae70c4833e9))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.23 ([#1066](https://github.com/Protelis/ProtelisDoc/issues/1066)) ([d7182f8](https://github.com/Protelis/ProtelisDoc/commit/d7182f8b306437ff7191200afd3820030c64b3d6))
+
 ## [3.0.124](https://github.com/Protelis/ProtelisDoc/compare/3.0.123...3.0.124) (2026-01-29)
 
 ### Dependency updates
