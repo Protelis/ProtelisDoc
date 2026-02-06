@@ -97,6 +97,11 @@ tasks.withType<Copy> {
     duplicatesStrategy = DuplicatesStrategy.WARN
 }
 
+// Disable V1 Dokka tasks - they are deprecated in V2
+tasks.matching { it.name.matches(Regex("dokka(Html|Javadoc|Gfm|Jekyll)")) }.configureEach {
+    enabled = false
+}
+
 if (System.getenv("CI") == true.toString()) {
     signing {
         val signingKey: String? by project

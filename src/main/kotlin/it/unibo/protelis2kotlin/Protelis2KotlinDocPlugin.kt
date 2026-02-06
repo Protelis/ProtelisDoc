@@ -8,7 +8,7 @@ import org.gradle.api.provider.Provider
 import org.gradle.kotlin.dsl.invoke
 import org.gradle.kotlin.dsl.property
 import org.jetbrains.dokka.DokkaVersion
-import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.dokka.gradle.DokkaExtension
 
 /**
  * Extension for the Protelis2KotlinDoc plugin.
@@ -81,29 +81,49 @@ class Protelis2KotlinDocPlugin : Plugin<Project> {
                 project.protelis2Kt(extension.baseDir.get(), extension.kotlinDestDir.get())
             }
         }
-        // ProtelisDoc task, based on Dokka
-        val protelisdoc = project.tasks.register(protelisDocTaskName, DokkaTask::class.java) { dokkaTask ->
-            dokkaTask.plugins.dependencies.add(
-                project.dependencies.create("org.jetbrains.dokka:javadoc-plugin:${DokkaVersion.version}"),
-            )
-            dokkaTask.dependsOn(genKotlinTask)
-        }
+
+        // Configure Dokka V2 extension
+        val dokkaExtension = project.extensions.getByType(DokkaExtension::class.java)
+
         project.afterEvaluate {
-            protelisdoc.get().apply {
-                dokkaSourceSets { sourceSetContainer ->
-                    sourceSetContainer.create("protelisdoc") { sourceSet ->
-                        sourceSet.sourceRoots.setFrom(extension.kotlinDestDir.get())
-                        val resolvedConfiguration = config.resolvedConfiguration
-                        if (resolvedConfiguration.hasError()) {
-                            kotlin.runCatching { resolvedConfiguration.rethrowFailure() }.onFailure {
-                                logger.warn("ProtelisDoc failed dependecy resolution!", it)
-                            }
-                        } else {
-                            sourceSet.classpath.setFrom(resolvedConfiguration.resolvedArtifacts.map { it.file })
+            dokkaExtension.apply {
+                // Configure the module name
+                moduleName.set("protelisdoc")
+
+                // Configure source sets
+                dokkaSourceSets.create("protelisdoc") { sourceSet ->
+                    sourceSet.sourceRoots.from(extension.kotlinDestDir.get())
+                    val resolvedConfiguration = config.resolvedConfiguration
+                    if (resolvedConfiguration.hasError()) {
+                        kotlin.runCatching { resolvedConfiguration.rethrowFailure() }.onFailure {
+                            project.logger.warn("ProtelisDoc failed dependency resolution!", it)
                         }
+                    } else {
+                        sourceSet.classpath.from(resolvedConfiguration.resolvedArtifacts.map { it.file })
                     }
                 }
-                outputDirectory.set(extension.destDir.map { project.file(it) }.get())
+
+                // Configure the default HTML publication
+                dokkaPublications.named("html") { publication ->
+                    publication.outputDirectory.set(project.file(extension.destDir.get()))
+                }
+            }
+
+            // Add javadoc plugin dependency to the dokkaPlugin configuration
+            project.dependencies.add(
+                "dokkaPlugin",
+                "org.jetbrains.dokka:javadoc-plugin:${DokkaVersion.version}",
+            )
+
+            // Create a wrapper task that depends on the generated Dokka task
+            val dokkaGenerateTask = project.tasks.named("dokkaGeneratePublicationHtml")
+            dokkaGenerateTask.configure { task ->
+                task.dependsOn(genKotlinTask)
+            }
+
+            // Register the protelisdoc task as an alias
+            project.tasks.register(protelisDocTaskName) { task ->
+                task.dependsOn(dokkaGenerateTask)
             }
         }
     }
