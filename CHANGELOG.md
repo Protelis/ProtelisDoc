@@ -1,3 +1,13 @@
+## [3.0.128](https://github.com/Protelis/ProtelisDoc/compare/3.0.127...3.0.128) (2026-02-06)
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.100.3 ([#1040](https://github.com/Protelis/ProtelisDoc/issues/1040)) ([c7a805a](https://github.com/Protelis/ProtelisDoc/commit/c7a805a2157fe06a5558ff41e3be7893a87e3fb5))
+
+### Build and continuous integration
+
+* add GitHub Copilot instructions ([#1073](https://github.com/Protelis/ProtelisDoc/issues/1073)) ([26acb43](https://github.com/Protelis/ProtelisDoc/commit/26acb4355dd4e71ee3a63166dd93e2ced2e55ba9))
+
 ## [3.0.127](https://github.com/Protelis/ProtelisDoc/compare/3.0.126...3.0.127) (2026-02-06)
 
 ### Dependency updates
