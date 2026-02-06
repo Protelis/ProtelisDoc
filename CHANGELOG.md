@@ -1,3 +1,9 @@
+## [3.0.129](https://github.com/Protelis/ProtelisDoc/compare/3.0.128...3.0.129) (2026-02-06)
+
+### Bug Fixes
+
+* **core-deps:** update dokka to v2.1.0 (minor) ([#986](https://github.com/Protelis/ProtelisDoc/issues/986)) ([32acfbe](https://github.com/Protelis/ProtelisDoc/commit/32acfbeea1088664b9b57eb0cbca16d1a9ce4c2a)), closes [#1074](https://github.com/Protelis/ProtelisDoc/issues/1074)
+
 ## [3.0.128](https://github.com/Protelis/ProtelisDoc/compare/3.0.127...3.0.128) (2026-02-06)
 
 ### Dependency updates
