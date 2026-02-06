@@ -1,3 +1,13 @@
+## [3.0.126](https://github.com/Protelis/ProtelisDoc/compare/3.0.125...3.0.126) (2026-02-06)
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.98.2 ([#1013](https://github.com/Protelis/ProtelisDoc/issues/1013)) ([c6e0207](https://github.com/Protelis/ProtelisDoc/commit/c6e020708d65d3349586b798bb02939e15d1e520))
+
+### Style improvements
+
+* import the style configuration from AlchemistSimulator/Alchemist ([#1070](https://github.com/Protelis/ProtelisDoc/issues/1070)) ([89132b0](https://github.com/Protelis/ProtelisDoc/commit/89132b08ac90ab1587730f964e55bfa7e70812ca))
+
 ## [3.0.125](https://github.com/Protelis/ProtelisDoc/compare/3.0.124...3.0.125) (2026-02-05)
 
 ### Dependency updates
