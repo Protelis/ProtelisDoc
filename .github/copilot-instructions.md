@@ -7,10 +7,10 @@ ProtelisDoc is a Gradle plugin that generates documentation for Protelis code. I
 2. Using Dokka (Kotlin's documentation engine) to generate the documentation
 
 **Main Technologies:**
-- Kotlin 2.3.10
+- Kotlin
 - Gradle (with Kotlin DSL)
-- Dokka 2.0.0 (documentation engine)
-- JUnit 5 with Kotest for testing
+- Dokka
+- JUnit with Kotest for testing
 
 ## Repository Structure
 
@@ -98,10 +98,7 @@ The plugin follows Gradle's convention-over-configuration principle:
 - Gradle TestKit for testing
 
 ### Version Catalog (`gradle/libs.versions.toml`)
-All dependency versions are centralized in the version catalog:
-- Dokka: 2.0.0
-- Kotlin: 2.3.10
-- Kotest: 6.1.2
+All dependency versions are centralized in the version catalog
 
 ### Plugin Dependencies
 - `git-sensitive-semantic-versioning`: Automatic versioning
@@ -169,20 +166,9 @@ When working with Protelis documentation:
 - GitHub Packages (secondary)
 - Gradle Plugin Portal (for plugin discovery)
 
-### Signing
-- Uses PGP signing for releases
-- In-memory signing keys (configured in CI)
-
-### Credentials Required
-- `MAVEN_CENTRAL_USERNAME` and `MAVEN_CENTRAL_PASSWORD`
-- `SIGNING_KEY` and `SIGNING_PASSWORD`
-- `GRADLE_PUBLISH_KEY` and `GRADLE_PUBLISH_SECRET`
-- `DEPLOYMENT_TOKEN` for GitHub releases
-
 ## Special Considerations
 
-1. **Duplicate Strategy**: Set to `WARN` for Copy tasks
 2. **Parallel Builds**: Enabled via `gradle.properties`
-3. **Node.js**: Required for semantic-release (version 24.13)
+3. **Node.js**: Required for semantic-release
 4. **Fork Handling**: Deployment disabled for forks
 5. **Protelis Language**: This is a specialized language for aggregate computing
