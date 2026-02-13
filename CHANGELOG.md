@@ -1,3 +1,11 @@
+## [3.0.131](https://github.com/Protelis/ProtelisDoc/compare/3.0.130...3.0.131) (2026-02-13)
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v0.101.1 ([#1075](https://github.com/Protelis/ProtelisDoc/issues/1075)) ([0dded61](https://github.com/Protelis/ProtelisDoc/commit/0dded617f428a1efbc1b17f0bd6bdbd4cc253b74))
+* **deps:** update kotest to v6.1.3 ([#1068](https://github.com/Protelis/ProtelisDoc/issues/1068)) ([538b6d8](https://github.com/Protelis/ProtelisDoc/commit/538b6d8153f1278690e215504c6e3c968d396bd1))
+* **deps:** update plugin multijvmtesting to v4.3.2 ([#995](https://github.com/Protelis/ProtelisDoc/issues/995)) ([6901e86](https://github.com/Protelis/ProtelisDoc/commit/6901e864d62b03085308f71bc01611959d098b26))
+
 ## [3.0.130](https://github.com/Protelis/ProtelisDoc/compare/3.0.129...3.0.130) (2026-02-06)
 
 ### Dependency updates
