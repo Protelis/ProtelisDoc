@@ -1,3 +1,14 @@
+## [3.0.133](https://github.com/Protelis/ProtelisDoc/compare/3.0.132...3.0.133) (2026-03-16)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v2.3.20 ([#1090](https://github.com/Protelis/ProtelisDoc/issues/1090)) ([f04dd0f](https://github.com/Protelis/ProtelisDoc/commit/f04dd0fd67fe7f4e5d70b0d13ee1c29bd1f5016f))
+* **deps:** update kotest to v6.1.5 ([#1087](https://github.com/Protelis/ProtelisDoc/issues/1087)) ([91a08d6](https://github.com/Protelis/ProtelisDoc/commit/91a08d6a6fee6fa2edbe54bb50ee7fd6f125d6c0))
+* **deps:** update kotest to v6.1.6 ([#1088](https://github.com/Protelis/ProtelisDoc/issues/1088)) ([3b4ffb6](https://github.com/Protelis/ProtelisDoc/commit/3b4ffb6494a060541afa11c12201d3934666aefb))
+* **deps:** update kotest to v6.1.7 ([#1089](https://github.com/Protelis/ProtelisDoc/issues/1089)) ([de6b8be](https://github.com/Protelis/ProtelisDoc/commit/de6b8be45d9090459c3ccbb9ad7a7be488e5a7c0))
+* **deps:** update plugin gitsemver to v7.0.13 ([#1085](https://github.com/Protelis/ProtelisDoc/issues/1085)) ([aefc795](https://github.com/Protelis/ProtelisDoc/commit/aefc795bb616b012fe58e5463b301068b971e92d))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.10 ([#1086](https://github.com/Protelis/ProtelisDoc/issues/1086)) ([8745287](https://github.com/Protelis/ProtelisDoc/commit/8745287f95fc82fafe97f6098cb069329c4745a9))
+
 ## [3.0.132](https://github.com/Protelis/ProtelisDoc/compare/3.0.131...3.0.132) (2026-03-04)
 
 ### Dependency updates
