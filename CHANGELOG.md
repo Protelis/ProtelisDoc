@@ -1,3 +1,16 @@
+## [3.0.134](https://github.com/Protelis/ProtelisDoc/compare/3.0.133...3.0.134) (2026-03-19)
+
+### Dependency updates
+
+* **core-deps:** update gradle to v9.4.1 ([#1095](https://github.com/Protelis/ProtelisDoc/issues/1095)) ([0738193](https://github.com/Protelis/ProtelisDoc/commit/0738193d257c0732ddf707ff267607f59ca402ef))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.11 ([#1091](https://github.com/Protelis/ProtelisDoc/issues/1091)) ([de406b1](https://github.com/Protelis/ProtelisDoc/commit/de406b16fde5c1aaa98bae342438e4286a740ffb))
+* **deps:** update plugin publishoncentral to v9.1.14 ([#1094](https://github.com/Protelis/ProtelisDoc/issues/1094)) ([7f7983c](https://github.com/Protelis/ProtelisDoc/commit/7f7983c86d610f52462087af5eaac618ebf011c7))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.25 ([#1092](https://github.com/Protelis/ProtelisDoc/issues/1092)) ([df5c10d](https://github.com/Protelis/ProtelisDoc/commit/df5c10d334d254b3928c93c0b94e368ab68c4550))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.26 ([#1093](https://github.com/Protelis/ProtelisDoc/issues/1093)) ([5106bc0](https://github.com/Protelis/ProtelisDoc/commit/5106bc0958f0a0e9e9bbe1f68d308d616553c15f))
+
 ## [3.0.133](https://github.com/Protelis/ProtelisDoc/compare/3.0.132...3.0.133) (2026-03-16)
 
 ### Dependency updates
