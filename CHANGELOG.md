@@ -1,3 +1,23 @@
+## [3.0.135](https://github.com/Protelis/ProtelisDoc/compare/3.0.134...3.0.135) (2026-03-26)
+
+### Dependency updates
+
+* **deps:** update dependency io.kotest:kotest-assertions-core-jvm to v6.1.8 ([#1100](https://github.com/Protelis/ProtelisDoc/issues/1100)) ([a754f8d](https://github.com/Protelis/ProtelisDoc/commit/a754f8dc60149407c7c05a45b593cfbcdf315ace))
+* **deps:** update kotest to v6.1.9 ([#1101](https://github.com/Protelis/ProtelisDoc/issues/1101)) ([d37121c](https://github.com/Protelis/ProtelisDoc/commit/d37121c694a914bf0fa6c30907aea79e60b2ea1a))
+* **deps:** update plugin com.gradle.develocity to v4.4.0 ([#1103](https://github.com/Protelis/ProtelisDoc/issues/1103)) ([c0ea56a](https://github.com/Protelis/ProtelisDoc/commit/c0ea56af55b9c9fef6d7a0a94daa60de72e5e39a))
+* **deps:** update plugin gitsemver to v7.0.15 ([#1097](https://github.com/Protelis/ProtelisDoc/issues/1097)) ([81530ec](https://github.com/Protelis/ProtelisDoc/commit/81530ec0c9075a923ec3608b1f7d641f8b6e9e3b))
+* **deps:** update plugin gradlepluginpublish to v2.1.1 ([#1096](https://github.com/Protelis/ProtelisDoc/issues/1096)) ([db4de3f](https://github.com/Protelis/ProtelisDoc/commit/db4de3f24173e16bdb8b6e1443be86b66774bc2e))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.12 ([#1098](https://github.com/Protelis/ProtelisDoc/issues/1098)) ([46ae325](https://github.com/Protelis/ProtelisDoc/commit/46ae325b7cd4bd89b87fcae393e5e8fb7ff5da80))
+
+### Documentation
+
+* **core-deps:** update dokka to v2.2.0 ([#1104](https://github.com/Protelis/ProtelisDoc/issues/1104)) ([cbc268b](https://github.com/Protelis/ProtelisDoc/commit/cbc268b020de284115c5e202ef575d74f84de4e0))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.27 ([#1099](https://github.com/Protelis/ProtelisDoc/issues/1099)) ([c17f5ff](https://github.com/Protelis/ProtelisDoc/commit/c17f5ffc283d67b2fee2f31eaa3748f212526956))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.28 ([#1102](https://github.com/Protelis/ProtelisDoc/issues/1102)) ([ffde8f6](https://github.com/Protelis/ProtelisDoc/commit/ffde8f6be1f4e5c602cf6c95461325fc424b2581))
+
 ## [3.0.134](https://github.com/Protelis/ProtelisDoc/compare/3.0.133...3.0.134) (2026-03-19)
 
 ### Dependency updates
