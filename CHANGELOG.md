@@ -1,3 +1,14 @@
+## [3.0.138](https://github.com/Protelis/ProtelisDoc/compare/3.0.137...3.0.138) (2026-04-28)
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v1.6.1 ([#1127](https://github.com/Protelis/ProtelisDoc/issues/1127)) ([45c79f0](https://github.com/Protelis/ProtelisDoc/commit/45c79f04b6bcd32ac9577df9d44fef4eb18a331f))
+* **deps:** update kotlin-qa to 1.6.0 ([#1126](https://github.com/Protelis/ProtelisDoc/issues/1126)) ([6c61fec](https://github.com/Protelis/ProtelisDoc/commit/6c61fec4ebc51c890ad54cecf076a915fd822395))
+
+### General maintenance
+
+* **agents:** add agent instructions and workflow guidelines ([7cc5fc6](https://github.com/Protelis/ProtelisDoc/commit/7cc5fc641f3de8f490a9ba2264ba78a6faf64e65))
+
 ## [3.0.137](https://github.com/Protelis/ProtelisDoc/compare/3.0.136...3.0.137) (2026-04-28)
 
 ### Dependency updates
