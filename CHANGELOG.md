@@ -1,3 +1,14 @@
+## [3.0.137](https://github.com/Protelis/ProtelisDoc/compare/3.0.136...3.0.137) (2026-04-28)
+
+### Dependency updates
+
+* **core-deps:** update gradle to v9.5.0 ([#1125](https://github.com/Protelis/ProtelisDoc/issues/1125)) ([5b854d8](https://github.com/Protelis/ProtelisDoc/commit/5b854d8fd5dcb63bc3a38feb5063270e992e6a53))
+* **deps:** update plugin gitsemver to v7.0.17 ([#1120](https://github.com/Protelis/ProtelisDoc/issues/1120)) ([5153057](https://github.com/Protelis/ProtelisDoc/commit/5153057c66a728050d99e4561bd2bb4672d1b3d4))
+* **deps:** update plugin gitsemver to v7.0.18 ([#1123](https://github.com/Protelis/ProtelisDoc/issues/1123)) ([6c79164](https://github.com/Protelis/ProtelisDoc/commit/6c79164a9dba26874d9e16eb42e3a942047903ce))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.15 ([#1121](https://github.com/Protelis/ProtelisDoc/issues/1121)) ([8a6d44a](https://github.com/Protelis/ProtelisDoc/commit/8a6d44a6750398098a47944c3901b1a061e810d3))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.16 ([#1124](https://github.com/Protelis/ProtelisDoc/issues/1124)) ([eee2f33](https://github.com/Protelis/ProtelisDoc/commit/eee2f33ec7048f9d9def145fede37baa570249c4))
+* **deps:** update plugin publishoncentral to v9.2.1 ([#1122](https://github.com/Protelis/ProtelisDoc/issues/1122)) ([56e4dae](https://github.com/Protelis/ProtelisDoc/commit/56e4dae975550374acae8952c0cc064d814915b1))
+
 ## [3.0.136](https://github.com/Protelis/ProtelisDoc/compare/3.0.135...3.0.136) (2026-04-23)
 
 ### Dependency updates
