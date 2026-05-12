@@ -1,3 +1,14 @@
+## [3.0.139](https://github.com/Protelis/ProtelisDoc/compare/3.0.138...3.0.139) (2026-05-12)
+
+### Dependency updates
+
+* **core-deps:** update gradle to v9.5.1 ([#1133](https://github.com/Protelis/ProtelisDoc/issues/1133)) ([451b45f](https://github.com/Protelis/ProtelisDoc/commit/451b45f3405c6c09f0c7bf9107f7debc8bcd03d4))
+* **deps:** update plugin multijvmtesting to v4.3.3 ([#1129](https://github.com/Protelis/ProtelisDoc/issues/1129)) ([4e0d6a4](https://github.com/Protelis/ProtelisDoc/commit/4e0d6a43a8973e883f292ccae124a55f461f4461))
+* **deps:** update plugin multijvmtesting to v4.3.4 ([#1130](https://github.com/Protelis/ProtelisDoc/issues/1130)) ([4077654](https://github.com/Protelis/ProtelisDoc/commit/40776540849b7b95897fd8a930ed0b366db69f3b))
+* **deps:** update plugin multijvmtesting to v4.3.5 ([#1131](https://github.com/Protelis/ProtelisDoc/issues/1131)) ([f3246c7](https://github.com/Protelis/ProtelisDoc/commit/f3246c7036714b9bfa63c59ecba1961393d77469))
+* **deps:** update plugin publishoncentral to v9.2.2 ([#1128](https://github.com/Protelis/ProtelisDoc/issues/1128)) ([9553b3f](https://github.com/Protelis/ProtelisDoc/commit/9553b3ff8417aa62cfa918ce14c528bd9b21994b))
+* **deps:** update plugin publishoncentral to v9.2.3 ([#1132](https://github.com/Protelis/ProtelisDoc/issues/1132)) ([09302d4](https://github.com/Protelis/ProtelisDoc/commit/09302d4a44b80ca9870a1299b820f86517ea8fa1))
+
 ## [3.0.138](https://github.com/Protelis/ProtelisDoc/compare/3.0.137...3.0.138) (2026-04-28)
 
 ### Dependency updates
