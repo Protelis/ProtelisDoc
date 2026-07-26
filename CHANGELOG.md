@@ -1,3 +1,19 @@
+## [3.0.142](https://github.com/Protelis/ProtelisDoc/compare/3.0.141...3.0.142) (2026-07-26)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v2.4.10 ([#1155](https://github.com/Protelis/ProtelisDoc/issues/1155)) ([c5c99d4](https://github.com/Protelis/ProtelisDoc/commit/c5c99d424d0793750fe2c1260604deb14b614f9c))
+* **deps:** update kotest to v6.2.3 ([#1158](https://github.com/Protelis/ProtelisDoc/issues/1158)) ([94078a3](https://github.com/Protelis/ProtelisDoc/commit/94078a32110e73efdd9df537116c6e91e2fe1928))
+* **deps:** update node.js to 24.17 ([#1159](https://github.com/Protelis/ProtelisDoc/issues/1159)) ([c7863fb](https://github.com/Protelis/ProtelisDoc/commit/c7863fbea9ac2f42febb33794301a65b662f9cf3))
+* **deps:** update plugin com.gradle.develocity to v4.4.3 ([#1147](https://github.com/Protelis/ProtelisDoc/issues/1147)) ([fca31cf](https://github.com/Protelis/ProtelisDoc/commit/fca31cf4349ef424da87df6d0dd085fa514a047c))
+* **deps:** update plugin gitsemver to v7.0.23 ([#1148](https://github.com/Protelis/ProtelisDoc/issues/1148)) ([99abd8d](https://github.com/Protelis/ProtelisDoc/commit/99abd8d9a7c86f35b36bec85914d0b4b86a76eb5))
+* **deps:** update plugin multijvmtesting to v4.5.4 ([#1149](https://github.com/Protelis/ProtelisDoc/issues/1149)) ([4caa32c](https://github.com/Protelis/ProtelisDoc/commit/4caa32c1a3ffc7e4b210eb6661add84b8b0c2837))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.21 ([#1150](https://github.com/Protelis/ProtelisDoc/issues/1150)) ([485a43c](https://github.com/Protelis/ProtelisDoc/commit/485a43c2592912cdfa48b027a5ce3ffef03625ce))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.41 ([#1154](https://github.com/Protelis/ProtelisDoc/issues/1154)) ([5b6dd93](https://github.com/Protelis/ProtelisDoc/commit/5b6dd9316c864bb7f720ebe94876c77d4d53a12c))
+
 ## [3.0.141](https://github.com/Protelis/ProtelisDoc/compare/3.0.140...3.0.141) (2026-05-29)
 
 ### Dependency updates
