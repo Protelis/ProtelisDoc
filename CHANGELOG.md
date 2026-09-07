@@ -1,3 +1,10 @@
+## [3.0.144](https://github.com/Protelis/ProtelisDoc/compare/3.0.143...3.0.144) (2026-09-07)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v2.4.20 ([#1179](https://github.com/Protelis/ProtelisDoc/issues/1179)) ([7227099](https://github.com/Protelis/ProtelisDoc/commit/72270995b31bf63eae0e4aa7c71e54c96ad8a8d8))
+* **deps:** update node.js to 24.20 ([#1178](https://github.com/Protelis/ProtelisDoc/issues/1178)) ([c96a5b6](https://github.com/Protelis/ProtelisDoc/commit/c96a5b6badd2c58323109dc97824f685f4979dc5))
+
 ## [3.0.143](https://github.com/Protelis/ProtelisDoc/compare/3.0.142...3.0.143) (2026-08-28)
 
 ### Dependency updates
