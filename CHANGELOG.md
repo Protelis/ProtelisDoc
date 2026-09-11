@@ -1,3 +1,20 @@
+## [3.0.145](https://github.com/Protelis/ProtelisDoc/compare/3.0.144...3.0.145) (2026-09-11)
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v1.9.1 ([#1188](https://github.com/Protelis/ProtelisDoc/issues/1188)) ([4a65299](https://github.com/Protelis/ProtelisDoc/commit/4a652995bcb56d84f1f0e86077aee64de41ed586))
+* **deps:** update kotest to v6.2.5 ([#1187](https://github.com/Protelis/ProtelisDoc/issues/1187)) ([e2cba1d](https://github.com/Protelis/ProtelisDoc/commit/e2cba1dac27aef9ca40268a662dea4fa4bd93f28))
+* **deps:** update node.js to 24.21 ([#1185](https://github.com/Protelis/ProtelisDoc/issues/1185)) ([58136ac](https://github.com/Protelis/ProtelisDoc/commit/58136acf39abb1f4357f7ec21bd5103d6423b589))
+* **deps:** update plugin com.gradle.develocity to v4.5.1 ([4d3fa6f](https://github.com/Protelis/ProtelisDoc/commit/4d3fa6faa892073ac40d4efc827c187d73131d50))
+* **deps:** update plugin gitsemver to v7.0.24 ([f63a1b9](https://github.com/Protelis/ProtelisDoc/commit/f63a1b9a7c9c45168f55260e69b31046d330aadc))
+* **deps:** update plugin gradlepluginpublish to v2.2.0 ([#1183](https://github.com/Protelis/ProtelisDoc/issues/1183)) ([4a6a1c5](https://github.com/Protelis/ProtelisDoc/commit/4a6a1c5ff0c0f3a7afe7e142dc02ddf8eceb16fd))
+* **deps:** update plugin gradlepluginpublish to v2.2.1 ([#1186](https://github.com/Protelis/ProtelisDoc/issues/1186)) ([962a888](https://github.com/Protelis/ProtelisDoc/commit/962a888a1feb658ace6525b0bdb398d7d40f60bc))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.24 ([#1181](https://github.com/Protelis/ProtelisDoc/issues/1181)) ([bddce8e](https://github.com/Protelis/ProtelisDoc/commit/bddce8ea44476f3768b75bfbd7ed12c678511a85))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.45 ([#1184](https://github.com/Protelis/ProtelisDoc/issues/1184)) ([1c6cec1](https://github.com/Protelis/ProtelisDoc/commit/1c6cec1e23775cedfa3b626655c5b791bab4cbef))
+
 ## [3.0.144](https://github.com/Protelis/ProtelisDoc/compare/3.0.143...3.0.144) (2026-09-07)
 
 ### Dependency updates
