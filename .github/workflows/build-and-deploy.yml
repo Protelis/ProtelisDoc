@@ -21,7 +21,7 @@ jobs:
           should-deploy: false
 
   dry-deploy:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - name: Checkout
         uses: DanySK/action-checkout@0.2.28
@@ -47,7 +47,7 @@ jobs:
     needs:
       - build
       - dry-deploy
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     if: github.event_name == 'push' && contains(github.repository, 'Protelis/ProtelisDoc')
     permissions:
       contents: write
@@ -80,7 +80,7 @@ jobs:
           signing-password: ${{ secrets.SIGNING_PASSWORD }}
 
   success:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs:
       - build
       - dry-deploy
