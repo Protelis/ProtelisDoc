@@ -1,3 +1,16 @@
+## [3.0.147](https://github.com/Protelis/ProtelisDoc/compare/3.0.146...3.0.147) (2026-09-25)
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v1.9.3 ([#1194](https://github.com/Protelis/ProtelisDoc/issues/1194)) ([e7c6ce5](https://github.com/Protelis/ProtelisDoc/commit/e7c6ce589318e54977dd6ecc8da82ca002680260))
+* **deps:** update plugin multijvmtesting to v4.5.7 ([#1190](https://github.com/Protelis/ProtelisDoc/issues/1190)) ([424d32f](https://github.com/Protelis/ProtelisDoc/commit/424d32f75789ad9d0c9ef469aad081ba89ebe7f0))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.46 ([#1191](https://github.com/Protelis/ProtelisDoc/issues/1191)) ([380d601](https://github.com/Protelis/ProtelisDoc/commit/380d6017940e8e2ce43d3dd27119e72f4ada91ae))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.47 ([#1192](https://github.com/Protelis/ProtelisDoc/issues/1192)) ([da6c952](https://github.com/Protelis/ProtelisDoc/commit/da6c9522bf81c74987af99bc4b50e1616d7cf06d))
+* **deps:** update dependency ubuntu to v26 ([#1193](https://github.com/Protelis/ProtelisDoc/issues/1193)) ([76dfcac](https://github.com/Protelis/ProtelisDoc/commit/76dfcacce129947df3bdb4266d3b0b9100043869))
+
 ## [3.0.146](https://github.com/Protelis/ProtelisDoc/compare/3.0.145...3.0.146) (2026-09-13)
 
 ### Dependency updates
