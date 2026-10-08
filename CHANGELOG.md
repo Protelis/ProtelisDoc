@@ -1,3 +1,15 @@
+## [3.0.149](https://github.com/Protelis/ProtelisDoc/compare/3.0.148...3.0.149) (2026-10-08)
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-qa to v1.10.1 ([#1202](https://github.com/Protelis/ProtelisDoc/issues/1202)) ([287635a](https://github.com/Protelis/ProtelisDoc/commit/287635a9200a0397975fd02b0c520af03220bb4d))
+* **deps:** update plugin multijvmtesting to v4.5.8 ([#1200](https://github.com/Protelis/ProtelisDoc/issues/1200)) ([c8abf65](https://github.com/Protelis/ProtelisDoc/commit/c8abf65deb0bc6781999f5b91c326410647230ac))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.26 ([#1201](https://github.com/Protelis/ProtelisDoc/issues/1201)) ([b521bfe](https://github.com/Protelis/ProtelisDoc/commit/b521bfe25721159dfa91bbe25c35d501f43bee16))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.48 ([#1199](https://github.com/Protelis/ProtelisDoc/issues/1199)) ([4e55d99](https://github.com/Protelis/ProtelisDoc/commit/4e55d99c4ae67a1687ad1cd12e4d0aa181c61a27))
+
 ## [3.0.148](https://github.com/Protelis/ProtelisDoc/compare/3.0.147...3.0.148) (2026-09-26)
 
 ### Dependency updates
