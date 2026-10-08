@@ -1,3 +1,10 @@
+## [3.0.150](https://github.com/Protelis/ProtelisDoc/compare/3.0.149...3.0.150) (2026-10-08)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v2.4.21 ([89f811c](https://github.com/Protelis/ProtelisDoc/commit/89f811c1c500218428ce05f394def6bb16d95741))
+* **deps:** update plugin multijvmtesting to v4.5.9 ([#1203](https://github.com/Protelis/ProtelisDoc/issues/1203)) ([9337ed4](https://github.com/Protelis/ProtelisDoc/commit/9337ed49c0cea6200e6af5efb1130014224b964c))
+
 ## [3.0.149](https://github.com/Protelis/ProtelisDoc/compare/3.0.148...3.0.149) (2026-10-08)
 
 ### Dependency updates
