@@ -1,9 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
-import dev.detekt.gradle.Detekt
 import org.apache.tools.ant.taskdefs.condition.Os
 import org.gradle.api.tasks.testing.logging.TestLogEvent
-import org.gradle.jvm.tasks.Jar
 
 
 plugins {
@@ -52,33 +50,31 @@ dependencies {
     testImplementation(libs.bundles.kotlin.testing)
 }
 
-val copyKotlinVersion by tasks.registering {
+val copyKotlinVersion = tasks.register("copyKotlinVersion") {
+    group = "build"
+    description = "Generates a resource file containing the Kotlin version used by ProtelisDoc."
     val inputFile = file("gradle/libs.versions.toml")
     inputs.file(inputFile)
-    val outputFile =
-        project.layout.buildDirectory.map {
-            it.asFile.resolve("resources/main/protelisdoc/kotlinversion")
-        }
-    outputs.file(outputFile)
+    val outputDirectory = layout.buildDirectory.dir("generated/resources/kotlinVersion")
+    outputs.dir(outputDirectory)
     doLast {
         val kotlinVersion = Regex("""kotlin\s*=\s*"(\d+(\.\d+)+)"""")
-        val version =
-            inputFile.useLines { lines ->
-                lines
-                    .mapNotNull {
-                        kotlinVersion.matchEntire(it)?.groupValues?.get(1)
-                    }.first()
-            }
-        outputFile.get().parentFile.mkdirs()
-        outputFile.get().writeText(version)
+        val version = inputFile.useLines { lines ->
+            lines.firstNotNullOf { kotlinVersion.matchEntire(it)?.groupValues?.get(1) }
+        }
+        val outputFile = outputDirectory.get().file("protelisdoc/kotlinversion").asFile
+        outputFile.parentFile.mkdirs()
+        outputFile.writeText(version)
     }
 }
 
-tasks.compileKotlin.configure { finalizedBy(copyKotlinVersion) }
-tasks.withType<Detekt>().configureEach { dependsOn(copyKotlinVersion) }
-tasks.withType<PluginUnderTestMetadata>().configureEach { dependsOn(copyKotlinVersion) }
-tasks.withType<Test>().configureEach { dependsOn(copyKotlinVersion) }
-tasks.withType<Jar>().configureEach { dependsOn(copyKotlinVersion) }
+sourceSets.main {
+    resources.srcDir(copyKotlinVersion)
+}
+
+cpd {
+    reportsDir = layout.buildDirectory.dir("reports/cpd").get().asFile
+}
 
 tasks.withType<Test> {
     useJUnitPlatform()
@@ -102,8 +98,8 @@ tasks.matching { it.name.matches(Regex("dokka(Html|Javadoc|Gfm|Jekyll)")) }.conf
 
 if (System.getenv("CI") == true.toString()) {
     signing {
-        val signingKey: String? by project
-        val signingPassword: String? by project
+        val signingKey = project.findProperty("signingKey")?.toString()
+        val signingPassword = project.findProperty("signingPassword")?.toString()
         useInMemoryPgpKeys(signingKey, signingPassword)
     }
 }

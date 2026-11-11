@@ -28,7 +28,7 @@ internal object TestUtil {
             .withProjectDir(workingDirectory.toFile())
             .withPluginClasspath()
             .withGradleVersion(GradleVersion.current().version)
-            .withArguments(task, "--stacktrace")
+            .withArguments(task, "--stacktrace", "--warning-mode", "all")
             .build()
         println(result.output)
         result.task(":$task")?.outcome shouldBe TaskOutcome.SUCCESS
