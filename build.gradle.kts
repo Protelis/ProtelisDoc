@@ -130,7 +130,7 @@ publishing {
                     developer {
                         name.set("Danilo Pianini")
                         email.set("danilo.pianini@unibo.it")
-                        url.set("http://www.danilopianini.org/")
+                        url.set("https://www.danilopianini.org/")
                     }
                     developer {
                         name.set("Roberto Casadei")
