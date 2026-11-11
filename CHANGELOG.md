@@ -1,3 +1,16 @@
+## [3.0.153](https://github.com/Protelis/ProtelisDoc/compare/3.0.152...3.0.153) (2026-11-11)
+
+### Dependency updates
+
+* **core-deps:** update gradle to v9.9.1 ([ecf9f39](https://github.com/Protelis/ProtelisDoc/commit/ecf9f39617cabea424f47e4d153d5fb54dcff350))
+* **deps:** update plugin publishoncentral to v9.3.2 ([#1226](https://github.com/Protelis/ProtelisDoc/issues/1226)) ([d4c6bc5](https://github.com/Protelis/ProtelisDoc/commit/d4c6bc5562d0aa9520b7aaa6f11d29acf1a23bf9))
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v7 ([ff92215](https://github.com/Protelis/ProtelisDoc/commit/ff9221551345b886e6d6d7807a82991ccedbac5d))
+* **deps:** update danysk/action-checkout action to v0.2.31 ([5d7adb5](https://github.com/Protelis/ProtelisDoc/commit/5d7adb5944ecfc5c910e22d53f41c4042e7962a6))
+* update developer URL to use HTTPS ([f727e80](https://github.com/Protelis/ProtelisDoc/commit/f727e80f6675631856bae2cee87d4de22b0dbe38))
+
 ## [3.0.152](https://github.com/Protelis/ProtelisDoc/compare/3.0.151...3.0.152) (2026-11-08)
 
 ### Dependency updates
