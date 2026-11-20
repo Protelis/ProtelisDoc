@@ -1,3 +1,16 @@
+## [3.0.154](https://github.com/Protelis/ProtelisDoc/compare/3.0.153...3.0.154) (2026-11-20)
+
+### Dependency updates
+
+* **core-deps:** update gradle to v9.9.2 ([#1230](https://github.com/Protelis/ProtelisDoc/issues/1230)) ([7be2c72](https://github.com/Protelis/ProtelisDoc/commit/7be2c728c74ae342dc24c279778e8a94e628da02))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.159 ([#1229](https://github.com/Protelis/ProtelisDoc/issues/1229)) ([8c2ad94](https://github.com/Protelis/ProtelisDoc/commit/8c2ad9491252a0be747e4c5449efae3c894c1567))
+* **deps:** update kotest to v6.2.7 ([982aac1](https://github.com/Protelis/ProtelisDoc/commit/982aac1538699ee46382f5db85633cb213e7e814))
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v7 ([#1164](https://github.com/Protelis/ProtelisDoc/issues/1164)) ([6183695](https://github.com/Protelis/ProtelisDoc/commit/6183695cb902923b9b73c18376a6658c122beabd))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.52 ([c8400b2](https://github.com/Protelis/ProtelisDoc/commit/c8400b2aa9046fa1acc454ee7ecd5d23f4534abe))
+
 ## [3.0.153](https://github.com/Protelis/ProtelisDoc/compare/3.0.152...3.0.153) (2026-11-11)
 
 ### Dependency updates
