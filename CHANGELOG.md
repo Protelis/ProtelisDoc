@@ -1,3 +1,11 @@
+## [3.0.155](https://github.com/Protelis/ProtelisDoc/compare/3.0.154...3.0.155) (2026-11-27)
+
+### Dependency updates
+
+* **core-deps:** update gradle to v9.9.3 ([#1233](https://github.com/Protelis/ProtelisDoc/issues/1233)) ([9cebae1](https://github.com/Protelis/ProtelisDoc/commit/9cebae1b3a9aeaefc0376ea715586032cecb2f77))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.160 ([#1232](https://github.com/Protelis/ProtelisDoc/issues/1232)) ([b9f5d80](https://github.com/Protelis/ProtelisDoc/commit/b9f5d80646ae96fdf74f784af6fa0e32d2ec2d28))
+* **deps:** update plugin publishoncentral to v9.3.3 ([#1231](https://github.com/Protelis/ProtelisDoc/issues/1231)) ([26be1fa](https://github.com/Protelis/ProtelisDoc/commit/26be1faa919e8aef96d10e6a3dc30f53049ca783))
+
 ## [3.0.154](https://github.com/Protelis/ProtelisDoc/compare/3.0.153...3.0.154) (2026-11-20)
 
 ### Dependency updates
